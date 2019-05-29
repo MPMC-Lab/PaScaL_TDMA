@@ -1,0 +1,78 @@
+\hypertarget{para__range_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/src/para\+\_\+range.f90 File Reference}
+\label{para__range_8f90}\index{/Users/jihoon/Documents/develop/STDMA/src/para\_range.f90@{/Users/jihoon/Documents/develop/STDMA/src/para\_range.f90}}
+
+
+Para\+\_\+range function which assign the computing range to each M\+PI process for.  
+
+
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine \mbox{\hyperlink{para__range_8f90_ab75ab386311975aa4ff7cac06798fcd4}{para\+\_\+range}} (n1, n2, nprocs, myrank, ista, iend)
+\begin{DoxyCompactList}\small\item\em Compute the indices of assigned range for each M\+PI process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Para\+\_\+range function which assign the computing range to each M\+PI process for. 
+
+\begin{DoxyAuthor}{Author}
+
+\end{DoxyAuthor}
+
+\begin{DoxyItemize}
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\texttt{ k-\/kiha@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\texttt{ jhkang@kisti.\+re.\+kr}}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\texttt{ jic@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\end{DoxyItemize}
+
+\begin{DoxyDate}{Date}
+June 2019 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyParagraph}{Copyright}
+Copyright (c) 2019 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{License }
+
+\end{DoxyParagraph}
+This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE in ) 
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{para__range_8f90_ab75ab386311975aa4ff7cac06798fcd4}\label{para__range_8f90_ab75ab386311975aa4ff7cac06798fcd4}} 
+\index{para\_range.f90@{para\_range.f90}!para\_range@{para\_range}}
+\index{para\_range@{para\_range}!para\_range.f90@{para\_range.f90}}
+\subsubsection{\texorpdfstring{para\_range()}{para\_range()}}
+{\footnotesize\ttfamily subroutine para\+\_\+range (\begin{DoxyParamCaption}\item[{integer, intent(in)}]{n1,  }\item[{integer, intent(in)}]{n2,  }\item[{integer, intent(in)}]{nprocs,  }\item[{integer, intent(in)}]{myrank,  }\item[{integer, intent(out)}]{ista,  }\item[{integer, intent(out)}]{iend }\end{DoxyParamCaption})}
+
+
+
+Compute the indices of assigned range for each M\+PI process. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n1} & First index of total range \\
+\hline
+{\em n2} & Last index of total range \\
+\hline
+{\em nprocs} & Number of M\+PI process \\
+\hline
+{\em myrank} & Rank ID of my M\+PI process \\
+\hline
+{\em ista} & First index of assigned range for myrank \\
+\hline
+{\em iend} & Last index of assigned range for myrank \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 27 of file para\+\_\+range.\+f90.
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{para__range_8f90_ab75ab386311975aa4ff7cac06798fcd4_icgraph}
+\end{center}
+\end{figure}

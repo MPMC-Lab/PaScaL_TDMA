@@ -1,0 +1,24 @@
+Scalable tri-\/diagonal matrix(\+T\+D\+M) solver for many tridiagonal systems of equations
+
+using a noble all-\/to-\/all communication scheme for the reduced unknowns based on the modified Thomas algorithm by Laszlo, Gilles and Appleyard(2016)
+
+This library is for both of a single and many tridiagonal systems of equations. The main algorithm for a tridiagonal matrix proposed in this library consists of the following three steps\+: (1) Lower/\+Upper element reduction step \+: creates reduced tridiagonals system of equations. (2) Reduced T\+D\+MA step \+: Solves the reduced tridiagonal systems of equations. (3) Update step \+: Updates solutions of the origianl tridiagonal systems of equations using the solutions of the reduced tridiagonal systems of equations.
+
+Our algorithm is close to the algorithm by Mattor, Williams, Hewette (1995) except that we use M\+P\+I\+\_\+\+Alltoall communication for reduced tridiagonal systems to distribute the many tridiagonal systems of equations almost equally to processes, while Mattor et al used M\+P\+I\+\_\+\+Gather to gather and solve the reduced equations on the master process only. The number of coefficient is greatly reduced by local reduction in Step(1), so we can avoid the communication bandwidth problem which happens to be common in M\+P\+I\+\_\+\+Alltoall communication. Our algorithm is also distinguished from the work of Laszlo, Gilles and Appleyard(2016) which used parallel cyclic reduction to solve the reduced tridiagonal systems of equations.
+
+\section*{Authors}
+
+
+\begin{DoxyItemize}
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\texttt{ k-\/kiha@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\texttt{ jhkang@kisti.\+re.\+kr}}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\texttt{ jic@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\end{DoxyItemize}
+
+\section*{Copyright}
+
+Copyright (c) 2019 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved.
+
+\section*{License}
+
+This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE in ) 

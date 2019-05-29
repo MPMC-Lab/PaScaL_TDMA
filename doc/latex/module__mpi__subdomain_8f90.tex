@@ -1,0 +1,154 @@
+\hypertarget{module__mpi__subdomain_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/examples/module\+\_\+mpi\+\_\+subdomain.f90 File Reference}
+\label{module__mpi__subdomain_8f90}\index{/Users/jihoon/Documents/develop/STDMA/examples/module\_mpi\_subdomain.f90@{/Users/jihoon/Documents/develop/STDMA/examples/module\_mpi\_subdomain.f90}}
+
+
+This is for an example case of stdma.  
+
+
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \mbox{\hyperlink{namespacemodule__mpi__subdomain}{module\+\_\+mpi\+\_\+subdomain}}
+\begin{DoxyCompactList}\small\item\em Module for building subdomains divided from the physical domain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a6387e08f00a18fad06417aa9b51854ac}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+make}} (nprocs\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z, myrank\+\_\+in\+\_\+z)
+\begin{DoxyCompactList}\small\item\em Prepare subdomain and determine size of subdomain. \end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_ab1a550c72f16254a20785d7f4eae4e1c}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+clean}}
+\begin{DoxyCompactList}\small\item\em Deallocate subdomain variables. \end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a108c65cb0e549fd286b43243a6406ec9}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype}}
+\begin{DoxyCompactList}\small\item\em Build derived datatypes for subdomain communication using ghostcell. \end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a3e13201bdd812e62d2293bb0e2c2221d}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update}} (theta\+\_\+sub, comm\+\_\+1d\+\_\+x, comm\+\_\+1d\+\_\+y, comm\+\_\+1d\+\_\+z)
+\begin{DoxyCompactList}\small\item\em Update the values of boundary ghostcells through communication in all directions. \end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a407d55f604c25fca086515a66980f67b}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+indices}} (myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Determine whether next grids are empty(0) or not(1). Only in y-\/direction. \end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a73f1a66627a730c3906f200d9d31f974}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+mesh}} (myrank\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+z, nprocs\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z)
+\begin{DoxyCompactList}\small\item\em Assign grid coordinates and lengths of subdomains. \end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a0be56ce2507138a1364de11e15f2bc7f}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+initialization}} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Initialize the values of main variable in subdomain. \end{DoxyCompactList}\item 
+subroutine, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a3ebf20fcc8a3cd5d916adddf69af4833}{module\+\_\+mpi\+\_\+subdomain\+::module\+\_\+mpi\+\_\+subdomain\+\_\+boundary}} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Assign the values of boundary grids in subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a180679cc4b2a39351cff87dcca079484}{module\+\_\+mpi\+\_\+subdomain\+::ierr}}
+\item 
+double precision, dimension(\+:,\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a64208c4f25ace4acb038e217cc784f02}{module\+\_\+mpi\+\_\+subdomain\+::thetabc3\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em B.\+C. of lower wall. \end{DoxyCompactList}\item 
+double precision, dimension(\+:,\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a63ecab89051a64282880083d20844204}{module\+\_\+mpi\+\_\+subdomain\+::thetabc4\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em B.\+C. of upper wall. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a1c2c2f77c74c40af73c7f65e3cba756e}{module\+\_\+mpi\+\_\+subdomain\+::jmbc\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Flag whether lower grid is empty(0) or not. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a9cf8549a75cc5cc0cd1541b2567c7dfd}{module\+\_\+mpi\+\_\+subdomain\+::jpbc\+\_\+index}}
+\begin{DoxyCompactList}\small\item\em Flag whether upper grid is empty(0) or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_ac0a0da3865fce334d01c602c949a680f}{module\+\_\+mpi\+\_\+subdomain\+::nx\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Grid numbers in subdomain. \end{DoxyCompactList}\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a337008dffc01586ae3a149d255115e30}{module\+\_\+mpi\+\_\+subdomain\+::ny\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Grid numbers in subdomain. \end{DoxyCompactList}\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a6df401547925214a36e4aaf656380a48}{module\+\_\+mpi\+\_\+subdomain\+::nz\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Grid numbers in subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a84290c344044aaadb0957d8530f360b6}{module\+\_\+mpi\+\_\+subdomain\+::ista}}
+\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_ac0d40d9eee1ec5249fb230e7d73959d5}{module\+\_\+mpi\+\_\+subdomain\+::iend}}
+\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a87c16acea97b6100c4629bda8a090169}{module\+\_\+mpi\+\_\+subdomain\+::jsta}}
+\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a5c6fcfcea80e9294d32411c15091955c}{module\+\_\+mpi\+\_\+subdomain\+::jend}}
+\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a3eab4b23cbc7b4ab032da06300bfca6f}{module\+\_\+mpi\+\_\+subdomain\+::ksta}}
+\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+integer, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a2d63d8a25db336795c14328ed3b31047}{module\+\_\+mpi\+\_\+subdomain\+::kend}}
+\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a514fad372aeabc519f09899d384c90f4}{module\+\_\+mpi\+\_\+subdomain\+::x\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Coordinates of grid points in subdomains. \end{DoxyCompactList}\item 
+double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_ac39b52c6423a346d4697c47057631257}{module\+\_\+mpi\+\_\+subdomain\+::y\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Coordinates of grid points in subdomains. \end{DoxyCompactList}\item 
+double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_abd5356a51fd823d37ecc203933a8a3c6}{module\+\_\+mpi\+\_\+subdomain\+::z\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Coordinates of grid points in subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a0bd571c841b92676b5017401591b74b4}{module\+\_\+mpi\+\_\+subdomain\+::dmx\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Grid lengths in subdomains. \end{DoxyCompactList}\item 
+double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a8b9835b45cf90a956b5b921507040c2d}{module\+\_\+mpi\+\_\+subdomain\+::dmy\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Grid lengths in subdomains. \end{DoxyCompactList}\item 
+double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacemodule__mpi__subdomain_a9ffca06a0bb7f1ecf84d60e7679002fd}{module\+\_\+mpi\+\_\+subdomain\+::dmz\+\_\+sub}}
+\begin{DoxyCompactList}\small\item\em Grid lengths in subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a17fa32eaf9dfe52b13cc7f17572a63be}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+e}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a8422fcfc17adb1bdf04f2b7ca08003c2}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+w}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a9ca276bc5dcbfd8fcb5b8173e66dba07}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+w}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_ab6299920e9e9fe15e9936e4be0bcfe7a}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+e}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a662c94173cf13879c5fea89a04fd8ffa}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_ada96687f5bacdbe6f66c542c7b9ec37b}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a8d1c7ef37ac2dca93a693c070d77638b}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+s}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a200baef48d70fe5075d62807732c8db4}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+n}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_aed4d71ca15cfe63b676efed68f82e313}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+f}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_af629d0205c8f2b9528e52b300b0586d4}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+b}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a2c99ccbd4e672593f4b2068ed3bc1c5a}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+b}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{namespacemodule__mpi__subdomain_a1af70aeca9de9289ff16adbd2d6f8bd8}{module\+\_\+mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+f}}
+\begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+
+\subsection{Detailed Description}
+This is for an example case of stdma. 
+
+\begin{DoxyAuthor}{Author}
+
+\end{DoxyAuthor}
+
+\begin{DoxyItemize}
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\texttt{ k-\/kiha@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\texttt{ jhkang@kisti.\+re.\+kr}}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\texttt{ jic@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\end{DoxyItemize}
+
+\begin{DoxyDate}{Date}
+June 2019 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyParagraph}{Copyright}
+Copyright (c) 2019 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{License }
+
+\end{DoxyParagraph}
+This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE in ) 

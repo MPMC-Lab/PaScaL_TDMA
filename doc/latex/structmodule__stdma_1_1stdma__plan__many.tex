@@ -1,0 +1,315 @@
+\hypertarget{structmodule__stdma_1_1stdma__plan__many}{}\section{module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many Type Reference}
+\label{structmodule__stdma_1_1stdma__plan__many}\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+
+
+Execution plan for many tridiagonal systems of equations.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+integer \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a047841250c4299bb9ae46f6793547f9e}{stdma\+\_\+world}}
+\begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to arrange data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a53ea9079aa233209ed3079699ca5189d}{n\+\_\+sys\+\_\+rt}}
+\begin{DoxyCompactList}\small\item\em Number of tridiagonal systems to solve in each process after transpose. \end{DoxyCompactList}\item 
+integer \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a4af0f905183855a4a3ae7caaf5e455c6}{n\+\_\+row\+\_\+rt}}
+\begin{DoxyCompactList}\small\item\em Number of rows of a reduced tridiagonal systems after transpose. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+integer, dimension(\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a0d3ca6c89a9c1d47cc2e0df0a3160c08}{ddtype\+\_\+fs}}
+\begin{DoxyCompactList}\small\item\em Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a4bf445309fd4740827a188160354536a}{count\+\_\+send}}
+\begin{DoxyCompactList}\small\item\em Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a78987f3bd9e87b612fa3d4a2ac85aa0a}{displ\+\_\+send}}
+\begin{DoxyCompactList}\small\item\em Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+integer, dimension(\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a264b748ea3feb795c3531d3d1f004bc8}{ddtype\+\_\+bs}}
+\begin{DoxyCompactList}\small\item\em Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a572723c149990425e6109dc8614bacb4}{count\+\_\+recv}}
+\begin{DoxyCompactList}\small\item\em Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw. \end{DoxyCompactList}\item 
+integer, dimension(\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_ae60c70d406ef511431a335c9eb2f029c}{displ\+\_\+recv}}
+\begin{DoxyCompactList}\small\item\em Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a19015e9b58d0978af7f588430f31416c}{a\+\_\+rd}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) \end{DoxyCompactList}\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_ae91e0b0131f3355bf15e79ae10a0768c}{b\+\_\+rd}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) \end{DoxyCompactList}\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_ab9430b05c4d593a1b5077be4d2d6d25d}{c\+\_\+rd}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) \end{DoxyCompactList}\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a4f6f40b879413975635c06e6d88c575b}{d\+\_\+rd}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_ab67f78f6ca2a5c48d5a9d7b3128e37e9}{a\+\_\+rt}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. \end{DoxyCompactList}\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_ac3de0f8c6e9ef01ed0fc824cfdfd93c8}{b\+\_\+rt}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. \end{DoxyCompactList}\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_ac47b44d0b8f2675b7dceff9570f2953b}{c\+\_\+rt}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. \end{DoxyCompactList}\item 
+double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structmodule__stdma_1_1stdma__plan__many_a93782a813206966e7f5966baaea40710}{d\+\_\+rt}}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+
+\subsection{Detailed Description}
+Execution plan for many tridiagonal systems of equations. 
+
+It uses M\+P\+I\+\_\+\+Ialltoallw communication to distribute the reduced tridiagonal matrices to M\+PI processes. Derived datatype is used for elimination of data packing and unpacking cost. 
+
+Definition at line 49 of file module\+\_\+stdma.\+f90.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a19015e9b58d0978af7f588430f31416c}\label{structmodule__stdma_1_1stdma__plan__many_a19015e9b58d0978af7f588430f31416c}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!a\_rd@{a\_rd}}
+\index{a\_rd@{a\_rd}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{a\_rd}{a\_rd}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::a\+\_\+rd}
+
+
+
+Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) 
+
+
+
+Definition at line 65 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_ab67f78f6ca2a5c48d5a9d7b3128e37e9}\label{structmodule__stdma_1_1stdma__plan__many_ab67f78f6ca2a5c48d5a9d7b3128e37e9}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!a\_rt@{a\_rt}}
+\index{a\_rt@{a\_rt}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{a\_rt}{a\_rt}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::a\+\_\+rt}
+
+
+
+Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. 
+
+
+
+Definition at line 70 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_ae91e0b0131f3355bf15e79ae10a0768c}\label{structmodule__stdma_1_1stdma__plan__many_ae91e0b0131f3355bf15e79ae10a0768c}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!b\_rd@{b\_rd}}
+\index{b\_rd@{b\_rd}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{b\_rd}{b\_rd}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::b\+\_\+rd}
+
+
+
+Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) 
+
+
+
+Definition at line 65 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_ac3de0f8c6e9ef01ed0fc824cfdfd93c8}\label{structmodule__stdma_1_1stdma__plan__many_ac3de0f8c6e9ef01ed0fc824cfdfd93c8}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!b\_rt@{b\_rt}}
+\index{b\_rt@{b\_rt}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{b\_rt}{b\_rt}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::b\+\_\+rt}
+
+
+
+Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. 
+
+
+
+Definition at line 70 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_ab9430b05c4d593a1b5077be4d2d6d25d}\label{structmodule__stdma_1_1stdma__plan__many_ab9430b05c4d593a1b5077be4d2d6d25d}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!c\_rd@{c\_rd}}
+\index{c\_rd@{c\_rd}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{c\_rd}{c\_rd}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::c\+\_\+rd}
+
+
+
+Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) 
+
+
+
+Definition at line 65 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_ac47b44d0b8f2675b7dceff9570f2953b}\label{structmodule__stdma_1_1stdma__plan__many_ac47b44d0b8f2675b7dceff9570f2953b}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!c\_rt@{c\_rt}}
+\index{c\_rt@{c\_rt}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{c\_rt}{c\_rt}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::c\+\_\+rt}
+
+
+
+Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. 
+
+
+
+Definition at line 70 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a572723c149990425e6109dc8614bacb4}\label{structmodule__stdma_1_1stdma__plan__many_a572723c149990425e6109dc8614bacb4}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!count\_recv@{count\_recv}}
+\index{count\_recv@{count\_recv}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{count\_recv}{count\_recv}}
+{\footnotesize\ttfamily integer, dimension(\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::count\+\_\+recv}
+
+
+
+Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw. 
+
+
+
+Definition at line 60 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a4bf445309fd4740827a188160354536a}\label{structmodule__stdma_1_1stdma__plan__many_a4bf445309fd4740827a188160354536a}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!count\_send@{count\_send}}
+\index{count\_send@{count\_send}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{count\_send}{count\_send}}
+{\footnotesize\ttfamily integer, dimension(\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::count\+\_\+send}
+
+
+
+Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw. 
+
+
+
+Definition at line 56 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a4f6f40b879413975635c06e6d88c575b}\label{structmodule__stdma_1_1stdma__plan__many_a4f6f40b879413975635c06e6d88c575b}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!d\_rd@{d\_rd}}
+\index{d\_rd@{d\_rd}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{d\_rd}{d\_rd}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::d\+\_\+rd}
+
+
+
+Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) 
+
+
+
+Definition at line 65 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a93782a813206966e7f5966baaea40710}\label{structmodule__stdma_1_1stdma__plan__many_a93782a813206966e7f5966baaea40710}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!d\_rt@{d\_rt}}
+\index{d\_rt@{d\_rt}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{d\_rt}{d\_rt}}
+{\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::d\+\_\+rt}
+
+
+
+Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. 
+
+
+
+Definition at line 70 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a264b748ea3feb795c3531d3d1f004bc8}\label{structmodule__stdma_1_1stdma__plan__many_a264b748ea3feb795c3531d3d1f004bc8}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!ddtype\_bs@{ddtype\_bs}}
+\index{ddtype\_bs@{ddtype\_bs}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{ddtype\_bs}{ddtype\_bs}}
+{\footnotesize\ttfamily integer, dimension(\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::ddtype\+\_\+bs}
+
+
+
+Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw. 
+
+
+
+Definition at line 60 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a0d3ca6c89a9c1d47cc2e0df0a3160c08}\label{structmodule__stdma_1_1stdma__plan__many_a0d3ca6c89a9c1d47cc2e0df0a3160c08}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!ddtype\_fs@{ddtype\_fs}}
+\index{ddtype\_fs@{ddtype\_fs}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{ddtype\_fs}{ddtype\_fs}}
+{\footnotesize\ttfamily integer, dimension(\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::ddtype\+\_\+fs}
+
+
+
+Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw. 
+
+
+
+Definition at line 56 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_ae60c70d406ef511431a335c9eb2f029c}\label{structmodule__stdma_1_1stdma__plan__many_ae60c70d406ef511431a335c9eb2f029c}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!displ\_recv@{displ\_recv}}
+\index{displ\_recv@{displ\_recv}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{displ\_recv}{displ\_recv}}
+{\footnotesize\ttfamily integer, dimension(\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::displ\+\_\+recv}
+
+
+
+Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw. 
+
+
+
+Definition at line 60 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a78987f3bd9e87b612fa3d4a2ac85aa0a}\label{structmodule__stdma_1_1stdma__plan__many_a78987f3bd9e87b612fa3d4a2ac85aa0a}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!displ\_send@{displ\_send}}
+\index{displ\_send@{displ\_send}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{displ\_send}{displ\_send}}
+{\footnotesize\ttfamily integer, dimension(\+:), allocatable module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::displ\+\_\+send}
+
+
+
+Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw. 
+
+
+
+Definition at line 56 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a4af0f905183855a4a3ae7caaf5e455c6}\label{structmodule__stdma_1_1stdma__plan__many_a4af0f905183855a4a3ae7caaf5e455c6}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!n\_row\_rt@{n\_row\_rt}}
+\index{n\_row\_rt@{n\_row\_rt}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{n\_row\_rt}{n\_row\_rt}}
+{\footnotesize\ttfamily integer module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::n\+\_\+row\+\_\+rt}
+
+
+
+Number of rows of a reduced tridiagonal systems after transpose. 
+
+
+
+Definition at line 53 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a53ea9079aa233209ed3079699ca5189d}\label{structmodule__stdma_1_1stdma__plan__many_a53ea9079aa233209ed3079699ca5189d}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!n\_sys\_rt@{n\_sys\_rt}}
+\index{n\_sys\_rt@{n\_sys\_rt}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{n\_sys\_rt}{n\_sys\_rt}}
+{\footnotesize\ttfamily integer module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::n\+\_\+sys\+\_\+rt}
+
+
+
+Number of tridiagonal systems to solve in each process after transpose. 
+
+
+
+Definition at line 52 of file module\+\_\+stdma.\+f90.
+
+\mbox{\Hypertarget{structmodule__stdma_1_1stdma__plan__many_a047841250c4299bb9ae46f6793547f9e}\label{structmodule__stdma_1_1stdma__plan__many_a047841250c4299bb9ae46f6793547f9e}} 
+\index{module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}!stdma\_world@{stdma\_world}}
+\index{stdma\_world@{stdma\_world}!module\_stdma::stdma\_plan\_many@{module\_stdma::stdma\_plan\_many}}
+\subsubsection{\texorpdfstring{stdma\_world}{stdma\_world}}
+{\footnotesize\ttfamily integer module\+\_\+stdma\+::stdma\+\_\+plan\+\_\+many\+::stdma\+\_\+world}
+
+
+
+Single dimensional subcommunicator to arrange data for the reduced T\+D\+MA. 
+
+
+
+Definition at line 51 of file module\+\_\+stdma.\+f90.
+
+
+
+The documentation for this type was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/src/\mbox{\hyperlink{module__stdma_8f90}{module\+\_\+stdma.\+f90}}\end{DoxyCompactItemize}
