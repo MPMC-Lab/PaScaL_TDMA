@@ -47,10 +47,10 @@ subroutine solve_theta_plan_single(theta)
     double precision :: eAPK, eAMK, eACK                            ! Diffusion treatment terms in z-direction
     double precision :: eRHS                                        ! From eAPI to eACK
 
-    double precision, allocatable, dimension(:, :, :) :: rhs                   ! RHS array
+    double precision, allocatable, dimension(:, :, :) :: rhs                    ! RHS array
     double precision, allocatable, dimension(:) :: ap_1d, am_1d, ac_1d, ad_1d   ! Coefficient of ridiagonal matrix
 
-    type(stdma_plan_single)      :: pz1d     ! Plan for STDMA
+    type(stdma_plan_single)      :: px_single, py_single, pz_single ! Plan for a single tridiagonal system of equations
 
     ! Calculating RHS
     allocate( rhs(0:nx_sub, 0:ny_sub, 0:nz_sub))
@@ -116,7 +116,7 @@ subroutine solve_theta_plan_single(theta)
     allocate( ap_1d(1:nz_sub-1), am_1d(1:nz_sub-1), ac_1d(1:nz_sub-1), ad_1d(1:nz_sub-1) )
 
     ! Create a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_create(pz1d, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm, 0)
+    call module_stdma_plan_single_create(pz_single, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm, 0)
 
     ! Build coefficient matrix for a single tridiagonal system
     do j = 1, ny_sub-1
@@ -131,15 +131,73 @@ subroutine solve_theta_plan_single(theta)
 
             enddo
             ! Solve a single tridiagonal system of equations under the defined plan with periodic boundary condition
-            call module_stdma_plan_single_solve_cycle(pz1d, am_1d, ac_1d, ap_1d, ad_1d, nz_sub-1)
+            call module_stdma_plan_single_solve_cycle(pz_single, am_1d, ac_1d, ap_1d, ad_1d, nz_sub-1)
             ! Return the solution to rhs line-by-line
             rhs(i,j,1:nz_sub-1)=ad_1d(1:nz_sub-1)
         enddo
     enddo
 
     ! Destroy a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_destroy(pz1d)
+    call module_stdma_plan_single_destroy(pz_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
+
+    !--SOLVE IN Y-DIRECTION
+    allocate( ap_1d(1:ny_sub-1), am_1d(1:ny_sub-1), ac_1d(1:ny_sub-1), ad_1d(1:ny_sub-1) )
+    ! Create a STDMA plan for a single tridiagonal system
+    call module_stdma_plan_single_create(py_single, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm, 0)
+
+    ! Build coefficient matrix for a single tridiagonal system
+    do k = 1, nz_sub-1
+        do i = 1, nx_sub-1
+            do j = 1, ny_sub-1
+                jp = j + 1
+                jm = j - 1
+                jep = jpbc_index(j)
+                jem = jmbc_index(j)
+
+                ! Y-DIRECTION
+                ap_1d(j) = -0.5d0*Ct/dy/dmy_sub(jp)*dble(jep)*dt
+                am_1d(j) = -0.5d0*Ct/dy/dmy_sub(j )*dble(jem)*dt
+                ac_1d(j) =  0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) + 1.d0/dmy_sub(j) )*dt + 1.d0
+                ad_1d(j) = rhs(i,j,k)
+            end do
+            ! Solve a single tridiagonal system of equations under the defined plan
+            call module_stdma_plan_single_solve(py_single, am_1d, ac_1d, ap_1d, ad_1d, ny_sub-1)
+            ! Return the solution to rhs line-by-line
+            rhs(i,1:ny_sub-1,k)=ad_1d(1:ny_sub-1)
+        end do
+    end do
+    ! Destroy a STDMA plan for a single tridiagonal system
+    call module_stdma_plan_single_destroy(py_single)
+    deallocate( ap_1d, am_1d, ac_1d, ad_1d )
+
+    ! !--SOLVE IN X-DIRECTION
+    allocate( ap_1d(1:nx_sub-1), am_1d(1:nx_sub-1), ac_1d(1:nx_sub-1), ad_1d(1:nx_sub-1) )
+    ! Create a STDMA plan for a single tridiagonal system
+    call module_stdma_plan_single_create(px_single, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm, 0)
+
+    ! Build coefficient matrix for a single tridiagonal system
+    do k = 1, nz_sub-1
+        do j = 1, ny_sub-1
+            do i = 1, nx_sub-1
+                ip = i+1
+                im = i-1
+
+                ap_1d(i) = -0.5d0*Ct/dx/dmx_sub(ip)*dt
+                am_1d(i) = -0.5d0*Ct/dx/dmx_sub(i )*dt
+                ac_1d(i) =  0.5d0*Ct/dx*( 1.d0/dmx_sub(ip) + 1.d0/dmx_sub(i) )*dt + 1.d0
+                ad_1d(i) = rhs(i,j,k)
+            enddo
+            ! Solve a single tridiagonal system of equations under the defined plan with periodic boundary condition
+            call module_stdma_plan_single_solve_cycle(px_single, am_1d, ac_1d, ap_1d, ad_1d, nx_sub-1)
+            ! Return the solution to theta line-by-line
+            theta(1:nx_sub-1,j,k) = theta(1:nx_sub-1,j,k) + ad_1d(1:nx_sub-1)
+        enddo
+    enddo
+    ! Destroy a STDMA plan for a single tridiagonal system
+    call module_stdma_plan_single_destroy(px_single)
+    deallocate( ap_1d, am_1d, ac_1d, ad_1d )
+
     deallocate( rhs)
 
     ! Update ghostcells from solution

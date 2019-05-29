@@ -47,10 +47,10 @@ subroutine solve_theta_plan_many(theta)
     double precision :: eAPK, eAMK, eACK                            ! Diffusion treatment terms in z-direction
     double precision :: eRHS                                        ! From eAPI to eACK
 
-    double precision, allocatable, dimension(:, :, :) :: rhs           ! RHS array
+    double precision, allocatable, dimension(:, :, :) :: rhs            ! RHS array
     double precision, allocatable, dimension(:, :) :: ap, am, ac, ad    ! Coefficient of ridiagonal matrix
 
-    type(stdma_plan_many)     :: pz2d       ! Plan for parallel TDMA
+    type(stdma_plan_many)     :: px_many, py_many, pz_many          ! Plan for many tridiagonal systems of equations
 
     ! Calculating RHS
     allocate( rhs(0:nx_sub, 0:ny_sub, 0:nz_sub))
@@ -116,7 +116,7 @@ subroutine solve_theta_plan_many(theta)
     allocate( ap(1:nx_sub-1, 1:nz_sub-1), am(1:nx_sub-1, 1:nz_sub-1), ac(1:nx_sub-1, 1:nz_sub-1), ad(1:nx_sub-1, 1:nz_sub-1) )
 
     ! Create a stdma plan for the tridiagonal systems
-    call module_stdma_plan_many_create(pz2d, nx_sub-1, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm)
+    call module_stdma_plan_many_create(pz_many, nx_sub-1, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm)
 
     ! Build coefficient matrix for the tridiagonal systems into 2D array
     do j = 1, ny_sub-1
@@ -132,7 +132,7 @@ subroutine solve_theta_plan_many(theta)
         enddo
 
         ! Solve the tridiagonal systems under the defined plan with periodic boundary condition
-        call module_stdma_plan_many_solve_cycle(pz2d, am, ac, ap, ad,nx_sub-1,nz_sub-1)
+        call module_stdma_plan_many_solve_cycle(pz_many, am, ac, ap, ad,nx_sub-1,nz_sub-1)
 
         ! Return the solution to rhs plane-by-plane
         do k = 1, nz_sub-1
@@ -141,8 +141,73 @@ subroutine solve_theta_plan_many(theta)
     enddo
 
     ! Destroy a stdma plan for the tridiagonal systems
-    call module_stdma_plan_many_destroy(pz2d)
+    call module_stdma_plan_many_destroy(pz_many)
     deallocate( ap, am, ac, ad )
+
+    !--SOLVE IN Y-DIRECTION
+    allocate( ap(1:nx_sub-1, 1:ny_sub-1), am(1:nx_sub-1, 1:ny_sub-1), ac(1:nx_sub-1, 1:ny_sub-1), ad(1:nx_sub-1, 1:ny_sub-1) )
+
+    ! Create a stdma plan for the tridiagonal systems
+    call module_stdma_plan_many_create(py_many, nx_sub-1, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm)
+
+    ! Build coefficient matrix for the tridiagonal systems into 2D array
+    do k = 1, nz_sub-1
+        do j = 1, ny_sub-1
+            jp = j + 1
+            jm = j - 1
+            jep = jpbc_index(j)
+            jem = jmbc_index(j)
+            
+            do i = 1, nx_sub-1
+                ap(i,j) = -0.5d0*Ct/dy/dmy_sub(jp)*dble(jep)*dt
+                am(i,j) = -0.5d0*Ct/dy/dmy_sub(j )*dble(jem)*dt
+                ac(i,j) =  0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) + 1.d0/dmy_sub(j) )*dt + 1.d0
+                ad(i,j) = rhs(i,j,k)
+            end do
+        end do
+
+        ! Solve the tridiagonal systems under the defined plan
+        call module_stdma_plan_many_solve(py_many, am, ac, ap, ad, nx_sub-1, ny_sub-1)
+
+        ! Return the solution to rhs plane-by-plane
+        do j = 1, ny_sub-1
+            rhs(1:nx_sub-1,j,k)=ad(1:nx_sub-1,j)
+        enddo
+    end do
+    call module_stdma_plan_many_destroy(py_many)
+    deallocate( ap, am, ac, ad )
+
+    !--SOLVE IN X-DIRECTION
+    allocate( ap(1:ny_sub-1, 1:nx_sub-1), am(1:ny_sub-1, 1:nx_sub-1), ac(1:ny_sub-1, 1:nx_sub-1), ad(1:ny_sub-1, 1:nx_sub-1) )
+
+    ! Create a stdma plan for the tridiagonal systems
+    call module_stdma_plan_many_create(px_many, ny_sub-1, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm)
+
+    ! Build coefficient matrix for the tridiagonal systems into 2D array
+    do k = 1, nz_sub-1
+        do j = 1, ny_sub-1
+            do i = 1, nx_sub-1
+                ip = i+1
+                im = i-1
+
+                ap(j,i) = -0.5d0*Ct/dx/dmx_sub(ip)*dt
+                am(j,i) = -0.5d0*Ct/dx/dmx_sub(i )*dt
+                ac(j,i) =  0.5d0*Ct/dx*( 1.d0/dmx_sub(ip) + 1.d0/dmx_sub(i) )*dt + 1.d0
+                ad(j,i) = rhs(i,j,k)
+            enddo
+        enddo
+        ! Solve the tridiagonal systems under the defined plan with periodic boundary condition
+        call module_stdma_plan_many_solve_cycle(px_many, am, ac, ap, ad, ny_sub-1, nx_sub-1)
+
+        ! Return the solution to theta plane-by-plane
+        do j = 1, ny_sub-1
+            theta(1:nx_sub-1,j,k) = theta(1:nx_sub-1,j,k) + ad(j,1:nx_sub-1)
+        enddo
+
+    enddo
+    call module_stdma_plan_many_destroy(px_many)
+    deallocate( ap, am, ac, ad )
+
     deallocate(rhs)
 
     ! Update ghostcells from solution
