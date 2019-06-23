@@ -1,6 +1,7 @@
 # PaScaL_TDMA
 
 Parallel and Scalable Library for Tri-Diagonal Matrix Algorithm
+
 PaScal_TDMA solves many tridiagonal systems of equations using a noble all-to-all communication scheme for the reduced unknowns based onthe modified Thomas algorithm by Laszlo, Gilles and Appleyard(2016)
 
 This library is for both of a single and many tridiagonal systems of equations. The main algorithm for a tridiagonal matrix proposed in this library consists of the following three steps: 
