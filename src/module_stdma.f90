@@ -1,6 +1,6 @@
 !======================================================================================================================
 !> @file        module_stdma.f90
-!> @brief       PaScaL_TDMA - Parallel and Scalable Library for tri-diagonal matrix(TDM) algorithm
+!> @brief       PaScaL_TDMA - Parallel and Scalable Library for Tri-Diagonal Matrix Algorithm
 !>              PaScal_TDMA solves many tridiagonal systems of equations in a parallel manner
 !>              using a noble all-to-all communication scheme for the reduced unknowns based on
 !>              the modified Thomas algorithm by Laszlo, Gilles and Appleyard(2016)
