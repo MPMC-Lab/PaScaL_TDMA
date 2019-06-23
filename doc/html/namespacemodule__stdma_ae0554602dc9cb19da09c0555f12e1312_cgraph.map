@@ -1,4 +1,0 @@
-<map id="module_stdma::module_stdma_plan_single_solve_cycle" name="module_stdma::module_stdma_plan_single_solve_cycle">
-<area shape="rect" id="node1" title="Solve a single cyclic tridiagonal system of equations." alt="" coords="5,5,222,44"/>
-<area shape="rect" id="node2" href="$tdmas_8f90.html#a4cb1f95e9c608085c5bb19baff639d9e" title="Solve a single cyclic tridiagonal system of equations using Thomas algorithm." alt="" coords="270,12,393,37"/>
-</map>

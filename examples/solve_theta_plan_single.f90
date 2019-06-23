@@ -18,17 +18,17 @@
 !>
 !> @brief       Example solver for a single tridiagonal system of equations using scalable TDMA
 !> @details     This solvers is for a single tridiagonal system of equations.
-!>              It solves the 3-dimensional diffusion equation using the STDMA solver.
-!>              Plans of STDMA for a single tridiagonal system of equations are created and
+!>              It solves the 3-dimensional diffusion equation using the PaScaL_TDMA solver.
+!>              Plans of PaScaL_TDMA for a single tridiagonal system of equations are created and
 !>              a single tridiagonal systems is solved line-by-line
 !> @param       theta       Main 3-D variable to be solved
 !>
 subroutine solve_theta_plan_single(theta)
     use mpi
-    use module_global
-    use module_mpi_subdomain
-    use module_mpi_topology
-    use module_stdma
+    use global
+    use mpi_subdomain
+    use mpi_topology
+    use PaScaL_TDMA
     implicit none
     double precision, dimension(0:nx_sub, 0:ny_sub, 0:nz_sub), intent(inout) :: theta
     
@@ -50,7 +50,7 @@ subroutine solve_theta_plan_single(theta)
     double precision, allocatable, dimension(:, :, :) :: rhs                    ! RHS array
     double precision, allocatable, dimension(:) :: ap_1d, am_1d, ac_1d, ad_1d   ! Coefficient of ridiagonal matrix
 
-    type(stdma_plan_single)      :: px_single, py_single, pz_single ! Plan for a single tridiagonal system of equations
+    type(ptdma_plan_single)      :: px_single, py_single, pz_single ! Plan for a single tridiagonal system of equations
 
     ! Calculating RHS
     allocate( rhs(0:nx_sub, 0:ny_sub, 0:nz_sub))
@@ -115,8 +115,8 @@ subroutine solve_theta_plan_single(theta)
     ! SOLVE IN Z-DIRECTION
     allocate( ap_1d(1:nz_sub-1), am_1d(1:nz_sub-1), ac_1d(1:nz_sub-1), ad_1d(1:nz_sub-1) )
 
-    ! Create a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_create(pz_single, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm, 0)
+    ! Create a PaScaL_TDMA plan for a single tridiagonal system
+    call PaScaL_TDMA_plan_single_create(pz_single, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm, 0)
 
     ! Build coefficient matrix for a single tridiagonal system
     do j = 1, ny_sub-1
@@ -131,20 +131,20 @@ subroutine solve_theta_plan_single(theta)
 
             enddo
             ! Solve a single tridiagonal system of equations under the defined plan with periodic boundary condition
-            call module_stdma_plan_single_solve_cycle(pz_single, am_1d, ac_1d, ap_1d, ad_1d, nz_sub-1)
+            call PaScaL_TDMA_single_solve_cycle(pz_single, am_1d, ac_1d, ap_1d, ad_1d, nz_sub-1)
             ! Return the solution to rhs line-by-line
             rhs(i,j,1:nz_sub-1)=ad_1d(1:nz_sub-1)
         enddo
     enddo
 
-    ! Destroy a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_destroy(pz_single)
+    ! Destroy a PaScaL_TDMA plan for a single tridiagonal system
+    call PaScaL_TDMA_plan_single_destroy(pz_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
     !--SOLVE IN Y-DIRECTION
     allocate( ap_1d(1:ny_sub-1), am_1d(1:ny_sub-1), ac_1d(1:ny_sub-1), ad_1d(1:ny_sub-1) )
-    ! Create a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_create(py_single, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm, 0)
+    ! Create a PaScaL_TDMA plan for a single tridiagonal system
+    call PaScaL_TDMA_plan_single_create(py_single, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm, 0)
 
     ! Build coefficient matrix for a single tridiagonal system
     do k = 1, nz_sub-1
@@ -162,19 +162,19 @@ subroutine solve_theta_plan_single(theta)
                 ad_1d(j) = rhs(i,j,k)
             end do
             ! Solve a single tridiagonal system of equations under the defined plan
-            call module_stdma_plan_single_solve(py_single, am_1d, ac_1d, ap_1d, ad_1d, ny_sub-1)
+            call PaScaL_TDMA_single_solve(py_single, am_1d, ac_1d, ap_1d, ad_1d, ny_sub-1)
             ! Return the solution to rhs line-by-line
             rhs(i,1:ny_sub-1,k)=ad_1d(1:ny_sub-1)
         end do
     end do
-    ! Destroy a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_destroy(py_single)
+    ! Destroy a PaScaL_TDMA plan for a single tridiagonal system
+    call PaScaL_TDMA_plan_single_destroy(py_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
     ! !--SOLVE IN X-DIRECTION
     allocate( ap_1d(1:nx_sub-1), am_1d(1:nx_sub-1), ac_1d(1:nx_sub-1), ad_1d(1:nx_sub-1) )
-    ! Create a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_create(px_single, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm, 0)
+    ! Create a PaScaL_TDMA plan for a single tridiagonal system
+    call PaScaL_TDMA_plan_single_create(px_single, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm, 0)
 
     ! Build coefficient matrix for a single tridiagonal system
     do k = 1, nz_sub-1
@@ -189,18 +189,18 @@ subroutine solve_theta_plan_single(theta)
                 ad_1d(i) = rhs(i,j,k)
             enddo
             ! Solve a single tridiagonal system of equations under the defined plan with periodic boundary condition
-            call module_stdma_plan_single_solve_cycle(px_single, am_1d, ac_1d, ap_1d, ad_1d, nx_sub-1)
+            call PaScaL_TDMA_single_solve_cycle(px_single, am_1d, ac_1d, ap_1d, ad_1d, nx_sub-1)
             ! Return the solution to theta line-by-line
             theta(1:nx_sub-1,j,k) = theta(1:nx_sub-1,j,k) + ad_1d(1:nx_sub-1)
         enddo
     enddo
-    ! Destroy a STDMA plan for a single tridiagonal system
-    call module_stdma_plan_single_destroy(px_single)
+    ! Destroy a PaScaL_TDMA plan for a single tridiagonal system
+    call PaScaL_TDMA_plan_single_destroy(px_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
     deallocate( rhs)
 
     ! Update ghostcells from solution
-    call module_mpi_subdomain_ghostcell_update(theta, comm_1d_x, comm_1d_y, comm_1d_z)
+    call mpi_subdomain_ghostcell_update(theta, comm_1d_x, comm_1d_y, comm_1d_z)
 
 end subroutine solve_theta_plan_single

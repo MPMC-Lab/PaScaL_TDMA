@@ -3,7 +3,7 @@ include ../Makefile.inc
 EXE = a.out
 
 INC = ../include
-LIB = ../lib -lp3ta
+LIB = ../lib -lpascal_tdma
 
 global = module_global.o
 topology = module_mpi_topology.o 

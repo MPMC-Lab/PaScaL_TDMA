@@ -18,11 +18,11 @@
 !>
 !> @brief       Module for building subdomains divided from the physical domain
 !>
-module module_mpi_subdomain
+module mpi_subdomain
 
     use MPI
-    use module_global
-    use module_mpi_topology, only : cart_comm_1d
+    use global
+    use mpi_topology, only : cart_comm_1d
 
     implicit none
     
@@ -57,14 +57,14 @@ module module_mpi_subdomain
     !> @}
     private
 
-    public  :: module_mpi_subdomain_make
-    public  :: module_mpi_subdomain_clean
-    public  :: module_mpi_subdomain_make_ghostcell_ddtype
-    public  :: module_mpi_subdomain_ghostcell_update
-    public  :: module_mpi_subdomain_indices
-    public  :: module_mpi_subdomain_mesh
-    public  :: module_mpi_subdomain_initialization
-    public  :: module_mpi_subdomain_boundary
+    public  :: mpi_subdomain_make
+    public  :: mpi_subdomain_clean
+    public  :: mpi_subdomain_make_ghostcell_ddtype
+    public  :: mpi_subdomain_ghostcell_update
+    public  :: mpi_subdomain_indices
+    public  :: mpi_subdomain_mesh
+    public  :: mpi_subdomain_initialization
+    public  :: mpi_subdomain_boundary
 
     contains
 
@@ -77,7 +77,7 @@ module module_mpi_subdomain
     !> @param       nprocs_in_z     Number of MPI processes in z-direction
     !> @param       myrank_in_z     Rank ID in z-direction
     !>
-    subroutine module_mpi_subdomain_make(nprocs_in_x, myrank_in_x, &
+    subroutine mpi_subdomain_make(nprocs_in_x, myrank_in_x, &
                                          nprocs_in_y, myrank_in_y, &
                                          nprocs_in_z, myrank_in_z)
         implicit none
@@ -100,12 +100,12 @@ module module_mpi_subdomain
 
         allocate(jmbc_index(0:ny_sub),jpbc_index(0:ny_sub))
 
-    end subroutine module_mpi_subdomain_make
+    end subroutine mpi_subdomain_make
 
     !>
     !> @brief       Deallocate subdomain variables
     !>
-    subroutine module_mpi_subdomain_clean
+    subroutine mpi_subdomain_clean
         implicit none
 
         deallocate(x_sub, dmx_sub)
@@ -115,12 +115,12 @@ module module_mpi_subdomain
 
         deallocate(jmbc_index,jpbc_index)
 
-    end subroutine module_mpi_subdomain_clean
+    end subroutine mpi_subdomain_clean
 
     !>
     !> @brief       Build derived datatypes for subdomain communication using ghostcell
     !>
-    subroutine module_mpi_subdomain_make_ghostcell_ddtype
+    subroutine mpi_subdomain_make_ghostcell_ddtype
 
         implicit none
         integer :: sizes(0:2), subsizes(0:2), starts(0:2), ierr     ! Local variables for MPI_Type_create_subarray
@@ -203,7 +203,7 @@ module module_mpi_subdomain
                                     MPI_DOUBLE_PRECISION, ddtype_recvfrom_F, ierr)
         call MPI_Type_commit(ddtype_recvfrom_F,ierr)
 
-    end subroutine module_mpi_subdomain_make_ghostcell_ddtype
+    end subroutine mpi_subdomain_make_ghostcell_ddtype
 
     !>
     !> @brief       Update the values of boundary ghostcells through communication in all directions
@@ -212,7 +212,7 @@ module module_mpi_subdomain
     !> @param       comm_1d_y       Subcommunicator in y-direction
     !> @param       comm_1d_z       Subcommunicator in z-direction
     !>
-    subroutine module_mpi_subdomain_ghostcell_update(theta_sub, comm_1d_x, comm_1d_y, comm_1d_z)
+    subroutine mpi_subdomain_ghostcell_update(theta_sub, comm_1d_x, comm_1d_y, comm_1d_z)
 
         implicit none
 
@@ -242,14 +242,14 @@ module module_mpi_subdomain
         
         call MPI_Waitall(12, request, MPI_STATUSES_IGNORE, ierr)
         
-    end subroutine module_mpi_subdomain_ghostcell_update
+    end subroutine mpi_subdomain_ghostcell_update
 
     !>
     !> @brief       Determine whether next grids are empty(0) or not(1). Only in y-direction
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
     !> @param       myrank_in_y     Rank ID in y-direction
     !>
-    subroutine module_mpi_subdomain_indices(myrank_in_y, nprocs_in_y)
+    subroutine mpi_subdomain_indices(myrank_in_y, nprocs_in_y)
 
         implicit none
         integer, intent(in) :: myrank_in_y, nprocs_in_y
@@ -263,7 +263,7 @@ module module_mpi_subdomain
         if(myrank_in_y==nprocs_in_y-1) jpbc_index(ny_sub-1)=0
     
         return
-    end subroutine module_mpi_subdomain_indices
+    end subroutine mpi_subdomain_indices
 
     !>
     !> @brief       Assign grid coordinates and lengths of subdomains
@@ -274,7 +274,7 @@ module module_mpi_subdomain
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
     !> @param       nprocs_in_z     Number of MPI processes in z-direction
     !>
-    subroutine module_mpi_subdomain_mesh(myrank_in_x, myrank_in_y, myrank_in_z,  &
+    subroutine mpi_subdomain_mesh(myrank_in_x, myrank_in_y, myrank_in_z,  &
                                          nprocs_in_x, nprocs_in_y, nprocs_in_z)
 
         implicit none
@@ -328,7 +328,7 @@ module module_mpi_subdomain
     
         return
     
-    end subroutine module_mpi_subdomain_mesh
+    end subroutine mpi_subdomain_mesh
 
     !>
     !> @brief       Initialize the values of main variable in subdomain.
@@ -336,7 +336,7 @@ module module_mpi_subdomain
     !> @param       myrank_in_y     Rank ID in y-direction
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
     !>
-    subroutine module_mpi_subdomain_initialization(theta_sub, myrank_in_y, nprocs_in_y)
+    subroutine mpi_subdomain_initialization(theta_sub, myrank_in_y, nprocs_in_y)
         implicit none
         integer, intent(in) :: myrank_in_y, nprocs_in_y
         double precision, intent(inout) :: theta_sub(0:nx_sub, 0:ny_sub, 0:nz_sub)
@@ -365,7 +365,7 @@ module module_mpi_subdomain
         end do
     
         return    
-    end subroutine module_mpi_subdomain_initialization
+    end subroutine mpi_subdomain_initialization
     
     !>
     !> @brief       Assign the values of boundary grids in subdomain.
@@ -373,7 +373,7 @@ module module_mpi_subdomain
     !> @param       myrank_in_y     Rank ID in y-direction
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
     !>
-    subroutine module_mpi_subdomain_boundary(theta_sub, myrank_in_y, nprocs_in_y)
+    subroutine mpi_subdomain_boundary(theta_sub, myrank_in_y, nprocs_in_y)
         implicit none
         integer, intent(in) :: myrank_in_y, nprocs_in_y
         double precision, intent(in) :: theta_sub(0:nx_sub, 0:ny_sub, 0:nz_sub)
@@ -407,6 +407,6 @@ module module_mpi_subdomain
         endif
     
         return    
-    end subroutine module_mpi_subdomain_boundary
+    end subroutine mpi_subdomain_boundary
     
-end module module_mpi_subdomain
+end module mpi_subdomain

@@ -18,7 +18,7 @@
 !>
 !> @brief       Module for global parameters
 !>
-module module_global
+module global
     implicit none
     double precision, parameter :: PI = acos(-1.d0)
     
@@ -60,10 +60,10 @@ module module_global
 
     contains 
     !>
-    !> @brief       Module for global parameters
+    !> @brief       Assign global parameters
     !> @param       np_dim      Number of MPI processes in 3D topology
     !>
-    subroutine module_global_inputpara(np_dim)
+    subroutine global_inputpara(np_dim)
         implicit none
         integer, intent(out) :: np_dim(0:2)
 
@@ -102,6 +102,6 @@ module module_global
         alphaG = 1.d0; nu = 1.d0/sqrt(Ra/(alphaG*Pr*ly**3.*(theta_hot-theta_cold)))
         Ct = nu/Pr
         
-    end subroutine module_global_inputpara
+    end subroutine global_inputpara
 
-end module module_global
+end module global

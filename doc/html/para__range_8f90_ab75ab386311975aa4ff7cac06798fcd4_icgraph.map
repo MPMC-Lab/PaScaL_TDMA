@@ -1,7 +1,7 @@
 <map id="para_range" name="para_range">
-<area shape="rect" id="node1" title="Compute the indices of assigned range for each MPI process." alt="" coords="596,40,685,65"/>
-<area shape="rect" id="node2" href="$namespacemodule__mpi__subdomain.html#a6387e08f00a18fad06417aa9b51854ac" title="Prepare subdomain and determine size of subdomain." alt="" coords="104,5,318,44"/>
-<area shape="rect" id="node4" href="$namespacemodule__stdma.html#ac68f17b987232c3daacbb844bd52d67e" title="Produce a plan for many tridiagonal systems of equations." alt="" coords="366,61,548,100"/>
+<area shape="rect" id="node1" title="Compute the indices of assigned range for each MPI process." alt="" coords="537,40,627,65"/>
+<area shape="rect" id="node2" href="$namespacempi__subdomain.html#a3a1e7cf64aafbebd3c09b92fc56bd311" title="Prepare subdomain and determine size of subdomain." alt="" coords="112,5,257,44"/>
+<area shape="rect" id="node4" href="$namespacepascal__tdma.html#a7e9c24b343ae949044eccc8692dcc6e9" title="Produce a plan for many tridiagonal systems of equations." alt="" coords="314,61,489,100"/>
 <area shape="rect" id="node3" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,40,56,65"/>
-<area shape="rect" id="node5" href="$solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="Example solver for many tridiagonal systems of equations using scalable TDMA." alt="" coords="129,68,292,93"/>
+<area shape="rect" id="node5" href="$solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="Example solver for many tridiagonal systems of equations using scalable TDMA." alt="" coords="104,68,266,93"/>
 </map>

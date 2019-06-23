@@ -20,10 +20,10 @@
 !>
 program main
     use mpi
-    use module_global
-    use module_mpi_subdomain
-    use module_mpi_topology
-    use module_stdma
+    use global
+    use mpi_subdomain
+    use mpi_topology
+    use PaScaL_TDMA
     
     implicit none
  
@@ -42,31 +42,31 @@ program main
     period(0)=.true.; period(1)=.false.; period(2)=.true.
     
     ! Read PARA_INPUT.inp file and setup the parameters for the simulation domain and conditions
-    call module_global_inputpara(np_dim)
+    call global_inputpara(np_dim)
 
     ! Create cartesian MPI topology and build sub-communcator in the cartesian topology
-    call module_mpi_topology_make()
+    call mpi_topology_make()
 
     ! Divide the simulation domain
-    call module_mpi_subdomain_make(comm_1d_x%nprocs, comm_1d_x%myrank, &
+    call mpi_subdomain_make(comm_1d_x%nprocs, comm_1d_x%myrank, &
                                    comm_1d_y%nprocs, comm_1d_y%myrank, &
                                    comm_1d_z%nprocs, comm_1d_z%myrank )
 
     ! Make ghostcell as communcation buffer using derived datatypes
-    call module_mpi_subdomain_make_ghostcell_ddtype()
+    call mpi_subdomain_make_ghostcell_ddtype()
     
     ! Allocate the main variable in the sub-domain
     allocate(theta_sub(0:nx_sub, 0:ny_sub, 0:nz_sub))
 
     ! Setup the parameters in the sub-domain
-    call module_mpi_subdomain_indices(comm_1d_y%myrank, comm_1d_y%nprocs)            
-    call module_mpi_subdomain_mesh(comm_1d_x%myrank,comm_1d_y%myrank,comm_1d_z%myrank, &
+    call mpi_subdomain_indices(comm_1d_y%myrank, comm_1d_y%nprocs)            
+    call mpi_subdomain_mesh(comm_1d_x%myrank,comm_1d_y%myrank,comm_1d_z%myrank, &
                                    comm_1d_x%nprocs,comm_1d_y%nprocs,comm_1d_z%nprocs)
 
     ! Initialize values in the simulation domain and boundary condition 
-    call module_mpi_subdomain_initialization(theta_sub,comm_1d_y%myrank, comm_1d_y%nprocs)
-    call module_mpi_subdomain_ghostcell_update(theta_sub, comm_1d_x, comm_1d_y, comm_1d_z)
-    call module_mpi_subdomain_boundary(theta_sub, comm_1d_y%myrank, comm_1d_y%nprocs)
+    call mpi_subdomain_initialization(theta_sub,comm_1d_y%myrank, comm_1d_y%nprocs)
+    call mpi_subdomain_ghostcell_update(theta_sub, comm_1d_x, comm_1d_y, comm_1d_z)
+    call mpi_subdomain_boundary(theta_sub, comm_1d_y%myrank, comm_1d_y%nprocs)
 
     call MPI_Barrier(MPI_COMM_WORLD,ierr)
 
@@ -91,8 +91,8 @@ program main
     
     ! Deallocate variables and clean module variables
     deallocate(theta_sub)
-    call module_mpi_subdomain_clean()
-    call module_mpi_topology_clean()
+    call mpi_subdomain_clean()
+    call mpi_topology_clean()
 
     call MPI_Finalize(ierr)
 end program main
@@ -106,9 +106,9 @@ end program main
 subroutine field_file_write(myrank, nprocs, theta_sub)
 
     use mpi
-    use module_global
-    use module_mpi_subdomain
-    use module_mpi_topology
+    use global
+    use mpi_subdomain
+    use mpi_topology
 
     implicit none
 

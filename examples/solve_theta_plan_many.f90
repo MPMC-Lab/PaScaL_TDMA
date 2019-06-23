@@ -1,6 +1,6 @@
 !======================================================================================================================
 !> @file        solve_theta_plan_many.f90
-!> @brief       This is for an example case of stdma.
+!> @brief       This is for an example case of PaScaL_TDMA.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -18,17 +18,17 @@
 !>
 !> @brief       Example solver for many tridiagonal systems of equations using scalable TDMA
 !> @details     This solvers is for many tridiagonal systems of equations.
-!>              It solves the 3-dimensional diffusion equation using the STDMA solver.
-!>              Plans of STDMA for many tridiagonal systems of equations are created and
+!>              It solves the 3-dimensional diffusion equation using the PaScaL_TDMA solver.
+!>              Plans of PaScaL_TDMA for many tridiagonal systems of equations are created and
 !>              many tridiagonal systems are solved plane-by-plane.
 !> @param       theta       Main 3-D variable to be solved
 !>
 subroutine solve_theta_plan_many(theta)
     use mpi
-    use module_global
-    use module_mpi_subdomain
-    use module_mpi_topology
-    use module_stdma
+    use global
+    use mpi_subdomain
+    use mpi_topology
+    use PaScaL_TDMA
     implicit none
     double precision, dimension(0:nx_sub, 0:ny_sub, 0:nz_sub), intent(inout) :: theta
     
@@ -50,7 +50,7 @@ subroutine solve_theta_plan_many(theta)
     double precision, allocatable, dimension(:, :, :) :: rhs            ! RHS array
     double precision, allocatable, dimension(:, :) :: ap, am, ac, ad    ! Coefficient of ridiagonal matrix
 
-    type(stdma_plan_many)     :: px_many, py_many, pz_many          ! Plan for many tridiagonal systems of equations
+    type(ptdma_plan_many)     :: px_many, py_many, pz_many          ! Plan for many tridiagonal systems of equations
 
     ! Calculating RHS
     allocate( rhs(0:nx_sub, 0:ny_sub, 0:nz_sub))
@@ -115,8 +115,8 @@ subroutine solve_theta_plan_many(theta)
     !--SOLVE IN Z-DIRECTION
     allocate( ap(1:nx_sub-1, 1:nz_sub-1), am(1:nx_sub-1, 1:nz_sub-1), ac(1:nx_sub-1, 1:nz_sub-1), ad(1:nx_sub-1, 1:nz_sub-1) )
 
-    ! Create a stdma plan for the tridiagonal systems
-    call module_stdma_plan_many_create(pz_many, nx_sub-1, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm)
+    ! Create a PaScaL_TDMA plan for the tridiagonal systems
+    call PaScaL_TDMA_plan_many_create(pz_many, nx_sub-1, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm)
 
     ! Build coefficient matrix for the tridiagonal systems into 2D array
     do j = 1, ny_sub-1
@@ -132,7 +132,7 @@ subroutine solve_theta_plan_many(theta)
         enddo
 
         ! Solve the tridiagonal systems under the defined plan with periodic boundary condition
-        call module_stdma_plan_many_solve_cycle(pz_many, am, ac, ap, ad,nx_sub-1,nz_sub-1)
+        call PaScaL_TDMA_many_solve_cycle(pz_many, am, ac, ap, ad,nx_sub-1,nz_sub-1)
 
         ! Return the solution to rhs plane-by-plane
         do k = 1, nz_sub-1
@@ -140,15 +140,15 @@ subroutine solve_theta_plan_many(theta)
         enddo
     enddo
 
-    ! Destroy a stdma plan for the tridiagonal systems
-    call module_stdma_plan_many_destroy(pz_many)
+    ! Destroy a PaScaL_TDMA plan for the tridiagonal systems
+    call PaScaL_TDMA_plan_many_destroy(pz_many)
     deallocate( ap, am, ac, ad )
 
     !--SOLVE IN Y-DIRECTION
     allocate( ap(1:nx_sub-1, 1:ny_sub-1), am(1:nx_sub-1, 1:ny_sub-1), ac(1:nx_sub-1, 1:ny_sub-1), ad(1:nx_sub-1, 1:ny_sub-1) )
 
-    ! Create a stdma plan for the tridiagonal systems
-    call module_stdma_plan_many_create(py_many, nx_sub-1, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm)
+    ! Create a PaScaL_TDMA plan for the tridiagonal systems
+    call PaScaL_TDMA_plan_many_create(py_many, nx_sub-1, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm)
 
     ! Build coefficient matrix for the tridiagonal systems into 2D array
     do k = 1, nz_sub-1
@@ -167,21 +167,21 @@ subroutine solve_theta_plan_many(theta)
         end do
 
         ! Solve the tridiagonal systems under the defined plan
-        call module_stdma_plan_many_solve(py_many, am, ac, ap, ad, nx_sub-1, ny_sub-1)
+        call PaScaL_TDMA_many_solve(py_many, am, ac, ap, ad, nx_sub-1, ny_sub-1)
 
         ! Return the solution to rhs plane-by-plane
         do j = 1, ny_sub-1
             rhs(1:nx_sub-1,j,k)=ad(1:nx_sub-1,j)
         enddo
     end do
-    call module_stdma_plan_many_destroy(py_many)
+    call PaScaL_TDMA_plan_many_destroy(py_many)
     deallocate( ap, am, ac, ad )
 
     !--SOLVE IN X-DIRECTION
     allocate( ap(1:ny_sub-1, 1:nx_sub-1), am(1:ny_sub-1, 1:nx_sub-1), ac(1:ny_sub-1, 1:nx_sub-1), ad(1:ny_sub-1, 1:nx_sub-1) )
 
-    ! Create a stdma plan for the tridiagonal systems
-    call module_stdma_plan_many_create(px_many, ny_sub-1, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm)
+    ! Create a PaScaL_TDMA plan for the tridiagonal systems
+    call PaScaL_TDMA_plan_many_create(px_many, ny_sub-1, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm)
 
     ! Build coefficient matrix for the tridiagonal systems into 2D array
     do k = 1, nz_sub-1
@@ -197,7 +197,7 @@ subroutine solve_theta_plan_many(theta)
             enddo
         enddo
         ! Solve the tridiagonal systems under the defined plan with periodic boundary condition
-        call module_stdma_plan_many_solve_cycle(px_many, am, ac, ap, ad, ny_sub-1, nx_sub-1)
+        call PaScaL_TDMA_many_solve_cycle(px_many, am, ac, ap, ad, ny_sub-1, nx_sub-1)
 
         ! Return the solution to theta plane-by-plane
         do j = 1, ny_sub-1
@@ -205,13 +205,13 @@ subroutine solve_theta_plan_many(theta)
         enddo
 
     enddo
-    call module_stdma_plan_many_destroy(px_many)
+    call PaScaL_TDMA_plan_many_destroy(px_many)
     deallocate( ap, am, ac, ad )
 
     deallocate(rhs)
 
     ! Update ghostcells from solution
-    call module_mpi_subdomain_ghostcell_update(theta, comm_1d_x, comm_1d_y, comm_1d_z)
+    call mpi_subdomain_ghostcell_update(theta, comm_1d_x, comm_1d_y, comm_1d_z)
 
 end subroutine solve_theta_plan_many
 

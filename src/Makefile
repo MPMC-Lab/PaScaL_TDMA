@@ -1,14 +1,14 @@
 include ../Makefile.inc
 
-LIB = libp3ta.a
+LIB = libpascal_tdma.a
 
 OBJDIR = ./obj
 
 TDMAS = $(OBJDIR)/tdmas.o
 RANGE = $(OBJDIR)/para_range.o
-P3TA  = $(OBJDIR)/module_stdma.o
+PTDMA  = $(OBJDIR)/module_stdma.o
 
-OBJS   = $(TDMAS) $(RANGE) $(P3TA)
+OBJS   = $(TDMAS) $(RANGE) $(PTDMA)
 
 all: $(LIB) inc
 
@@ -23,7 +23,7 @@ $(OBJDIR)/%.o: %.f90
 	$(FC) $(FLAG) -c $^ -o $@  -module $(OBJDIR) -I$(OBJDIR)
 $(OBJDIR)/%.o:$(OBJDIR)/%.mod
 
-%(P3TA)	 : %(RANGE) %(TDMAS)
+%(PTDMA)	 : %(RANGE) %(TDMAS)
 
 clean:
 	rm -rf ../lib ../include *__genmod.f90 $(LIB)

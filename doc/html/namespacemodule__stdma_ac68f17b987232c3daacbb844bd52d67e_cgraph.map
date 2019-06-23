@@ -1,4 +1,0 @@
-<map id="module_stdma::module_stdma_plan_many_create" name="module_stdma::module_stdma_plan_many_create">
-<area shape="rect" id="node1" title="Produce a plan for many tridiagonal systems of equations." alt="" coords="5,5,188,44"/>
-<area shape="rect" id="node2" href="$para__range_8f90.html#ab75ab386311975aa4ff7cac06798fcd4" title="Compute the indices of assigned range for each MPI process." alt="" coords="236,12,325,37"/>
-</map>

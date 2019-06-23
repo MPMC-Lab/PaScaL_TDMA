@@ -1,23 +1,4 @@
 var searchData=
 [
-  ['main',['main',['../main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d',1,'main.f90']]],
-  ['module_5fglobal_5finputpara',['module_global_inputpara',['../namespacemodule__global.html#a74cb46a87131e7b91b464cd2a2c480d2',1,'module_global']]],
-  ['module_5fmpi_5fsubdomain_5fboundary',['module_mpi_subdomain_boundary',['../namespacemodule__mpi__subdomain.html#a3ebf20fcc8a3cd5d916adddf69af4833',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5fsubdomain_5fclean',['module_mpi_subdomain_clean',['../namespacemodule__mpi__subdomain.html#ab1a550c72f16254a20785d7f4eae4e1c',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5fsubdomain_5fghostcell_5fupdate',['module_mpi_subdomain_ghostcell_update',['../namespacemodule__mpi__subdomain.html#a3e13201bdd812e62d2293bb0e2c2221d',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5fsubdomain_5findices',['module_mpi_subdomain_indices',['../namespacemodule__mpi__subdomain.html#a407d55f604c25fca086515a66980f67b',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5fsubdomain_5finitialization',['module_mpi_subdomain_initialization',['../namespacemodule__mpi__subdomain.html#a0be56ce2507138a1364de11e15f2bc7f',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5fsubdomain_5fmake',['module_mpi_subdomain_make',['../namespacemodule__mpi__subdomain.html#a6387e08f00a18fad06417aa9b51854ac',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5fsubdomain_5fmake_5fghostcell_5fddtype',['module_mpi_subdomain_make_ghostcell_ddtype',['../namespacemodule__mpi__subdomain.html#a108c65cb0e549fd286b43243a6406ec9',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5fsubdomain_5fmesh',['module_mpi_subdomain_mesh',['../namespacemodule__mpi__subdomain.html#a73f1a66627a730c3906f200d9d31f974',1,'module_mpi_subdomain']]],
-  ['module_5fmpi_5ftopology_5fclean',['module_mpi_topology_clean',['../namespacemodule__mpi__topology.html#aba41ff8d55ee4cd7371e7165ed1a3316',1,'module_mpi_topology']]],
-  ['module_5fmpi_5ftopology_5fmake',['module_mpi_topology_make',['../namespacemodule__mpi__topology.html#a162ac095bb487254991dd12ad5ac8935',1,'module_mpi_topology']]],
-  ['module_5fstdma_5fplan_5fmany_5fcreate',['module_stdma_plan_many_create',['../namespacemodule__stdma.html#ac68f17b987232c3daacbb844bd52d67e',1,'module_stdma']]],
-  ['module_5fstdma_5fplan_5fmany_5fdestroy',['module_stdma_plan_many_destroy',['../namespacemodule__stdma.html#a4ff32ed335c7df121dbb0be635a29287',1,'module_stdma']]],
-  ['module_5fstdma_5fplan_5fmany_5fsolve',['module_stdma_plan_many_solve',['../namespacemodule__stdma.html#aa0817e49b29e14abc90f0aab91c4c2d9',1,'module_stdma']]],
-  ['module_5fstdma_5fplan_5fmany_5fsolve_5fcycle',['module_stdma_plan_many_solve_cycle',['../namespacemodule__stdma.html#ab9a4a74a41d0b04823b5ac26f58a9733',1,'module_stdma']]],
-  ['module_5fstdma_5fplan_5fsingle_5fcreate',['module_stdma_plan_single_create',['../namespacemodule__stdma.html#af1e75db96d40d895493a1d46fd1d044b',1,'module_stdma']]],
-  ['module_5fstdma_5fplan_5fsingle_5fdestroy',['module_stdma_plan_single_destroy',['../namespacemodule__stdma.html#afad99ac77e49d1b335d1a088d9ce0de9',1,'module_stdma']]],
-  ['module_5fstdma_5fplan_5fsingle_5fsolve',['module_stdma_plan_single_solve',['../namespacemodule__stdma.html#a01a73c00d5295d293827efc2b542c9e2',1,'module_stdma']]],
-  ['module_5fstdma_5fplan_5fsingle_5fsolve_5fcycle',['module_stdma_plan_single_solve_cycle',['../namespacemodule__stdma.html#ae0554602dc9cb19da09c0555f12e1312',1,'module_stdma']]]
+  ['global_5finputpara',['global_inputpara',['../namespaceglobal.html#a930b565da2644b675f35b91735e11ce3',1,'global']]]
 ];

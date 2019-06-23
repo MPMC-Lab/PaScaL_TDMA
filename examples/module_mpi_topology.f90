@@ -18,7 +18,7 @@
 !>
 !> @brief       Module for creating cartesian topology of MPI processes and subcommunicators
 !>
-module module_mpi_topology
+module mpi_topology
     use mpi
     implicit none
 
@@ -41,27 +41,27 @@ module module_mpi_topology
 
     private
 
-    public  :: module_mpi_topology_make
-    public  :: module_mpi_topology_clean
+    public  :: mpi_topology_make
+    public  :: mpi_topology_clean
 
     contains
 
     !>
     !> @brief       Destroy the communicator for cartesian topology
     !>
-    subroutine module_mpi_topology_clean()
+    subroutine mpi_topology_clean()
 
         implicit none
         integer :: ierr
 
         call MPI_Comm_free(mpi_world_cart, ierr)
 
-    end subroutine module_mpi_topology_clean
+    end subroutine mpi_topology_clean
 
     !>
     !> @brief       Make the cartesian topology of MPI processes and subcommunicators
     !>
-    subroutine module_mpi_topology_make()
+    subroutine mpi_topology_make()
         implicit none
         logical :: remain(0:2)
         integer :: ierr
@@ -103,6 +103,6 @@ module module_mpi_topology
         call MPI_Comm_size(comm_1d_z%mpi_comm, comm_1d_z%nprocs, ierr)
         call MPI_Cart_shift(comm_1d_z%mpi_comm, 0, 1, comm_1d_z%west_rank, comm_1d_z%east_rank, ierr)
 
-    end subroutine module_mpi_topology_make
+    end subroutine mpi_topology_make
 
-end module module_mpi_topology
+end module mpi_topology

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ra',['ra',['../namespacemodule__global.html#a7256706b4dc44ce0154f5dec61873a45',1,'module_global']]]
+  ['ra',['ra',['../namespaceglobal.html#a7b363950bb58d4e52dda12a928b2b9e2',1,'global']]]
 ];
