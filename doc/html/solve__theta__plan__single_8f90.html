@@ -72,7 +72,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>This is for an example case of stdma.  
+<p>This file contains a solver subroutine for the example problem of PaScaL_TDMA.  
 <a href="#details">More...</a></p>
 
 <p><a href="solve__theta__plan__single_8f90_source.html">Go to the source code of this file.</a></p>
@@ -80,12 +80,12 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a53ef6756822306f33a47be6a66232862"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862">solve_theta_plan_single</a> (theta)</td></tr>
-<tr class="memdesc:a53ef6756822306f33a47be6a66232862"><td class="mdescLeft">&#160;</td><td class="mdescRight">Example solver for a single tridiagonal system of equations using scalable TDMA.  <a href="#a53ef6756822306f33a47be6a66232862">More...</a><br /></td></tr>
+<tr class="memdesc:a53ef6756822306f33a47be6a66232862"><td class="mdescLeft">&#160;</td><td class="mdescRight">An example solver for a single tridiagonal system of equations using PaScaL_TDMA.  <a href="#a53ef6756822306f33a47be6a66232862">More...</a><br /></td></tr>
 <tr class="separator:a53ef6756822306f33a47be6a66232862"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This is for an example case of stdma. </p>
-<dl class="section author"><dt>Author</dt><dd></dd></dl>
+<div class="textblock"><p>This file contains a solver subroutine for the example problem of PaScaL_TDMA. </p>
+<p>The target example problem is the three-dimensional time-dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries. </p><dl class="section author"><dt>Author</dt><dd></dd></dl>
 <ul>
 <li>Kiha Kim (<a href="#" onclick="location.href='mai'+'lto:'+'k-k'+'ih'+'a@y'+'on'+'sei'+'.a'+'c.k'+'r'; return false;">k-kih<span style="display: none;">.nosp@m.</span>a@yo<span style="display: none;">.nosp@m.</span>nsei.<span style="display: none;">.nosp@m.</span>ac.k<span style="display: none;">.nosp@m.</span>r</a>), Department of Computational Science &amp; Engineering, Yonsei University</li>
 <li>Ji-Hoon Kang (<a href="#" onclick="location.href='mai'+'lto:'+'jhk'+'an'+'g@k'+'is'+'ti.'+'re'+'.kr'; return false;">jhkan<span style="display: none;">.nosp@m.</span>g@ki<span style="display: none;">.nosp@m.</span>sti.r<span style="display: none;">.nosp@m.</span>e.kr</a>), Korea Institute of Science and Technology Information</li>
@@ -115,22 +115,22 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Example solver for a single tridiagonal system of equations using scalable TDMA. </p>
-<p>This solvers is for a single tridiagonal system of equations. It solves the 3-dimensional diffusion equation using the PaScaL_TDMA solver. Plans of PaScaL_TDMA for a single tridiagonal system of equations are created and a single tridiagonal systems is solved line-by-line </p><dl class="params"><dt>Parameters</dt><dd>
+<p>An example solver for a single tridiagonal system of equations using PaScaL_TDMA. </p>
+<p>This subroutine is for a single tridiagonal system of equations. It solves the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA solver. Plans of PaScaL_TDMA for a single tridiagonal system of equations are created and a single tridiagonal systems is solved line-by-line. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">theta</td><td>Main 3-D variable to be solved </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="solve__theta__plan__single_8f90_source.html#l00027">27</a> of file <a class="el" href="solve__theta__plan__single_8f90_source.html">solve_theta_plan_single.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="solve__theta__plan__single_8f90_source.html#l00030">30</a> of file <a class="el" href="solve__theta__plan__single_8f90_source.html">solve_theta_plan_single.f90</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="solve__theta__plan__single_8f90_a53ef6756822306f33a47be6a66232862_cgraph.png" border="0" usemap="#solve__theta__plan__single_8f90_a53ef6756822306f33a47be6a66232862_cgraph" alt=""/></div>
 <map name="solve__theta__plan__single_8f90_a53ef6756822306f33a47be6a66232862_cgraph" id="solve__theta__plan__single_8f90_a53ef6756822306f33a47be6a66232862_cgraph">
-<area shape="rect"  title="Example solver for a single tridiagonal system of equations using scalable TDMA." alt="" coords="5,137,170,163"/>
-<area shape="rect"  href="namespacepascal__tdma.html#a5dfc2d7c919b47ad364a74d141532a9f" title="Produce a plan for a single tridiagonal system of equations." alt="" coords="221,5,399,44"/>
+<area shape="rect"  title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,137,170,163"/>
+<area shape="rect"  href="namespacepascal__tdma.html#a5dfc2d7c919b47ad364a74d141532a9f" title="Create a plan for a single tridiagonal system of equations." alt="" coords="221,5,399,44"/>
 <area shape="rect"  href="namespacepascal__tdma.html#ac8e377fa86c75126380f0196f6046043" title="Solve a single cyclic tridiagonal system of equations." alt="" coords="221,68,398,107"/>
 <area shape="rect"  href="namespacepascal__tdma.html#adb04e59c740ce6c4b9518dd86eaeb594" title="Deallocate the allocated arrays in the defined plan_single." alt="" coords="218,131,402,169"/>
 <area shape="rect"  href="namespacepascal__tdma.html#ab14e132231d4b53fd65dd333ccc85a50" title="Solve a single tridiagonal system of equation." alt="" coords="239,193,381,232"/>

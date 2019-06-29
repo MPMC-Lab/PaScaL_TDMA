@@ -93,7 +93,7 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memdesc:a612331eead74041f174ece9a572c7427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign grid coordinates and lengths of subdomains.  <a href="#a612331eead74041f174ece9a572c7427">More...</a><br /></td></tr>
 <tr class="separator:a612331eead74041f174ece9a572c7427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc0deb85b84358eb7addeea849733c4"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a7cc0deb85b84358eb7addeea849733c4">mpi_subdomain_initialization</a> (theta_sub, myrank_in_y, nprocs_in_y)</td></tr>
-<tr class="memdesc:a7cc0deb85b84358eb7addeea849733c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the values of main variable in subdomain.  <a href="#a7cc0deb85b84358eb7addeea849733c4">More...</a><br /></td></tr>
+<tr class="memdesc:a7cc0deb85b84358eb7addeea849733c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the values of main variable in a subdomain.  <a href="#a7cc0deb85b84358eb7addeea849733c4">More...</a><br /></td></tr>
 <tr class="separator:a7cc0deb85b84358eb7addeea849733c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55659431068678c08d21847338390ea8"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a55659431068678c08d21847338390ea8">mpi_subdomain_boundary</a> (theta_sub, myrank_in_y, nprocs_in_y)</td></tr>
 <tr class="memdesc:a55659431068678c08d21847338390ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the values of boundary grids in subdomain.  <a href="#a55659431068678c08d21847338390ea8">More...</a><br /></td></tr>
@@ -206,6 +206,7 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Module for building subdomains divided from the physical domain. </p>
+<p>This module has simulation parameters for subdomains and communication between the subdomains. </p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a55659431068678c08d21847338390ea8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a55659431068678c08d21847338390ea8">&#9670;&nbsp;</a></span>mpi_subdomain_boundary()</h2>
@@ -249,14 +250,14 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00377">377</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00381">381</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph.png" border="0" usemap="#namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph" id="namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph">
 <area shape="rect"  title="Assign the values of boundary grids in subdomain." alt="" coords="104,5,261,44"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -279,14 +280,14 @@ Here is the caller graph for this function:</div>
 
 <p>Deallocate subdomain variables. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00109">109</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00113">113</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe_icgraph.png" border="0" usemap="#namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe_icgraph" id="namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe_icgraph">
 <area shape="rect"  title="Deallocate subdomain variables." alt="" coords="104,5,248,44"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -341,16 +342,16 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00216">216</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00220">220</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62_icgraph.png" border="0" usemap="#namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62_icgraph" id="namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62_icgraph">
 <area shape="rect"  title="Update the values of boundary ghostcells through communication in all directions." alt="" coords="316,17,470,69"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,5,56,31"/>
-<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="Example solver for many tridiagonal systems of equations using scalable TDMA." alt="" coords="105,31,267,56"/>
-<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="Example solver for a single tridiagonal system of equations using scalable TDMA." alt="" coords="104,80,268,105"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,5,56,31"/>
+<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="105,31,267,56"/>
+<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="104,80,268,105"/>
 </map>
 </div>
 
@@ -391,14 +392,14 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00253">253</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00257">257</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph.png" border="0" usemap="#namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph" id="namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph">
 <area shape="rect"  title="Determine whether next grids are empty(0) or not(1). Only in y&#45;direction." alt="" coords="104,5,248,44"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -436,7 +437,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Initialize the values of main variable in subdomain. </p>
+<p>Initialize the values of main variable in a subdomain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">theta_sub</td><td>Main variable to be solved </td></tr>
@@ -446,14 +447,14 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00340">340</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00344">344</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph.png" border="0" usemap="#namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph" id="namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph">
-<area shape="rect"  title="Initialize the values of main variable in subdomain." alt="" coords="104,5,274,44"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  title="Initialize the values of main variable in a subdomain." alt="" coords="104,5,274,44"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -522,7 +523,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00083">83</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00087">87</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -538,7 +539,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph.png" border="0" usemap="#namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph" id="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph">
 <area shape="rect"  title="Prepare subdomain and determine size of subdomain." alt="" coords="104,5,248,44"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -561,14 +562,14 @@ Here is the caller graph for this function:</div>
 
 <p>Build derived datatypes for subdomain communication using ghostcell. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00124">124</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00128">128</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph.png" border="0" usemap="#namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph" id="namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph">
 <area shape="rect"  title="Build derived datatypes for subdomain communication using ghostcell." alt="" coords="104,5,298,57"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,19,56,44"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,19,56,44"/>
 </map>
 </div>
 
@@ -637,14 +638,14 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00279">279</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00283">283</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a612331eead74041f174ece9a572c7427_icgraph.png" border="0" usemap="#namespacempi__subdomain_a612331eead74041f174ece9a572c7427_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a612331eead74041f174ece9a572c7427_icgraph" id="namespacempi__subdomain_a612331eead74041f174ece9a572c7427_icgraph">
 <area shape="rect"  title="Assign grid coordinates and lengths of subdomains." alt="" coords="104,5,248,44"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -665,7 +666,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between z-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00056">56</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00060">60</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -683,7 +684,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between x-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00050">50</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00054">54</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -701,7 +702,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between z-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00056">56</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00060">60</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -719,7 +720,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between y-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00053">53</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00057">57</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -737,7 +738,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between y-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00053">53</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00057">57</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -755,7 +756,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between x-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00050">50</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00054">54</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -773,7 +774,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between z-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00056">56</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00060">60</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -791,7 +792,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between x-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00050">50</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00054">54</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -809,7 +810,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between z-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00056">56</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00060">60</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -827,7 +828,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between y-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00053">53</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00057">57</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -845,7 +846,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between y-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00053">53</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00057">57</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -863,7 +864,7 @@ Here is the caller graph for this function:</div>
 
 <p>Derived datatype for communication between x-neighbor subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00050">50</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00054">54</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -881,7 +882,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid lengths in subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00041">41</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00045">45</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -899,7 +900,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid lengths in subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00041">41</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00045">45</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -917,7 +918,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid lengths in subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00041">41</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00045">45</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -935,7 +936,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid indices of assigned range. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00034">34</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -951,7 +952,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00029">29</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00033">33</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -969,7 +970,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid indices of assigned range. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00034">34</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -987,7 +988,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid indices of assigned range. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00034">34</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1005,7 +1006,7 @@ Here is the caller graph for this function:</div>
 
 <p>Flag whether lower grid is empty(0) or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00046">46</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00050">50</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1023,7 +1024,7 @@ Here is the caller graph for this function:</div>
 
 <p>Flag whether upper grid is empty(0) or not. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00047">47</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00051">51</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1041,7 +1042,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid indices of assigned range. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00034">34</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1059,7 +1060,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid indices of assigned range. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00034">34</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1077,7 +1078,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid indices of assigned range. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00034">34</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1095,7 +1096,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid numbers in subdomain. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00031">31</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00035">35</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1113,7 +1114,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid numbers in subdomain. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00031">31</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00035">35</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1131,7 +1132,7 @@ Here is the caller graph for this function:</div>
 
 <p>Grid numbers in subdomain. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00031">31</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00035">35</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1149,7 +1150,7 @@ Here is the caller graph for this function:</div>
 
 <p>B.C. of lower wall. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00043">43</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00047">47</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1167,7 +1168,7 @@ Here is the caller graph for this function:</div>
 
 <p>B.C. of upper wall. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00044">44</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00048">48</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1185,7 +1186,7 @@ Here is the caller graph for this function:</div>
 
 <p>Coordinates of grid points in subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00042">42</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1203,7 +1204,7 @@ Here is the caller graph for this function:</div>
 
 <p>Coordinates of grid points in subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00042">42</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>
@@ -1221,7 +1222,7 @@ Here is the caller graph for this function:</div>
 
 <p>Coordinates of grid points in subdomains. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="module__mpi__subdomain_8f90_source.html">module_mpi_subdomain.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00042">42</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
 </div>
 </div>

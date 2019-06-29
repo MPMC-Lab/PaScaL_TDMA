@@ -2,7 +2,7 @@
 \label{namespacepascal__tdma}\index{pascal\_tdma@{pascal\_tdma}}
 
 
-Module for a scalable tri-\/diagonal matrix(\+T\+D\+M) solver for tridiagonal systems of equations.  
+Module for Pa\+Sca\+L-\/\+T\+D\+MA library.  
 
 
 \subsection*{Data Types}
@@ -16,13 +16,13 @@ type \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan
 \begin{DoxyCompactItemize}
 \item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create}} (plan, myrank, nprocs, mpi\+\_\+world, gather\+\_\+rank)
-\begin{DoxyCompactList}\small\item\em Produce a plan for a single tridiagonal system of equations. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a plan for a single tridiagonal system of equations. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy}} (plan)
 \begin{DoxyCompactList}\small\item\em Deallocate the allocated arrays in the defined plan\+\_\+single. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create}} (plan, n\+\_\+sys, myrank, nprocs, mpi\+\_\+world)
-\begin{DoxyCompactList}\small\item\em Produce a plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Create a plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy}} (plan)
-\begin{DoxyCompactList}\small\item\em Deallocate the allocated arrays in the defined plan\+\_\+many. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Destroy the allocated arrays in the defined plan\+\_\+many. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50}{pascal\+\_\+tdma\+\_\+single\+\_\+solve}} (plan, A, B, C, D, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve a single tridiagonal system of equation. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043}{pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle}} (plan, A, B, C, D, n\+\_\+row)
@@ -34,9 +34,9 @@ subroutine, public \mbox{\hyperlink{namespacepascal__tdma_acbaed65e67ecbfd92a8f1
 
 
 \subsection{Detailed Description}
-Module for a scalable tri-\/diagonal matrix(\+T\+D\+M) solver for tridiagonal systems of equations. 
+Module for Pa\+Sca\+L-\/\+T\+D\+MA library. 
 
-It contains plans for triagonal systems of equations and subroutines for solving them under the defined plans. 
+It contains plans for triagonal systems of equations and subroutines for solving them using the defined plans. The operation of the library consists of the following three phases. (1) Create a data structure called a plan which has information for communication and reduced systems. (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5 (3) Destroy the created plan 
 
 \subsection{Function/\+Subroutine Documentation}
 \mbox{\Hypertarget{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}\label{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}} 
@@ -68,7 +68,7 @@ Solve many tridiagonal systems of equations.
 \end{DoxyParams}
 
 
-Definition at line 467 of file module\+\_\+stdma.\+f90.
+Definition at line 481 of file pascal\+\_\+tdma.\+f90.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -115,7 +115,7 @@ Solve many cyclic tridiagonal systems of equations.
 \end{DoxyParams}
 
 
-Definition at line 574 of file module\+\_\+stdma.\+f90.
+Definition at line 588 of file pascal\+\_\+tdma.\+f90.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -141,7 +141,7 @@ Here is the caller graph for this function\+:
 
 
 
-Produce a plan for many tridiagonal systems of equations. 
+Create a plan for many tridiagonal systems of equations. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -158,7 +158,7 @@ Produce a plan for many tridiagonal systems of equations.
 \end{DoxyParams}
 
 
-Definition at line 171 of file module\+\_\+stdma.\+f90.
+Definition at line 185 of file pascal\+\_\+tdma.\+f90.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -184,7 +184,7 @@ Here is the caller graph for this function\+:
 
 
 
-Deallocate the allocated arrays in the defined plan\+\_\+many. 
+Destroy the allocated arrays in the defined plan\+\_\+many. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -193,7 +193,7 @@ Deallocate the allocated arrays in the defined plan\+\_\+many.
 \end{DoxyParams}
 
 
-Definition at line 258 of file module\+\_\+stdma.\+f90.
+Definition at line 272 of file pascal\+\_\+tdma.\+f90.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -211,7 +211,7 @@ Here is the caller graph for this function\+:
 
 
 
-Produce a plan for a single tridiagonal system of equations. 
+Create a plan for a single tridiagonal system of equations. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -228,7 +228,7 @@ Produce a plan for a single tridiagonal system of equations.
 \end{DoxyParams}
 
 
-Definition at line 125 of file module\+\_\+stdma.\+f90.
+Definition at line 139 of file pascal\+\_\+tdma.\+f90.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -255,7 +255,7 @@ Deallocate the allocated arrays in the defined plan\+\_\+single.
 \end{DoxyParams}
 
 
-Definition at line 152 of file module\+\_\+stdma.\+f90.
+Definition at line 166 of file pascal\+\_\+tdma.\+f90.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -292,7 +292,7 @@ Solve a single tridiagonal system of equation.
 \end{DoxyParams}
 
 
-Definition at line 281 of file module\+\_\+stdma.\+f90.
+Definition at line 295 of file pascal\+\_\+tdma.\+f90.
 
 Here is the call graph for this function\+:
 \nopagebreak
@@ -337,7 +337,7 @@ Solve a single cyclic tridiagonal system of equations.
 \end{DoxyParams}
 
 
-Definition at line 373 of file module\+\_\+stdma.\+f90.
+Definition at line 387 of file pascal\+\_\+tdma.\+f90.
 
 Here is the call graph for this function\+:
 \nopagebreak

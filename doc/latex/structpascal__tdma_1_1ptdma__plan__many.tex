@@ -9,7 +9,7 @@ Execution plan for many tridiagonal systems of equations.
 \begin{DoxyCompactItemize}
 \item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many_acb7e645e37c791564905c6e2808db0c6}{ptdma\+\_\+world}}
-\begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to arrange data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many_a22b42947ab742f83aad3bbeb3a42a0f6}{n\+\_\+sys\+\_\+rt}}
 \begin{DoxyCompactList}\small\item\em Number of tridiagonal systems to solve in each process after transpose. \end{DoxyCompactList}\item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many_ad94248e2aa0653f151f0575d62d6fff7}{n\+\_\+row\+\_\+rt}}
@@ -63,9 +63,9 @@ double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structpascal_
 \subsection{Detailed Description}
 Execution plan for many tridiagonal systems of equations. 
 
-It uses M\+P\+I\+\_\+\+Ialltoallw communication to distribute the reduced tridiagonal matrices to M\+PI processes. Derived datatype is used for elimination of data packing and unpacking cost. 
+It uses M\+P\+I\+\_\+\+Ialltoallw function to distribute the modified tridiagonal systems to M\+PI processes and build the reduced tridiagonal systems of equations. Derived datatypes are defined and used for elimination of data packing and unpacking cost. 
 
-Definition at line 53 of file module\+\_\+stdma.\+f90.
+Definition at line 67 of file pascal\+\_\+tdma.\+f90.
 
 
 
@@ -82,7 +82,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 69 of file module\+\_\+stdma.\+f90.
+Definition at line 83 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a42be039aee75c5393c22111cf232e77d}\label{structpascal__tdma_1_1ptdma__plan__many_a42be039aee75c5393c22111cf232e77d}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!a\_rt@{a\_rt}}
@@ -96,7 +96,7 @@ Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal
 
 
 
-Definition at line 74 of file module\+\_\+stdma.\+f90.
+Definition at line 88 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a81ed1b6910c30334e93598f7d18254a3}\label{structpascal__tdma_1_1ptdma__plan__many_a81ed1b6910c30334e93598f7d18254a3}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!b\_rd@{b\_rd}}
@@ -110,7 +110,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 69 of file module\+\_\+stdma.\+f90.
+Definition at line 83 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_aab84eff7c823d47acb5388cd4e2a790a}\label{structpascal__tdma_1_1ptdma__plan__many_aab84eff7c823d47acb5388cd4e2a790a}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!b\_rt@{b\_rt}}
@@ -124,7 +124,7 @@ Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal
 
 
 
-Definition at line 74 of file module\+\_\+stdma.\+f90.
+Definition at line 88 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a56b15fe2b742c06106a46da7a720d9fd}\label{structpascal__tdma_1_1ptdma__plan__many_a56b15fe2b742c06106a46da7a720d9fd}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!c\_rd@{c\_rd}}
@@ -138,7 +138,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 69 of file module\+\_\+stdma.\+f90.
+Definition at line 83 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a49336d53d19c274798e87ae33b530b33}\label{structpascal__tdma_1_1ptdma__plan__many_a49336d53d19c274798e87ae33b530b33}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!c\_rt@{c\_rt}}
@@ -152,7 +152,7 @@ Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal
 
 
 
-Definition at line 74 of file module\+\_\+stdma.\+f90.
+Definition at line 88 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a30cebfb14bfcc955d3e98d9b1ea5fad7}\label{structpascal__tdma_1_1ptdma__plan__many_a30cebfb14bfcc955d3e98d9b1ea5fad7}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!count\_recv@{count\_recv}}
@@ -166,7 +166,7 @@ Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw.
 
 
 
-Definition at line 64 of file module\+\_\+stdma.\+f90.
+Definition at line 78 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_ab7a5a4be85650cfe4dfc30fd83b132d7}\label{structpascal__tdma_1_1ptdma__plan__many_ab7a5a4be85650cfe4dfc30fd83b132d7}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!count\_send@{count\_send}}
@@ -180,7 +180,7 @@ Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw.
 
 
 
-Definition at line 60 of file module\+\_\+stdma.\+f90.
+Definition at line 74 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_aa1054814f874504a77ad17a838a80fd2}\label{structpascal__tdma_1_1ptdma__plan__many_aa1054814f874504a77ad17a838a80fd2}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!d\_rd@{d\_rd}}
@@ -194,7 +194,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 69 of file module\+\_\+stdma.\+f90.
+Definition at line 83 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_af0941ce4b9206c36a3a059d2bae84d2b}\label{structpascal__tdma_1_1ptdma__plan__many_af0941ce4b9206c36a3a059d2bae84d2b}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!d\_rt@{d\_rt}}
@@ -208,7 +208,7 @@ Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal
 
 
 
-Definition at line 74 of file module\+\_\+stdma.\+f90.
+Definition at line 88 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a54ddb10078b443daf47204cdcd8e7f8f}\label{structpascal__tdma_1_1ptdma__plan__many_a54ddb10078b443daf47204cdcd8e7f8f}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!ddtype\_bs@{ddtype\_bs}}
@@ -222,7 +222,7 @@ Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw.
 
 
 
-Definition at line 64 of file module\+\_\+stdma.\+f90.
+Definition at line 78 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_ad95f6ed58387dd66baecf53ed5fab7e8}\label{structpascal__tdma_1_1ptdma__plan__many_ad95f6ed58387dd66baecf53ed5fab7e8}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!ddtype\_fs@{ddtype\_fs}}
@@ -236,7 +236,7 @@ Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw.
 
 
 
-Definition at line 60 of file module\+\_\+stdma.\+f90.
+Definition at line 74 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a1801ea6bbff319dd594a5e993bc5d542}\label{structpascal__tdma_1_1ptdma__plan__many_a1801ea6bbff319dd594a5e993bc5d542}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!displ\_recv@{displ\_recv}}
@@ -250,7 +250,7 @@ Recv. buffer related variables M\+P\+I\+\_\+\+Ialltoallw.
 
 
 
-Definition at line 64 of file module\+\_\+stdma.\+f90.
+Definition at line 78 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a1c7544758e7ccfcd3b07e91caf0d8f3d}\label{structpascal__tdma_1_1ptdma__plan__many_a1c7544758e7ccfcd3b07e91caf0d8f3d}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!displ\_send@{displ\_send}}
@@ -264,7 +264,7 @@ Send buffer related variables for M\+P\+I\+\_\+\+Ialltoallw.
 
 
 
-Definition at line 60 of file module\+\_\+stdma.\+f90.
+Definition at line 74 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_ad94248e2aa0653f151f0575d62d6fff7}\label{structpascal__tdma_1_1ptdma__plan__many_ad94248e2aa0653f151f0575d62d6fff7}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!n\_row\_rt@{n\_row\_rt}}
@@ -278,7 +278,7 @@ Number of rows of a reduced tridiagonal systems after transpose.
 
 
 
-Definition at line 57 of file module\+\_\+stdma.\+f90.
+Definition at line 71 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_a22b42947ab742f83aad3bbeb3a42a0f6}\label{structpascal__tdma_1_1ptdma__plan__many_a22b42947ab742f83aad3bbeb3a42a0f6}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!n\_sys\_rt@{n\_sys\_rt}}
@@ -292,7 +292,7 @@ Number of tridiagonal systems to solve in each process after transpose.
 
 
 
-Definition at line 56 of file module\+\_\+stdma.\+f90.
+Definition at line 70 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__many_acb7e645e37c791564905c6e2808db0c6}\label{structpascal__tdma_1_1ptdma__plan__many_acb7e645e37c791564905c6e2808db0c6}} 
 \index{pascal\_tdma::ptdma\_plan\_many@{pascal\_tdma::ptdma\_plan\_many}!ptdma\_world@{ptdma\_world}}
@@ -302,14 +302,14 @@ Definition at line 56 of file module\+\_\+stdma.\+f90.
 
 
 
-Single dimensional subcommunicator to arrange data for the reduced T\+D\+MA. 
+Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. 
 
 
 
-Definition at line 55 of file module\+\_\+stdma.\+f90.
+Definition at line 69 of file pascal\+\_\+tdma.\+f90.
 
 
 
 The documentation for this type was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/src/\mbox{\hyperlink{module__stdma_8f90}{module\+\_\+stdma.\+f90}}\end{DoxyCompactItemize}
+/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/src/\mbox{\hyperlink{pascal__tdma_8f90}{pascal\+\_\+tdma.\+f90}}\end{DoxyCompactItemize}

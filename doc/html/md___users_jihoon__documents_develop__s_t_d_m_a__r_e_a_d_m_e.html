@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: STDMA</title>
+<title>My Project: PaScaL_TDMA</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,16 +62,20 @@ $(function() {
 </div><!-- top -->
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">STDMA </div>  </div>
+<div class="title">PaScaL_TDMA </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Scalable tri-diagonal matrix(TDM) solver for many tridiagonal systems of equations using a noble all-to-all communication scheme for the reduced unknowns based onthe modified Thomas algorithm by Laszlo, Gilles and Appleyard(2016)</p>
-<p>This library is for both of a single and many tridiagonal systems of equations. The main algorithm for a tridiagonal matrix proposed in this library consists of the following three steps:</p><ul>
-<li>(1) Lower/Upper element reduction step : creates reduced tridiagonals system of equations.</li>
-<li>(2) Reduced TDMA step : Solves the reduced tridiagonal systems of equations.</li>
-<li>(3) Update step : Updates solutions of the origianl tridiagonal systems of equations using the solutions of the reduced tridiagonal systems of equations.</li>
+<div class="textblock"><p>Parallel and Scalable Library for Tri-Diagonal Matrix Algorithm</p>
+<p>PaScal_TDMA solves a single or many tridiagonal systems of equations in a parallel manner using a noble all-to-all communication scheme with the modified Thomas algorithm by Laszlo et al(2016).</p>
+<p>This library is for both of a single and many tridiagonal systems of equations. The main algorithm for a tridiagonal matrix proposed in this library consists of the following five steps:</p>
+<ul>
+<li>(1) Transform the original partitioned tridiagonal systems of equations The original partitioned tridiagonal system of equations is transformed to the modified tridiagonal system using the modified Thomas algorithm.</li>
+<li>(2) Build the reduced tridiagonal systems of equations The first and last rows of the modified tridiagonal systems are assembled by executing the proposed all-to-all communication scheme and the reduced tridiagonal systems are built.</li>
+<li>(3) Solve the reduced tridiagonal systems The reduced tridiagonal systems are solved by applying Thomas algorithm.</li>
+<li>(4) Distribute the solutions of the reduced tridiagonal systems The solutions in Step 3 are distributed to each computing cores by executing the inverse of the all-to-all communication in Step 2.</li>
+<li>(5) Update the solutions in the modified tridiagonal systems The remaining unknows are updated using the modified tridiagonal systems with the solutions obtained in Step 3 and Step 4.</li>
 </ul>
-<p>Our algorithm is close to the algorithm by Mattor, Williams, Hewette (1995) except that we use MPI_Alltoall communication for reduced tridiagonal systems to distribute the many tridiagonal systems of equations almost equally to processes, while Mattor et al used MPI_Gather to gather and solve the reduced equations on the master process only. The number of coefficient is greatly reduced by local reduction in Step(1), so we can avoid the communication bandwidth problem which happens to be common in MPI_Alltoall communication. Our algorithm is also distinguished from the work of Laszlo, Gilles and Appleyard(2016) which used parallel cyclic reduction to solve the reduced tridiagonal systems of equations.</p>
+<p>Step 1 and Step 5 are similar to the method proposed by Laszlo, Gilles and Appleyard(2016) which used the parallel cyclic reduction (PCR) to build and solve the reduced tridiagonal systems. Instead of using the PCR, we develop an all-to-all communication scheme using a MPI_Ialltoall function after the modified Thomas algorithm is execued. The number of coefficients for the reduced tridiagonal systems are greatly reduced, so we can avoid the communication bandwidth problem which is a main bottle-neck of all-to-all communications. Our algorithm is also distinguished from the work of Mattor, Williams, Hewette (1995) which assembles the undetermined coefficients of the temporary solutions in a single processor using MPI_Gather, where load imbalances are serious.</p>
 <h1>Authors</h1>
 <ul>
 <li>Kiha Kim (<a href="#" onclick="location.href='mai'+'lto:'+'k-k'+'ih'+'a@y'+'on'+'sei'+'.a'+'c.k'+'r'; return false;">k-kih<span style="display: none;">.nosp@m.</span>a@yo<span style="display: none;">.nosp@m.</span>nsei.<span style="display: none;">.nosp@m.</span>ac.k<span style="display: none;">.nosp@m.</span>r</a>), Multi-Physics Modeling and Computation Lab., Yonsei University</li>

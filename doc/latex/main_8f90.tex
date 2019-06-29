@@ -2,22 +2,22 @@
 \label{main_8f90}\index{/Users/jihoon/Documents/develop/STDMA/examples/main.f90@{/Users/jihoon/Documents/develop/STDMA/examples/main.f90}}
 
 
-This is for an example case of S\+T\+D\+MA.  
+This file contains the main subroutines for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA.  
 
 
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
 program \mbox{\hyperlink{main_8f90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}
-\begin{DoxyCompactList}\small\item\em Main execution program for S\+T\+D\+MA example problem. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Main execution program for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. \end{DoxyCompactList}\item 
 subroutine \mbox{\hyperlink{main_8f90_af0a1310807f21ee1a2c0fdf14c58b63b}{field\+\_\+file\+\_\+write}} (myrank, nprocs, theta\+\_\+sub)
-\begin{DoxyCompactList}\small\item\em Write the values of field variable to a output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Write the values of field variable in a output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-This is for an example case of S\+T\+D\+MA. 
+This file contains the main subroutines for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
 
-\begin{DoxyAuthor}{Author}
+The target example problem is the three-\/dimensional time-\/dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries. \begin{DoxyAuthor}{Author}
 
 \end{DoxyAuthor}
 
@@ -50,9 +50,9 @@ This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\
 
 
 
-Write the values of field variable to a output file. 
+Write the values of field variable in a output file. 
 
-
+It writes the values of field variables with two methods, single task IO and post assembly IO. In single task I/O, each process writes the values in its own file. In post assembly IO, each process send data to a master process and the master process write the obtained data in a single file. 
 \begin{DoxyParams}{Parameters}
 {\em myrank} & Rank ID in M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD \\
 \hline
@@ -63,7 +63,7 @@ Write the values of field variable to a output file.
 \end{DoxyParams}
 
 
-Definition at line 107 of file main.\+f90.
+Definition at line 113 of file main.\+f90.
 
 Here is the caller graph for this function\+:
 \nopagebreak
@@ -81,11 +81,11 @@ Here is the caller graph for this function\+:
 
 
 
-Main execution program for S\+T\+D\+MA example problem. 
+Main execution program for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
 
 
 
-Definition at line 21 of file main.\+f90.
+Definition at line 24 of file main.\+f90.
 
 Here is the call graph for this function\+:
 \nopagebreak

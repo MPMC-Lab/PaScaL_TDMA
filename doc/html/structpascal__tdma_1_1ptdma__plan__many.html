@@ -79,7 +79,7 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:acb7e645e37c791564905c6e2808db0c6"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpascal__tdma_1_1ptdma__plan__many.html#acb7e645e37c791564905c6e2808db0c6">ptdma_world</a></td></tr>
-<tr class="memdesc:acb7e645e37c791564905c6e2808db0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single dimensional subcommunicator to arrange data for the reduced TDMA.  <a href="#acb7e645e37c791564905c6e2808db0c6">More...</a><br /></td></tr>
+<tr class="memdesc:acb7e645e37c791564905c6e2808db0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single dimensional subcommunicator to assemble data for the reduced TDMA.  <a href="#acb7e645e37c791564905c6e2808db0c6">More...</a><br /></td></tr>
 <tr class="separator:acb7e645e37c791564905c6e2808db0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22b42947ab742f83aad3bbeb3a42a0f6"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpascal__tdma_1_1ptdma__plan__many.html#a22b42947ab742f83aad3bbeb3a42a0f6">n_sys_rt</a></td></tr>
 <tr class="memdesc:a22b42947ab742f83aad3bbeb3a42a0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of tridiagonal systems to solve in each process after transpose.  <a href="#a22b42947ab742f83aad3bbeb3a42a0f6">More...</a><br /></td></tr>
@@ -136,9 +136,9 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Execution plan for many tridiagonal systems of equations. </p>
-<p>It uses MPI_Ialltoallw communication to distribute the reduced tridiagonal matrices to MPI processes. Derived datatype is used for elimination of data packing and unpacking cost. </p>
+<p>It uses MPI_Ialltoallw function to distribute the modified tridiagonal systems to MPI processes and build the reduced tridiagonal systems of equations. Derived datatypes are defined and used for elimination of data packing and unpacking cost. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00053">53</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00067">67</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a6d9101716eca623dc8c45075788f06bd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6d9101716eca623dc8c45075788f06bd">&#9670;&nbsp;</a></span>a_rd</h2>
@@ -154,7 +154,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs. The orginal dimension (m:n) is reduced to (m:2) </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00069">69</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00083">83</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -172,7 +172,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (m:2) changes to (m/np: 2*np) after transpose. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00074">74</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00088">88</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -190,7 +190,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs. The orginal dimension (m:n) is reduced to (m:2) </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00069">69</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00083">83</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -208,7 +208,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (m:2) changes to (m/np: 2*np) after transpose. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00074">74</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00088">88</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -226,7 +226,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs. The orginal dimension (m:n) is reduced to (m:2) </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00069">69</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00083">83</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -244,7 +244,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (m:2) changes to (m/np: 2*np) after transpose. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00074">74</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00088">88</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -262,7 +262,7 @@ Public Attributes</h2></td></tr>
 
 <p>Recv. buffer related variables MPI_Ialltoallw. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00064">64</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00078">78</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -280,7 +280,7 @@ Public Attributes</h2></td></tr>
 
 <p>Send buffer related variables for MPI_Ialltoallw. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00060">60</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00074">74</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -298,7 +298,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs. The orginal dimension (m:n) is reduced to (m:2) </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00069">69</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00083">83</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -316,7 +316,7 @@ Public Attributes</h2></td></tr>
 
 <p>Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (m:2) changes to (m/np: 2*np) after transpose. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00074">74</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00088">88</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -334,7 +334,7 @@ Public Attributes</h2></td></tr>
 
 <p>Recv. buffer related variables MPI_Ialltoallw. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00064">64</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00078">78</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -352,7 +352,7 @@ Public Attributes</h2></td></tr>
 
 <p>Send buffer related variables for MPI_Ialltoallw. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00060">60</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00074">74</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -370,7 +370,7 @@ Public Attributes</h2></td></tr>
 
 <p>Recv. buffer related variables MPI_Ialltoallw. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00064">64</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00078">78</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -388,7 +388,7 @@ Public Attributes</h2></td></tr>
 
 <p>Send buffer related variables for MPI_Ialltoallw. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00060">60</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00074">74</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -406,7 +406,7 @@ Public Attributes</h2></td></tr>
 
 <p>Number of rows of a reduced tridiagonal systems after transpose. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00057">57</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00071">71</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -424,7 +424,7 @@ Public Attributes</h2></td></tr>
 
 <p>Number of tridiagonal systems to solve in each process after transpose. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00056">56</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00070">70</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
@@ -440,14 +440,14 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Single dimensional subcommunicator to arrange data for the reduced TDMA. </p>
+<p>Single dimensional subcommunicator to assemble data for the reduced TDMA. </p>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00055">55</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00069">69</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this type was generated from the following file:<ul>
-<li>/Users/jihoon/Documents/develop/STDMA/src/<a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a></li>
+<li>/Users/jihoon/Documents/develop/STDMA/src/<a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -69,7 +69,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Module for a scalable tri-diagonal matrix(TDM) solver for tridiagonal systems of equations.  
+<p>Module for PaScaL-TDMA library.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
@@ -84,16 +84,16 @@ Data Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a5dfc2d7c919b47ad364a74d141532a9f"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepascal__tdma.html#a5dfc2d7c919b47ad364a74d141532a9f">pascal_tdma_plan_single_create</a> (plan, myrank, nprocs, mpi_world, gather_rank)</td></tr>
-<tr class="memdesc:a5dfc2d7c919b47ad364a74d141532a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Produce a plan for a single tridiagonal system of equations.  <a href="#a5dfc2d7c919b47ad364a74d141532a9f">More...</a><br /></td></tr>
+<tr class="memdesc:a5dfc2d7c919b47ad364a74d141532a9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a plan for a single tridiagonal system of equations.  <a href="#a5dfc2d7c919b47ad364a74d141532a9f">More...</a><br /></td></tr>
 <tr class="separator:a5dfc2d7c919b47ad364a74d141532a9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb04e59c740ce6c4b9518dd86eaeb594"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepascal__tdma.html#adb04e59c740ce6c4b9518dd86eaeb594">pascal_tdma_plan_single_destroy</a> (plan)</td></tr>
 <tr class="memdesc:adb04e59c740ce6c4b9518dd86eaeb594"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocate the allocated arrays in the defined plan_single.  <a href="#adb04e59c740ce6c4b9518dd86eaeb594">More...</a><br /></td></tr>
 <tr class="separator:adb04e59c740ce6c4b9518dd86eaeb594"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e9c24b343ae949044eccc8692dcc6e9"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepascal__tdma.html#a7e9c24b343ae949044eccc8692dcc6e9">pascal_tdma_plan_many_create</a> (plan, n_sys, myrank, nprocs, mpi_world)</td></tr>
-<tr class="memdesc:a7e9c24b343ae949044eccc8692dcc6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Produce a plan for many tridiagonal systems of equations.  <a href="#a7e9c24b343ae949044eccc8692dcc6e9">More...</a><br /></td></tr>
+<tr class="memdesc:a7e9c24b343ae949044eccc8692dcc6e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a plan for many tridiagonal systems of equations.  <a href="#a7e9c24b343ae949044eccc8692dcc6e9">More...</a><br /></td></tr>
 <tr class="separator:a7e9c24b343ae949044eccc8692dcc6e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8438e6774617871b147af9ec8bdad6ce"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepascal__tdma.html#a8438e6774617871b147af9ec8bdad6ce">pascal_tdma_plan_many_destroy</a> (plan)</td></tr>
-<tr class="memdesc:a8438e6774617871b147af9ec8bdad6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocate the allocated arrays in the defined plan_many.  <a href="#a8438e6774617871b147af9ec8bdad6ce">More...</a><br /></td></tr>
+<tr class="memdesc:a8438e6774617871b147af9ec8bdad6ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the allocated arrays in the defined plan_many.  <a href="#a8438e6774617871b147af9ec8bdad6ce">More...</a><br /></td></tr>
 <tr class="separator:a8438e6774617871b147af9ec8bdad6ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab14e132231d4b53fd65dd333ccc85a50"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacepascal__tdma.html#ab14e132231d4b53fd65dd333ccc85a50">pascal_tdma_single_solve</a> (plan, A, B, C, D, n_row)</td></tr>
 <tr class="memdesc:ab14e132231d4b53fd65dd333ccc85a50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a single tridiagonal system of equation.  <a href="#ab14e132231d4b53fd65dd333ccc85a50">More...</a><br /></td></tr>
@@ -109,8 +109,8 @@ Functions/Subroutines</h2></td></tr>
 <tr class="separator:acbaed65e67ecbfd92a8f1d51d1b69fd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Module for a scalable tri-diagonal matrix(TDM) solver for tridiagonal systems of equations. </p>
-<p>It contains plans for triagonal systems of equations and subroutines for solving them under the defined plans. </p>
+<div class="textblock"><p>Module for PaScaL-TDMA library. </p>
+<p>It contains plans for triagonal systems of equations and subroutines for solving them using the defined plans. The operation of the library consists of the following three phases. (1) Create a data structure called a plan which has information for communication and reduced systems. (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5 (3) Destroy the created plan </p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="afa0c78b8377f5fe1059907befda3c940"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afa0c78b8377f5fe1059907befda3c940">&#9670;&nbsp;</a></span>pascal_tdma_many_solve()</h2>
@@ -182,14 +182,14 @@ Functions/Subroutines</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00467">467</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00481">481</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_cgraph.png" border="0" usemap="#namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_cgraph" alt=""/></div>
 <map name="namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_cgraph" id="namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_cgraph">
 <area shape="rect"  title="Solve many tridiagonal systems of equations." alt="" coords="5,5,148,44"/>
-<area shape="rect"  href="tdmas_8f90.html#ab8cc761496e63e21ee8379d4fc077f05" title="Solve many tridiagonal systems of equations using Thomas algorithm First index is for indicating inde..." alt="" coords="196,12,287,37"/>
+<area shape="rect"  href="tdmas_8f90.html#ab8cc761496e63e21ee8379d4fc077f05" title="Solve many tridiagonal systems of equations using Thomas algorithm First index is to indicate a numbe..." alt="" coords="196,12,287,37"/>
 </map>
 </div>
 <div class="dynheader">
@@ -198,8 +198,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_icgraph.png" border="0" usemap="#namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_icgraph" id="namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_icgraph">
 <area shape="rect"  title="Solve many tridiagonal systems of equations." alt="" coords="314,5,457,44"/>
-<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="Example solver for many tridiagonal systems of equations using scalable TDMA." alt="" coords="104,12,266,37"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -275,14 +275,14 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00574">574</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00588">588</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_cgraph.png" border="0" usemap="#namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_cgraph" alt=""/></div>
 <map name="namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_cgraph" id="namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_cgraph">
 <area shape="rect"  title="Solve many cyclic tridiagonal systems of equations." alt="" coords="5,5,180,44"/>
-<area shape="rect"  href="tdmas_8f90.html#a6c50d548eaa4b5e9b96ccbf8f65cb12a" title="Solve many cyclic tridiagonal systems of equations using Thomas algorithm First index is for indicati..." alt="" coords="228,12,349,37"/>
+<area shape="rect"  href="tdmas_8f90.html#a6c50d548eaa4b5e9b96ccbf8f65cb12a" title="Solve many cyclic tridiagonal systems of equations using Thomas algorithm First index is to indicate ..." alt="" coords="228,12,349,37"/>
 </map>
 </div>
 <div class="dynheader">
@@ -291,8 +291,8 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_icgraph.png" border="0" usemap="#namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_icgraph" id="namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_icgraph">
 <area shape="rect"  title="Solve many cyclic tridiagonal systems of equations." alt="" coords="314,5,488,44"/>
-<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="Example solver for many tridiagonal systems of equations using scalable TDMA." alt="" coords="104,12,266,37"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -342,7 +342,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Produce a plan for many tridiagonal systems of equations. </p>
+<p>Create a plan for many tridiagonal systems of equations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plan</td><td>Plan for a single tridiagonal system of equations </td></tr>
@@ -354,13 +354,13 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00171">171</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00185">185</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_cgraph.png" border="0" usemap="#namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_cgraph" alt=""/></div>
 <map name="namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_cgraph" id="namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_cgraph">
-<area shape="rect"  title="Produce a plan for many tridiagonal systems of equations." alt="" coords="5,5,181,44"/>
+<area shape="rect"  title="Create a plan for many tridiagonal systems of equations." alt="" coords="5,5,181,44"/>
 <area shape="rect"  href="para__range_8f90.html#ab75ab386311975aa4ff7cac06798fcd4" title="Compute the indices of assigned range for each MPI process." alt="" coords="229,12,318,37"/>
 </map>
 </div>
@@ -369,9 +369,9 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_icgraph.png" border="0" usemap="#namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_icgraph" id="namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_icgraph">
-<area shape="rect"  title="Produce a plan for many tridiagonal systems of equations." alt="" coords="314,5,489,44"/>
-<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="Example solver for many tridiagonal systems of equations using scalable TDMA." alt="" coords="104,12,266,37"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  title="Create a plan for many tridiagonal systems of equations." alt="" coords="314,5,489,44"/>
+<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -393,7 +393,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Deallocate the allocated arrays in the defined plan_many. </p>
+<p>Destroy the allocated arrays in the defined plan_many. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plan</td><td>Plan for many tridiagonal systems of equations </td></tr>
@@ -401,15 +401,15 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00258">258</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00272">272</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce_icgraph.png" border="0" usemap="#namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce_icgraph" id="namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce_icgraph">
-<area shape="rect"  title="Deallocate the allocated arrays in the defined plan_many." alt="" coords="314,5,496,44"/>
-<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="Example solver for many tridiagonal systems of equations using scalable TDMA." alt="" coords="104,12,266,37"/>
-<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for STDMA example problem." alt="" coords="5,12,56,37"/>
+<area shape="rect"  title="Destroy the allocated arrays in the defined plan_many." alt="" coords="314,5,496,44"/>
+<area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
+<area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
 
@@ -459,7 +459,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Produce a plan for a single tridiagonal system of equations. </p>
+<p>Create a plan for a single tridiagonal system of equations. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">plan</td><td>Plan for a single tridiagonal system of equations </td></tr>
@@ -471,14 +471,14 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00125">125</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00139">139</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f_icgraph.png" border="0" usemap="#namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f_icgraph" id="namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f_icgraph">
-<area shape="rect"  title="Produce a plan for a single tridiagonal system of equations." alt="" coords="218,5,395,44"/>
-<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="Example solver for a single tridiagonal system of equations using scalable TDMA." alt="" coords="5,12,170,37"/>
+<area shape="rect"  title="Create a plan for a single tridiagonal system of equations." alt="" coords="218,5,395,44"/>
+<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
 </map>
 </div>
 
@@ -508,14 +508,14 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00152">152</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00166">166</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594_icgraph.png" border="0" usemap="#namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594_icgraph" id="namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594_icgraph">
 <area shape="rect"  title="Deallocate the allocated arrays in the defined plan_single." alt="" coords="218,5,402,44"/>
-<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="Example solver for a single tridiagonal system of equations using scalable TDMA." alt="" coords="5,12,170,37"/>
+<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
 </map>
 </div>
 
@@ -584,7 +584,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00281">281</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00295">295</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -600,7 +600,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_icgraph.png" border="0" usemap="#namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_icgraph" id="namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_icgraph">
 <area shape="rect"  title="Solve a single tridiagonal system of equation." alt="" coords="218,5,361,44"/>
-<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="Example solver for a single tridiagonal system of equations using scalable TDMA." alt="" coords="5,12,170,37"/>
+<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
 </map>
 </div>
 
@@ -669,7 +669,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="module__stdma_8f90_source.html#l00373">373</a> of file <a class="el" href="module__stdma_8f90_source.html">module_stdma.f90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00387">387</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -685,7 +685,7 @@ Here is the caller graph for this function:</div>
 <div class="center"><img src="namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_icgraph.png" border="0" usemap="#namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_icgraph" alt=""/></div>
 <map name="namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_icgraph" id="namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_icgraph">
 <area shape="rect"  title="Solve a single cyclic tridiagonal system of equations." alt="" coords="218,5,395,44"/>
-<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="Example solver for a single tridiagonal system of equations using scalable TDMA." alt="" coords="5,12,170,37"/>
+<area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
 </map>
 </div>
 

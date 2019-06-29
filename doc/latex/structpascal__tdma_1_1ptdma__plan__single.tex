@@ -9,7 +9,7 @@ Execution plan for a single tridiagonal system of equations.
 \begin{DoxyCompactItemize}
 \item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a073cddefd8ef983b185b6727d8ad7de6}{ptdma\+\_\+world}}
-\begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to arrange data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a91fd8fb919f9b7d3137b13fcaa55dc1b}{n\+\_\+row\+\_\+rt}}
 \begin{DoxyCompactList}\small\item\em Number of rows of a reduced tridiagonal system after M\+P\+I\+\_\+\+Gather. \end{DoxyCompactList}\item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_af0d3b3bce8b9956aa9e80ba0712a9a9d}{gather\+\_\+rank}}
@@ -45,9 +45,9 @@ double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdm
 \subsection{Detailed Description}
 Execution plan for a single tridiagonal system of equations. 
 
-It uses M\+P\+I\+\_\+\+Igather communication to gather the coefficients of a reduced tridiagonal system to a specified M\+PI processes. 
+It uses M\+P\+I\+\_\+\+Igather function to build the reduced tridiagonal system of equations to a specified M\+PI processes. 
 
-Definition at line 82 of file module\+\_\+stdma.\+f90.
+Definition at line 96 of file pascal\+\_\+tdma.\+f90.
 
 
 
@@ -64,7 +64,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 92 of file module\+\_\+stdma.\+f90.
+Definition at line 106 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_ad8bed95f594c23d7df9467e204025a74}\label{structpascal__tdma_1_1ptdma__plan__single_ad8bed95f594c23d7df9467e204025a74}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!a\_rt@{a\_rt}}
@@ -78,7 +78,7 @@ Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagona
 
 
 
-Definition at line 97 of file module\+\_\+stdma.\+f90.
+Definition at line 111 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_acf24e954fa50a47ece2c59598b81c157}\label{structpascal__tdma_1_1ptdma__plan__single_acf24e954fa50a47ece2c59598b81c157}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!b\_rd@{b\_rd}}
@@ -92,7 +92,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 92 of file module\+\_\+stdma.\+f90.
+Definition at line 106 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a8e9487525ccef0d45c8a5440103613b0}\label{structpascal__tdma_1_1ptdma__plan__single_a8e9487525ccef0d45c8a5440103613b0}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!b\_rt@{b\_rt}}
@@ -106,7 +106,7 @@ Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagona
 
 
 
-Definition at line 97 of file module\+\_\+stdma.\+f90.
+Definition at line 111 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a9450979ebd66ed321f27165c8e13629f}\label{structpascal__tdma_1_1ptdma__plan__single_a9450979ebd66ed321f27165c8e13629f}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!c\_rd@{c\_rd}}
@@ -120,7 +120,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 92 of file module\+\_\+stdma.\+f90.
+Definition at line 106 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a7169b89281236696ea6eb5631ce44d95}\label{structpascal__tdma_1_1ptdma__plan__single_a7169b89281236696ea6eb5631ce44d95}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!c\_rt@{c\_rt}}
@@ -134,7 +134,7 @@ Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagona
 
 
 
-Definition at line 97 of file module\+\_\+stdma.\+f90.
+Definition at line 111 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a8b99edaa7ecd71fe6ceafd9c69d9a374}\label{structpascal__tdma_1_1ptdma__plan__single_a8b99edaa7ecd71fe6ceafd9c69d9a374}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!d\_rd@{d\_rd}}
@@ -148,7 +148,7 @@ Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: 
 
 
 
-Definition at line 92 of file module\+\_\+stdma.\+f90.
+Definition at line 106 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a627be8624cd48aa5b3aad7f6cf8d0b08}\label{structpascal__tdma_1_1ptdma__plan__single_a627be8624cd48aa5b3aad7f6cf8d0b08}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!d\_rt@{d\_rt}}
@@ -162,7 +162,7 @@ Coefficient arrays, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs.
 
 
 
-Definition at line 97 of file module\+\_\+stdma.\+f90.
+Definition at line 111 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_af0d3b3bce8b9956aa9e80ba0712a9a9d}\label{structpascal__tdma_1_1ptdma__plan__single_af0d3b3bce8b9956aa9e80ba0712a9a9d}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!gather\_rank@{gather\_rank}}
@@ -176,7 +176,7 @@ Destination rank of M\+P\+I\+\_\+\+Igather.
 
 
 
-Definition at line 87 of file module\+\_\+stdma.\+f90.
+Definition at line 101 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_af473533b36508af4e0752cee8d182334}\label{structpascal__tdma_1_1ptdma__plan__single_af473533b36508af4e0752cee8d182334}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!myrank@{myrank}}
@@ -190,7 +190,7 @@ Current rank ID in the communicator of ptdma\+\_\+world.
 
 
 
-Definition at line 88 of file module\+\_\+stdma.\+f90.
+Definition at line 102 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a91fd8fb919f9b7d3137b13fcaa55dc1b}\label{structpascal__tdma_1_1ptdma__plan__single_a91fd8fb919f9b7d3137b13fcaa55dc1b}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!n\_row\_rt@{n\_row\_rt}}
@@ -204,7 +204,7 @@ Number of rows of a reduced tridiagonal system after M\+P\+I\+\_\+\+Gather.
 
 
 
-Definition at line 85 of file module\+\_\+stdma.\+f90.
+Definition at line 99 of file pascal\+\_\+tdma.\+f90.
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a073cddefd8ef983b185b6727d8ad7de6}\label{structpascal__tdma_1_1ptdma__plan__single_a073cddefd8ef983b185b6727d8ad7de6}} 
 \index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!ptdma\_world@{ptdma\_world}}
@@ -214,14 +214,14 @@ Definition at line 85 of file module\+\_\+stdma.\+f90.
 
 
 
-Single dimensional subcommunicator to arrange data for the reduced T\+D\+MA. 
+Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. 
 
 
 
-Definition at line 84 of file module\+\_\+stdma.\+f90.
+Definition at line 98 of file pascal\+\_\+tdma.\+f90.
 
 
 
 The documentation for this type was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/src/\mbox{\hyperlink{module__stdma_8f90}{module\+\_\+stdma.\+f90}}\end{DoxyCompactItemize}
+/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/src/\mbox{\hyperlink{pascal__tdma_8f90}{pascal\+\_\+tdma.\+f90}}\end{DoxyCompactItemize}
