@@ -1,6 +1,11 @@
+# Main compiler with MPI
 FC = mpifort
 
-# FLAG = -O0 -g -fcheck=all
+# Complie flag
+# For debugging
 FLAG = -O0 -g -fPIC -check all -warn all -WB
-#FLAG = -r8 -O1 -fPIC -fp-model=precise -check bounds #-xMIC-AVX512
+# For moderate debugging
+#FLAG = -O1 -fPIC -fp-model=precise -check bounds #-xMIC-AVX512
+# For optimized run in Intel Xeon Phi
+#FLAG = -O3 -fPIC -fp-model=precise -xMIC-AVX512
 
