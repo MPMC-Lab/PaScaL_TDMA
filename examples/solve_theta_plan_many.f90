@@ -1,6 +1,9 @@
 !======================================================================================================================
 !> @file        solve_theta_plan_many.f90
-!> @brief       This is for an example case of PaScaL_TDMA.
+!> @brief       This file contains a solver subroutine for the example problem of PaScaL_TDMA.
+!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
+!>              and horizontally periodic boundaries.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -16,9 +19,9 @@
 !======================================================================================================================
 
 !>
-!> @brief       Example solver for many tridiagonal systems of equations using scalable TDMA
-!> @details     This solvers is for many tridiagonal systems of equations.
-!>              It solves the 3-dimensional diffusion equation using the PaScaL_TDMA solver.
+!> @brief       An example solver for many tridiagonal systems of equations using PaScaL_TDMA
+!> @details     This subroutine is for many tridiagonal systems of equations.
+!>              It solves the the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA.
 !>              Plans of PaScaL_TDMA for many tridiagonal systems of equations are created and
 !>              many tridiagonal systems are solved plane-by-plane.
 !> @param       theta       Main 3-D variable to be solved

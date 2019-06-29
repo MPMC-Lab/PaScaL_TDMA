@@ -1,6 +1,9 @@
 !======================================================================================================================
-!> @file        module_global.f90
-!> @brief       This is for an example case of p3ta.
+!> @file        global.f90
+!> @brief       This file contains a module of global parameters for the example problem of PaScaL_TDMA.
+!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
+!>              and horizontally periodic boundaries.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -17,19 +20,20 @@
 
 !>
 !> @brief       Module for global parameters
+!> @details     This global module has simulation parameters and a subroutine to initialize parameters. 
 !>
 module global
     implicit none
     double precision, parameter :: PI = acos(-1.d0)
     
-    ! PHYSICAL PARAMETERS
+    ! Physical parameters
     double precision :: Pr  !< Prandtl number
     double precision :: Ra  !< Reyleigh number
 
-    ! ITERATION STEPS 
+    ! Iteration steps
     integer :: Tmax             !< Maximum number of iteration steps
     
-    ! COMPUTATIONAL SIZE FOR SPACE AND TIME DISCRETIZATIONS
+    ! Computational size for physical domain and time discretization
     !> @{ Grid numbers in each direction
     integer :: nx,ny,nz 
     !> @}
@@ -43,7 +47,7 @@ module global
     double precision :: dtStart             !< Initial dt
     double precision :: tStart              !< Initial simulation time
     
-    ! DOMAIN SIZE FOR THE PHYSICAL PROBLEMS
+    ! Physical size of the computational domain
     !> @{ Lengths of the physical domain
     double precision :: lx, ly, lz
     !> @}
@@ -51,7 +55,7 @@ module global
     double precision :: dx, dy, dz
     !> @}
     
-    ! BOUNDARY CONDITIONS OF THE HOT AND COLD WALLS AND OTHER PROPERTIES
+    ! Boundary conditions of hot and cold walls and related parameters
     double precision :: theta_cold              !< Boundary temperature of cold wall
     double precision :: theta_hot               !< Boundary temperature of hot wall
     double precision :: alphaG                  !< Thermal expansion coefficient x gravitational acceleration
@@ -84,20 +88,20 @@ module global
         np_dim(1) = npy
         np_dim(2) = npz
 
-        ! PHYSICAL PARAMETERS
+        ! Physical parameters
         Pr = 5.0d0; Ra = 2.d+2
 
-        ! COMPUTATIONAL SIZE FOR SPACE AND TIME DISCRETIZATIONS
+        ! Computational size for physical domain and time discretization
         nx = nx+1; ny = ny+1; nz = nz+1
         nxm = nx-1; nym = ny-1; nzm = nz-1
         nxp = nx+1; nyp = ny+1; nzp = nz+1
 
         dtStart = 5.0D-3; tStart = 0.d0
 
-        ! DOMAIN SIZE FOR THE PHYSICAL PROBLEMS
+        ! Physical size of the computational domain
         lx = 1.0d0; ly = 1.0d0; lz = 1.0d0
 
-        ! BOUNDARY CONDITIONS OF THE HOT AND COLD WALLS AND OTHER PROPERTIES
+        ! Boundary conditions of hot and cold walls and related parameters
         theta_cold = -1.d0; theta_hot = 2.d0 + theta_cold
         alphaG = 1.d0; nu = 1.d0/sqrt(Ra/(alphaG*Pr*ly**3.*(theta_hot-theta_cold)))
         Ct = nu/Pr

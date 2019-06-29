@@ -1,28 +1,37 @@
 !======================================================================================================================
-!> @file        module_stdma.f90
+!> @file        pascal_tdma.f90
 !> @brief       PaScaL_TDMA - Parallel and Scalable Library for Tri-Diagonal Matrix Algorithm
 !>              PaScal_TDMA solves many tridiagonal systems of equations in a parallel manner
-!>              using a noble all-to-all communication scheme for the reduced unknowns based on
-!>              the modified Thomas algorithm by Laszlo, Gilles and Appleyard(2016)
+!>              using a noble all-to-all communication scheme with the modified Thomas algorithm
+!>              by Laszlo et al(2016).
 !> @details     This module is for both of a single and many tridiagonal systems of equations.
-!>              The main algorithm for a tridiagonal matrix proposed in this code consists of 
-!>              the following three steps: 
-!>              - (1) Building a reduced system 
-!>                      The tridiagonal system of equations is transformed to a reduced system 
-!>                      by applying the modified Thomas algorithm.
-!>              - (2) Solving unknowns of a reduced system
-!>                      The reduced tridiagonal system solved by applying the sequential Thomas algorithm.
-!>              - (3) Updating the other unknowns
-!>                      The other unknowns are computed by using the solutions obtained in Step 2 
-!>                      and the transformed equations in Step 1.
-!>              Our algorithm is close to the algorithm by Mattor, Williams, Hewette (1995) except that
-!>              we use MPI_Alltoall communication for reduced tridiagonal systems to distribute 
-!>              the many tridiagonal systems of equations almost equally to processes, while Mattor et al
-!>              used MPI_Gather to gather and solve the reduced equations on the master process only.
-!>              The number of coefficient is greatly reduced by local reduction in Step(1), so we can avoid
-!>              the communication bandwidth problem which happens to be common in MPI_Alltoall communication.
-!>              Our algorithm is also distinguished from the work of Laszlo, Gilles and Appleyard(2016) which
-!>              used parallel cyclic reduction to solve the reduced tridiagonal systems of equations.
+!>              The main algorithm consists of the following five steps: 
+!>              (1) Transform the original partitioned tridiagonal systems of equations 
+!>                  The original partitioned tridiagonal system of equations is transformed 
+!>                  to the modified tridiagonal system using the modified Thomas algorithm.
+!>              (2) Build the reduced tridiagonal systems of equations
+!>                  The first and last rows of the modified tridiagonal systems are assembled 
+!>                  by executing the proposed all-to-all communication scheme and 
+!>                  the reduced tridiagonal systems are built.
+!>              (3) Solve the reduced tridiagonal systems
+!>                  The reduced tridiagonal systems are solved by applying Thomas algorithm.
+!>              (4) Distribute the solutions of the reduced tridiagonal systems
+!>                  The solutions in Step 3 are distributed to each computing cores by executing
+!>                  the inverse of the all-to-all communication in Step 2.
+!>              (5) Update the solutions in the modified tridiagonal systems
+!>                  The remaining unknows are updated using the modified tridiagonal systems
+!>                  with the solutions obtained in Step 3 and Step 4.
+!>                  
+!>              Step 1 and Step 5 are similar to the method proposed by Laszlo, Gilles and Appleyard(2016)
+!>              which used the parallel cyclic reduction (PCR) to build and solve the reduced tridiagonal systems.
+!>              Instead of using the PCR, we develop an all-to-all communication scheme using a MPI_Ialltoall
+!>              function after the modified Thomas algorithm is execued. The number of coefficients for
+!>              the reduced tridiagonal systems are greatly reduced, so we can avoid the communication 
+!>              bandwidth problem which is a main bottle-neck of all-to-all communications.
+!>              Our algorithm is also distinguished from the work of Mattor, Williams, Hewette (1995) which
+!>              assembles the undetermined coefficients of the temporary solutions in a single processor 
+!>              using MPI_Gather, where load imbalances are serious.
+!> 
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -38,8 +47,12 @@
 !======================================================================================================================
 
 !>
-!> @brief       Module for a scalable tri-diagonal matrix(TDM) solver for tridiagonal systems of equations 
-!> @details     It contains plans for triagonal systems of equations and subroutines for solving them under the defined plans.
+!> @brief       Module for PaScaL-TDMA library 
+!> @details     It contains plans for triagonal systems of equations and subroutines for solving them 
+!>              using the defined plans. The operation of the library consists of the following three phases.
+!>              (1) Create a data structure called a plan which has information for communication and reduced systems.
+!>              (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5
+!>              (3) Destroy the created plan
 !>
 module PaScaL_TDMA
 
@@ -48,11 +61,12 @@ module PaScaL_TDMA
     implicit none
 
     !> @brief   Execution plan for many tridiagonal systems of equations.
-    !> @details It uses MPI_Ialltoallw communication to distribute the reduced tridiagonal matrices to MPI processes.
-    !>          Derived datatype is used for elimination of data packing and unpacking cost.
+    !> @details It uses MPI_Ialltoallw function to distribute the modified tridiagonal systems to MPI processes
+    !>          and build the reduced tridiagonal systems of equations. Derived datatypes are defined and  used 
+    !>          for elimination of data packing and unpacking cost.
     type, public :: ptdma_plan_many
 
-        integer :: ptdma_world          !< Single dimensional subcommunicator to arrange data for the reduced TDMA
+        integer :: ptdma_world          !< Single dimensional subcommunicator to assemble data for the reduced TDMA
         integer :: n_sys_rt             !< Number of tridiagonal systems to solve in each process after transpose
         integer :: n_row_rt             !< Number of rows of a reduced tridiagonal systems after transpose
 
@@ -77,11 +91,11 @@ module PaScaL_TDMA
     end type ptdma_plan_many
 
     !> @brief   Execution plan for a single tridiagonal system of equations.
-    !> @details It uses MPI_Igather communication to gather the coefficients of a reduced tridiagonal system 
+    !> @details It uses MPI_Igather function to build the reduced tridiagonal system of equations
     !>          to a specified MPI processes.
     type, public :: ptdma_plan_single
 
-        integer :: ptdma_world          !< Single dimensional subcommunicator to arrange data for the reduced TDMA
+        integer :: ptdma_world          !< Single dimensional subcommunicator to assemble data for the reduced TDMA
         integer :: n_row_rt             !< Number of rows of a reduced tridiagonal system after MPI_Gather
 
         integer :: gather_rank          !< Destination rank of MPI_Igather
@@ -114,7 +128,7 @@ module PaScaL_TDMA
     contains
 
     !>
-    !> @brief   Produce a plan for a single tridiagonal system of equations
+    !> @brief   Create a plan for a single tridiagonal system of equations
     !> @param   plan        Plan for a single tridiagonal system of equations
     !> @param   myrank      Rank ID in mpi_world
     !> @param   nprocs      Number of MPI process in mpi_world
@@ -160,7 +174,7 @@ module PaScaL_TDMA
     end subroutine PaScaL_TDMA_plan_single_destroy
 
     !>
-    !> @brief   Produce a plan for many tridiagonal systems of equations
+    !> @brief   Create a plan for many tridiagonal systems of equations
     !> @param   plan        Plan for a single tridiagonal system of equations
     !> @param   n_sys       Number of tridiagonal systems of equations for process
     !> @param   myrank      Rank ID in mpi_world
@@ -210,7 +224,7 @@ module PaScaL_TDMA
         allocate( plan%C_rt(1:ns_rt, 1:nr_rt) )
         allocate( plan%D_rt(1:ns_rt, 1:nr_rt) )
 
-        ! Building derived data type (ddt)
+        ! Building derived data type (DDT)
         allocate(plan%ddtype_Fs(0:nprocs-1),  plan%ddtype_Bs(0:nprocs-1))
 
         do i=0,nprocs-1
@@ -251,7 +265,7 @@ module PaScaL_TDMA
     end subroutine PaScaL_TDMA_plan_many_create
 
     !>
-    !> @brief   Deallocate the allocated arrays in the defined plan_many
+    !> @brief   Destroy the allocated arrays in the defined plan_many
     !> @param   plan        Plan for many tridiagonal systems of equations
     !>
     subroutine PaScaL_TDMA_plan_many_destroy(plan)
@@ -351,7 +365,7 @@ module PaScaL_TDMA
 
         call MPI_Waitall(1, request, MPI_STATUSES_IGNORE, ierr)
 
-        ! Update solutions of the original tridiagonal system by solution of the reduced tridiagonal system.
+        ! Update solutions of the modified tridiagonal system with the solutions of the reduced tridiagonal system.
         D(1 ) = plan%D_rd(1)
         D(n_row) = plan%D_rd(2)
         do i=2,n_row-1
@@ -381,7 +395,7 @@ module PaScaL_TDMA
         integer :: i, request(4), ierr
         double precision :: rr
 
-        ! Reduction step : elimination of lower diagonal elements
+        ! The modified Thomas algorithm : elimination of lower diagonal elements
         A(1) = A(1)/B(1)
         D(1) = D(1)/B(1)
         C(1) = C(1)/B(1)
@@ -397,7 +411,7 @@ module PaScaL_TDMA
             A(i) = -rr*A(i)*A(i-1)
         enddo
 
-        ! Reduction step : elimination of upper diagonal elements
+        ! The modified Thomas algorithm : elimination of upper diagonal elements
         do i=n_row-2,2,-1
             D(i) =  D(i)-C(i)*D(i+1)
             A(i) =  A(i)-C(i)*A(i+1)
@@ -436,14 +450,14 @@ module PaScaL_TDMA
             call tdma_cycl_single(plan%A_rt,plan%B_rt,plan%C_rt,plan%D_rt, plan%n_row_rt)
         endif
 
-        ! Scatter the solutions to each rank
+        ! Distribute the solutions to each rank
         call MPI_Iscatter(plan%D_rt, 2, MPI_DOUBLE_PRECISION, &
                           plan%D_rd, 2, MPI_DOUBLE_PRECISION, &
                           plan%gather_rank, plan%ptdma_world, request(1), ierr)
 
         call MPI_Waitall(1, request, MPI_STATUSES_IGNORE, ierr)
 
-        ! Update solutions of the original tridiagonal system by solution of the reduced tridiagonal system.
+        ! Update solutions of the modified tridiagonal system with the solutions of the reduced tridiagonal system.
         D(1 ) = plan%D_rd(1)
         D(n_row) = plan%D_rd(2)
 
@@ -476,9 +490,9 @@ module PaScaL_TDMA
         integer :: request(4),ierr
         double precision :: r
 
-        ! Reduction step : elimination of lower diagonal elements. 
-        ! First index is for indicating independent many tridiagonal systems to use vectorization
-        ! Second index is for a single tridiagonal system distributed to MPI process
+        ! The modified Thomas algorithm : elimination of lower diagonal elements. 
+        ! First index is to indicate a number of independent many tridiagonal systems to use vectorization
+        ! Second index is to indicate a row number in a partitioned tridiagonal system 
         do i=1, n_sys
             A(i,1) = A(i,1)/B(i,1)
             D(i,1) = D(i,1)/B(i,1)
@@ -498,7 +512,7 @@ module PaScaL_TDMA
             enddo
         enddo
     
-        ! Reduction step : elimination of upper diagonal elements
+        ! The modified Thomas algorithm : elimination of upper diagonal elements
         do j=n_row-2, 2, -1
             do i=1, n_sys
                 D(i,j) = D(i,j)-C(i,j)*D(i,j+1)
@@ -537,7 +551,7 @@ module PaScaL_TDMA
 
         call MPI_Waitall(4, request, MPI_STATUSES_IGNORE, ierr)
 
-        ! Solve the reduced tridiagonal systems of equations using TDMA
+        ! Solve the reduced tridiagonal systems of equations using Thomas algorithm
         call tdma_many(plan%A_rt,plan%B_rt,plan%C_rt,plan%D_rt, plan%n_sys_rt, plan%n_row_rt)
 
         ! Transpose the obtained solutions to original reduced forms using MPI_Ialltoallw and derived datatypes
@@ -546,7 +560,7 @@ module PaScaL_TDMA
                             plan%ptdma_world, request(1), ierr)
         call MPI_Waitall(1, request, MPI_STATUSES_IGNORE, ierr)
 
-        ! Update solutions of the original tridiagonal systems by solution of the reduced tridiagonal systems.
+        ! Update solutions of the modified tridiagonal system with the solutions of the reduced tridiagonal system.
         do i=1,n_sys
             D(i,1 ) = plan%D_rd(i,1)
             D(i,n_row) = plan%D_rd(i,2)
@@ -583,9 +597,9 @@ module PaScaL_TDMA
         integer :: request(4), ierr
         double precision :: r
 
-        ! Reduction step : elimination of lower diagonal elements. 
-        ! First index is for indicating independent many tridiagonal systems to use vectorization
-        ! Second index is for a single tridiagonal system distributed to MPI process
+        ! The modified Thomas algorithm : elimination of lower diagonal elements. 
+        ! First index is to indicate a number of independent many tridiagonal systems to use vectorization
+        ! Second index is to indicate a row number in a partitioned tridiagonal system 
         do i=1,n_sys
             A(i,1) = A(i,1)/B(i,1)
             D(i,1) = D(i,1)/B(i,1)
@@ -605,7 +619,7 @@ module PaScaL_TDMA
             enddo
         enddo
     
-        ! Reduction step : elimination of upper diagonal elements
+        ! The modified Thomas algorithm : elimination of upper diagonal elements
         do j=n_row-2,2,-1
             do i=1,n_sys
                 D(i,j) = D(i,j)-C(i,j)*D(i,j+1)
@@ -652,7 +666,7 @@ module PaScaL_TDMA
                             plan%ptdma_world, request(1), ierr)
         call MPI_Waitall(1, request, MPI_STATUSES_IGNORE, ierr)
 
-        ! Update solution of the original tridiagonal systems by solutions of the reduced tridiagonal systems.
+        ! Update solutions of the modified tridiagonal system with the solutions of the reduced tridiagonal system.
         do i=1,n_sys
             D(i,1 ) = plan%D_rd(i,1)
             D(i,n_row) = plan%D_rd(i,2)

@@ -1,6 +1,9 @@
 !!======================================================================================================================
-!> @file        module_mpi_subdomain.f90
-!> @brief       This is for an example case of stdma.
+!> @file        mpi_subdomain.f90
+!> @brief       This file contains a module of subdomains for the example problem of PaScaL_TDMA.
+!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
+!>              and horizontally periodic boundaries.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -17,6 +20,7 @@
 
 !>
 !> @brief       Module for building subdomains divided from the physical domain
+!> @details     This module has simulation parameters for subdomains and communication between the subdomains.
 !>
 module mpi_subdomain
 
@@ -282,21 +286,21 @@ module mpi_subdomain
     
         integer :: i,j,k
 
-        ! X-DIRECTION, x_sub are coordinates and dmx_sub are grid lengths
+        ! X-direction, x_sub is for coordinates and dmx_sub is for grid lengths
         dx = lx/dble(nx-1)
         do i = 0, nx_sub
             x_sub(i) = dble(i-1+ista-1)*dx
             dmx_sub(i)=dx
         end do
 
-        ! Y-DIRECTION, y_sub are coordinates and dmy_sub are grid lengths
+        ! Y-direction, y_sub is for coordinates and dmy_sub is for grid lengths
         dy = ly/dble(ny-1)
         do j = 0, ny_sub
             y_sub(j) = dble(j-1+jsta-1)*dy
             dmy_sub(j)=dy
         end do
 
-        ! Z-DIRECTION, z_sub are coordinates and dmz_sub are grid lengths
+        ! Z-direction, z_sub is for coordinates and dmz_sub is for grid lengths
         dz = lz/dble(nz-1)
         do k = 0, nz_sub
             z_sub(k) = dble(k-1+ksta-1)*dz
@@ -331,7 +335,7 @@ module mpi_subdomain
     end subroutine mpi_subdomain_mesh
 
     !>
-    !> @brief       Initialize the values of main variable in subdomain.
+    !> @brief       Initialize the values of main variable in a subdomain.
     !> @param       theta_sub       Main variable to be solved
     !> @param       myrank_in_y     Rank ID in y-direction
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
@@ -356,7 +360,7 @@ module mpi_subdomain
             end do
         end do
     
-        ! Initialize the upper and lower boundary grids
+        ! Initialize the values of upper and lower boundary grids
         do k = 0, nz_sub
             do i = 0, nx_sub
                 if(myrank_in_y==0) theta_sub(i,0,k)  = theta_hot

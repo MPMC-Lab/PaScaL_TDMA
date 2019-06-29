@@ -1,6 +1,9 @@
 !======================================================================================================================
-!> @file        module_mpi_topology.f90
-!> @brief       This is for an example case of stdma.
+!> @file        mpi_topology.f90
+!> @brief       This file contains a module of communication topology for the example problem of PaScaL_TDMA.
+!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
+!>              and horizontally periodic boundaries.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -16,7 +19,8 @@
 !======================================================================================================================
 
 !>
-!> @brief       Module for creating cartesian topology of MPI processes and subcommunicators
+!> @brief       Module for creating the cartesian topology of MPI processes and subcommunicators
+!> @details     This module has three subcommunicators in each-direction and related subroutines
 !>
 module mpi_topology
     use mpi
@@ -26,13 +30,13 @@ module mpi_topology
     integer, public :: np_dim(0:2)          !< Number of MPI processes in 3D topology
     logical, public :: period(0:2)          !< Periodicity in each direction
 
-    !> @brief   Type variable for 1D communicator information
+    !> @brief   Type variable for the information of 1D communicator
     type, public :: cart_comm_1d
-        integer :: myrank                   !< Rank ID in this communicator
-        integer :: nprocs                   !< Number of processes in this communicator
-        integer :: west_rank                !< Previous rank ID in this communicator
-        integer :: east_rank                !< Next rank ID in this communicator
-        integer :: mpi_comm                 !< This communicator
+        integer :: myrank                   !< Rank ID in current communicator
+        integer :: nprocs                   !< Number of processes in current communicator
+        integer :: west_rank                !< Previous rank ID in current communicator
+        integer :: east_rank                !< Next rank ID in current communicator
+        integer :: mpi_comm                 !< Current communicator
     end type cart_comm_1d
 
     type(cart_comm_1d), public :: comm_1d_x     !< Subcommunicator information in x-direction

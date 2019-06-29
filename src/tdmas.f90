@@ -1,6 +1,6 @@
 !======================================================================================================================
 !> @file        tdmas.f90
-!> @brief       Tri-diagonal matrix solvers using Thomas algorithm.
+!> @brief       Tri-diagonal matrix (TDM) solvers using Thomas algorithm.
 !> @details     A single TDM solver and many TDM solver with non-cyclic and cyclic conditions.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
@@ -101,8 +101,8 @@ end subroutine tdma_cycl_single
 
 !>
 !> @brief       Solve many tridiagonal systems of equations using Thomas algorithm
-!>              First index is for indicating independent many tridiagonal systems to use vectorization
-!>              Second index is for a single tridiagonal system distributed to MPI process
+!>              First index is to indicate a number of independent many tridiagonal systems to use vectorization.
+!>              Second index is to indicate a row number in a tridiagonal system .
 !> @param       a       Coefficient array in lower diagonal elements
 !> @param       b       Coefficient array in diagonal elements
 !> @param       c       Coefficient array in upper diagonal elements
@@ -147,8 +147,8 @@ end subroutine tdma_many
 
 !>
 !> @brief       Solve many cyclic tridiagonal systems of equations using Thomas algorithm
-!>              First index is for indicating independent many tridiagonal systems to use vectorization
-!>              Second index is for a single tridiagonal system distributed to MPI process
+!>              First index is to indicate a number of independent many tridiagonal systems to use vectorization.
+!>              Second index is to indicate a row number in a tridiagonal system.
 !> @param       a       Coefficient array in lower diagonal elements
 !> @param       b       Coefficient array in diagonal elements
 !> @param       c       Coefficient array in upper diagonal elements

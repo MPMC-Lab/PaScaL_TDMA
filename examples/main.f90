@@ -1,6 +1,9 @@
 !!======================================================================================================================
 !> @file        main.f90
-!> @brief       This is for an example case of STDMA.
+!> @brief       This file contains the main subroutines for the example problem of PaScaL_TDMA.
+!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
+!>              and horizontally periodic boundaries.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -16,7 +19,7 @@
 !======================================================================================================================
 
 !>
-!> @brief       Main execution program for STDMA example problem
+!> @brief       Main execution program for the example problem of PaScaL_TDMA
 !>
 program main
     use mpi
@@ -27,8 +30,8 @@ program main
     
     implicit none
  
-    integer :: time_step        ! Loop variable indicate current time step
-    double precision :: t_curr  ! Indicate current simulation time
+    integer :: time_step        ! Current time step
+    double precision :: t_curr  ! Current simulation time
 
     integer :: nprocs, myrank   ! Number of MPI processes and rank ID in MPI_COMM_WORLD
     integer :: ierr
@@ -38,7 +41,7 @@ program main
     call MPI_Comm_size( MPI_COMM_WORLD, nprocs, ierr)
     call MPI_Comm_rank( MPI_COMM_WORLD, myrank, ierr)
     
-    ! Periodicity in simulation domain
+    ! Periodicity in the simulation domain
     period(0)=.true.; period(1)=.false.; period(2)=.true.
     
     ! Read PARA_INPUT.inp file and setup the parameters for the simulation domain and conditions
@@ -47,7 +50,7 @@ program main
     ! Create cartesian MPI topology and build sub-communcator in the cartesian topology
     call mpi_topology_make()
 
-    ! Divide the simulation domain
+    ! Divide the simulation domain into sub-domains
     call mpi_subdomain_make(comm_1d_x%nprocs, comm_1d_x%myrank, &
                                    comm_1d_y%nprocs, comm_1d_y%myrank, &
                                    comm_1d_z%nprocs, comm_1d_z%myrank )
@@ -98,7 +101,10 @@ program main
 end program main
 
 !>
-!> @brief       Write the values of field variable to a output file
+!> @brief       Write the values of field variable in a output file
+!> @details     It writes the values of field variables with two methods, single task IO and post assembly IO.
+!>              In single task I/O, each process writes the values in its own file. In post assembly IO, each process 
+!>              send data to a master process and the master process write the obtained data in a single file.
 !> @param       myrank      Rank ID in MPI_COMM_WORLD
 !> @param       nprocs      Number of MPI process in MPI_COMM_WORLD
 !> @param       theta_sub   Field variable to write
@@ -157,7 +163,7 @@ subroutine field_file_write(myrank, nprocs, theta_sub)
     allocate(theta_all(1:nxm,1:nym,1:nzm))
     theta_all(:,:,:) = 0.0d0
 
-    ! Building derived datatype for single file IO using post-assembly method
+    ! Building derived datatype for single file IO using the post-assembly IO
     ! Derived datatype for sending data, excluding ghostcell
     sizes    = (/nx_sub+1,ny_sub+1,nz_sub+1/)
     subsizes = (/nx_sub-1,ny_sub-1,nz_sub-1/)
@@ -195,7 +201,7 @@ subroutine field_file_write(myrank, nprocs, theta_sub)
         nzm_sub_disp(i)=sum(nzm_sub_cnt(0:i-1))
     enddo
 
-    ! Derived datatypes for every rank are required for receiving data
+    ! Derived datatypes for every process are required for receiving data
     do i = 0, nprocs-1
         sizes    = (/nxm,    nym,    nzm/)
         subsizes = (/nxm_sub_cnt(cart_coord(0,i)), nym_sub_cnt(cart_coord(1,i)), nzm_sub_cnt(cart_coord(2,i))/)
@@ -206,10 +212,10 @@ subroutine field_file_write(myrank, nprocs, theta_sub)
         call MPI_Type_commit( ddtype_data_write_recv(i), ierr)
     enddo
 
-    ! Each rank sends data to rank 0 using ddt
+    ! Each rank sends data to process 0 using ddt
     call MPI_Isend(theta_sub(0,0,0), 1, ddtype_data_write_send, 0, 101, MPI_COMM_WORLD, request_send, ierr)
 
-    ! Rank 0 receives data from all ranks
+    ! Process 0 receives data from all ranks
     if(myrank == 0 ) then
         do i = 0, nprocs-1
             call MPI_Irecv(theta_all(1,1,1), 1, ddtype_data_write_recv(i), i, 101, MPI_COMM_WORLD, request_recv(i), ierr)

@@ -1,6 +1,9 @@
 !======================================================================================================================
 !> @file        solve_theta_plan_single.f90
-!> @brief       This is for an example case of stdma.
+!> @brief       This file contains a solver subroutine for the example problem of PaScaL_TDMA.
+!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
+!>              and horizontally periodic boundaries.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -16,11 +19,11 @@
 !======================================================================================================================
 
 !>
-!> @brief       Example solver for a single tridiagonal system of equations using scalable TDMA
-!> @details     This solvers is for a single tridiagonal system of equations.
-!>              It solves the 3-dimensional diffusion equation using the PaScaL_TDMA solver.
+!> @brief       An example solver for a single tridiagonal system of equations using PaScaL_TDMA
+!> @details     This subroutine is for a single tridiagonal system of equations.
+!>              It solves the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA solver.
 !>              Plans of PaScaL_TDMA for a single tridiagonal system of equations are created and
-!>              a single tridiagonal systems is solved line-by-line
+!>              a single tridiagonal systems is solved line-by-line.
 !> @param       theta       Main 3-D variable to be solved
 !>
 subroutine solve_theta_plan_single(theta)
@@ -47,12 +50,12 @@ subroutine solve_theta_plan_single(theta)
     double precision :: eAPK, eAMK, eACK                            ! Diffusion treatment terms in z-direction
     double precision :: eRHS                                        ! From eAPI to eACK
 
-    double precision, allocatable, dimension(:, :, :) :: rhs                    ! RHS array
+    double precision, allocatable, dimension(:, :, :) :: rhs                    ! r.h.s. array
     double precision, allocatable, dimension(:) :: ap_1d, am_1d, ac_1d, ad_1d   ! Coefficient of ridiagonal matrix
 
     type(ptdma_plan_single)      :: px_single, py_single, pz_single ! Plan for a single tridiagonal system of equations
 
-    ! Calculating RHS
+    ! Calculating r.h.s
     allocate( rhs(0:nx_sub, 0:ny_sub, 0:nz_sub))
     do k = 1, nz_sub-1
         kp = k+1
@@ -68,7 +71,7 @@ subroutine solve_theta_plan_single(theta)
                 ip = i+1
                 im = i-1
 
-                ! DIFFUSION TERM
+                ! Diffusion term
                 dedx1 = (  theta(i ,j ,k ) - theta(im,j ,k )  )/dmx_sub(i )
                 dedx2 = (  theta(ip,j ,k ) - theta(i ,j ,k )  )/dmx_sub(ip)  
                 dedy3 = (  theta(i ,j ,k ) - theta(i ,jm,k )  )/dmy_sub(j )
@@ -86,17 +89,17 @@ subroutine solve_theta_plan_single(theta)
                 ebc_up = 0.5d0*Ct/dy/dmy_sub(jp)*thetaBC4_sub(i,k)
                 ebc = dble(1. - jem)*ebc_down + dble(1. - jep)*ebc_up
 
-                ! Diffusion term from incremental notation in next time step: X-DIRECTION
+                ! Diffusion term from incremental notation in next time step: X-direction
                 eAPI = -0.5d0*Ct/dx/dmx_sub(ip)
                 eAMI = -0.5d0*Ct/dx/dmx_sub(i )
                 eACI =  0.5d0*Ct/dx*( 1.d0/dmx_sub(ip) + 1.d0/dmx_sub(i) )
 
-                ! Diffusion term from incremental notation in next time step: Z-DIRECTION
+                ! Diffusion term from incremental notation in next time step: Z-direction
                 eAPK = -0.5d0*Ct/dz/dmz_sub(kp)
                 eAMK = -0.5d0*Ct/dz/dmz_sub(k )
                 eACK =  0.5d0*Ct/dz*( 1.d0/dmz_sub(kp) + 1.d0/dmz_sub(k) )
 
-                ! Diffusion term from incremental notation in next time step: Y-DIRECTION
+                ! Diffusion term from incremental notation in next time step: Y-direction
                 eAPJ = -0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) )*dble(jep)
                 eAMJ = -0.5d0*Ct/dy*( 1.d0/dmy_sub(j ) )*dble(jem)
                 eACJ =  0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) + 1.d0/dmy_sub(j) )
@@ -105,14 +108,14 @@ subroutine solve_theta_plan_single(theta)
                     & + eAPJ*theta(i,jp,k) + eACJ*theta(i,j,k) + eAMJ*theta(i,jm,k)      &
                     & + eAPI*theta(ip,j,k) + eACI*theta(i,j,k) + eAMI*theta(im,j,k)
 
-                ! RIGHT-HAND SIDE      
+                ! r.h.s.     
                 rhs(i,j,k) = theta(i,j,k)/dt + viscous + ebc      &
                           & - (theta(i,j,k)/dt + eRHS)
             enddo
         enddo
     enddo
 
-    ! SOLVE IN Z-DIRECTION
+    ! Solve in z-direction
     allocate( ap_1d(1:nz_sub-1), am_1d(1:nz_sub-1), ac_1d(1:nz_sub-1), ad_1d(1:nz_sub-1) )
 
     ! Create a PaScaL_TDMA plan for a single tridiagonal system
@@ -141,7 +144,7 @@ subroutine solve_theta_plan_single(theta)
     call PaScaL_TDMA_plan_single_destroy(pz_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
-    !--SOLVE IN Y-DIRECTION
+    ! Solve in y-direction
     allocate( ap_1d(1:ny_sub-1), am_1d(1:ny_sub-1), ac_1d(1:ny_sub-1), ad_1d(1:ny_sub-1) )
     ! Create a PaScaL_TDMA plan for a single tridiagonal system
     call PaScaL_TDMA_plan_single_create(py_single, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm, 0)
@@ -155,7 +158,6 @@ subroutine solve_theta_plan_single(theta)
                 jep = jpbc_index(j)
                 jem = jmbc_index(j)
 
-                ! Y-DIRECTION
                 ap_1d(j) = -0.5d0*Ct/dy/dmy_sub(jp)*dble(jep)*dt
                 am_1d(j) = -0.5d0*Ct/dy/dmy_sub(j )*dble(jem)*dt
                 ac_1d(j) =  0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) + 1.d0/dmy_sub(j) )*dt + 1.d0
@@ -171,7 +173,7 @@ subroutine solve_theta_plan_single(theta)
     call PaScaL_TDMA_plan_single_destroy(py_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
-    ! !--SOLVE IN X-DIRECTION
+    ! Solve in x-direction
     allocate( ap_1d(1:nx_sub-1), am_1d(1:nx_sub-1), ac_1d(1:nx_sub-1), ad_1d(1:nx_sub-1) )
     ! Create a PaScaL_TDMA plan for a single tridiagonal system
     call PaScaL_TDMA_plan_single_create(px_single, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm, 0)
