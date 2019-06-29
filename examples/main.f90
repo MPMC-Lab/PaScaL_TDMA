@@ -36,11 +36,11 @@ program main
     integer :: nprocs, myrank   ! Number of MPI processes and rank ID in MPI_COMM_WORLD
     integer :: ierr
     double precision, allocatable, dimension(:, :, :) :: theta_sub  ! Main 3-D variable to be solved
-
     call MPI_Init(ierr)
     call MPI_Comm_size( MPI_COMM_WORLD, nprocs, ierr)
     call MPI_Comm_rank( MPI_COMM_WORLD, myrank, ierr)
     
+    if(myrank==0) write(*,*) '[Main] The main simulation starts! '
     ! Periodicity in the simulation domain
     period(0)=.true.; period(1)=.false.; period(2)=.true.
     
@@ -57,7 +57,9 @@ program main
 
     ! Make ghostcell as communcation buffer using derived datatypes
     call mpi_subdomain_make_ghostcell_ddtype()
-    
+
+    if(myrank==0) write(*,*) '[Main] Subdomains and topology created! '
+
     ! Allocate the main variable in the sub-domain
     allocate(theta_sub(0:nx_sub, 0:ny_sub, 0:nz_sub))
 
@@ -73,29 +75,32 @@ program main
 
     call MPI_Barrier(MPI_COMM_WORLD,ierr)
 
-    if(myrank==0) write(*,*)'------------------------------------------------------------------------------'
-    if(myrank==0) write(*,*)'>>>>>>>>>    The preparation for simulation has been finished!    <<<<<<<<<'
-    if(myrank==0) write(*,*)'------------------------------------------------------------------------------'
-    if(myrank==0) write(*,*) 
+    if(myrank==0) write(*,*) '[Main] The preparation for simulation finished! '
 
     ! Begin simulation
     t_curr = tStart
     dt = dtstart
 
+    if(myrank==0) write(*,*) '[Main] Solving the three-dimensional heat equation! '
+
     do time_step = 1, Tmax
         t_curr = t_curr + dt
+        if(myrank==0) write(*,*) '[Main] Current time step = ', time_step
     
         call solve_theta_plan_many(theta_sub)
  
     end do
+    if(myrank==0) write(*,*) '[Main] Solving the three-dimensional heat equation finished! '
 
     ! Write the values of field variable to a output file if required
     call field_file_write(myrank, nprocs, theta_sub)
-    
+    if(myrank==0) write(*,*) '[Main] Solutions has been written to files! '
+   
     ! Deallocate variables and clean module variables
     deallocate(theta_sub)
     call mpi_subdomain_clean()
     call mpi_topology_clean()
+    if(myrank==0) write(*,*) '[Main] The main simulation finished! '
 
     call MPI_Finalize(ierr)
 end program main

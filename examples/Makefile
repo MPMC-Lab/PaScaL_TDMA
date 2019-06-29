@@ -5,9 +5,9 @@ EXE = a.out
 INC = ../include
 LIB = ../lib -lpascal_tdma
 
-global = module_global.o
-topology = module_mpi_topology.o 
-subdomain = module_mpi_subdomain.o
+global = global.o
+topology = mpi_topology.o 
+subdomain = mpi_subdomain.o
 THETA = solve_theta_plan_single.o solve_theta_plan_many.o
 main = main.o
 

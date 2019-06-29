@@ -6,7 +6,7 @@ OBJDIR = ./obj
 
 TDMAS = $(OBJDIR)/tdmas.o
 RANGE = $(OBJDIR)/para_range.o
-PTDMA  = $(OBJDIR)/module_stdma.o
+PTDMA  = $(OBJDIR)/pascal_tdma.o
 
 OBJS   = $(TDMAS) $(RANGE) $(PTDMA)
 

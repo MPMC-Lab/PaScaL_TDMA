@@ -22,7 +22,7 @@
 !>                  The remaining unknows are updated using the modified tridiagonal systems
 !>                  with the solutions obtained in Step 3 and Step 4.
 !>                  
-!>              Step 1 and Step 5 are similar to the method proposed by Laszlo, Gilles and Appleyard(2016)
+!>              Step 1 and Step 5 are similar to the method proposed by Laszlo, Gilles, and Appleyard(2016)
 !>              which used the parallel cyclic reduction (PCR) to build and solve the reduced tridiagonal systems.
 !>              Instead of using the PCR, we develop an all-to-all communication scheme using a MPI_Ialltoall
 !>              function after the modified Thomas algorithm is execued. The number of coefficients for
