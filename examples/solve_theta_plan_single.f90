@@ -19,10 +19,10 @@
 !======================================================================================================================
 
 !>
-!> @brief       An example solver for a single tridiagonal system of equations using PaScaL_TDMA
+!> @brief       An example solver for a single tridiagonal system of equations using PaScaL_TDMA.
 !> @details     This subroutine is for a single tridiagonal system of equations.
 !>              It solves the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA solver.
-!>              Plans of PaScaL_TDMA for a single tridiagonal system of equations are created and
+!>              PaScaL_TDMA plans are created for a single tridiagonal system of equations and
 !>              a single tridiagonal systems is solved line-by-line.
 !> @param       theta       Main 3-D variable to be solved
 !>
@@ -89,17 +89,17 @@ subroutine solve_theta_plan_single(theta)
                 ebc_up = 0.5d0*Ct/dy/dmy_sub(jp)*thetaBC4_sub(i,k)
                 ebc = dble(1. - jem)*ebc_down + dble(1. - jep)*ebc_up
 
-                ! Diffusion term from incremental notation in next time step: X-direction
+                ! Diffusion term from incremental notation in next time step: x-direction
                 eAPI = -0.5d0*Ct/dx/dmx_sub(ip)
                 eAMI = -0.5d0*Ct/dx/dmx_sub(i )
                 eACI =  0.5d0*Ct/dx*( 1.d0/dmx_sub(ip) + 1.d0/dmx_sub(i) )
 
-                ! Diffusion term from incremental notation in next time step: Z-direction
+                ! Diffusion term from incremental notation in next time step: z-direction
                 eAPK = -0.5d0*Ct/dz/dmz_sub(kp)
                 eAMK = -0.5d0*Ct/dz/dmz_sub(k )
                 eACK =  0.5d0*Ct/dz*( 1.d0/dmz_sub(kp) + 1.d0/dmz_sub(k) )
 
-                ! Diffusion term from incremental notation in next time step: Y-direction
+                ! Diffusion term from incremental notation in next time step: y-direction
                 eAPJ = -0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) )*dble(jep)
                 eAMJ = -0.5d0*Ct/dy*( 1.d0/dmy_sub(j ) )*dble(jem)
                 eACJ =  0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) + 1.d0/dmy_sub(j) )
@@ -115,13 +115,13 @@ subroutine solve_theta_plan_single(theta)
         enddo
     enddo
 
-    ! Solve in z-direction
+    ! Solve in the z-direction.
     allocate( ap_1d(1:nz_sub-1), am_1d(1:nz_sub-1), ac_1d(1:nz_sub-1), ad_1d(1:nz_sub-1) )
 
-    ! Create a PaScaL_TDMA plan for a single tridiagonal system
+    ! Create a PaScaL_TDMA plan for a single tridiagonal system.
     call PaScaL_TDMA_plan_single_create(pz_single, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm, 0)
 
-    ! Build coefficient matrix for a single tridiagonal system
+    ! Build a coefficient matrix for a single tridiagonal system.
     do j = 1, ny_sub-1
         do i = 1, nx_sub-1
             do k = 1, nz_sub-1
@@ -133,23 +133,23 @@ subroutine solve_theta_plan_single(theta)
                 ad_1d(k) = rhs(i,j,k)*dt
 
             enddo
-            ! Solve a single tridiagonal system of equations under the defined plan with periodic boundary condition
+            ! Solve a single tridiagonal system of equations under the defined plan with periodic boundary conditions.
             call PaScaL_TDMA_single_solve_cycle(pz_single, am_1d, ac_1d, ap_1d, ad_1d, nz_sub-1)
-            ! Return the solution to rhs line-by-line
+            ! Return the solution to the r.h.s. line-by-line.
             rhs(i,j,1:nz_sub-1)=ad_1d(1:nz_sub-1)
         enddo
     enddo
 
-    ! Destroy a PaScaL_TDMA plan for a single tridiagonal system
+    ! Destroy the PaScaL_TDMA plan for a single tridiagonal system.
     call PaScaL_TDMA_plan_single_destroy(pz_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
-    ! Solve in y-direction
+    ! Solve in the y-direction.
     allocate( ap_1d(1:ny_sub-1), am_1d(1:ny_sub-1), ac_1d(1:ny_sub-1), ad_1d(1:ny_sub-1) )
-    ! Create a PaScaL_TDMA plan for a single tridiagonal system
+    ! Create a PaScaL_TDMA plan for a single tridiagonal system.
     call PaScaL_TDMA_plan_single_create(py_single, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm, 0)
 
-    ! Build coefficient matrix for a single tridiagonal system
+    ! Build a coefficient matrix for a single tridiagonal system.
     do k = 1, nz_sub-1
         do i = 1, nx_sub-1
             do j = 1, ny_sub-1
@@ -163,22 +163,22 @@ subroutine solve_theta_plan_single(theta)
                 ac_1d(j) =  0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) + 1.d0/dmy_sub(j) )*dt + 1.d0
                 ad_1d(j) = rhs(i,j,k)
             end do
-            ! Solve a single tridiagonal system of equations under the defined plan
+            ! Solve a single tridiagonal system of equations under the defined plan.
             call PaScaL_TDMA_single_solve(py_single, am_1d, ac_1d, ap_1d, ad_1d, ny_sub-1)
-            ! Return the solution to rhs line-by-line
+            ! Return the solution to r.h.s. line-by-line.
             rhs(i,1:ny_sub-1,k)=ad_1d(1:ny_sub-1)
         end do
     end do
-    ! Destroy a PaScaL_TDMA plan for a single tridiagonal system
+    ! Destroy the PaScaL_TDMA plan for a single tridiagonal system.
     call PaScaL_TDMA_plan_single_destroy(py_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
-    ! Solve in x-direction
+    ! Solve in the x-direction.
     allocate( ap_1d(1:nx_sub-1), am_1d(1:nx_sub-1), ac_1d(1:nx_sub-1), ad_1d(1:nx_sub-1) )
-    ! Create a PaScaL_TDMA plan for a single tridiagonal system
+    ! Create a PaScaL_TDMA plan for a single tridiagonal system.
     call PaScaL_TDMA_plan_single_create(px_single, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm, 0)
 
-    ! Build coefficient matrix for a single tridiagonal system
+    ! Build a coefficient matrix for a single tridiagonal system.
     do k = 1, nz_sub-1
         do j = 1, ny_sub-1
             do i = 1, nx_sub-1
@@ -190,19 +190,19 @@ subroutine solve_theta_plan_single(theta)
                 ac_1d(i) =  0.5d0*Ct/dx*( 1.d0/dmx_sub(ip) + 1.d0/dmx_sub(i) )*dt + 1.d0
                 ad_1d(i) = rhs(i,j,k)
             enddo
-            ! Solve a single tridiagonal system of equations under the defined plan with periodic boundary condition
+            ! Solve the single tridiagonal system of equations under the defined plan with periodic boundary conditions.
             call PaScaL_TDMA_single_solve_cycle(px_single, am_1d, ac_1d, ap_1d, ad_1d, nx_sub-1)
-            ! Return the solution to theta line-by-line
+            ! Return the solution to theta line-by-line.
             theta(1:nx_sub-1,j,k) = theta(1:nx_sub-1,j,k) + ad_1d(1:nx_sub-1)
         enddo
     enddo
-    ! Destroy a PaScaL_TDMA plan for a single tridiagonal system
+    ! Destroy the PaScaL_TDMA plan for a single tridiagonal system.
     call PaScaL_TDMA_plan_single_destroy(px_single)
     deallocate( ap_1d, am_1d, ac_1d, ad_1d )
 
     deallocate( rhs)
 
-    ! Update ghostcells from solution
+    ! Update ghostcells from the solutions.
     call mpi_subdomain_ghostcell_update(theta, comm_1d_x, comm_1d_y, comm_1d_z)
 
 end subroutine solve_theta_plan_single

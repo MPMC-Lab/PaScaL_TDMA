@@ -1,3 +1,4 @@
+# Compiler and complilation flag are included in Makefile.inc
 include Makefile.inc
 
 lib:

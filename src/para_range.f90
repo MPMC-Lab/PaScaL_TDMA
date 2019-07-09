@@ -1,6 +1,6 @@
 !======================================================================================================================
 !> @file        para_range.f90
-!> @brief       Para_range function which assign the computing range to each MPI process.
+!> @brief       The para_range function assigns the computing range to each MPI process.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
@@ -15,7 +15,7 @@
 !>              This project is release under the terms of the MIT License (see LICENSE in )
 !======================================================================================================================
 
-!> @brief       Compute the indices of assigned range for each MPI process 
+!> @brief       Compute the indices of the assigned range for each MPI process .
 !> @param       n1      First index of total range
 !> @param       n2      Last index of total range
 !> @param       nprocs  Number of MPI process

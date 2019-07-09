@@ -11,5 +11,5 @@ npz = 5
 /
 
 &time
-Tmax = 2
+Tmax = 10
 /

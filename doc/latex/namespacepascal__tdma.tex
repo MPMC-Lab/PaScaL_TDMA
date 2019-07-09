@@ -18,7 +18,7 @@ type \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create}} (plan, myrank, nprocs, mpi\+\_\+world, gather\+\_\+rank)
 \begin{DoxyCompactList}\small\item\em Create a plan for a single tridiagonal system of equations. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy}} (plan)
-\begin{DoxyCompactList}\small\item\em Deallocate the allocated arrays in the defined plan\+\_\+single. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Deallocate the allocated arrays in the defined plan\+\_\+single . \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create}} (plan, n\+\_\+sys, myrank, nprocs, mpi\+\_\+world)
 \begin{DoxyCompactList}\small\item\em Create a plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy}} (plan)
@@ -36,7 +36,7 @@ subroutine, public \mbox{\hyperlink{namespacepascal__tdma_acbaed65e67ecbfd92a8f1
 \subsection{Detailed Description}
 Module for Pa\+Sca\+L-\/\+T\+D\+MA library. 
 
-It contains plans for triagonal systems of equations and subroutines for solving them using the defined plans. The operation of the library consists of the following three phases. (1) Create a data structure called a plan which has information for communication and reduced systems. (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5 (3) Destroy the created plan 
+It contains plans for tridiagonal systems of equations and subroutines for solving them using the defined plans. The operation of the library includes the following three phases\+: (1) Create a data structure called a plan, which has the information for communication and reduced systems. (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5 (3) Destroy the created plan 
 
 \subsection{Function/\+Subroutine Documentation}
 \mbox{\Hypertarget{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}\label{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}} 
@@ -63,7 +63,7 @@ Solve many tridiagonal systems of equations.
 \hline
 {\em n\+\_\+sys} & Number of tridiagonal systems per process \\
 \hline
-{\em n\+\_\+row} & Number of rows in each process, dimension of a tridiagonal matrix N divided by nprocs \\
+{\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
 
@@ -110,7 +110,7 @@ Solve many cyclic tridiagonal systems of equations.
 \hline
 {\em n\+\_\+sys} & Number of tridiagonal systems per process \\
 \hline
-{\em n\+\_\+row} & Number of rows in each process, dimension of a tridiagonal matrix N divided by nprocs \\
+{\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
 
@@ -223,7 +223,7 @@ Create a plan for a single tridiagonal system of equations.
 \hline
 {\em mpi\+\_\+world} & Communicator for M\+P\+I\+\_\+\+Gather and M\+P\+I\+\_\+\+Scatter of a reduced system \\
 \hline
-{\em gather\+\_\+rank} & Target rank where all coeffcients are gathered to \\
+{\em gather\+\_\+rank} & Target rank where all coefficients are gathered to \\
 \hline
 \end{DoxyParams}
 
@@ -246,7 +246,7 @@ Here is the caller graph for this function\+:
 
 
 
-Deallocate the allocated arrays in the defined plan\+\_\+single. 
+Deallocate the allocated arrays in the defined plan\+\_\+single . 
 
 
 \begin{DoxyParams}{Parameters}
@@ -287,7 +287,7 @@ Solve a single tridiagonal system of equation.
 \hline
 {\em D} & Coefficients in right-\/hand side terms \\
 \hline
-{\em n\+\_\+row} & Number of rows in each process, dimension of a tridiagonal matrix N divided by nprocs \\
+{\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
 
@@ -332,7 +332,7 @@ Solve a single cyclic tridiagonal system of equations.
 \hline
 {\em D} & Coefficients in right-\/hand side terms \\
 \hline
-{\em n\+\_\+row} & Number of rows in each process, dimension of a tridiagonal matrix N divided by nprocs \\
+{\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
 

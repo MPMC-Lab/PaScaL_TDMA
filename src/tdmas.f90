@@ -1,6 +1,6 @@
 !======================================================================================================================
 !> @file        tdmas.f90
-!> @brief       Tri-diagonal matrix (TDM) solvers using Thomas algorithm.
+!> @brief       Tridiagonal matrix (TDM) solvers using the Thomas algorithm.
 !> @details     A single TDM solver and many TDM solver with non-cyclic and cyclic conditions.
 !> @author      
 !>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
@@ -17,11 +17,11 @@
 !======================================================================================================================
 
 !>
-!> @brief       Solve a single tridiagonal system of equations using Thomas algorithm
+!> @brief       Solve a single tridiagonal system of equations using the Thomas algorithm.
 !> @param       a       Coefficients in lower diagonal elements
 !> @param       b       Coefficients in diagonal elements
 !> @param       c       Coefficients in upper diagonal elements
-!> @param       d       Coefficients in right-hand side terms
+!> @param       d       Coefficients in the right-hand side terms
 !> @param       n1      Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs
 !>
 subroutine tdma_single(a, b, c, d, n1)
@@ -50,11 +50,11 @@ subroutine tdma_single(a, b, c, d, n1)
 end subroutine tdma_single
 
 !>
-!> @brief       Solve a single cyclic tridiagonal system of equations using Thomas algorithm
+!> @brief       Solve a single cyclic tridiagonal system of equations using the Thomas algorithm.
 !> @param       a       Coefficients in lower diagonal elements
 !> @param       b       Coefficients in diagonal elements
 !> @param       c       Coefficients in upper diagonal elements
-!> @param       d       Coefficients in right-hand side terms
+!> @param       d       Coefficients in the right-hand side terms
 !> @param       n1      Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs
 !>
 subroutine tdma_cycl_single(a, b, c, d, n1)
@@ -100,15 +100,15 @@ subroutine tdma_cycl_single(a, b, c, d, n1)
 end subroutine tdma_cycl_single
 
 !>
-!> @brief       Solve many tridiagonal systems of equations using Thomas algorithm
-!>              First index is to indicate a number of independent many tridiagonal systems to use vectorization.
-!>              Second index is to indicate a row number in a tridiagonal system .
+!> @brief       Solve many tridiagonal systems of equations using the Thomas algorithm.
+!>              First index indicates the number of independent many tridiagonal systems to use vectorization.
+!>              Second index indicates the row number in the tridiagonal system .
 !> @param       a       Coefficient array in lower diagonal elements
 !> @param       b       Coefficient array in diagonal elements
 !> @param       c       Coefficient array in upper diagonal elements
-!> @param       d       Coefficient array in right-hand side terms
+!> @param       d       Coefficient array in the right-hand side terms
 !> @param       n1      Number of tridiagonal systems per process
-!> @param       n2      Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs
+!> @param       n2      Number of rows in each process, size of the tridiagonal matrix N divided by nprocs
 !>
 subroutine tdma_many(a, b, c, d, n1, n2)
 
@@ -146,15 +146,15 @@ subroutine tdma_many(a, b, c, d, n1, n2)
 end subroutine tdma_many
 
 !>
-!> @brief       Solve many cyclic tridiagonal systems of equations using Thomas algorithm
-!>              First index is to indicate a number of independent many tridiagonal systems to use vectorization.
-!>              Second index is to indicate a row number in a tridiagonal system.
+!> @brief       Solve many cyclic tridiagonal systems of equations using the Thomas algorithm.
+!>              First index indicates the number of independent many tridiagonal systems to use vectorization.
+!>              Second index indicates the row number in the tridiagonal system.
 !> @param       a       Coefficient array in lower diagonal elements
 !> @param       b       Coefficient array in diagonal elements
 !> @param       c       Coefficient array in upper diagonal elements
-!> @param       d       Coefficient array in right-hand side terms
+!> @param       d       Coefficient array in the right-hand side terms
 !> @param       n1      Number of tridiagonal systems per process
-!> @param       n2      Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs
+!> @param       n2      Number of rows in each process, size of the tridiagonal matrix N divided by nprocs
 !>
 subroutine tdma_cycl_many(a, b, c, d, n1, n2)
 

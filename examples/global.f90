@@ -1,7 +1,7 @@
 !======================================================================================================================
 !> @file        global.f90
 !> @brief       This file contains a module of global parameters for the example problem of PaScaL_TDMA.
-!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!> @details     The target example problem is the three-dimensional(3D) time-dependent heat conduction problem 
 !>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
 !>              and horizontally periodic boundaries.
 !> @author      
@@ -19,8 +19,8 @@
 !======================================================================================================================
 
 !>
-!> @brief       Module for global parameters
-!> @details     This global module has simulation parameters and a subroutine to initialize parameters. 
+!> @brief       Module for global parameters.
+!> @details     This global module has simulation parameters and a subroutine to initialize the parameters. 
 !>
 module global
     implicit none
@@ -33,7 +33,7 @@ module global
     ! Iteration steps
     integer :: Tmax             !< Maximum number of iteration steps
     
-    ! Computational size for physical domain and time discretization
+    ! Computational size for the physical domain and time discretization
     !> @{ Grid numbers in each direction
     integer :: nx,ny,nz 
     !> @}
@@ -55,7 +55,7 @@ module global
     double precision :: dx, dy, dz
     !> @}
     
-    ! Boundary conditions of hot and cold walls and related parameters
+    ! Boundary conditions of the hot and cold walls and related parameters
     double precision :: theta_cold              !< Boundary temperature of cold wall
     double precision :: theta_hot               !< Boundary temperature of hot wall
     double precision :: alphaG                  !< Thermal expansion coefficient x gravitational acceleration
@@ -64,7 +64,7 @@ module global
 
     contains 
     !>
-    !> @brief       Assign global parameters
+    !> @brief       Assign global parameters.
     !> @param       np_dim      Number of MPI processes in 3D topology
     !>
     subroutine global_inputpara(np_dim)
@@ -91,7 +91,7 @@ module global
         ! Physical parameters
         Pr = 5.0d0; Ra = 2.d+2
 
-        ! Computational size for physical domain and time discretization
+        ! Computational size for the physical domain and time discretization
         nx = nx+1; ny = ny+1; nz = nz+1
         nxm = nx-1; nym = ny-1; nzm = nz-1
         nxp = nx+1; nyp = ny+1; nzp = nz+1
@@ -101,7 +101,7 @@ module global
         ! Physical size of the computational domain
         lx = 1.0d0; ly = 1.0d0; lz = 1.0d0
 
-        ! Boundary conditions of hot and cold walls and related parameters
+        ! Boundary conditions of the hot and cold walls and related parameters
         theta_cold = -1.d0; theta_hot = 2.d0 + theta_cold
         alphaG = 1.d0; nu = 1.d0/sqrt(Ra/(alphaG*Pr*ly**3.*(theta_hot-theta_cold)))
         Ct = nu/Pr

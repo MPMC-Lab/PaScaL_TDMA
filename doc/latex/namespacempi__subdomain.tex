@@ -2,28 +2,28 @@
 \label{namespacempi__subdomain}\index{mpi\_subdomain@{mpi\_subdomain}}
 
 
-Module for building subdomains divided from the physical domain.  
+Module for building subdomains from the physical domain.  
 
 
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311}{mpi\+\_\+subdomain\+\_\+make}} (nprocs\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z, myrank\+\_\+in\+\_\+z)
-\begin{DoxyCompactList}\small\item\em Prepare subdomain and determine size of subdomain. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Prepare the subdomain and determine the size of the subdomain. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe}{mpi\+\_\+subdomain\+\_\+clean}}
 \begin{DoxyCompactList}\small\item\em Deallocate subdomain variables. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d}{mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype}}
-\begin{DoxyCompactList}\small\item\em Build derived datatypes for subdomain communication using ghostcell. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Build derived datatypes for subdomain communication using ghostcells. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62}{mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update}} (theta\+\_\+sub, comm\+\_\+1d\+\_\+x, comm\+\_\+1d\+\_\+y, comm\+\_\+1d\+\_\+z)
 \begin{DoxyCompactList}\small\item\em Update the values of boundary ghostcells through communication in all directions. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe}{mpi\+\_\+subdomain\+\_\+indices}} (myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
-\begin{DoxyCompactList}\small\item\em Determine whether next grids are empty(0) or not(1). Only in y-\/direction. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Determine whether the next grids are empty(0) or not(1) only in the y-\/direction. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a612331eead74041f174ece9a572c7427}{mpi\+\_\+subdomain\+\_\+mesh}} (myrank\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+z, nprocs\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z)
 \begin{DoxyCompactList}\small\item\em Assign grid coordinates and lengths of subdomains. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4}{mpi\+\_\+subdomain\+\_\+initialization}} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
-\begin{DoxyCompactList}\small\item\em Initialize the values of main variable in a subdomain. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Initialize the values of the main variable in a subdomain. \end{DoxyCompactList}\item 
 subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a55659431068678c08d21847338390ea8}{mpi\+\_\+subdomain\+\_\+boundary}} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
-\begin{DoxyCompactList}\small\item\em Assign the values of boundary grids in subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Assign the values of boundary grids in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
@@ -41,47 +41,47 @@ integer, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subd
 \begin{DoxyCompactItemize}
 \item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid numbers in subdomain. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid numbers in the subdomain. \end{DoxyCompactList}\item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid numbers in subdomain. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid numbers in the subdomain. \end{DoxyCompactList}\item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid numbers in subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Grid numbers in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_ab8925faaa6f45326c1d11efa37e03566}{ista}}
-\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_abbd7d35107c53bcfd2b2b52771f4aa67}{iend}}
-\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_ac85bfba1caf77f9c3c0047fe9450fee6}{jsta}}
-\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_a06433a0d1a081c51202a0010c21c9d36}{jend}}
-\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_acd499eb1d07159aa9f5c878f9519b00f}{ksta}}
-\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
 integer, public \mbox{\hyperlink{namespacempi__subdomain_af9934313b1ccbcb09f30916df3326076}{kend}}
-\begin{DoxyCompactList}\small\item\em Grid indices of assigned range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
 double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_a978554e1520c79471ef3793ed1872b37}{x\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Coordinates of grid points in subdomains. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Coordinates of grid points in the subdomain. \end{DoxyCompactList}\item 
 double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_a58b09abee5f1002de7b20b1b86f5c821}{y\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Coordinates of grid points in subdomains. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Coordinates of grid points in the subdomain. \end{DoxyCompactList}\item 
 double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_aab6d78e49471a9a3db5ad9df4c3d4041}{z\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Coordinates of grid points in subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Coordinates of grid points in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
 double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_a56af1740899dc9df6868e5e71a0884a5}{dmx\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid lengths in subdomains. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid lengths in the subdomain. \end{DoxyCompactList}\item 
 double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_ae44efbff9669bfad03a79ab41b5e8ace}{dmy\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid lengths in subdomains. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Grid lengths in the subdomain. \end{DoxyCompactList}\item 
 double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_afb6341d7362587d6fd0a06fe78ba4e3f}{dmz\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid lengths in subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Grid lengths in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
@@ -122,7 +122,7 @@ integer \mbox{\hyperlink{namespacempi__subdomain_a4da19838e8bc3934ad5c24db424bec
 
 
 \subsection{Detailed Description}
-Module for building subdomains divided from the physical domain. 
+Module for building subdomains from the physical domain. 
 
 This module has simulation parameters for subdomains and communication between the subdomains. 
 
@@ -135,7 +135,7 @@ This module has simulation parameters for subdomains and communication between t
 
 
 
-Assign the values of boundary grids in subdomain. 
+Assign the values of boundary grids in the subdomain. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -194,11 +194,11 @@ Update the values of boundary ghostcells through communication in all directions
 \begin{DoxyParams}{Parameters}
 {\em theta\+\_\+sub} & Variables to be updated \\
 \hline
-{\em comm\+\_\+1d\+\_\+x} & Subcommunicator in x-\/direction \\
+{\em comm\+\_\+1d\+\_\+x} & Subcommunicator in the x-\/direction \\
 \hline
-{\em comm\+\_\+1d\+\_\+y} & Subcommunicator in y-\/direction \\
+{\em comm\+\_\+1d\+\_\+y} & Subcommunicator in the y-\/direction \\
 \hline
-{\em comm\+\_\+1d\+\_\+z} & Subcommunicator in z-\/direction \\
+{\em comm\+\_\+1d\+\_\+z} & Subcommunicator in the z-\/direction \\
 \hline
 \end{DoxyParams}
 
@@ -221,7 +221,7 @@ Here is the caller graph for this function\+:
 
 
 
-Determine whether next grids are empty(0) or not(1). Only in y-\/direction. 
+Determine whether the next grids are empty(0) or not(1) only in the y-\/direction. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -250,7 +250,7 @@ Here is the caller graph for this function\+:
 
 
 
-Initialize the values of main variable in a subdomain. 
+Initialize the values of the main variable in a subdomain. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -281,7 +281,7 @@ Here is the caller graph for this function\+:
 
 
 
-Prepare subdomain and determine size of subdomain. 
+Prepare the subdomain and determine the size of the subdomain. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -326,7 +326,7 @@ Here is the caller graph for this function\+:
 
 
 
-Build derived datatypes for subdomain communication using ghostcell. 
+Build derived datatypes for subdomain communication using ghostcells. 
 
 
 
@@ -556,7 +556,7 @@ Definition at line 54 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid lengths in subdomains. 
+Grid lengths in the subdomain. 
 
 
 
@@ -570,7 +570,7 @@ Definition at line 45 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid lengths in subdomains. 
+Grid lengths in the subdomain. 
 
 
 
@@ -584,7 +584,7 @@ Definition at line 45 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid lengths in subdomains. 
+Grid lengths in the subdomain. 
 
 
 
@@ -598,7 +598,7 @@ Definition at line 45 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid indices of assigned range. 
+Grid indices of the assigned range. 
 
 
 
@@ -622,7 +622,7 @@ Definition at line 33 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid indices of assigned range. 
+Grid indices of the assigned range. 
 
 
 
@@ -636,7 +636,7 @@ Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid indices of assigned range. 
+Grid indices of the assigned range. 
 
 
 
@@ -678,7 +678,7 @@ Definition at line 51 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid indices of assigned range. 
+Grid indices of the assigned range. 
 
 
 
@@ -692,7 +692,7 @@ Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid indices of assigned range. 
+Grid indices of the assigned range. 
 
 
 
@@ -706,7 +706,7 @@ Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid indices of assigned range. 
+Grid indices of the assigned range. 
 
 
 
@@ -720,7 +720,7 @@ Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid numbers in subdomain. 
+Grid numbers in the subdomain. 
 
 
 
@@ -734,7 +734,7 @@ Definition at line 35 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid numbers in subdomain. 
+Grid numbers in the subdomain. 
 
 
 
@@ -748,7 +748,7 @@ Definition at line 35 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Grid numbers in subdomain. 
+Grid numbers in the subdomain. 
 
 
 
@@ -790,7 +790,7 @@ Definition at line 48 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Coordinates of grid points in subdomains. 
+Coordinates of grid points in the subdomain. 
 
 
 
@@ -804,7 +804,7 @@ Definition at line 42 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Coordinates of grid points in subdomains. 
+Coordinates of grid points in the subdomain. 
 
 
 
@@ -818,7 +818,7 @@ Definition at line 42 of file mpi\+\_\+subdomain.\+f90.
 
 
 
-Coordinates of grid points in subdomains. 
+Coordinates of grid points in the subdomain. 
 
 
 

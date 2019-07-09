@@ -11,7 +11,7 @@ Execution plan for many tridiagonal systems of equations.
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many_acb7e645e37c791564905c6e2808db0c6}{ptdma\+\_\+world}}
 \begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many_a22b42947ab742f83aad3bbeb3a42a0f6}{n\+\_\+sys\+\_\+rt}}
-\begin{DoxyCompactList}\small\item\em Number of tridiagonal systems to solve in each process after transpose. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Number of tridiagonal systems that need to be solved in each process after transpose. \end{DoxyCompactList}\item 
 integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many_ad94248e2aa0653f151f0575d62d6fff7}{n\+\_\+row\+\_\+rt}}
 \begin{DoxyCompactList}\small\item\em Number of rows of a reduced tridiagonal systems after transpose. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \textbf{ }\par
@@ -63,7 +63,7 @@ double precision, dimension(\+:,\+:), allocatable \mbox{\hyperlink{structpascal_
 \subsection{Detailed Description}
 Execution plan for many tridiagonal systems of equations. 
 
-It uses M\+P\+I\+\_\+\+Ialltoallw function to distribute the modified tridiagonal systems to M\+PI processes and build the reduced tridiagonal systems of equations. Derived datatypes are defined and used for elimination of data packing and unpacking cost. 
+It uses M\+P\+I\+\_\+\+Ialltoallw function to distribute the modified tridiagonal systems to M\+PI processes and build the reduced tridiagonal systems of equations. Derived datatypes are defined and used to eliminate the cost of data packing and unpacking. 
 
 Definition at line 68 of file pascal\+\_\+tdma.\+f90.
 
@@ -288,7 +288,7 @@ Definition at line 72 of file pascal\+\_\+tdma.\+f90.
 
 
 
-Number of tridiagonal systems to solve in each process after transpose. 
+Number of tridiagonal systems that need to be solved in each process after transpose. 
 
 
 
@@ -312,4 +312,4 @@ Definition at line 70 of file pascal\+\_\+tdma.\+f90.
 
 The documentation for this type was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/src/\mbox{\hyperlink{pascal__tdma_8f90}{pascal\+\_\+tdma.\+f90}}\end{DoxyCompactItemize}
+/\+Users/jihoon/\+Documents/develop/pascal\+\_\+tdma/src/\mbox{\hyperlink{pascal__tdma_8f90}{pascal\+\_\+tdma.\+f90}}\end{DoxyCompactItemize}

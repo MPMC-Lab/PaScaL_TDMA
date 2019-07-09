@@ -1,4 +1,4 @@
-# Main compiler with MPI
+# Main compiler with MPI. Use mpiifort for intel MPI.
 FC = mpifort
 
 # Complie flag

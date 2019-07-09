@@ -1,8 +1,8 @@
-\hypertarget{main_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/\+S\+T\+D\+M\+A/examples/main.f90 File Reference}
-\label{main_8f90}\index{/Users/jihoon/Documents/develop/STDMA/examples/main.f90@{/Users/jihoon/Documents/develop/STDMA/examples/main.f90}}
+\hypertarget{main_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/pascal\+\_\+tdma/examples/main.f90 File Reference}
+\label{main_8f90}\index{/Users/jihoon/Documents/develop/pascal\_tdma/examples/main.f90@{/Users/jihoon/Documents/develop/pascal\_tdma/examples/main.f90}}
 
 
-This file contains the main subroutines for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA.  
+This file contains the main subroutines for an example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA.  
 
 
 \subsection*{Functions/\+Subroutines}
@@ -11,13 +11,13 @@ This file contains the main subroutines for the example problem of Pa\+Sca\+L\+\
 program \mbox{\hyperlink{main_8f90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}
 \begin{DoxyCompactList}\small\item\em Main execution program for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. \end{DoxyCompactList}\item 
 subroutine \mbox{\hyperlink{main_8f90_af0a1310807f21ee1a2c0fdf14c58b63b}{field\+\_\+file\+\_\+write}} (myrank, nprocs, theta\+\_\+sub)
-\begin{DoxyCompactList}\small\item\em Write the values of field variable in a output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Write the values of the field variable in an output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-This file contains the main subroutines for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
+This file contains the main subroutines for an example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
 
-The target example problem is the three-\/dimensional time-\/dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries. \begin{DoxyAuthor}{Author}
+The target example problem is a three-\/dimensional(3D) time-\/dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries. \begin{DoxyAuthor}{Author}
 
 \end{DoxyAuthor}
 
@@ -50,9 +50,11 @@ This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\
 
 
 
-Write the values of field variable in a output file. 
+Write the values of the field variable in an output file. 
 
-It writes the values of field variables with two methods, single task IO and post assembly IO. In single task I/O, each process writes the values in its own file. In post assembly IO, each process send data to a master process and the master process write the obtained data in a single file. 
+It writes the values of the field variables using two methods; single task IO and post assembly IO. In the single task IO, each process writes the values in its own file. In the post assembly IO,
+
+each process send data to a master process, which writes the obtained data in a single file. 
 \begin{DoxyParams}{Parameters}
 {\em myrank} & Rank ID in M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD \\
 \hline

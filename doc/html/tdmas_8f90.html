@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: /Users/jihoon/Documents/develop/STDMA/src/tdmas.f90 File Reference</title>
+<title>My Project: /Users/jihoon/Documents/develop/pascal_tdma/src/tdmas.f90 File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -61,7 +61,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_f396504afdc959660871b003fa10164d.html">Documents</a></li><li class="navelem"><a class="el" href="dir_4d30140f9922a921f935e93bb35111fb.html">develop</a></li><li class="navelem"><a class="el" href="dir_4e8059b3e3ce4038b6f37c7a7e79fb1b.html">STDMA</a></li><li class="navelem"><a class="el" href="dir_7ea5b2f35db9abcfc292b70d8bef2e64.html">src</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_f396504afdc959660871b003fa10164d.html">Documents</a></li><li class="navelem"><a class="el" href="dir_4d30140f9922a921f935e93bb35111fb.html">develop</a></li><li class="navelem"><a class="el" href="dir_81e1d413a76d72fea0691456f7da03f8.html">pascal_tdma</a></li><li class="navelem"><a class="el" href="dir_8601ef6f8199d62bc9eba9355f83d2c7.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -72,7 +72,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Tri-diagonal matrix (TDM) solvers using Thomas algorithm.  
+<p>Tridiagonal matrix (TDM) solvers using the Thomas algorithm.  
 <a href="#details">More...</a></p>
 
 <p><a href="tdmas_8f90_source.html">Go to the source code of this file.</a></p>
@@ -80,20 +80,20 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a4a6130fff49607012fefacc8640424a7"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tdmas_8f90.html#a4a6130fff49607012fefacc8640424a7">tdma_single</a> (a, b, c, d, n1)</td></tr>
-<tr class="memdesc:a4a6130fff49607012fefacc8640424a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a single tridiagonal system of equations using Thomas algorithm.  <a href="#a4a6130fff49607012fefacc8640424a7">More...</a><br /></td></tr>
+<tr class="memdesc:a4a6130fff49607012fefacc8640424a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a single tridiagonal system of equations using the Thomas algorithm.  <a href="#a4a6130fff49607012fefacc8640424a7">More...</a><br /></td></tr>
 <tr class="separator:a4a6130fff49607012fefacc8640424a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cb1f95e9c608085c5bb19baff639d9e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tdmas_8f90.html#a4cb1f95e9c608085c5bb19baff639d9e">tdma_cycl_single</a> (a, b, c, d, n1)</td></tr>
-<tr class="memdesc:a4cb1f95e9c608085c5bb19baff639d9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a single cyclic tridiagonal system of equations using Thomas algorithm.  <a href="#a4cb1f95e9c608085c5bb19baff639d9e">More...</a><br /></td></tr>
+<tr class="memdesc:a4cb1f95e9c608085c5bb19baff639d9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve a single cyclic tridiagonal system of equations using the Thomas algorithm.  <a href="#a4cb1f95e9c608085c5bb19baff639d9e">More...</a><br /></td></tr>
 <tr class="separator:a4cb1f95e9c608085c5bb19baff639d9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8cc761496e63e21ee8379d4fc077f05"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tdmas_8f90.html#ab8cc761496e63e21ee8379d4fc077f05">tdma_many</a> (a, b, c, d, n1, n2)</td></tr>
-<tr class="memdesc:ab8cc761496e63e21ee8379d4fc077f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve many tridiagonal systems of equations using Thomas algorithm First index is to indicate a number of independent many tridiagonal systems to use vectorization. Second index is to indicate a row number in a tridiagonal system .  <a href="#ab8cc761496e63e21ee8379d4fc077f05">More...</a><br /></td></tr>
+<tr class="memdesc:ab8cc761496e63e21ee8379d4fc077f05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve many tridiagonal systems of equations using the Thomas algorithm. First index indicates the number of independent many tridiagonal systems to use vectorization. Second index indicates the row number in the tridiagonal system .  <a href="#ab8cc761496e63e21ee8379d4fc077f05">More...</a><br /></td></tr>
 <tr class="separator:ab8cc761496e63e21ee8379d4fc077f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c50d548eaa4b5e9b96ccbf8f65cb12a"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="tdmas_8f90.html#a6c50d548eaa4b5e9b96ccbf8f65cb12a">tdma_cycl_many</a> (a, b, c, d, n1, n2)</td></tr>
-<tr class="memdesc:a6c50d548eaa4b5e9b96ccbf8f65cb12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve many cyclic tridiagonal systems of equations using Thomas algorithm First index is to indicate a number of independent many tridiagonal systems to use vectorization. Second index is to indicate a row number in a tridiagonal system.  <a href="#a6c50d548eaa4b5e9b96ccbf8f65cb12a">More...</a><br /></td></tr>
+<tr class="memdesc:a6c50d548eaa4b5e9b96ccbf8f65cb12a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Solve many cyclic tridiagonal systems of equations using the Thomas algorithm. First index indicates the number of independent many tridiagonal systems to use vectorization. Second index indicates the row number in the tridiagonal system.  <a href="#a6c50d548eaa4b5e9b96ccbf8f65cb12a">More...</a><br /></td></tr>
 <tr class="separator:a6c50d548eaa4b5e9b96ccbf8f65cb12a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Tri-diagonal matrix (TDM) solvers using Thomas algorithm. </p>
+<div class="textblock"><p>Tridiagonal matrix (TDM) solvers using the Thomas algorithm. </p>
 <p>A single TDM solver and many TDM solver with non-cyclic and cyclic conditions. </p><dl class="section author"><dt>Author</dt><dd></dd></dl>
 <ul>
 <li>Kiha Kim (<a href="#" onclick="location.href='mai'+'lto:'+'k-k'+'ih'+'a@y'+'on'+'sei'+'.a'+'c.k'+'r'; return false;">k-kih<span style="display: none;">.nosp@m.</span>a@yo<span style="display: none;">.nosp@m.</span>nsei.<span style="display: none;">.nosp@m.</span>ac.k<span style="display: none;">.nosp@m.</span>r</a>), Department of Computational Science &amp; Engineering, Yonsei University</li>
@@ -158,15 +158,15 @@ Functions/Subroutines</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Solve many cyclic tridiagonal systems of equations using Thomas algorithm First index is to indicate a number of independent many tridiagonal systems to use vectorization. Second index is to indicate a row number in a tridiagonal system. </p>
+<p>Solve many cyclic tridiagonal systems of equations using the Thomas algorithm. First index indicates the number of independent many tridiagonal systems to use vectorization. Second index indicates the row number in the tridiagonal system. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td>Coefficient array in lower diagonal elements </td></tr>
     <tr><td class="paramname">b</td><td>Coefficient array in diagonal elements </td></tr>
     <tr><td class="paramname">c</td><td>Coefficient array in upper diagonal elements </td></tr>
-    <tr><td class="paramname">d</td><td>Coefficient array in right-hand side terms </td></tr>
+    <tr><td class="paramname">d</td><td>Coefficient array in the right-hand side terms </td></tr>
     <tr><td class="paramname">n1</td><td>Number of tridiagonal systems per process </td></tr>
-    <tr><td class="paramname">n2</td><td>Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs </td></tr>
+    <tr><td class="paramname">n2</td><td>Number of rows in each process, size of the tridiagonal matrix N divided by nprocs </td></tr>
   </table>
   </dd>
 </dl>
@@ -177,7 +177,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a_icgraph.png" border="0" usemap="#tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a_icgraph" alt=""/></div>
 <map name="tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a_icgraph" id="tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a_icgraph">
-<area shape="rect"  title="Solve many cyclic tridiagonal systems of equations using Thomas algorithm First index is to indicate ..." alt="" coords="536,12,658,37"/>
+<area shape="rect"  title="Solve many cyclic tridiagonal systems of equations using the Thomas algorithm. First index indicates ..." alt="" coords="536,12,658,37"/>
 <area shape="rect"  href="namespacepascal__tdma.html#acbaed65e67ecbfd92a8f1d51d1b69fd5" title="Solve many cyclic tridiagonal systems of equations." alt="" coords="314,5,488,44"/>
 <area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
 <area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
@@ -230,13 +230,13 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Solve a single cyclic tridiagonal system of equations using Thomas algorithm. </p>
+<p>Solve a single cyclic tridiagonal system of equations using the Thomas algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td>Coefficients in lower diagonal elements </td></tr>
     <tr><td class="paramname">b</td><td>Coefficients in diagonal elements </td></tr>
     <tr><td class="paramname">c</td><td>Coefficients in upper diagonal elements </td></tr>
-    <tr><td class="paramname">d</td><td>Coefficients in right-hand side terms </td></tr>
+    <tr><td class="paramname">d</td><td>Coefficients in the right-hand side terms </td></tr>
     <tr><td class="paramname">n1</td><td>Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs </td></tr>
   </table>
   </dd>
@@ -248,7 +248,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e_icgraph.png" border="0" usemap="#tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e_icgraph" alt=""/></div>
 <map name="tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e_icgraph" id="tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e_icgraph">
-<area shape="rect"  title="Solve a single cyclic tridiagonal system of equations using Thomas algorithm." alt="" coords="443,12,566,37"/>
+<area shape="rect"  title="Solve a single cyclic tridiagonal system of equations using the Thomas algorithm." alt="" coords="443,12,566,37"/>
 <area shape="rect"  href="namespacepascal__tdma.html#ac8e377fa86c75126380f0196f6046043" title="Solve a single cyclic tridiagonal system of equations." alt="" coords="218,5,395,44"/>
 <area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
 </map>
@@ -306,15 +306,15 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Solve many tridiagonal systems of equations using Thomas algorithm First index is to indicate a number of independent many tridiagonal systems to use vectorization. Second index is to indicate a row number in a tridiagonal system . </p>
+<p>Solve many tridiagonal systems of equations using the Thomas algorithm. First index indicates the number of independent many tridiagonal systems to use vectorization. Second index indicates the row number in the tridiagonal system . </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td>Coefficient array in lower diagonal elements </td></tr>
     <tr><td class="paramname">b</td><td>Coefficient array in diagonal elements </td></tr>
     <tr><td class="paramname">c</td><td>Coefficient array in upper diagonal elements </td></tr>
-    <tr><td class="paramname">d</td><td>Coefficient array in right-hand side terms </td></tr>
+    <tr><td class="paramname">d</td><td>Coefficient array in the right-hand side terms </td></tr>
     <tr><td class="paramname">n1</td><td>Number of tridiagonal systems per process </td></tr>
-    <tr><td class="paramname">n2</td><td>Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs </td></tr>
+    <tr><td class="paramname">n2</td><td>Number of rows in each process, size of the tridiagonal matrix N divided by nprocs </td></tr>
   </table>
   </dd>
 </dl>
@@ -325,7 +325,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05_icgraph.png" border="0" usemap="#tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05_icgraph" alt=""/></div>
 <map name="tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05_icgraph" id="tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05_icgraph">
-<area shape="rect"  title="Solve many tridiagonal systems of equations using Thomas algorithm First index is to indicate a numbe..." alt="" coords="505,12,596,37"/>
+<area shape="rect"  title="Solve many tridiagonal systems of equations using the Thomas algorithm. First index indicates the num..." alt="" coords="505,12,596,37"/>
 <area shape="rect"  href="namespacepascal__tdma.html#afa0c78b8377f5fe1059907befda3c940" title="Solve many tridiagonal systems of equations." alt="" coords="314,5,457,44"/>
 <area shape="rect"  href="solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
 <area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
@@ -378,13 +378,13 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Solve a single tridiagonal system of equations using Thomas algorithm. </p>
+<p>Solve a single tridiagonal system of equations using the Thomas algorithm. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">a</td><td>Coefficients in lower diagonal elements </td></tr>
     <tr><td class="paramname">b</td><td>Coefficients in diagonal elements </td></tr>
     <tr><td class="paramname">c</td><td>Coefficients in upper diagonal elements </td></tr>
-    <tr><td class="paramname">d</td><td>Coefficients in right-hand side terms </td></tr>
+    <tr><td class="paramname">d</td><td>Coefficients in the right-hand side terms </td></tr>
     <tr><td class="paramname">n1</td><td>Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs </td></tr>
   </table>
   </dd>
@@ -396,7 +396,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="tdmas_8f90_a4a6130fff49607012fefacc8640424a7_icgraph.png" border="0" usemap="#tdmas_8f90_a4a6130fff49607012fefacc8640424a7_icgraph" alt=""/></div>
 <map name="tdmas_8f90_a4a6130fff49607012fefacc8640424a7_icgraph" id="tdmas_8f90_a4a6130fff49607012fefacc8640424a7_icgraph">
-<area shape="rect"  title="Solve a single tridiagonal system of equations using Thomas algorithm." alt="" coords="409,12,502,37"/>
+<area shape="rect"  title="Solve a single tridiagonal system of equations using the Thomas algorithm." alt="" coords="409,12,502,37"/>
 <area shape="rect"  href="namespacepascal__tdma.html#ab14e132231d4b53fd65dd333ccc85a50" title="Solve a single tridiagonal system of equation." alt="" coords="218,5,361,44"/>
 <area shape="rect"  href="solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
 </map>

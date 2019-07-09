@@ -19,8 +19,8 @@
 !======================================================================================================================
 
 !>
-!> @brief       Module for creating the cartesian topology of MPI processes and subcommunicators
-!> @details     This module has three subcommunicators in each-direction and related subroutines
+!> @brief       Module for creating the cartesian topology of the MPI processes and subcommunicators.
+!> @details     This module has three subcommunicators in each-direction and related subroutines.
 !>
 module mpi_topology
     use mpi
@@ -51,7 +51,7 @@ module mpi_topology
     contains
 
     !>
-    !> @brief       Destroy the communicator for cartesian topology
+    !> @brief       Destroy the communicator for cartesian topology.
     !>
     subroutine mpi_topology_clean()
 
@@ -63,14 +63,14 @@ module mpi_topology
     end subroutine mpi_topology_clean
 
     !>
-    !> @brief       Make the cartesian topology of MPI processes and subcommunicators
+    !> @brief       Create the cartesian topology for the MPI processes and subcommunicators.
     !>
     subroutine mpi_topology_make()
         implicit none
         logical :: remain(0:2)
         integer :: ierr
 
-        ! Make the cartesian topology
+        ! Create the cartesian topology.
         call MPI_Cart_create( MPI_COMM_WORLD    &!  input  | integer      | Input communicator (handle).
                             , 3                 &!  input  | integer      | Number of dimensions of Cartesian grid (integer).
                             , np_dim            &!  input  | integer(1:3) | Integer array of size ndims specifying the number of processes in each dimension.
@@ -80,7 +80,7 @@ module mpi_topology
                             , ierr              &!  output | integer      | Fortran only: Error status
                             )
 
-        ! Create subcommunicators and assign two neighboring processes in x-direction
+        ! Create subcommunicators and assign two neighboring processes in the x-direction.
         remain(0) = .true.
         remain(1) = .false.
         remain(2) = .false.
@@ -89,7 +89,7 @@ module mpi_topology
         call MPI_Comm_size(comm_1d_x%mpi_comm, comm_1d_x%nprocs, ierr)
         call MPI_Cart_shift(comm_1d_x%mpi_comm, 0, 1, comm_1d_x%west_rank, comm_1d_x%east_rank, ierr)
 
-        ! Create subcommunicators and assign two neighboring processes in y-direction
+        ! Create subcommunicators and assign two neighboring processes in the y-direction
         remain(0) = .false.
         remain(1) = .true.
         remain(2) = .false.
@@ -98,7 +98,7 @@ module mpi_topology
         call MPI_Comm_size(comm_1d_y%mpi_comm, comm_1d_y%nprocs, ierr)
         call MPI_Cart_shift(comm_1d_y%mpi_comm, 0, 1, comm_1d_y%west_rank, comm_1d_y%east_rank, ierr)
 
-        ! Create subcommunicators and assign two neighboring processes in z-direction
+        ! Create subcommunicators and assign two neighboring processes in the z-direction
         remain(0) = .false.
         remain(1) = .false.
         remain(2) = .true.

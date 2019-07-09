@@ -69,34 +69,34 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Module for building subdomains divided from the physical domain.  
+<p>Module for building subdomains from the physical domain.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
 <tr class="memitem:a3a1e7cf64aafbebd3c09b92fc56bd311"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a3a1e7cf64aafbebd3c09b92fc56bd311">mpi_subdomain_make</a> (nprocs_in_x, myrank_in_x, nprocs_in_y, myrank_in_y, nprocs_in_z, myrank_in_z)</td></tr>
-<tr class="memdesc:a3a1e7cf64aafbebd3c09b92fc56bd311"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare subdomain and determine size of subdomain.  <a href="#a3a1e7cf64aafbebd3c09b92fc56bd311">More...</a><br /></td></tr>
+<tr class="memdesc:a3a1e7cf64aafbebd3c09b92fc56bd311"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare the subdomain and determine the size of the subdomain.  <a href="#a3a1e7cf64aafbebd3c09b92fc56bd311">More...</a><br /></td></tr>
 <tr class="separator:a3a1e7cf64aafbebd3c09b92fc56bd311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56e9f2afd59e45fcada0f1c21a90eefe"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a56e9f2afd59e45fcada0f1c21a90eefe">mpi_subdomain_clean</a></td></tr>
 <tr class="memdesc:a56e9f2afd59e45fcada0f1c21a90eefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deallocate subdomain variables.  <a href="#a56e9f2afd59e45fcada0f1c21a90eefe">More...</a><br /></td></tr>
 <tr class="separator:a56e9f2afd59e45fcada0f1c21a90eefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad788c273d92ea7058caf0874bffdad6d"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#ad788c273d92ea7058caf0874bffdad6d">mpi_subdomain_make_ghostcell_ddtype</a></td></tr>
-<tr class="memdesc:ad788c273d92ea7058caf0874bffdad6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build derived datatypes for subdomain communication using ghostcell.  <a href="#ad788c273d92ea7058caf0874bffdad6d">More...</a><br /></td></tr>
+<tr class="memdesc:ad788c273d92ea7058caf0874bffdad6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build derived datatypes for subdomain communication using ghostcells.  <a href="#ad788c273d92ea7058caf0874bffdad6d">More...</a><br /></td></tr>
 <tr class="separator:ad788c273d92ea7058caf0874bffdad6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2e34a77537009dd448375e8fdc8d5b62"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a2e34a77537009dd448375e8fdc8d5b62">mpi_subdomain_ghostcell_update</a> (theta_sub, comm_1d_x, comm_1d_y, comm_1d_z)</td></tr>
 <tr class="memdesc:a2e34a77537009dd448375e8fdc8d5b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the values of boundary ghostcells through communication in all directions.  <a href="#a2e34a77537009dd448375e8fdc8d5b62">More...</a><br /></td></tr>
 <tr class="separator:a2e34a77537009dd448375e8fdc8d5b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe948dc18da021f2448cf9a6265155fe"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#afe948dc18da021f2448cf9a6265155fe">mpi_subdomain_indices</a> (myrank_in_y, nprocs_in_y)</td></tr>
-<tr class="memdesc:afe948dc18da021f2448cf9a6265155fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine whether next grids are empty(0) or not(1). Only in y-direction.  <a href="#afe948dc18da021f2448cf9a6265155fe">More...</a><br /></td></tr>
+<tr class="memdesc:afe948dc18da021f2448cf9a6265155fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine whether the next grids are empty(0) or not(1) only in the y-direction.  <a href="#afe948dc18da021f2448cf9a6265155fe">More...</a><br /></td></tr>
 <tr class="separator:afe948dc18da021f2448cf9a6265155fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a612331eead74041f174ece9a572c7427"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a612331eead74041f174ece9a572c7427">mpi_subdomain_mesh</a> (myrank_in_x, myrank_in_y, myrank_in_z, nprocs_in_x, nprocs_in_y, nprocs_in_z)</td></tr>
 <tr class="memdesc:a612331eead74041f174ece9a572c7427"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign grid coordinates and lengths of subdomains.  <a href="#a612331eead74041f174ece9a572c7427">More...</a><br /></td></tr>
 <tr class="separator:a612331eead74041f174ece9a572c7427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc0deb85b84358eb7addeea849733c4"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a7cc0deb85b84358eb7addeea849733c4">mpi_subdomain_initialization</a> (theta_sub, myrank_in_y, nprocs_in_y)</td></tr>
-<tr class="memdesc:a7cc0deb85b84358eb7addeea849733c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the values of main variable in a subdomain.  <a href="#a7cc0deb85b84358eb7addeea849733c4">More...</a><br /></td></tr>
+<tr class="memdesc:a7cc0deb85b84358eb7addeea849733c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the values of the main variable in a subdomain.  <a href="#a7cc0deb85b84358eb7addeea849733c4">More...</a><br /></td></tr>
 <tr class="separator:a7cc0deb85b84358eb7addeea849733c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55659431068678c08d21847338390ea8"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a55659431068678c08d21847338390ea8">mpi_subdomain_boundary</a> (theta_sub, myrank_in_y, nprocs_in_y)</td></tr>
-<tr class="memdesc:a55659431068678c08d21847338390ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the values of boundary grids in subdomain.  <a href="#a55659431068678c08d21847338390ea8">More...</a><br /></td></tr>
+<tr class="memdesc:a55659431068678c08d21847338390ea8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assign the values of boundary grids in the subdomain.  <a href="#a55659431068678c08d21847338390ea8">More...</a><br /></td></tr>
 <tr class="separator:a55659431068678c08d21847338390ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
@@ -117,52 +117,52 @@ Variables</h2></td></tr>
 <tr class="separator:a9adbfdd11c7e9fdb968bb8eef2b13c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a005fe127fe0fc85b932814a820a36444"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a005fe127fe0fc85b932814a820a36444">nx_sub</a></td></tr>
-<tr class="memdesc:a005fe127fe0fc85b932814a820a36444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid numbers in subdomain.  <a href="#a005fe127fe0fc85b932814a820a36444">More...</a><br /></td></tr>
+<tr class="memdesc:a005fe127fe0fc85b932814a820a36444"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid numbers in the subdomain.  <a href="#a005fe127fe0fc85b932814a820a36444">More...</a><br /></td></tr>
 <tr class="separator:a005fe127fe0fc85b932814a820a36444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a665ba05d0ae9309dd28b9b513a0c87a1"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a665ba05d0ae9309dd28b9b513a0c87a1">ny_sub</a></td></tr>
-<tr class="memdesc:a665ba05d0ae9309dd28b9b513a0c87a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid numbers in subdomain.  <a href="#a665ba05d0ae9309dd28b9b513a0c87a1">More...</a><br /></td></tr>
+<tr class="memdesc:a665ba05d0ae9309dd28b9b513a0c87a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid numbers in the subdomain.  <a href="#a665ba05d0ae9309dd28b9b513a0c87a1">More...</a><br /></td></tr>
 <tr class="separator:a665ba05d0ae9309dd28b9b513a0c87a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07555cc931ac78376a4c81207662251f"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a07555cc931ac78376a4c81207662251f">nz_sub</a></td></tr>
-<tr class="memdesc:a07555cc931ac78376a4c81207662251f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid numbers in subdomain.  <a href="#a07555cc931ac78376a4c81207662251f">More...</a><br /></td></tr>
+<tr class="memdesc:a07555cc931ac78376a4c81207662251f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid numbers in the subdomain.  <a href="#a07555cc931ac78376a4c81207662251f">More...</a><br /></td></tr>
 <tr class="separator:a07555cc931ac78376a4c81207662251f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:ab8925faaa6f45326c1d11efa37e03566"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#ab8925faaa6f45326c1d11efa37e03566">ista</a></td></tr>
-<tr class="memdesc:ab8925faaa6f45326c1d11efa37e03566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of assigned range.  <a href="#ab8925faaa6f45326c1d11efa37e03566">More...</a><br /></td></tr>
+<tr class="memdesc:ab8925faaa6f45326c1d11efa37e03566"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of the assigned range.  <a href="#ab8925faaa6f45326c1d11efa37e03566">More...</a><br /></td></tr>
 <tr class="separator:ab8925faaa6f45326c1d11efa37e03566"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abbd7d35107c53bcfd2b2b52771f4aa67"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#abbd7d35107c53bcfd2b2b52771f4aa67">iend</a></td></tr>
-<tr class="memdesc:abbd7d35107c53bcfd2b2b52771f4aa67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of assigned range.  <a href="#abbd7d35107c53bcfd2b2b52771f4aa67">More...</a><br /></td></tr>
+<tr class="memdesc:abbd7d35107c53bcfd2b2b52771f4aa67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of the assigned range.  <a href="#abbd7d35107c53bcfd2b2b52771f4aa67">More...</a><br /></td></tr>
 <tr class="separator:abbd7d35107c53bcfd2b2b52771f4aa67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac85bfba1caf77f9c3c0047fe9450fee6"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#ac85bfba1caf77f9c3c0047fe9450fee6">jsta</a></td></tr>
-<tr class="memdesc:ac85bfba1caf77f9c3c0047fe9450fee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of assigned range.  <a href="#ac85bfba1caf77f9c3c0047fe9450fee6">More...</a><br /></td></tr>
+<tr class="memdesc:ac85bfba1caf77f9c3c0047fe9450fee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of the assigned range.  <a href="#ac85bfba1caf77f9c3c0047fe9450fee6">More...</a><br /></td></tr>
 <tr class="separator:ac85bfba1caf77f9c3c0047fe9450fee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a06433a0d1a081c51202a0010c21c9d36"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a06433a0d1a081c51202a0010c21c9d36">jend</a></td></tr>
-<tr class="memdesc:a06433a0d1a081c51202a0010c21c9d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of assigned range.  <a href="#a06433a0d1a081c51202a0010c21c9d36">More...</a><br /></td></tr>
+<tr class="memdesc:a06433a0d1a081c51202a0010c21c9d36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of the assigned range.  <a href="#a06433a0d1a081c51202a0010c21c9d36">More...</a><br /></td></tr>
 <tr class="separator:a06433a0d1a081c51202a0010c21c9d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd499eb1d07159aa9f5c878f9519b00f"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#acd499eb1d07159aa9f5c878f9519b00f">ksta</a></td></tr>
-<tr class="memdesc:acd499eb1d07159aa9f5c878f9519b00f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of assigned range.  <a href="#acd499eb1d07159aa9f5c878f9519b00f">More...</a><br /></td></tr>
+<tr class="memdesc:acd499eb1d07159aa9f5c878f9519b00f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of the assigned range.  <a href="#acd499eb1d07159aa9f5c878f9519b00f">More...</a><br /></td></tr>
 <tr class="separator:acd499eb1d07159aa9f5c878f9519b00f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9934313b1ccbcb09f30916df3326076"><td class="memItemLeft" align="right" valign="top">integer, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#af9934313b1ccbcb09f30916df3326076">kend</a></td></tr>
-<tr class="memdesc:af9934313b1ccbcb09f30916df3326076"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of assigned range.  <a href="#af9934313b1ccbcb09f30916df3326076">More...</a><br /></td></tr>
+<tr class="memdesc:af9934313b1ccbcb09f30916df3326076"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid indices of the assigned range.  <a href="#af9934313b1ccbcb09f30916df3326076">More...</a><br /></td></tr>
 <tr class="separator:af9934313b1ccbcb09f30916df3326076"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a978554e1520c79471ef3793ed1872b37"><td class="memItemLeft" align="right" valign="top">double precision, dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a978554e1520c79471ef3793ed1872b37">x_sub</a></td></tr>
-<tr class="memdesc:a978554e1520c79471ef3793ed1872b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates of grid points in subdomains.  <a href="#a978554e1520c79471ef3793ed1872b37">More...</a><br /></td></tr>
+<tr class="memdesc:a978554e1520c79471ef3793ed1872b37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates of grid points in the subdomain.  <a href="#a978554e1520c79471ef3793ed1872b37">More...</a><br /></td></tr>
 <tr class="separator:a978554e1520c79471ef3793ed1872b37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a58b09abee5f1002de7b20b1b86f5c821"><td class="memItemLeft" align="right" valign="top">double precision, dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a58b09abee5f1002de7b20b1b86f5c821">y_sub</a></td></tr>
-<tr class="memdesc:a58b09abee5f1002de7b20b1b86f5c821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates of grid points in subdomains.  <a href="#a58b09abee5f1002de7b20b1b86f5c821">More...</a><br /></td></tr>
+<tr class="memdesc:a58b09abee5f1002de7b20b1b86f5c821"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates of grid points in the subdomain.  <a href="#a58b09abee5f1002de7b20b1b86f5c821">More...</a><br /></td></tr>
 <tr class="separator:a58b09abee5f1002de7b20b1b86f5c821"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab6d78e49471a9a3db5ad9df4c3d4041"><td class="memItemLeft" align="right" valign="top">double precision, dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#aab6d78e49471a9a3db5ad9df4c3d4041">z_sub</a></td></tr>
-<tr class="memdesc:aab6d78e49471a9a3db5ad9df4c3d4041"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates of grid points in subdomains.  <a href="#aab6d78e49471a9a3db5ad9df4c3d4041">More...</a><br /></td></tr>
+<tr class="memdesc:aab6d78e49471a9a3db5ad9df4c3d4041"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coordinates of grid points in the subdomain.  <a href="#aab6d78e49471a9a3db5ad9df4c3d4041">More...</a><br /></td></tr>
 <tr class="separator:aab6d78e49471a9a3db5ad9df4c3d4041"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a56af1740899dc9df6868e5e71a0884a5"><td class="memItemLeft" align="right" valign="top">double precision, dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a56af1740899dc9df6868e5e71a0884a5">dmx_sub</a></td></tr>
-<tr class="memdesc:a56af1740899dc9df6868e5e71a0884a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid lengths in subdomains.  <a href="#a56af1740899dc9df6868e5e71a0884a5">More...</a><br /></td></tr>
+<tr class="memdesc:a56af1740899dc9df6868e5e71a0884a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid lengths in the subdomain.  <a href="#a56af1740899dc9df6868e5e71a0884a5">More...</a><br /></td></tr>
 <tr class="separator:a56af1740899dc9df6868e5e71a0884a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae44efbff9669bfad03a79ab41b5e8ace"><td class="memItemLeft" align="right" valign="top">double precision, dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#ae44efbff9669bfad03a79ab41b5e8ace">dmy_sub</a></td></tr>
-<tr class="memdesc:ae44efbff9669bfad03a79ab41b5e8ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid lengths in subdomains.  <a href="#ae44efbff9669bfad03a79ab41b5e8ace">More...</a><br /></td></tr>
+<tr class="memdesc:ae44efbff9669bfad03a79ab41b5e8ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid lengths in the subdomain.  <a href="#ae44efbff9669bfad03a79ab41b5e8ace">More...</a><br /></td></tr>
 <tr class="separator:ae44efbff9669bfad03a79ab41b5e8ace"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb6341d7362587d6fd0a06fe78ba4e3f"><td class="memItemLeft" align="right" valign="top">double precision, dimension(:), allocatable, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#afb6341d7362587d6fd0a06fe78ba4e3f">dmz_sub</a></td></tr>
-<tr class="memdesc:afb6341d7362587d6fd0a06fe78ba4e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid lengths in subdomains.  <a href="#afb6341d7362587d6fd0a06fe78ba4e3f">More...</a><br /></td></tr>
+<tr class="memdesc:afb6341d7362587d6fd0a06fe78ba4e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Grid lengths in the subdomain.  <a href="#afb6341d7362587d6fd0a06fe78ba4e3f">More...</a><br /></td></tr>
 <tr class="separator:afb6341d7362587d6fd0a06fe78ba4e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a93395266b1630e5a91e8e89531dfcec6"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacempi__subdomain.html#a93395266b1630e5a91e8e89531dfcec6">ddtype_sendto_e</a></td></tr>
@@ -205,7 +205,7 @@ Variables</h2></td></tr>
 <tr class="separator:a4da19838e8bc3934ad5c24db424bec2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Module for building subdomains divided from the physical domain. </p>
+<div class="textblock"><p>Module for building subdomains from the physical domain. </p>
 <p>This module has simulation parameters for subdomains and communication between the subdomains. </p>
 </div><h2 class="groupheader">Function/Subroutine Documentation</h2>
 <a id="a55659431068678c08d21847338390ea8"></a>
@@ -240,7 +240,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Assign the values of boundary grids in subdomain. </p>
+<p>Assign the values of boundary grids in the subdomain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">theta_sub</td><td>Main variable to be solved </td></tr>
@@ -256,7 +256,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph.png" border="0" usemap="#namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph" id="namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph">
-<area shape="rect"  title="Assign the values of boundary grids in subdomain." alt="" coords="104,5,261,44"/>
+<area shape="rect"  title="Assign the values of boundary grids in the subdomain." alt="" coords="104,5,261,44"/>
 <area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
@@ -335,9 +335,9 @@ Here is the caller graph for this function:</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">theta_sub</td><td>Variables to be updated </td></tr>
-    <tr><td class="paramname">comm_1d_x</td><td>Subcommunicator in x-direction </td></tr>
-    <tr><td class="paramname">comm_1d_y</td><td>Subcommunicator in y-direction </td></tr>
-    <tr><td class="paramname">comm_1d_z</td><td>Subcommunicator in z-direction </td></tr>
+    <tr><td class="paramname">comm_1d_x</td><td>Subcommunicator in the x-direction </td></tr>
+    <tr><td class="paramname">comm_1d_y</td><td>Subcommunicator in the y-direction </td></tr>
+    <tr><td class="paramname">comm_1d_z</td><td>Subcommunicator in the z-direction </td></tr>
   </table>
   </dd>
 </dl>
@@ -383,7 +383,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Determine whether next grids are empty(0) or not(1). Only in y-direction. </p>
+<p>Determine whether the next grids are empty(0) or not(1) only in the y-direction. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nprocs_in_y</td><td>Number of MPI processes in y-direction </td></tr>
@@ -398,7 +398,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph.png" border="0" usemap="#namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph" id="namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph">
-<area shape="rect"  title="Determine whether next grids are empty(0) or not(1). Only in y&#45;direction." alt="" coords="104,5,248,44"/>
+<area shape="rect"  title="Determine whether the next grids are empty(0) or not(1) only in the y&#45;direction." alt="" coords="104,5,248,44"/>
 <area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
@@ -437,7 +437,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Initialize the values of main variable in a subdomain. </p>
+<p>Initialize the values of the main variable in a subdomain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">theta_sub</td><td>Main variable to be solved </td></tr>
@@ -453,7 +453,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph.png" border="0" usemap="#namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph" id="namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph">
-<area shape="rect"  title="Initialize the values of main variable in a subdomain." alt="" coords="104,5,274,44"/>
+<area shape="rect"  title="Initialize the values of the main variable in a subdomain." alt="" coords="104,5,274,44"/>
 <area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
@@ -510,7 +510,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Prepare subdomain and determine size of subdomain. </p>
+<p>Prepare the subdomain and determine the size of the subdomain. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nprocs_in_x</td><td>Number of MPI processes in x-direction </td></tr>
@@ -529,8 +529,8 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_cgraph.png" border="0" usemap="#namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_cgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_cgraph" id="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_cgraph">
-<area shape="rect"  title="Prepare subdomain and determine size of subdomain." alt="" coords="5,5,150,44"/>
-<area shape="rect"  href="para__range_8f90.html#ab75ab386311975aa4ff7cac06798fcd4" title="Compute the indices of assigned range for each MPI process." alt="" coords="198,12,287,37"/>
+<area shape="rect"  title="Prepare the subdomain and determine the size of the subdomain." alt="" coords="5,5,150,44"/>
+<area shape="rect"  href="para__range_8f90.html#ab75ab386311975aa4ff7cac06798fcd4" title="Compute the indices of the assigned range for each MPI process ." alt="" coords="198,12,287,37"/>
 </map>
 </div>
 <div class="dynheader">
@@ -538,7 +538,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph.png" border="0" usemap="#namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph" id="namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph">
-<area shape="rect"  title="Prepare subdomain and determine size of subdomain." alt="" coords="104,5,248,44"/>
+<area shape="rect"  title="Prepare the subdomain and determine the size of the subdomain." alt="" coords="104,5,248,44"/>
 <area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
 </map>
 </div>
@@ -560,7 +560,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Build derived datatypes for subdomain communication using ghostcell. </p>
+<p>Build derived datatypes for subdomain communication using ghostcells. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00128">128</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 <div class="dynheader">
@@ -568,7 +568,7 @@ Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph.png" border="0" usemap="#namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph" alt=""/></div>
 <map name="namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph" id="namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph">
-<area shape="rect"  title="Build derived datatypes for subdomain communication using ghostcell." alt="" coords="104,5,298,57"/>
+<area shape="rect"  title="Build derived datatypes for subdomain communication using ghostcells." alt="" coords="104,5,298,57"/>
 <area shape="rect"  href="main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,19,56,44"/>
 </map>
 </div>
@@ -880,7 +880,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid lengths in subdomains. </p>
+<p>Grid lengths in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00045">45</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -898,7 +898,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid lengths in subdomains. </p>
+<p>Grid lengths in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00045">45</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -916,7 +916,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid lengths in subdomains. </p>
+<p>Grid lengths in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00045">45</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -934,7 +934,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid indices of assigned range. </p>
+<p>Grid indices of the assigned range. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -968,7 +968,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid indices of assigned range. </p>
+<p>Grid indices of the assigned range. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -986,7 +986,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid indices of assigned range. </p>
+<p>Grid indices of the assigned range. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1040,7 +1040,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid indices of assigned range. </p>
+<p>Grid indices of the assigned range. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1058,7 +1058,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid indices of assigned range. </p>
+<p>Grid indices of the assigned range. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1076,7 +1076,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid indices of assigned range. </p>
+<p>Grid indices of the assigned range. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00038">38</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1094,7 +1094,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid numbers in subdomain. </p>
+<p>Grid numbers in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00035">35</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1112,7 +1112,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid numbers in subdomain. </p>
+<p>Grid numbers in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00035">35</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1130,7 +1130,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Grid numbers in subdomain. </p>
+<p>Grid numbers in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00035">35</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1184,7 +1184,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Coordinates of grid points in subdomains. </p>
+<p>Coordinates of grid points in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00042">42</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1202,7 +1202,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Coordinates of grid points in subdomains. </p>
+<p>Coordinates of grid points in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00042">42</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 
@@ -1220,7 +1220,7 @@ Here is the caller graph for this function:</div>
       </table>
 </div><div class="memdoc">
 
-<p>Coordinates of grid points in subdomains. </p>
+<p>Coordinates of grid points in the subdomain. </p>
 
 <p class="definition">Definition at line <a class="el" href="mpi__subdomain_8f90_source.html#l00042">42</a> of file <a class="el" href="mpi__subdomain_8f90_source.html">mpi_subdomain.f90</a>.</p>
 

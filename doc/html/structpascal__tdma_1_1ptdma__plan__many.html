@@ -82,7 +82,7 @@ Public Attributes</h2></td></tr>
 <tr class="memdesc:acb7e645e37c791564905c6e2808db0c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single dimensional subcommunicator to assemble data for the reduced TDMA.  <a href="#acb7e645e37c791564905c6e2808db0c6">More...</a><br /></td></tr>
 <tr class="separator:acb7e645e37c791564905c6e2808db0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22b42947ab742f83aad3bbeb3a42a0f6"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpascal__tdma_1_1ptdma__plan__many.html#a22b42947ab742f83aad3bbeb3a42a0f6">n_sys_rt</a></td></tr>
-<tr class="memdesc:a22b42947ab742f83aad3bbeb3a42a0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of tridiagonal systems to solve in each process after transpose.  <a href="#a22b42947ab742f83aad3bbeb3a42a0f6">More...</a><br /></td></tr>
+<tr class="memdesc:a22b42947ab742f83aad3bbeb3a42a0f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of tridiagonal systems that need to be solved in each process after transpose.  <a href="#a22b42947ab742f83aad3bbeb3a42a0f6">More...</a><br /></td></tr>
 <tr class="separator:a22b42947ab742f83aad3bbeb3a42a0f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad94248e2aa0653f151f0575d62d6fff7"><td class="memItemLeft" align="right" valign="top">integer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structpascal__tdma_1_1ptdma__plan__many.html#ad94248e2aa0653f151f0575d62d6fff7">n_row_rt</a></td></tr>
 <tr class="memdesc:ad94248e2aa0653f151f0575d62d6fff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of rows of a reduced tridiagonal systems after transpose.  <a href="#ad94248e2aa0653f151f0575d62d6fff7">More...</a><br /></td></tr>
@@ -136,7 +136,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Execution plan for many tridiagonal systems of equations. </p>
-<p>It uses MPI_Ialltoallw function to distribute the modified tridiagonal systems to MPI processes and build the reduced tridiagonal systems of equations. Derived datatypes are defined and used for elimination of data packing and unpacking cost. </p>
+<p>It uses MPI_Ialltoallw function to distribute the modified tridiagonal systems to MPI processes and build the reduced tridiagonal systems of equations. Derived datatypes are defined and used to eliminate the cost of data packing and unpacking. </p>
 
 <p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00068">68</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
@@ -422,7 +422,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Number of tridiagonal systems to solve in each process after transpose. </p>
+<p>Number of tridiagonal systems that need to be solved in each process after transpose. </p>
 
 <p class="definition">Definition at line <a class="el" href="pascal__tdma_8f90_source.html#l00071">71</a> of file <a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a>.</p>
 
@@ -447,7 +447,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this type was generated from the following file:<ul>
-<li>/Users/jihoon/Documents/develop/STDMA/src/<a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a></li>
+<li>/Users/jihoon/Documents/develop/pascal_tdma/src/<a class="el" href="pascal__tdma_8f90_source.html">pascal_tdma.f90</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

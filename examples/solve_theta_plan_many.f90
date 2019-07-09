@@ -19,11 +19,11 @@
 !======================================================================================================================
 
 !>
-!> @brief       An example solver for many tridiagonal systems of equations using PaScaL_TDMA
+!> @brief       An example solver for many tridiagonal systems of equations using PaScaL_TDMA.
 !> @details     This subroutine is for many tridiagonal systems of equations.
 !>              It solves the the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA.
-!>              Plans of PaScaL_TDMA for many tridiagonal systems of equations are created and
-!>              many tridiagonal systems are solved plane-by-plane.
+!>              PaScaL_TDMA plans are created for many tridiagonal systems of equations and
+!>              the many tridiagonal systems are solved plane-by-plane.
 !> @param       theta       Main 3-D variable to be solved
 !>
 subroutine solve_theta_plan_many(theta)
@@ -50,12 +50,12 @@ subroutine solve_theta_plan_many(theta)
     double precision :: eAPK, eAMK, eACK                            ! Diffusion treatment terms in z-direction
     double precision :: eRHS                                        ! From eAPI to eACK
 
-    double precision, allocatable, dimension(:, :, :) :: rhs            ! RHS array
+    double precision, allocatable, dimension(:, :, :) :: rhs            ! r.h.s. array
     double precision, allocatable, dimension(:, :) :: ap, am, ac, ad    ! Coefficient of ridiagonal matrix
 
     type(ptdma_plan_many)     :: px_many, py_many, pz_many          ! Plan for many tridiagonal systems of equations
 
-    ! Calculating RHS
+    ! Calculating r.h.s.
     allocate( rhs(0:nx_sub, 0:ny_sub, 0:nz_sub))
     do k = 1, nz_sub-1
         kp = k+1
@@ -71,7 +71,7 @@ subroutine solve_theta_plan_many(theta)
                 ip = i+1
                 im = i-1
 
-                ! DIFFUSION TERM
+                ! Diffusion term
                 dedx1 = (  theta(i ,j ,k ) - theta(im,j ,k )  )/dmx_sub(i )
                 dedx2 = (  theta(ip,j ,k ) - theta(i ,j ,k )  )/dmx_sub(ip)  
                 dedy3 = (  theta(i ,j ,k ) - theta(i ,jm,k )  )/dmy_sub(j )
@@ -84,22 +84,22 @@ subroutine solve_theta_plan_many(theta)
                 viscous_e3 = 1.d0/dz*(dedz6 - dedz5)
                 viscous = 0.5d0*Ct*(viscous_e1 + viscous_e2 + viscous_e3) 
                 
-                ! Boundary treatment for y-direction only
+                ! Boundary treatment for the y-direction only
                 ebc_down = 0.5d0*Ct/dy/dmy_sub(j)*thetaBC3_sub(i,k)
                 ebc_up = 0.5d0*Ct/dy/dmy_sub(jp)*thetaBC4_sub(i,k)
                 ebc = dble(1. - jem)*ebc_down + dble(1. - jep)*ebc_up
 
-                ! Diffusion term from incremental notation in next time step: X-DIRECTION
+                ! Diffusion term from incremental notation in next time step: x-direction
                 eAPI = -0.5d0*Ct/dx/dmx_sub(ip)
                 eAMI = -0.5d0*Ct/dx/dmx_sub(i )
                 eACI =  0.5d0*Ct/dx*( 1.d0/dmx_sub(ip) + 1.d0/dmx_sub(i) )
 
-                ! Diffusion term from incremental notation in next time step: Z-DIRECTION
+                ! Diffusion term from incremental notation in next time step: z-direction
                 eAPK = -0.5d0*Ct/dz/dmz_sub(kp)
                 eAMK = -0.5d0*Ct/dz/dmz_sub(k )
                 eACK =  0.5d0*Ct/dz*( 1.d0/dmz_sub(kp) + 1.d0/dmz_sub(k) )
 
-                ! Diffusion term from incremental notation in next time step: Y-DIRECTION
+                ! Diffusion term from incremental notation in next time step: y-direction
                 eAPJ = -0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) )*dble(jep)
                 eAMJ = -0.5d0*Ct/dy*( 1.d0/dmy_sub(j ) )*dble(jem)
                 eACJ =  0.5d0*Ct/dy*( 1.d0/dmy_sub(jp) + 1.d0/dmy_sub(j) )
@@ -108,20 +108,20 @@ subroutine solve_theta_plan_many(theta)
                     & + eAPJ*theta(i,jp,k) + eACJ*theta(i,j,k) + eAMJ*theta(i,jm,k)      &
                     & + eAPI*theta(ip,j,k) + eACI*theta(i,j,k) + eAMI*theta(im,j,k)
 
-                ! RIGHT-HAND SIDE      
+                ! r.h.s. term 
                 rhs(i,j,k) = theta(i,j,k)/dt + viscous + ebc      &
                           & - (theta(i,j,k)/dt + eRHS)
             enddo
         enddo
     enddo
 
-    !--SOLVE IN Z-DIRECTION
+    ! solve in the z-direction.
     allocate( ap(1:nx_sub-1, 1:nz_sub-1), am(1:nx_sub-1, 1:nz_sub-1), ac(1:nx_sub-1, 1:nz_sub-1), ad(1:nx_sub-1, 1:nz_sub-1) )
 
-    ! Create a PaScaL_TDMA plan for the tridiagonal systems
+    ! Create a PaScaL_TDMA plan for the tridiagonal systems.
     call PaScaL_TDMA_plan_many_create(pz_many, nx_sub-1, comm_1d_z%myrank, comm_1d_z%nprocs, comm_1d_z%mpi_comm)
 
-    ! Build coefficient matrix for the tridiagonal systems into 2D array
+    ! Build a coefficient matrix for the tridiagonal systems into a 2D array.
     do j = 1, ny_sub-1
         do k = 1, nz_sub-1
             kp = k+1
@@ -134,26 +134,26 @@ subroutine solve_theta_plan_many(theta)
             enddo
         enddo
 
-        ! Solve the tridiagonal systems under the defined plan with periodic boundary condition
+        ! Solve the tridiagonal systems under the defined plan with periodic boundary conditions.
         call PaScaL_TDMA_many_solve_cycle(pz_many, am, ac, ap, ad,nx_sub-1,nz_sub-1)
 
-        ! Return the solution to rhs plane-by-plane
+        ! Return the solution to the r.h.s. plane-by-plane
         do k = 1, nz_sub-1
             rhs(1:nx_sub-1,j,k)=ad(1:nx_sub-1,k)
         enddo
     enddo
 
-    ! Destroy a PaScaL_TDMA plan for the tridiagonal systems
+    ! Destroy the PaScaL_TDMA plan for the tridiagonal systems.
     call PaScaL_TDMA_plan_many_destroy(pz_many)
     deallocate( ap, am, ac, ad )
 
-    !--SOLVE IN Y-DIRECTION
+    ! solve in the x-direction.
     allocate( ap(1:nx_sub-1, 1:ny_sub-1), am(1:nx_sub-1, 1:ny_sub-1), ac(1:nx_sub-1, 1:ny_sub-1), ad(1:nx_sub-1, 1:ny_sub-1) )
 
-    ! Create a PaScaL_TDMA plan for the tridiagonal systems
+    ! Create a PaScaL_TDMA plan for the tridiagonal systems.
     call PaScaL_TDMA_plan_many_create(py_many, nx_sub-1, comm_1d_y%myrank, comm_1d_y%nprocs, comm_1d_y%mpi_comm)
 
-    ! Build coefficient matrix for the tridiagonal systems into 2D array
+    ! Build a coefficient matrix for the tridiagonal systems into a 2D array.
     do k = 1, nz_sub-1
         do j = 1, ny_sub-1
             jp = j + 1
@@ -169,10 +169,10 @@ subroutine solve_theta_plan_many(theta)
             end do
         end do
 
-        ! Solve the tridiagonal systems under the defined plan
+        ! Solve the tridiagonal systems under the defined plan.
         call PaScaL_TDMA_many_solve(py_many, am, ac, ap, ad, nx_sub-1, ny_sub-1)
 
-        ! Return the solution to rhs plane-by-plane
+        ! Return the solution to the r.h.s. plane-by-plane.
         do j = 1, ny_sub-1
             rhs(1:nx_sub-1,j,k)=ad(1:nx_sub-1,j)
         enddo
@@ -180,13 +180,13 @@ subroutine solve_theta_plan_many(theta)
     call PaScaL_TDMA_plan_many_destroy(py_many)
     deallocate( ap, am, ac, ad )
 
-    !--SOLVE IN X-DIRECTION
+    ! solve in the y-direction.
     allocate( ap(1:ny_sub-1, 1:nx_sub-1), am(1:ny_sub-1, 1:nx_sub-1), ac(1:ny_sub-1, 1:nx_sub-1), ad(1:ny_sub-1, 1:nx_sub-1) )
 
-    ! Create a PaScaL_TDMA plan for the tridiagonal systems
+    ! Create a PaScaL_TDMA plan for the tridiagonal systems.
     call PaScaL_TDMA_plan_many_create(px_many, ny_sub-1, comm_1d_x%myrank, comm_1d_x%nprocs, comm_1d_x%mpi_comm)
 
-    ! Build coefficient matrix for the tridiagonal systems into 2D array
+    ! Build a coefficient matrix for the tridiagonal systems into a 2D array.
     do k = 1, nz_sub-1
         do j = 1, ny_sub-1
             do i = 1, nx_sub-1
@@ -199,10 +199,10 @@ subroutine solve_theta_plan_many(theta)
                 ad(j,i) = rhs(i,j,k)
             enddo
         enddo
-        ! Solve the tridiagonal systems under the defined plan with periodic boundary condition
+        ! Solve the tridiagonal systems under the defined plan with periodic boundary conditions.
         call PaScaL_TDMA_many_solve_cycle(px_many, am, ac, ap, ad, ny_sub-1, nx_sub-1)
 
-        ! Return the solution to theta plane-by-plane
+        ! Return the solution to theta plane-by-plane.
         do j = 1, ny_sub-1
             theta(1:nx_sub-1,j,k) = theta(1:nx_sub-1,j,k) + ad(j,1:nx_sub-1)
         enddo
@@ -213,7 +213,7 @@ subroutine solve_theta_plan_many(theta)
 
     deallocate(rhs)
 
-    ! Update ghostcells from solution
+    ! Update ghostcells from the solution.
     call mpi_subdomain_ghostcell_update(theta, comm_1d_x, comm_1d_y, comm_1d_z)
 
 end subroutine solve_theta_plan_many

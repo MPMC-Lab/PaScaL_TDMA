@@ -1,7 +1,7 @@
 !!======================================================================================================================
 !> @file        mpi_subdomain.f90
 !> @brief       This file contains a module of subdomains for the example problem of PaScaL_TDMA.
-!> @details     The target example problem is the three-dimensional time-dependent heat conduction problem 
+!> @details     The target example problem is the three-dimensional(3D) time-dependent heat conduction problem 
 !>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
 !>              and horizontally periodic boundaries.
 !> @author      
@@ -19,7 +19,7 @@
 !======================================================================================================================
 
 !>
-!> @brief       Module for building subdomains divided from the physical domain
+!> @brief       Module for building subdomains from the physical domain.
 !> @details     This module has simulation parameters for subdomains and communication between the subdomains.
 !>
 module mpi_subdomain
@@ -31,17 +31,17 @@ module mpi_subdomain
     implicit none
     
     integer :: ierr
-    !> @{ Grid numbers in subdomain
+    !> @{ Grid numbers in the subdomain
     integer, public :: nx_sub,ny_sub,nz_sub
     !> @}
-    !> @{ Grid indices of assigned range
+    !> @{ Grid indices of the assigned range
     integer, public :: ista, iend, jsta, jend, ksta, kend
     !> @}
 
-    !> @{ Coordinates of grid points in subdomains
+    !> @{ Coordinates of grid points in the subdomain
     double precision, allocatable, dimension(:), public     :: x_sub, y_sub, Z_sub
     !> @}
-    !> @{ Grid lengths in subdomains
+    !> @{ Grid lengths in the subdomain
     double precision, allocatable, dimension(:), public     :: dmx_sub, dmy_sub, dmz_sub
     !> @}
     double precision, allocatable, dimension(:,:), public   :: thetaBC3_sub     !< B.C. of lower wall
@@ -73,7 +73,7 @@ module mpi_subdomain
     contains
 
     !>
-    !> @brief       Prepare subdomain and determine size of subdomain
+    !> @brief       Prepare the subdomain and determine the size of the subdomain.
     !> @param       nprocs_in_x     Number of MPI processes in x-direction
     !> @param       myrank_in_x     Rank ID in x-direction
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
@@ -87,7 +87,7 @@ module mpi_subdomain
         implicit none
         integer, intent(in) :: nprocs_in_x, myrank_in_x, nprocs_in_y, myrank_in_y, nprocs_in_z, myrank_in_z
 
-        ! Assigning grid numbers and grid indices of my subdomain
+        ! Assigning grid numbers and grid indices of my subdomain.
         call para_range(1, nx-1, nprocs_in_x, myrank_in_x, ista, iend)
         nx_sub = iend - ista + 2
         call para_range(1, ny-1, nprocs_in_y, myrank_in_y, jsta, jend)
@@ -95,7 +95,7 @@ module mpi_subdomain
         call para_range(1, nz-1, nprocs_in_z, myrank_in_z, ksta, kend)
         nz_sub = kend - ksta + 2
         
-        ! Allocate subdomain variables
+        ! Allocate subdomain variables.
         allocate( x_sub(0:nx_sub), dmx_sub(0:nx_sub))
         allocate( y_sub(0:ny_sub), dmy_sub(0:ny_sub))
         allocate( z_sub(0:nz_sub), dmz_sub(0:nz_sub))
@@ -122,7 +122,7 @@ module mpi_subdomain
     end subroutine mpi_subdomain_clean
 
     !>
-    !> @brief       Build derived datatypes for subdomain communication using ghostcell
+    !> @brief       Build derived datatypes for subdomain communication using ghostcells.
     !>
     subroutine mpi_subdomain_make_ghostcell_ddtype
 
@@ -210,11 +210,11 @@ module mpi_subdomain
     end subroutine mpi_subdomain_make_ghostcell_ddtype
 
     !>
-    !> @brief       Update the values of boundary ghostcells through communication in all directions
+    !> @brief       Update the values of boundary ghostcells through communication in all directions.
     !> @param       theta_sub       Variables to be updated
-    !> @param       comm_1d_x       Subcommunicator in x-direction
-    !> @param       comm_1d_y       Subcommunicator in y-direction
-    !> @param       comm_1d_z       Subcommunicator in z-direction
+    !> @param       comm_1d_x       Subcommunicator in the x-direction
+    !> @param       comm_1d_y       Subcommunicator in the y-direction
+    !> @param       comm_1d_z       Subcommunicator in the z-direction
     !>
     subroutine mpi_subdomain_ghostcell_update(theta_sub, comm_1d_x, comm_1d_y, comm_1d_z)
 
@@ -226,19 +226,19 @@ module mpi_subdomain
         integer :: ierr
         integer :: request(12)
 
-        ! Update the ghostcells in x-direction using derived datatypes and subcommunicator
+        ! Update the ghostcells in the x-direction using derived datatypes and subcommunicator.
         call MPI_Isend(theta_sub,1, ddtype_sendto_E  , comm_1d_x%east_rank, 111, comm_1d_x%mpi_comm, request(1), ierr)
         call MPI_Irecv(theta_sub,1, ddtype_recvfrom_W, comm_1d_x%west_rank, 111, comm_1d_x%mpi_comm, request(2), ierr)
         call MPI_Isend(theta_sub,1, ddtype_sendto_W  , comm_1d_x%west_rank, 222, comm_1d_x%mpi_comm, request(3), ierr)
         call MPI_Irecv(theta_sub,1, ddtype_recvfrom_E, comm_1d_x%east_rank, 222, comm_1d_x%mpi_comm, request(4), ierr)
         
-        ! Update the ghostcells in y-direction using derived datatypes and subcommunicator
+        ! Update the ghostcells in the y-direction using derived datatypes and subcommunicator.
         call MPI_Isend(theta_sub,1, ddtype_sendto_N  , comm_1d_y%east_rank, 111, comm_1d_y%mpi_comm, request(5), ierr)
         call MPI_Irecv(theta_sub,1, ddtype_recvfrom_S, comm_1d_y%west_rank, 111, comm_1d_y%mpi_comm, request(6), ierr)
         call MPI_Isend(theta_sub,1, ddtype_sendto_S  , comm_1d_y%west_rank, 222, comm_1d_y%mpi_comm, request(7), ierr)
         call MPI_Irecv(theta_sub,1, ddtype_recvfrom_N, comm_1d_y%east_rank, 222, comm_1d_y%mpi_comm, request(8), ierr)
         
-        ! Update the ghostcells in z-direction using derived datatypes and subcommunicator
+        ! Update the ghostcells in the z-direction using derived datatypes and subcommunicator.
         call MPI_Isend(theta_sub,1, ddtype_sendto_F  , comm_1d_z%east_rank, 111, comm_1d_z%mpi_comm, request(9) , ierr)
         call MPI_Irecv(theta_sub,1, ddtype_recvfrom_B, comm_1d_z%west_rank, 111, comm_1d_z%mpi_comm, request(10), ierr)
         call MPI_Isend(theta_sub,1, ddtype_sendto_B  , comm_1d_z%west_rank, 222, comm_1d_z%mpi_comm, request(11), ierr)
@@ -249,7 +249,7 @@ module mpi_subdomain
     end subroutine mpi_subdomain_ghostcell_update
 
     !>
-    !> @brief       Determine whether next grids are empty(0) or not(1). Only in y-direction
+    !> @brief       Determine whether the next grids are empty(0) or not(1) only in the y-direction.
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
     !> @param       myrank_in_y     Rank ID in y-direction
     !>
@@ -258,19 +258,19 @@ module mpi_subdomain
         implicit none
         integer, intent(in) :: myrank_in_y, nprocs_in_y
     
-        ! All values are initialized with 1, meaning all grids are not empty and effective
+        ! All values are initialized with 1, meaning all grids are not empty and effective.
         jmbc_index=1; jpbc_index=1
     
-        ! Set the first jmbc_index to 0, being empty in case of lower boundary domain
+        ! Set the first jmbc_index to 0, having it empty in case of lower boundary domain.
         if(myrank_in_y==0) jmbc_index(1)=0
-        ! Set the last jmbc_index to 0, being empty in case of upper boundary domain
+        ! Set the last jmbc_index to 0, having it empty in case of upper boundary domain.
         if(myrank_in_y==nprocs_in_y-1) jpbc_index(ny_sub-1)=0
     
         return
     end subroutine mpi_subdomain_indices
 
     !>
-    !> @brief       Assign grid coordinates and lengths of subdomains
+    !> @brief       Assign grid coordinates and lengths of subdomains.
     !> @param       myrank_in_x     Rank ID in x-direction
     !> @param       myrank_in_y     Rank ID in y-direction
     !> @param       myrank_in_z     Rank ID in z-direction
@@ -286,35 +286,35 @@ module mpi_subdomain
     
         integer :: i,j,k
 
-        ! X-direction, x_sub is for coordinates and dmx_sub is for grid lengths
+        ! X-direction: x_sub is for coordinates and dmx_sub is for grid lengths.
         dx = lx/dble(nx-1)
         do i = 0, nx_sub
             x_sub(i) = dble(i-1+ista-1)*dx
             dmx_sub(i)=dx
         end do
 
-        ! Y-direction, y_sub is for coordinates and dmy_sub is for grid lengths
+        ! Y-direction: y_sub is for coordinates and dmy_sub is for grid lengths.
         dy = ly/dble(ny-1)
         do j = 0, ny_sub
             y_sub(j) = dble(j-1+jsta-1)*dy
             dmy_sub(j)=dy
         end do
 
-        ! Z-direction, z_sub is for coordinates and dmz_sub is for grid lengths
+        ! Z-direction: z_sub is for coordinates and dmz_sub is for grid lengths.
         dz = lz/dble(nz-1)
         do k = 0, nz_sub
             z_sub(k) = dble(k-1+ksta-1)*dz
             dmz_sub(k)=dz
         end do
 
-        ! For boundary grids in x-direction. Same with other grids due to p.b.c.
+        ! For boundary grids in the x-direction. The same grid length is used due to periodic boundary conditions.
         if(myrank_in_x == 0) then
             dmx_sub(0)= dx
         else if(myrank_in_x == nprocs_in_x-1) then
             dmx_sub(nx_sub)=dx
         endif
 
-        ! For boundary grids in y-direction. Half grid length for lower and upper boundary grids.
+        ! For boundary grids in the y-direction. Half grid length is used for lower and upper boundary grids.
         if(myrank_in_y == 0) then
             y_sub(0) = 0.0d0
             dmy_sub(0)=0.0d0
@@ -323,7 +323,7 @@ module mpi_subdomain
             dmy_sub(ny_sub)=dy/2.0d0
         endif 
     
-        ! For boundary grids in z-direction. Same with other grids due to p.b.c.
+        ! For boundary grids in the z-direction. The same grid length is used due to periodic boundary conditions.
         if(myrank_in_z == 0) then
             dmz_sub(0)=dz
         else if(myrank_in_z == nprocs_in_z-1) then
@@ -335,7 +335,7 @@ module mpi_subdomain
     end subroutine mpi_subdomain_mesh
 
     !>
-    !> @brief       Initialize the values of main variable in a subdomain.
+    !> @brief       Initialize the values of the main variable in a subdomain.
     !> @param       theta_sub       Main variable to be solved
     !> @param       myrank_in_y     Rank ID in y-direction
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
@@ -348,7 +348,7 @@ module mpi_subdomain
         double precision, parameter :: PI = acos(-1.d0)
         integer :: i,j,k
 
-        ! Initialize the main variable with a sine function and linearly changed values between wall boundaries
+        ! Initialize the main variable with a sine function and linearly changed values between the wall boundaries.
         do k = 0, nz_sub
             do j = 0, ny_sub
                 do i = 0, nx_sub
@@ -360,7 +360,7 @@ module mpi_subdomain
             end do
         end do
     
-        ! Initialize the values of upper and lower boundary grids
+        ! Initialize the values of the upper and lower boundary grids.
         do k = 0, nz_sub
             do i = 0, nx_sub
                 if(myrank_in_y==0) theta_sub(i,0,k)  = theta_hot
@@ -372,7 +372,7 @@ module mpi_subdomain
     end subroutine mpi_subdomain_initialization
     
     !>
-    !> @brief       Assign the values of boundary grids in subdomain.
+    !> @brief       Assign the values of boundary grids in the subdomain.
     !> @param       theta_sub       Main variable to be solved
     !> @param       myrank_in_y     Rank ID in y-direction
     !> @param       nprocs_in_y     Number of MPI processes in y-direction
@@ -384,7 +384,7 @@ module mpi_subdomain
     
         integer :: i,k
 
-        ! Lower boundary subdomain - Assign lower boundary condition to boundary variables
+        ! Lower boundary subdomain: Assign lower boundary condition to the boundary variables.
         if(myrank_in_y==0) then
             do k = 0, nz_sub
                 do i = 0, nx_sub
@@ -392,7 +392,7 @@ module mpi_subdomain
                     thetaBC4_sub(i,k) = theta_sub(i,ny_sub,k)
                 end do
             end do  
-        ! Upper boundary subdomain - Assign upper boundary condition to boundary variables
+        ! Upper boundary subdomain: Assign upper boundary condition to the boundary variables.
         else if(myrank_in_y==nprocs_in_y-1) then
             do k = 0, nz_sub
                 do i = 0, nx_sub
@@ -400,7 +400,7 @@ module mpi_subdomain
                     thetaBC4_sub(i,k) = theta_cold
                 end do
             end do
-        ! Normal subdomain - Assign values of ghostcells to boundary variables
+        ! Normal subdomain: Assign values of ghostcells to the boundary variables.
         else
             do k = 0, nz_sub
                 do i = 0, nx_sub
