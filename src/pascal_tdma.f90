@@ -269,17 +269,23 @@ module PaScaL_TDMA
     !> @brief   Destroy the allocated arrays in the defined plan_many.
     !> @param   plan        Plan for many tridiagonal systems of equations
     !>
-    subroutine PaScaL_TDMA_plan_many_destroy(plan)
-
+    subroutine PaScaL_TDMA_plan_many_destroy(plan,nprocs)
         implicit none
 
         type(ptdma_plan_many), intent(inout)  :: plan
+        integer :: i,nprocs,ierr
+
+        do i=0,nprocs-1
+            call MPI_TYPE_FREE(plan%ddtype_Fs(i), ierr)
+            call MPI_TYPE_FREE(plan%ddtype_Bs(i), ierr)
+        enddo
 
         deallocate(plan%ddtype_Fs,  plan%ddtype_Bs)
         deallocate(plan%count_send, plan%displ_send)
         deallocate(plan%count_recv, plan%displ_recv)
         deallocate(plan%A_rd, plan%B_rd, plan%C_rd, plan%D_rd)
         deallocate(plan%A_rt, plan%B_rt, plan%C_rt, plan%D_rt)
+
 
     end subroutine PaScaL_TDMA_plan_many_destroy
 

@@ -144,7 +144,7 @@ subroutine solve_theta_plan_many(theta)
     enddo
 
     ! Destroy the PaScaL_TDMA plan for the tridiagonal systems.
-    call PaScaL_TDMA_plan_many_destroy(pz_many)
+    call PaScaL_TDMA_plan_many_destroy(pz_many,comm_1d_z%nprocs)
     deallocate( ap, am, ac, ad )
 
     ! solve in the x-direction.
@@ -177,7 +177,7 @@ subroutine solve_theta_plan_many(theta)
             rhs(1:nx_sub-1,j,k)=ad(1:nx_sub-1,j)
         enddo
     end do
-    call PaScaL_TDMA_plan_many_destroy(py_many)
+    call PaScaL_TDMA_plan_many_destroy(py_many,comm_1d_y%nprocs)
     deallocate( ap, am, ac, ad )
 
     ! solve in the y-direction.
@@ -208,7 +208,7 @@ subroutine solve_theta_plan_many(theta)
         enddo
 
     enddo
-    call PaScaL_TDMA_plan_many_destroy(px_many)
+    call PaScaL_TDMA_plan_many_destroy(px_many,comm_1d_x%nprocs)
     deallocate( ap, am, ac, ad )
 
     deallocate(rhs)
