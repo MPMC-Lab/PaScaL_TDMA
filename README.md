@@ -27,9 +27,10 @@ Step 1 and Step 5 are similar to the method proposed by Laszlo et al.(2016) whic
 
 # Cite
 Please use the following bibtex, when you refer to this project.
-    @unpublished{kkpc2020
-        author = {Kim, Kiha and Kang, Ji-Hoon and Pan, Xiaomin and Choi, Jung-Il},
+
+    @unpublished{kkpc2020,
         title = {PaScaL_TDMA: A library of parallel and scalable solvers for massive tridiagonal system},
+        author = {Kim, Kiha and Kang, Ji-Hoon and Pan, Xiaomin and Choi, Jung-Il},
         note = {under review}
     }
 
