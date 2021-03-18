@@ -294,9 +294,9 @@ module mpi_subdomain
         end do
 
         ! Y-direction: y_sub is for coordinates and dmy_sub is for grid lengths.
-        dy = ly/dble(ny-1)
+        dy = ly/dble(ny)
         do j = 0, ny_sub
-            y_sub(j) = dble(j-1+jsta-1)*dy
+            y_sub(j) = dble(j+jsta-1)*dy
             dmy_sub(j)=dy
         end do
 
@@ -316,9 +316,7 @@ module mpi_subdomain
 
         ! For boundary grids in the y-direction. Half grid length is used for lower and upper boundary grids.
         if(myrank_in_y == 0) then
-            y_sub(0) = 0.0d0
-            dmy_sub(0)=0.0d0
-            dmy_sub(1)=dy/2.0d0
+            dmy_sub(0)=dy/2.0d0
         else if(myrank_in_y == nprocs_in_y-1) then
             dmy_sub(ny_sub)=dy/2.0d0
         endif 
