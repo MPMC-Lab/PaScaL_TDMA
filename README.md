@@ -21,7 +21,7 @@ This library is for both single and many tridiagonal systems of equations. The m
 Step 1 and Step 5 are similar to the method proposed by Laszlo et al.(2016) which uses parallel cyclic reduction (PCR) algorithm to build and solve the reduced tridiagonal systems. Instead of using the PCR, we develop an all-to-all communication scheme using the MPI_Ialltoall function after the modified Thomas algorithm is executed. The number of coefficients for the reduced tridiagonal systems are greatly reduced, so we can avoid the communication bandwidth problem, which is a main bottleneck for all-to-all communications. Our algorithm is also distinguished from the work of Mattor et al. (1995) which assembles the undetermined coefficients of the temporary solutions in a single processor using MPI_Gather, where load imbalances are serious.
 
 # Authors
-- Kiha Kim (k-kiha@yonsei.ac.kr), Multi-Physics Modeling and Computation Lab., Yonsei University
+- Ki-Ha Kim (k-kiha@yonsei.ac.kr), Multi-Physics Modeling and Computation Lab., Yonsei University
 - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
 - Jung-Il Choi (jic@yonsei.ac.kr), Multi-Physics Modeling and Computation Lab., Yonsei University
 
@@ -30,7 +30,7 @@ Please use the following bibtex, when you refer to this project.
 
     @article{kkpc2020,
         title = "PaScaL_TDMA: A library of parallel and scalable solvers for massive tridiagonal system",
-        author = "Kim, Kiha and Kang, Ji-Hoon and Pan, Xiaomin and Choi, Jung-Il",
+        author = "Kim, Ki-Ha and Kang, Ji-Hoon and Pan, Xiaomin and Choi, Jung-Il",
         journal = "Computer Physics Communications",
         volume = "260",
         pages = "107722",
@@ -41,7 +41,7 @@ Please use the following bibtex, when you refer to this project.
 
     @misc{PaScaL_TDMA2019,
         title  = "Parallel and Scalable Library for TriDiagonal Matrix Algorithm",
-        author = "Kim, Kiha and Kang, Ji-Hoon and Choi, Jung-Il",
+        author = "Kim, Ki-Ha and Kang, Ji-Hoon and Choi, Jung-Il",
         url    = "https://github.com/MPMC-Lab/PaScaL_TDMA",
         year   = "2019"
     }
