@@ -1,0 +1,170 @@
+.TH "pascal_tdma::ptdma_plan_many" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+pascal_tdma::ptdma_plan_many \- Execution plan for many tridiagonal systems of equations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "integer \fBptdma_world\fP"
+.br
+.RI "Single dimensional subcommunicator to assemble data for the reduced TDMA\&. "
+.ti -1c
+.RI "integer \fBn_sys_rt\fP"
+.br
+.RI "Number of tridiagonal systems that need to be solved in each process after transpose\&. "
+.ti -1c
+.RI "integer \fBn_row_rt\fP"
+.br
+.RI "Number of rows of a reduced tridiagonal systems after transpose\&. "
+.ti -1c
+.RI "integer \fBnprocs\fP"
+.br
+.RI "Communicator size of ptdma_world\&. "
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer, dimension(:), allocatable \fBddtype_fs\fP"
+.br
+.RI "Send buffer related variables for MPI_Ialltoallw\&. "
+.ti -1c
+.RI "integer, dimension(:), allocatable \fBcount_send\fP"
+.br
+.ti -1c
+.RI "integer, dimension(:), allocatable \fBdispl_send\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer, dimension(:), allocatable \fBddtype_bs\fP"
+.br
+.RI "Recv\&. buffer related variables MPI_Ialltoallw\&. "
+.ti -1c
+.RI "integer, dimension(:), allocatable \fBcount_recv\fP"
+.br
+.ti -1c
+.RI "integer, dimension(:), allocatable \fBdispl_recv\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBa_rd\fP"
+.br
+.RI "Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs\&. The orginal dimension (m:n) is reduced to (m:2) "
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBb_rd\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBc_rd\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBd_rd\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBa_rt\fP"
+.br
+.RI "Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (m:2) changes to (m/np: 2*np) after transpose\&. "
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBb_rt\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBc_rt\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable \fBd_rt\fP"
+.br
+.in -1c
+.in -1c
+.SH "Detailed Description"
+.PP 
+Execution plan for many tridiagonal systems of equations\&. 
+
+It uses MPI_Ialltoallw function to distribute the modified tridiagonal systems to MPI processes and build the reduced tridiagonal systems of equations\&. Derived datatypes are defined and used to eliminate the cost of data packing and unpacking\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::a_rd"
+
+.PP
+Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs\&. The orginal dimension (m:n) is reduced to (m:2) 
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::a_rt"
+
+.PP
+Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (m:2) changes to (m/np: 2*np) after transpose\&. 
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::b_rd"
+
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::b_rt"
+
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::c_rd"
+
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::c_rt"
+
+.SS "integer, dimension(:), allocatable pascal_tdma::ptdma_plan_many::count_recv"
+
+.SS "integer, dimension(:), allocatable pascal_tdma::ptdma_plan_many::count_send"
+
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::d_rd"
+
+.SS "double precision, dimension(:,:), allocatable pascal_tdma::ptdma_plan_many::d_rt"
+
+.SS "integer, dimension(:), allocatable pascal_tdma::ptdma_plan_many::ddtype_bs"
+
+.PP
+Recv\&. buffer related variables MPI_Ialltoallw\&. 
+.SS "integer, dimension(:), allocatable pascal_tdma::ptdma_plan_many::ddtype_fs"
+
+.PP
+Send buffer related variables for MPI_Ialltoallw\&. 
+.SS "integer, dimension(:), allocatable pascal_tdma::ptdma_plan_many::displ_recv"
+
+.SS "integer, dimension(:), allocatable pascal_tdma::ptdma_plan_many::displ_send"
+
+.SS "integer pascal_tdma::ptdma_plan_many::n_row_rt"
+
+.PP
+Number of rows of a reduced tridiagonal systems after transpose\&. 
+.SS "integer pascal_tdma::ptdma_plan_many::n_sys_rt"
+
+.PP
+Number of tridiagonal systems that need to be solved in each process after transpose\&. 
+.SS "integer pascal_tdma::ptdma_plan_many::nprocs"
+
+.PP
+Communicator size of ptdma_world\&. 
+.SS "integer pascal_tdma::ptdma_plan_many::ptdma_world"
+
+.PP
+Single dimensional subcommunicator to assemble data for the reduced TDMA\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

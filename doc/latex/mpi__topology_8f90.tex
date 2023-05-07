@@ -1,5 +1,5 @@
-\hypertarget{mpi__topology_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/pascal\+\_\+tdma/examples/mpi\+\_\+topology.f90 File Reference}
-\label{mpi__topology_8f90}\index{/Users/jihoon/Documents/develop/pascal\_tdma/examples/mpi\_topology.f90@{/Users/jihoon/Documents/develop/pascal\_tdma/examples/mpi\_topology.f90}}
+\hypertarget{mpi__topology_8f90}{}\section{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/mpi\+\_\+topology.f90 File Reference}
+\label{mpi__topology_8f90}\index{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/mpi\+\_\+topology.\+f90@{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/mpi\+\_\+topology.\+f90}}
 
 
 This file contains a module of communication topology for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA.  
@@ -8,34 +8,34 @@ This file contains a module of communication topology for the example problem of
 \subsection*{Data Types}
 \begin{DoxyCompactItemize}
 \item 
-type \mbox{\hyperlink{structmpi__topology_1_1cart__comm__1d}{mpi\+\_\+topology\+::cart\+\_\+comm\+\_\+1d}}
+type \hyperlink{structmpi__topology_1_1cart__comm__1d}{mpi\+\_\+topology\+::cart\+\_\+comm\+\_\+1d}
 \begin{DoxyCompactList}\small\item\em Type variable for the information of 1D communicator. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Modules}
 \begin{DoxyCompactItemize}
 \item 
-module \mbox{\hyperlink{namespacempi__topology}{mpi\+\_\+topology}}
+module \hyperlink{namespacempi__topology}{mpi\+\_\+topology}
 \begin{DoxyCompactList}\small\item\em Module for creating the cartesian topology of the M\+PI processes and subcommunicators. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-subroutine, public \mbox{\hyperlink{namespacempi__topology_aa14e91baaec6d1c1082ebd5ac6e19128}{mpi\+\_\+topology\+::mpi\+\_\+topology\+\_\+clean}} ()
+subroutine, public \hyperlink{namespacempi__topology_aa14e91baaec6d1c1082ebd5ac6e19128}{mpi\+\_\+topology\+::mpi\+\_\+topology\+\_\+clean} ()
 \begin{DoxyCompactList}\small\item\em Destroy the communicator for cartesian topology. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__topology_a8819f16f50aded913f17520a29d3ec4c}{mpi\+\_\+topology\+::mpi\+\_\+topology\+\_\+make}} ()
+subroutine, public \hyperlink{namespacempi__topology_a8819f16f50aded913f17520a29d3ec4c}{mpi\+\_\+topology\+::mpi\+\_\+topology\+\_\+make} ()
 \begin{DoxyCompactList}\small\item\em Create the cartesian topology for the M\+PI processes and subcommunicators. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-integer, public \mbox{\hyperlink{namespacempi__topology_a2b10bc780ba4b14ea773c36f3e489a94}{mpi\+\_\+topology\+::mpi\+\_\+world\+\_\+cart}}
+integer, public \hyperlink{namespacempi__topology_a2b10bc780ba4b14ea773c36f3e489a94}{mpi\+\_\+topology\+::mpi\+\_\+world\+\_\+cart}
 \begin{DoxyCompactList}\small\item\em Communicator for cartesian topology. \end{DoxyCompactList}\item 
-integer, dimension(0\+:2), public \mbox{\hyperlink{namespacempi__topology_ac837e97cb4896a72d94eb7a9f12d6682}{mpi\+\_\+topology\+::np\+\_\+dim}}
+integer, dimension(0\+:2), public \hyperlink{namespacempi__topology_ac837e97cb4896a72d94eb7a9f12d6682}{mpi\+\_\+topology\+::np\+\_\+dim}
 \begin{DoxyCompactList}\small\item\em Number of M\+PI processes in 3D topology. \end{DoxyCompactList}\item 
-logical, dimension(0\+:2), public \mbox{\hyperlink{namespacempi__topology_ac24cb383bdfbdf566165cf78b03677aa}{mpi\+\_\+topology\+::period}}
+logical, dimension(0\+:2), public \hyperlink{namespacempi__topology_ac24cb383bdfbdf566165cf78b03677aa}{mpi\+\_\+topology\+::period}
 \begin{DoxyCompactList}\small\item\em Periodicity in each direction. \end{DoxyCompactList}\item 
-type(cart\+\_\+comm\+\_\+1d), public \mbox{\hyperlink{namespacempi__topology_a4ef8d80f442649d77707d5ebeeefa391}{mpi\+\_\+topology\+::comm\+\_\+1d\+\_\+x}}
+type(cart\+\_\+comm\+\_\+1d), public \hyperlink{namespacempi__topology_a4ef8d80f442649d77707d5ebeeefa391}{mpi\+\_\+topology\+::comm\+\_\+1d\+\_\+x}
 \begin{DoxyCompactList}\small\item\em Subcommunicator information in x-\/direction. \end{DoxyCompactList}\item 
-type(cart\+\_\+comm\+\_\+1d), public \mbox{\hyperlink{namespacempi__topology_ad48a88602b9b9950200733823f95b5d0}{mpi\+\_\+topology\+::comm\+\_\+1d\+\_\+y}}
+type(cart\+\_\+comm\+\_\+1d), public \hyperlink{namespacempi__topology_ad48a88602b9b9950200733823f95b5d0}{mpi\+\_\+topology\+::comm\+\_\+1d\+\_\+y}
 \begin{DoxyCompactList}\small\item\em Subcommunicator information in y-\/direction. \end{DoxyCompactList}\item 
-type(cart\+\_\+comm\+\_\+1d), public \mbox{\hyperlink{namespacempi__topology_aed5c66dd4697b116c53db4613ad802ce}{mpi\+\_\+topology\+::comm\+\_\+1d\+\_\+z}}
+type(cart\+\_\+comm\+\_\+1d), public \hyperlink{namespacempi__topology_aed5c66dd4697b116c53db4613ad802ce}{mpi\+\_\+topology\+::comm\+\_\+1d\+\_\+z}
 \begin{DoxyCompactList}\small\item\em Subcommunicator information in z-\/direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -44,24 +44,21 @@ This file contains a module of communication topology for the example problem of
 
 The target example problem is the three-\/dimensional time-\/dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries. \begin{DoxyAuthor}{Author}
 
-\end{DoxyAuthor}
-
 \begin{DoxyItemize}
-\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\texttt{ k-\/kiha@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
-\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\texttt{ jhkang@kisti.\+re.\+kr}}), Korea Institute of Science and Technology Information
-\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\texttt{ jic@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\tt k-\/kiha@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\tt jhkang@kisti.\+re.\+kr}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\tt jic@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
 \end{DoxyItemize}
-
+\end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-June 2019 
+March 2023 
 \end{DoxyDate}
 \begin{DoxyVersion}{Version}
-1.\+0 
+2.\+0 
 \end{DoxyVersion}
 \begin{DoxyParagraph}{Copyright}
-Copyright (c) 2019 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
+Copyright (c) 2019-\/2023 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{License }
-
-\end{DoxyParagraph}
 This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE in ) 
+\end{DoxyParagraph}

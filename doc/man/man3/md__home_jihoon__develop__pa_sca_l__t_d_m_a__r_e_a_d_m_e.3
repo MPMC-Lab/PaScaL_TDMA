@@ -1,0 +1,148 @@
+.TH "md__home_jihoon__develop__pa_sca_l__t_d_m_a__r_e_a_d_m_e" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__home_jihoon__develop__pa_sca_l__t_d_m_a__r_e_a_d_m_ePaScaL_TDMA 2\&.0 
+ \- Parallel and Scalable Library for TriDiagonal Matrix Algorithm
+.PP
+PaScal_TDMA provides an efficient and scalable computational procedure to solve many tridiagonal systems in multi-dimensional partial differential equations\&. The modified Thomas algorithm proposed by Laszlo et al\&.(2016) and the newly designed communication scheme have been used to reduce the communication overhead in solving many tridiagonal systems\&.
+.PP
+This library is for both single and many tridiagonal systems of equations\&. The main algorithm for a tridiagonal matrix consists of the following five steps:
+.PP
+.IP "\(bu" 2
+(1) Transform the partitioned submatrices in the tridiagonal systems into modified submatrices: Each computing core transforms the partitioned submatrices in the tridiagonal systems of equations into the modified forms by applying modified Thomas algorithm\&.
+.IP "\(bu" 2
+(2) Construct reduced tridiagonal systems from the modified submatrices: The reduced tridiagonal systems are constructed by collecting the first and last rows of the modified submatrices from each core using MPI_Ialltoallw\&.
+.IP "\(bu" 2
+(3) Solve the reduced tridiagonal systems: The reduced tridiagonal systems constructed in Step 2 are solved by applying the Thomas algorithm\&.
+.IP "\(bu" 2
+(4) Distribute the solutions of the reduced tridiagonal systems: The solutions of the reduced tridiagonal systems in Step 3 are distributed to each core using MPI_Ialltoallw\&. This communication is an exact inverse of the communication in Step 2\&.
+.IP "\(bu" 2
+(5) Update the other unknowns in the modified tridiagonal systems: The remaining unknowns in the modified submatrices in Step 1 are solved in each computing core with the solutions obtained in Step 3 and Step 4\&.
+.PP
+.PP
+Step 1 and Step 5 are similar to the method proposed by Laszlo et al\&.(2016) which uses parallel cyclic reduction (PCR) algorithm to build and solve the reduced tridiagonal systems\&. Instead of using the PCR, we develop an all-to-all communication scheme using the MPI_Ialltoall function after the modified Thomas algorithm is executed\&. The number of coefficients for the reduced tridiagonal systems are greatly reduced, so we can avoid the communication bandwidth problem, which is a main bottleneck for all-to-all communications\&. Our algorithm is also distinguished from the work of Mattor et al\&. (1995) which assembles the undetermined coefficients of the temporary solutions in a single processor using MPI_Gather, where load imbalances are serious\&.
+.PP
+.SH "CUDA implementation in PaScal_TDMA 2\&.0"
+.PP
+.PP
+In PaScaL_TDMA 2\&.0, multi-GPU acceleration is implemented using NVIDIA CUDA\&. CUDA-related features are as follows:
+.IP "\(bu" 2
+(1) Incorporation of CUDA kernels into the loop structures of the existing algorithm, that are modified to exploit more GPU threads\&.
+.IP "\(bu" 2
+(2) Utilization of shared memory using pipeline copy of variables in device memory to reduce the amount of device memory access\&.
+.IP "\(bu" 2
+(3) CUDA-aware MPI communication for rapid communication with the support of hardward
+.IP "\(bu" 2
+(4) Use of 3D-array for practical applications and accordingly the use of CUDA threads more than in a single dimension with the 3-D array\&.
+.IP "\(bu" 2
+(5) Depreciation on functions for single tridiagonal matrix as they are rarely used for three-dimensional problems\&.
+.PP
+.PP
+.SH "Authors"
+.PP
+.PP
+.IP "\(bu" 2
+Kiha Kim (k-kiha@yonsei.ac.kr), Multi-Physics Modeling and Computation Lab\&., Yonsei University
+.IP "\(bu" 2
+Mingyu Yang (yang926@yonsei.ac.kr), Multi-Physics Modeling and Computation Lab\&., Yonsei University
+.IP "\(bu" 2
+Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+.IP "\(bu" 2
+Jung-Il Choi (jic@yonsei.ac.kr), Multi-Physics Modeling and Computation Lab\&., Yonsei University
+.PP
+.PP
+.SH "Usage"
+.PP
+.PP
+.SS "Downloading PaScaL_TDMA"
+.PP
+The repository can be cloned as follows:
+.PP
+.PP
+.nf
+git clone https://github\&.com/MPMC-Lab/PaScaL_TDMA\&.git
+.fi
+.PP
+ Alternatively, the source files can be downloaded through github menu 'Download ZIP'\&.
+.PP
+.SS "Compile"
+.PP
+.SS "Prerequisites"
+.PP
+Prerequisites to compile PaScaL_TDMAS are as follows:
+.IP "\(bu" 2
+MPI
+.IP "\(bu" 2
+fortran compiler (`nvfortran for GPU runs, NVIDIA HPC SKD 21\&.1 or higher)
+.PP
+.PP
+.SS "Compile and build"
+.PP
+.IP "\(bu" 2
+Build PaScaL_TDMA ``` make lib ```
+.IP "\(bu" 2
+Build an example problem after build PaScaL_TDMA
+.PP
+``` make example ```
+.IP "\(bu" 2
+Build all
+.PP
+``` make all ``` 
+.SS "Mores on compile option"
+.PP
+The \fCMakefile\fP in root directory is to compile the source code, and is expected to work for most systems\&. The '\fBMakefile\&.inc\fP' file in the root directory can be used to change the compiler (and MPI wrapper) and a few pre-defined compile options depending on compiler, execution environment and et al\&.
+.PP
+.PP
+.SS "Running the example"
+.PP
+After building the example file, an executable binary, \fCa\&.out\fP, is built in the \fCrun\fP folder\&. The \fCPARA_INPUT\&.inp\fP file in the \fCrun\fP folder is a pre-defined input file, and the \fCa\&.out\fP can be executed as follows: ``` mpirun -np 8 \&./a\&.out \&./PARA_INPUT\&.inp ```
+.PP
+.SH "Folder structure"
+.PP
+.PP
+.IP "\(bu" 2
+\fCsrc\fP : source files of PaScaL_TDMA_CUDA\&.
+.IP "\(bu" 2
+\fCexample\fP : source files of an example problem for 3D heat-transfer equation\&.
+.IP "\(bu" 2
+\fCinclude\fP : header files are created after building
+.IP "\(bu" 2
+\fClib\fP : a static library of PaScaL_TDMA_CUDA is are created after building
+.IP "\(bu" 2
+\fCdoc\fP : documentation
+.IP "\(bu" 2
+\fCrun\fP : an executable binary file for the example problem is created after building\&.
+.PP
+.PP
+.SH "Cite"
+.PP
+.PP
+Please use the following bibtex, when you refer to this project\&. 
+.PP
+.nf
+@article{kkpc2020,
+    title = "PaScaL_TDMA: A library of parallel and scalable solvers for massive tridiagonal system",
+    author = "Kim, Kiha and Kang, Ji-Hoon and Pan, Xiaomin and Choi, Jung-Il",
+    journal = "Computer Physics Communications",
+    volume = "260",
+    pages = "107722",
+    year = "2021",
+    issn = "0010-4655",
+    doi = "https://doi.org/10.1016/j.cpc.2020.107722"
+}
+
+@misc{PaScaL_TDMA2019,
+    title  = "Parallel and Scalable Library for TriDiagonal Matrix Algorithm",
+    author = "Kim, Kiha and Kang, Ji-Hoon and Choi, Jung-Il",
+    url    = "https://github.com/MPMC-Lab/PaScaL_TDMA",
+    year   = "2019"
+}
+
+.fi
+.PP
+.PP
+.SH "References"
+.PP
+.PP
+For more information, please the reference paper and \fCMulti-Physics Modeling and Computation Lab\&.\fP 

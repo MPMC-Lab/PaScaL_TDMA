@@ -1,5 +1,5 @@
 \hypertarget{namespacepascal__tdma}{}\section{pascal\+\_\+tdma Module Reference}
-\label{namespacepascal__tdma}\index{pascal\_tdma@{pascal\_tdma}}
+\label{namespacepascal__tdma}\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}}
 
 
 Module for Pa\+Sca\+L-\/\+T\+D\+MA library.  
@@ -8,28 +8,28 @@ Module for Pa\+Sca\+L-\/\+T\+D\+MA library.
 \subsection*{Data Types}
 \begin{DoxyCompactItemize}
 \item 
-type \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}}
+type \hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}
 \begin{DoxyCompactList}\small\item\em Execution plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
-type \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}}
+type \hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}
 \begin{DoxyCompactList}\small\item\em Execution plan for a single tridiagonal system of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create}} (plan, myrank, nprocs, mpi\+\_\+world, gather\+\_\+rank)
+subroutine, public \hyperlink{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create} (plan, myrank, nprocs, mpi\+\_\+world, gather\+\_\+rank)
 \begin{DoxyCompactList}\small\item\em Create a plan for a single tridiagonal system of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy}} (plan)
+subroutine, public \hyperlink{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy} (plan)
 \begin{DoxyCompactList}\small\item\em Deallocate the allocated arrays in the defined plan\+\_\+single . \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create}} (plan, n\+\_\+sys, myrank, nprocs, mpi\+\_\+world)
+subroutine, public \hyperlink{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create} (plan, n\+\_\+sys, myrank, nprocs, mpi\+\_\+world)
 \begin{DoxyCompactList}\small\item\em Create a plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy}} (plan)
+subroutine, public \hyperlink{namespacepascal__tdma_aceec478e18d25d413a5bd8a174c3fcb8}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy} (plan, nprocs)
 \begin{DoxyCompactList}\small\item\em Destroy the allocated arrays in the defined plan\+\_\+many. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50}{pascal\+\_\+tdma\+\_\+single\+\_\+solve}} (plan, A, B, C, D, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50}{pascal\+\_\+tdma\+\_\+single\+\_\+solve} (plan, A, B, C, D, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve a single tridiagonal system of equation. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043}{pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle}} (plan, A, B, C, D, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043}{pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle} (plan, A, B, C, D, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve a single cyclic tridiagonal system of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}{pascal\+\_\+tdma\+\_\+many\+\_\+solve}} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}{pascal\+\_\+tdma\+\_\+many\+\_\+solve} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve many tridiagonal systems of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5}{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle}} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5}{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve many cyclic tridiagonal systems of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -40,10 +40,10 @@ It contains plans for tridiagonal systems of equations and subroutines for solvi
 
 \subsection{Function/\+Subroutine Documentation}
 \mbox{\Hypertarget{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}\label{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_many\_solve@{pascal\_tdma\_many\_solve}}
-\index{pascal\_tdma\_many\_solve@{pascal\_tdma\_many\_solve}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_many\_solve()}{pascal\_tdma\_many\_solve()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+sys,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+many\+\_\+solve@{pascal\+\_\+tdma\+\_\+many\+\_\+solve}}
+\index{pascal\+\_\+tdma\+\_\+many\+\_\+solve@{pascal\+\_\+tdma\+\_\+many\+\_\+solve}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+many\+\_\+solve()}{pascal\_tdma\_many\_solve()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+sys,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
 
 
 
@@ -66,10 +66,6 @@ Solve many tridiagonal systems of equations.
 {\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 482 of file pascal\+\_\+tdma.\+f90.
-
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -83,14 +79,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_icgraph}
+\includegraphics[width=319pt]{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5}\label{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_many\_solve\_cycle@{pascal\_tdma\_many\_solve\_cycle}}
-\index{pascal\_tdma\_many\_solve\_cycle@{pascal\_tdma\_many\_solve\_cycle}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_many\_solve\_cycle()}{pascal\_tdma\_many\_solve\_cycle()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+sys,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle@{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle}}
+\index{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle@{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle()}{pascal\_tdma\_many\_solve\_cycle()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+sys,1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+sys,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
 
 
 
@@ -113,16 +109,12 @@ Solve many cyclic tridiagonal systems of equations.
 {\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 589 of file pascal\+\_\+tdma.\+f90.
-
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=338pt]{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_cgraph}
+\includegraphics[width=337pt]{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -130,14 +122,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_icgraph}
+\includegraphics[width=342pt]{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}\label{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_plan\_many\_create@{pascal\_tdma\_plan\_many\_create}}
-\index{pascal\_tdma\_plan\_many\_create@{pascal\_tdma\_plan\_many\_create}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_plan\_many\_create()}{pascal\_tdma\_plan\_many\_create()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}}), intent(inout)}]{plan,  }\item[{integer, intent(in)}]{n\+\_\+sys,  }\item[{integer, intent(in)}]{myrank,  }\item[{integer, intent(in)}]{nprocs,  }\item[{integer, intent(in)}]{mpi\+\_\+world }\end{DoxyParamCaption})}
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create}}
+\index{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create()}{pascal\_tdma\_plan\_many\_create()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}), intent(inout)}]{plan,  }\item[{integer, intent(in)}]{n\+\_\+sys,  }\item[{integer, intent(in)}]{myrank,  }\item[{integer, intent(in)}]{nprocs,  }\item[{integer, intent(in)}]{mpi\+\_\+world }\end{DoxyParamCaption})}
 
 
 
@@ -156,16 +148,12 @@ Create a plan for many tridiagonal systems of equations.
 {\em mpi\+\_\+world} & Communicator for M\+P\+I\+\_\+\+Gather and M\+P\+I\+\_\+\+Scatter of reduced equations \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 186 of file pascal\+\_\+tdma.\+f90.
-
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=315pt]{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_cgraph}
+\includegraphics[width=309pt]{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -173,14 +161,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_icgraph}
+\includegraphics[width=340pt]{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9_icgraph}
 \end{center}
 \end{figure}
-\mbox{\Hypertarget{namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce}\label{namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_plan\_many\_destroy@{pascal\_tdma\_plan\_many\_destroy}}
-\index{pascal\_tdma\_plan\_many\_destroy@{pascal\_tdma\_plan\_many\_destroy}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_plan\_many\_destroy()}{pascal\_tdma\_plan\_many\_destroy()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}}), intent(inout)}]{plan }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{namespacepascal__tdma_aceec478e18d25d413a5bd8a174c3fcb8}\label{namespacepascal__tdma_aceec478e18d25d413a5bd8a174c3fcb8}} 
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy}}
+\index{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy()}{pascal\_tdma\_plan\_many\_destroy()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{ptdma\+\_\+plan\+\_\+many}), intent(inout)}]{plan,  }\item[{integer}]{nprocs }\end{DoxyParamCaption})}
 
 
 
@@ -191,23 +179,19 @@ Destroy the allocated arrays in the defined plan\+\_\+many.
 {\em plan} & Plan for many tridiagonal systems of equations \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 273 of file pascal\+\_\+tdma.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce_icgraph}
+\includegraphics[width=346pt]{namespacepascal__tdma_aceec478e18d25d413a5bd8a174c3fcb8_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}\label{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_plan\_single\_create@{pascal\_tdma\_plan\_single\_create}}
-\index{pascal\_tdma\_plan\_single\_create@{pascal\_tdma\_plan\_single\_create}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_plan\_single\_create()}{pascal\_tdma\_plan\_single\_create()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}}), intent(inout)}]{plan,  }\item[{integer, intent(in)}]{myrank,  }\item[{integer, intent(in)}]{nprocs,  }\item[{integer, intent(in)}]{mpi\+\_\+world,  }\item[{integer, intent(in)}]{gather\+\_\+rank }\end{DoxyParamCaption})}
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create@{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create}}
+\index{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create@{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create()}{pascal\_tdma\_plan\_single\_create()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}), intent(inout)}]{plan,  }\item[{integer, intent(in)}]{myrank,  }\item[{integer, intent(in)}]{nprocs,  }\item[{integer, intent(in)}]{mpi\+\_\+world,  }\item[{integer, intent(in)}]{gather\+\_\+rank }\end{DoxyParamCaption})}
 
 
 
@@ -226,23 +210,19 @@ Create a plan for a single tridiagonal system of equations.
 {\em gather\+\_\+rank} & Target rank where all coefficients are gathered to \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 140 of file pascal\+\_\+tdma.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f_icgraph}
+\includegraphics[width=344pt]{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}\label{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_plan\_single\_destroy@{pascal\_tdma\_plan\_single\_destroy}}
-\index{pascal\_tdma\_plan\_single\_destroy@{pascal\_tdma\_plan\_single\_destroy}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_plan\_single\_destroy()}{pascal\_tdma\_plan\_single\_destroy()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}}), intent(inout)}]{plan }\end{DoxyParamCaption})}
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy@{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy}}
+\index{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy@{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy()}{pascal\_tdma\_plan\_single\_destroy()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}), intent(inout)}]{plan }\end{DoxyParamCaption})}
 
 
 
@@ -253,23 +233,19 @@ Deallocate the allocated arrays in the defined plan\+\_\+single .
 {\em plan} & Plan for a single tridiagonal system of equations \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 167 of file pascal\+\_\+tdma.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594_icgraph}
+\includegraphics[width=349pt]{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50}\label{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_single\_solve@{pascal\_tdma\_single\_solve}}
-\index{pascal\_tdma\_single\_solve@{pascal\_tdma\_single\_solve}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_single\_solve()}{pascal\_tdma\_single\_solve()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+single\+\_\+solve@{pascal\+\_\+tdma\+\_\+single\+\_\+solve}}
+\index{pascal\+\_\+tdma\+\_\+single\+\_\+solve@{pascal\+\_\+tdma\+\_\+single\+\_\+solve}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+single\+\_\+solve()}{pascal\_tdma\_single\_solve()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
 
 
 
@@ -290,16 +266,12 @@ Solve a single tridiagonal system of equation.
 {\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 296 of file pascal\+\_\+tdma.\+f90.
-
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=293pt]{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_cgraph}
+\includegraphics[width=292pt]{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -307,14 +279,14 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=346pt]{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_icgraph}
+\includegraphics[width=321pt]{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043}\label{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043}} 
-\index{pascal\_tdma@{pascal\_tdma}!pascal\_tdma\_single\_solve\_cycle@{pascal\_tdma\_single\_solve\_cycle}}
-\index{pascal\_tdma\_single\_solve\_cycle@{pascal\_tdma\_single\_solve\_cycle}!pascal\_tdma@{pascal\_tdma}}
-\subsubsection{\texorpdfstring{pascal\_tdma\_single\_solve\_cycle()}{pascal\_tdma\_single\_solve\_cycle()}}
-{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle (\begin{DoxyParamCaption}\item[{type(\mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
+\index{pascal\+\_\+tdma@{pascal\+\_\+tdma}!pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle@{pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle}}
+\index{pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle@{pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle}!pascal\+\_\+tdma@{pascal\+\_\+tdma}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle()}{pascal\_tdma\_single\_solve\_cycle()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{ptdma\+\_\+plan\+\_\+single}), intent(inout)}]{plan,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{A,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{B,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{C,  }\item[{double precision, dimension(1\+:n\+\_\+row), intent(inout)}]{D,  }\item[{integer, intent(in)}]{n\+\_\+row }\end{DoxyParamCaption})}
 
 
 
@@ -335,16 +307,12 @@ Solve a single cyclic tridiagonal system of equations.
 {\em n\+\_\+row} & Number of rows in each process, size of a tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 388 of file pascal\+\_\+tdma.\+f90.
-
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=341pt]{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_cgraph}
+\includegraphics[width=339pt]{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -352,6 +320,6 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_icgraph}
+\includegraphics[width=345pt]{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043_icgraph}
 \end{center}
 \end{figure}

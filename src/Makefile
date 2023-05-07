@@ -4,11 +4,18 @@ LIB = libpascal_tdma.a
 
 OBJDIR = ./obj
 
-TDMAS = $(OBJDIR)/tdmas.o
 RANGE = $(OBJDIR)/para_range.o
+TDMAS = $(OBJDIR)/tdmas.o
 PTDMA  = $(OBJDIR)/pascal_tdma.o
 
-OBJS   = $(TDMAS) $(RANGE) $(PTDMA)
+TDMAS_CUDA = $(OBJDIR)/tdmas_cuda.o
+PTDMA_CUDA  = $(OBJDIR)/pascal_tdma_cuda.o
+
+OBJS   = $(RANGE) $(TDMAS) $(PTDMA)
+
+ifdef USE_CUDA
+    OBJS += $(TDMAS_CUDA) $(PTDMA_CUDA)
+endif
 
 all: $(LIB) inc
 
@@ -20,6 +27,8 @@ inc: $(LIB)
 	cp $(OBJDIR)/*.mod ../include
 
 $(OBJDIR)/%.o: %.f90
+	$(FC) $(FLAG) -c $^ -o $@  -module $(OBJDIR) -I$(OBJDIR)
+$(OBJDIR)/%.o: %.cuf
 	$(FC) $(FLAG) -c $^ -o $@  -module $(OBJDIR) -I$(OBJDIR)
 $(OBJDIR)/%.o:$(OBJDIR)/%.mod
 

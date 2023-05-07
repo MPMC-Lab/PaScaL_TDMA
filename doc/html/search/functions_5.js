@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['tdma_5fcycl_5fmany',['tdma_cycl_many',['../tdmas_8f90.html#a6c50d548eaa4b5e9b96ccbf8f65cb12a',1,'tdmas.f90']]],
-  ['tdma_5fcycl_5fsingle',['tdma_cycl_single',['../tdmas_8f90.html#a4cb1f95e9c608085c5bb19baff639d9e',1,'tdmas.f90']]],
-  ['tdma_5fmany',['tdma_many',['../tdmas_8f90.html#ab8cc761496e63e21ee8379d4fc077f05',1,'tdmas.f90']]],
-  ['tdma_5fsingle',['tdma_single',['../tdmas_8f90.html#a4a6130fff49607012fefacc8640424a7',1,'tdmas.f90']]]
+  ['solve_5ftheta_5fplan_5fmany',['solve_theta_plan_many',['../namespacesolve__theta.html#a0b7fdb576c007dc344092bf40efb0f4b',1,'solve_theta']]],
+  ['solve_5ftheta_5fplan_5fmany_5fcuda',['solve_theta_plan_many_cuda',['../namespacesolve__theta.html#a84c4bdc671112259790470f6ad4c7e4c',1,'solve_theta']]],
+  ['solve_5ftheta_5fplan_5fsingle',['solve_theta_plan_single',['../namespacesolve__theta.html#a215d44e312ec3ab2a3ab44fa0613b100',1,'solve_theta']]]
 ];

@@ -3,6 +3,8 @@ var searchData=
   ['main',['main',['../main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d',1,'main.f90']]],
   ['main_2ef90',['main.f90',['../main_8f90.html',1,'']]],
   ['makefile_2einc',['Makefile.inc',['../_makefile_8inc.html',1,'']]],
+  ['message',['message',['../structnvtx_1_1nvtxeventattributes.html#a988faa8b845122161036f87fe2034ee1',1,'nvtx::nvtxeventattributes']]],
+  ['messagetype',['messagetype',['../structnvtx_1_1nvtxeventattributes.html#af2fd0cfacc31da95db6a9037ace4bcdc',1,'nvtx::nvtxeventattributes']]],
   ['mpi_5fcomm',['mpi_comm',['../structmpi__topology_1_1cart__comm__1d.html#ab9d9b0c2f72db4fb74c0264691778a45',1,'mpi_topology::cart_comm_1d']]],
   ['mpi_5fsubdomain',['mpi_subdomain',['../namespacempi__subdomain.html',1,'']]],
   ['mpi_5fsubdomain_2ef90',['mpi_subdomain.f90',['../mpi__subdomain_8f90.html',1,'']]],

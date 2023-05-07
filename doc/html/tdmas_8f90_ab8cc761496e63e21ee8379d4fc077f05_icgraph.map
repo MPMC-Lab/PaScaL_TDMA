@@ -1,6 +1,4 @@
 <map id="tdma_many" name="tdma_many">
-<area shape="rect" id="node1" title="Solve many tridiagonal systems of equations using the Thomas algorithm. First index indicates the num..." alt="" coords="505,12,596,37"/>
-<area shape="rect" id="node2" href="$namespacepascal__tdma.html#afa0c78b8377f5fe1059907befda3c940" title="Solve many tridiagonal systems of equations." alt="" coords="314,5,457,44"/>
-<area shape="rect" id="node3" href="$solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
-<area shape="rect" id="node4" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
+<area shape="rect" id="node2" href="$namespacepascal__tdma.html#afa0c78b8377f5fe1059907befda3c940" title="Solve many tridiagonal systems of equations. " alt="" coords="144,5,287,47"/>
+<area shape="rect" id="node3" href="$namespacesolve__theta.html#a0b7fdb576c007dc344092bf40efb0f4b" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA. " alt="" coords="335,5,463,47"/>
 </map>

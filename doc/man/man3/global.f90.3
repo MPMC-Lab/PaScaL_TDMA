@@ -1,0 +1,223 @@
+.TH "/home/jihoon/Develop/PaScaL_TDMA/examples/global.f90" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jihoon/Develop/PaScaL_TDMA/examples/global.f90 \- This file contains a module of global parameters for the example problem of PaScaL_TDMA\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "module \fBglobal\fP"
+.br
+.RI "Module for global parameters\&. "
+.in -1c
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine \fBglobal::global_inputpara\fP (np_dim)"
+.br
+.RI "Assign global parameters\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "double precision, parameter \fBglobal::pi\fP = acos(\-1\&.d0)"
+.br
+.ti -1c
+.RI "double precision \fBglobal::pr\fP"
+.br
+.RI "Prandtl number\&. "
+.ti -1c
+.RI "double precision \fBglobal::ra\fP"
+.br
+.RI "Reyleigh number\&. "
+.ti -1c
+.RI "integer \fBglobal::tmax\fP"
+.br
+.RI "Maximum number of iteration steps\&. "
+.ti -1c
+.RI "double precision \fBglobal::dt\fP"
+.br
+.RI "Length of time step\&. "
+.ti -1c
+.RI "double precision \fBglobal::dtstart\fP"
+.br
+.RI "Initial dt\&. "
+.ti -1c
+.RI "double precision \fBglobal::tstart\fP"
+.br
+.RI "Initial simulation time\&. "
+.ti -1c
+.RI "double precision \fBglobal::theta_cold\fP"
+.br
+.RI "Boundary temperature of cold wall\&. "
+.ti -1c
+.RI "double precision \fBglobal::theta_hot\fP"
+.br
+.RI "Boundary temperature of hot wall\&. "
+.ti -1c
+.RI "double precision \fBglobal::alphag\fP"
+.br
+.RI "Thermal expansion coefficient x gravitational acceleration\&. "
+.ti -1c
+.RI "double precision \fBglobal::nu\fP"
+.br
+.RI "Kinematic viscosity\&. "
+.ti -1c
+.RI "double precision \fBglobal::ct\fP"
+.br
+.RI "Thermal diffusivity\&. "
+.ti -1c
+.RI "integer \fBglobal::thread_in_x\fP"
+.br
+.ti -1c
+.RI "integer \fBglobal::thread_in_y\fP"
+.br
+.ti -1c
+.RI "integer \fBglobal::thread_in_z\fP"
+.br
+.ti -1c
+.RI "integer \fBglobal::thread_in_x_pascal\fP"
+.br
+.ti -1c
+.RI "integer \fBglobal::thread_in_y_pascal\fP"
+.br
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBglobal::nx\fP"
+.br
+.RI "Grid numbers in each direction\&. "
+.ti -1c
+.RI "integer \fBglobal::ny\fP"
+.br
+.ti -1c
+.RI "integer \fBglobal::nz\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBglobal::nxm\fP"
+.br
+.RI "Grid numbers minus 1 in each direction\&. "
+.ti -1c
+.RI "integer \fBglobal::nym\fP"
+.br
+.ti -1c
+.RI "integer \fBglobal::nzm\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBglobal::nxp\fP"
+.br
+.RI "Grid numbers plus 1 in each direction\&. "
+.ti -1c
+.RI "integer \fBglobal::nyp\fP"
+.br
+.ti -1c
+.RI "integer \fBglobal::nzp\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision \fBglobal::lx\fP"
+.br
+.RI "Lengths of the physical domain\&. "
+.ti -1c
+.RI "double precision \fBglobal::ly\fP"
+.br
+.ti -1c
+.RI "double precision \fBglobal::lz\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision \fBglobal::dx\fP"
+.br
+.RI "Discretized grid lengths of the physical domain\&. "
+.ti -1c
+.RI "double precision \fBglobal::dy\fP"
+.br
+.ti -1c
+.RI "double precision \fBglobal::dz\fP"
+.br
+.in -1c
+.in -1c
+.SH "Detailed Description"
+.PP 
+This file contains a module of global parameters for the example problem of PaScaL_TDMA\&. 
+
+The target example problem is the three-dimensional(3D) time-dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries\&. 
+.PP
+\fBAuthor:\fP
+.RS 4
+
+.IP "\(bu" 2
+Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.IP "\(bu" 2
+Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+.IP "\(bu" 2
+Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.PP
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+March 2023 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+2\&.0 
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2019-2023 Kiha Kim and Jung-Il choi, Yonsei University and Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved\&. 
+.RE
+.PP
+\fBLicense \fP
+.RS 4
+This project is release under the terms of the MIT License (see LICENSE in ) 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

@@ -1,5 +1,5 @@
-\hypertarget{main_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/pascal\+\_\+tdma/examples/main.f90 File Reference}
-\label{main_8f90}\index{/Users/jihoon/Documents/develop/pascal\_tdma/examples/main.f90@{/Users/jihoon/Documents/develop/pascal\_tdma/examples/main.f90}}
+\hypertarget{main_8f90}{}\section{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/main.f90 File Reference}
+\label{main_8f90}\index{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/main.\+f90@{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/main.\+f90}}
 
 
 This file contains the main subroutines for an example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA.  
@@ -8,9 +8,9 @@ This file contains the main subroutines for an example problem of Pa\+Sca\+L\+\_
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-program \mbox{\hyperlink{main_8f90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}}
+program \hyperlink{main_8f90_a8ec2266d83cd6c0b762cbcbc92c0af3d}{main}
 \begin{DoxyCompactList}\small\item\em Main execution program for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. \end{DoxyCompactList}\item 
-subroutine \mbox{\hyperlink{main_8f90_af0a1310807f21ee1a2c0fdf14c58b63b}{field\+\_\+file\+\_\+write}} (myrank, nprocs, theta\+\_\+sub)
+subroutine \hyperlink{main_8f90_af0a1310807f21ee1a2c0fdf14c58b63b}{field\+\_\+file\+\_\+write} (myrank, nprocs, theta\+\_\+sub)
 \begin{DoxyCompactList}\small\item\em Write the values of the field variable in an output file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -19,42 +19,38 @@ This file contains the main subroutines for an example problem of Pa\+Sca\+L\+\_
 
 The target example problem is a three-\/dimensional(3D) time-\/dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries. \begin{DoxyAuthor}{Author}
 
-\end{DoxyAuthor}
-
 \begin{DoxyItemize}
-\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\texttt{ k-\/kiha@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
-\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\texttt{ jhkang@kisti.\+re.\+kr}}), Korea Institute of Science and Technology Information
-\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\texttt{ jic@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\tt k-\/kiha@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\tt jhkang@kisti.\+re.\+kr}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\tt jic@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
 \end{DoxyItemize}
-
+\end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-June 2019 
+March 2023 
 \end{DoxyDate}
 \begin{DoxyVersion}{Version}
-1.\+0 
+2.\+0 
 \end{DoxyVersion}
 \begin{DoxyParagraph}{Copyright}
-Copyright (c) 2019 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
+Copyright (c) 2019-\/2023 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{License }
-
-\end{DoxyParagraph}
 This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE in ) 
+\end{DoxyParagraph}
+
 
 \subsection{Function/\+Subroutine Documentation}
 \mbox{\Hypertarget{main_8f90_af0a1310807f21ee1a2c0fdf14c58b63b}\label{main_8f90_af0a1310807f21ee1a2c0fdf14c58b63b}} 
-\index{main.f90@{main.f90}!field\_file\_write@{field\_file\_write}}
-\index{field\_file\_write@{field\_file\_write}!main.f90@{main.f90}}
-\subsubsection{\texorpdfstring{field\_file\_write()}{field\_file\_write()}}
+\index{main.\+f90@{main.\+f90}!field\+\_\+file\+\_\+write@{field\+\_\+file\+\_\+write}}
+\index{field\+\_\+file\+\_\+write@{field\+\_\+file\+\_\+write}!main.\+f90@{main.\+f90}}
+\subsubsection{\texorpdfstring{field\+\_\+file\+\_\+write()}{field\_file\_write()}}
 {\footnotesize\ttfamily subroutine field\+\_\+file\+\_\+write (\begin{DoxyParamCaption}\item[{integer, intent(in)}]{myrank,  }\item[{integer, intent(in)}]{nprocs,  }\item[{double precision, dimension(0\+:nx\+\_\+sub, 0\+:ny\+\_\+sub, 0\+:nz\+\_\+sub), intent(in)}]{theta\+\_\+sub }\end{DoxyParamCaption})}
 
 
 
 Write the values of the field variable in an output file. 
 
-It writes the values of the field variables using two methods; single task IO and post assembly IO. In the single task IO, each process writes the values in its own file. In the post assembly IO,
-
-each process send data to a master process, which writes the obtained data in a single file. 
+It writes the values of the field variables using two methods; single task IO and post assembly IO. In the single task IO, each process writes the values in its own file. In the post assembly IO, each process send data to a master process, which writes the obtained data in a single file. 
 \begin{DoxyParams}{Parameters}
 {\em myrank} & Rank ID in M\+P\+I\+\_\+\+C\+O\+M\+M\+\_\+\+W\+O\+R\+LD \\
 \hline
@@ -63,10 +59,6 @@ each process send data to a master process, which writes the obtained data in a 
 {\em theta\+\_\+sub} & Field variable to write \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 118 of file main.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -76,18 +68,14 @@ Here is the caller graph for this function\+:
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{main_8f90_a8ec2266d83cd6c0b762cbcbc92c0af3d}\label{main_8f90_a8ec2266d83cd6c0b762cbcbc92c0af3d}} 
-\index{main.f90@{main.f90}!main@{main}}
-\index{main@{main}!main.f90@{main.f90}}
+\index{main.\+f90@{main.\+f90}!main@{main}}
+\index{main@{main}!main.\+f90@{main.\+f90}}
 \subsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily program main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Main execution program for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
-
-
-
-Definition at line 24 of file main.\+f90.
 
 Here is the call graph for this function\+:
 \nopagebreak

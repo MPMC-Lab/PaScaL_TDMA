@@ -1,5 +1,5 @@
-\hypertarget{structpascal__tdma_1_1ptdma__plan__single}{}\section{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single Type Reference}
-\label{structpascal__tdma_1_1ptdma__plan__single}\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
+\hypertarget{structpascal__tdma_1_1ptdma__plan__single}{}\section{pascal\+\_\+tdma\+:\+:ptdma\+\_\+plan\+\_\+single Type Reference}
+\label{structpascal__tdma_1_1ptdma__plan__single}\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
 
 
 Execution plan for a single tridiagonal system of equations.  
@@ -8,36 +8,38 @@ Execution plan for a single tridiagonal system of equations.
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a073cddefd8ef983b185b6727d8ad7de6}{ptdma\+\_\+world}}
+integer \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a073cddefd8ef983b185b6727d8ad7de6}{ptdma\+\_\+world}
 \begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a91fd8fb919f9b7d3137b13fcaa55dc1b}{n\+\_\+row\+\_\+rt}}
+integer \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a91fd8fb919f9b7d3137b13fcaa55dc1b}{n\+\_\+row\+\_\+rt}
 \begin{DoxyCompactList}\small\item\em Number of rows of a reduced tridiagonal system after M\+P\+I\+\_\+\+Gather. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_af0d3b3bce8b9956aa9e80ba0712a9a9d}{gather\+\_\+rank}}
+integer \hyperlink{structpascal__tdma_1_1ptdma__plan__single_af0d3b3bce8b9956aa9e80ba0712a9a9d}{gather\+\_\+rank}
 \begin{DoxyCompactList}\small\item\em Destination rank of M\+P\+I\+\_\+\+Igather. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_af473533b36508af4e0752cee8d182334}{myrank}}
-\begin{DoxyCompactList}\small\item\em Current rank ID in the communicator of ptdma\+\_\+world. \end{DoxyCompactList}\end{DoxyCompactItemize}
+integer \hyperlink{structpascal__tdma_1_1ptdma__plan__single_af473533b36508af4e0752cee8d182334}{myrank}
+\begin{DoxyCompactList}\small\item\em Current rank ID in the communicator of ptdma\+\_\+world. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma_1_1ptdma__plan__single_ad37699922fd3eb9c8ef7c42a60583dc7}{nprocs}
+\begin{DoxyCompactList}\small\item\em Communicator size of ptdma\+\_\+world. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a732d93dcbef429c1396a6f7ace9cefa6}{a\+\_\+rd}}
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a732d93dcbef429c1396a6f7ace9cefa6}{a\+\_\+rd}
 \begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_acf24e954fa50a47ece2c59598b81c157}{b\+\_\+rd}}
-\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a9450979ebd66ed321f27165c8e13629f}{c\+\_\+rd}}
-\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a8b99edaa7ecd71fe6ceafd9c69d9a374}{d\+\_\+rd}}
-\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) \end{DoxyCompactList}\end{DoxyCompactItemize}
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_acf24e954fa50a47ece2c59598b81c157}{b\+\_\+rd}
+\item 
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a9450979ebd66ed321f27165c8e13629f}{c\+\_\+rd}
+\item 
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a8b99edaa7ecd71fe6ceafd9c69d9a374}{d\+\_\+rd}
+\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_ad8bed95f594c23d7df9467e204025a74}{a\+\_\+rt}}
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_ad8bed95f594c23d7df9467e204025a74}{a\+\_\+rt}
 \begin{DoxyCompactList}\small\item\em Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (2) changes to (2$\ast$np) after transpose. \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a8e9487525ccef0d45c8a5440103613b0}{b\+\_\+rt}}
-\begin{DoxyCompactList}\small\item\em Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (2) changes to (2$\ast$np) after transpose. \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a7169b89281236696ea6eb5631ce44d95}{c\+\_\+rt}}
-\begin{DoxyCompactList}\small\item\em Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (2) changes to (2$\ast$np) after transpose. \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single_a627be8624cd48aa5b3aad7f6cf8d0b08}{d\+\_\+rt}}
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a8e9487525ccef0d45c8a5440103613b0}{b\+\_\+rt}
+\item 
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a7169b89281236696ea6eb5631ce44d95}{c\+\_\+rt}
+\item 
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma_1_1ptdma__plan__single_a627be8624cd48aa5b3aad7f6cf8d0b08}{d\+\_\+rt}
 \begin{DoxyCompactList}\small\item\em Coefficient arrays, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -47,140 +49,80 @@ Execution plan for a single tridiagonal system of equations.
 
 It uses the M\+P\+I\+\_\+\+Igather function to build the reduced tridiagonal system of equations to a specified M\+PI process. 
 
-Definition at line 97 of file pascal\+\_\+tdma.\+f90.
-
-
-
 \subsection{Member Data Documentation}
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a732d93dcbef429c1396a6f7ace9cefa6}\label{structpascal__tdma_1_1ptdma__plan__single_a732d93dcbef429c1396a6f7ace9cefa6}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!a\_rd@{a\_rd}}
-\index{a\_rd@{a\_rd}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{a\_rd}{a\_rd}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!a\+\_\+rd@{a\+\_\+rd}}
+\index{a\+\_\+rd@{a\+\_\+rd}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{a\+\_\+rd}{a\_rd}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::a\+\_\+rd}
 
 
 
 Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) 
 
-
-
-Definition at line 107 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_ad8bed95f594c23d7df9467e204025a74}\label{structpascal__tdma_1_1ptdma__plan__single_ad8bed95f594c23d7df9467e204025a74}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!a\_rt@{a\_rt}}
-\index{a\_rt@{a\_rt}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{a\_rt}{a\_rt}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!a\+\_\+rt@{a\+\_\+rt}}
+\index{a\+\_\+rt@{a\+\_\+rt}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{a\+\_\+rt}{a\_rt}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::a\+\_\+rt}
 
 
 
 Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (2) changes to (2$\ast$np) after transpose. 
 
-
-
-Definition at line 112 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_acf24e954fa50a47ece2c59598b81c157}\label{structpascal__tdma_1_1ptdma__plan__single_acf24e954fa50a47ece2c59598b81c157}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!b\_rd@{b\_rd}}
-\index{b\_rd@{b\_rd}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{b\_rd}{b\_rd}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!b\+\_\+rd@{b\+\_\+rd}}
+\index{b\+\_\+rd@{b\+\_\+rd}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{b\+\_\+rd}{b\_rd}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::b\+\_\+rd}
 
-
-
-Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) 
-
-
-
-Definition at line 107 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a8e9487525ccef0d45c8a5440103613b0}\label{structpascal__tdma_1_1ptdma__plan__single_a8e9487525ccef0d45c8a5440103613b0}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!b\_rt@{b\_rt}}
-\index{b\_rt@{b\_rt}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{b\_rt}{b\_rt}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!b\+\_\+rt@{b\+\_\+rt}}
+\index{b\+\_\+rt@{b\+\_\+rt}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{b\+\_\+rt}{b\_rt}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::b\+\_\+rt}
 
-
-
-Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (2) changes to (2$\ast$np) after transpose. 
-
-
-
-Definition at line 112 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a9450979ebd66ed321f27165c8e13629f}\label{structpascal__tdma_1_1ptdma__plan__single_a9450979ebd66ed321f27165c8e13629f}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!c\_rd@{c\_rd}}
-\index{c\_rd@{c\_rd}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{c\_rd}{c\_rd}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!c\+\_\+rd@{c\+\_\+rd}}
+\index{c\+\_\+rd@{c\+\_\+rd}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{c\+\_\+rd}{c\_rd}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::c\+\_\+rd}
 
-
-
-Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) 
-
-
-
-Definition at line 107 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a7169b89281236696ea6eb5631ce44d95}\label{structpascal__tdma_1_1ptdma__plan__single_a7169b89281236696ea6eb5631ce44d95}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!c\_rt@{c\_rt}}
-\index{c\_rt@{c\_rt}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{c\_rt}{c\_rt}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!c\+\_\+rt@{c\+\_\+rt}}
+\index{c\+\_\+rt@{c\+\_\+rt}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{c\+\_\+rt}{c\_rt}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::c\+\_\+rt}
 
-
-
-Coefficient arrays after transpose of a reduced system, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (2) changes to (2$\ast$np) after transpose. 
-
-
-
-Definition at line 112 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a8b99edaa7ecd71fe6ceafd9c69d9a374}\label{structpascal__tdma_1_1ptdma__plan__single_a8b99edaa7ecd71fe6ceafd9c69d9a374}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!d\_rd@{d\_rd}}
-\index{d\_rd@{d\_rd}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{d\_rd}{d\_rd}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!d\+\_\+rd@{d\+\_\+rd}}
+\index{d\+\_\+rd@{d\+\_\+rd}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{d\+\_\+rd}{d\_rd}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::d\+\_\+rd}
 
-
-
-Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (n) is reduced to (2) 
-
-
-
-Definition at line 107 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a627be8624cd48aa5b3aad7f6cf8d0b08}\label{structpascal__tdma_1_1ptdma__plan__single_a627be8624cd48aa5b3aad7f6cf8d0b08}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!d\_rt@{d\_rt}}
-\index{d\_rt@{d\_rt}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{d\_rt}{d\_rt}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!d\+\_\+rt@{d\+\_\+rt}}
+\index{d\+\_\+rt@{d\+\_\+rt}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{d\+\_\+rt}{d\_rt}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::d\+\_\+rt}
 
 
 
 Coefficient arrays, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. 
 
-
-
-Definition at line 112 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_af0d3b3bce8b9956aa9e80ba0712a9a9d}\label{structpascal__tdma_1_1ptdma__plan__single_af0d3b3bce8b9956aa9e80ba0712a9a9d}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!gather\_rank@{gather\_rank}}
-\index{gather\_rank@{gather\_rank}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{gather\_rank}{gather\_rank}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!gather\+\_\+rank@{gather\+\_\+rank}}
+\index{gather\+\_\+rank@{gather\+\_\+rank}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{gather\+\_\+rank}{gather\_rank}}
 {\footnotesize\ttfamily integer pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::gather\+\_\+rank}
 
 
 
 Destination rank of M\+P\+I\+\_\+\+Igather. 
 
-
-
-Definition at line 102 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_af473533b36508af4e0752cee8d182334}\label{structpascal__tdma_1_1ptdma__plan__single_af473533b36508af4e0752cee8d182334}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!myrank@{myrank}}
-\index{myrank@{myrank}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!myrank@{myrank}}
+\index{myrank@{myrank}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
 \subsubsection{\texorpdfstring{myrank}{myrank}}
 {\footnotesize\ttfamily integer pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::myrank}
 
@@ -188,28 +130,30 @@ Definition at line 102 of file pascal\+\_\+tdma.\+f90.
 
 Current rank ID in the communicator of ptdma\+\_\+world. 
 
-
-
-Definition at line 103 of file pascal\+\_\+tdma.\+f90.
-
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a91fd8fb919f9b7d3137b13fcaa55dc1b}\label{structpascal__tdma_1_1ptdma__plan__single_a91fd8fb919f9b7d3137b13fcaa55dc1b}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!n\_row\_rt@{n\_row\_rt}}
-\index{n\_row\_rt@{n\_row\_rt}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{n\_row\_rt}{n\_row\_rt}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!n\+\_\+row\+\_\+rt@{n\+\_\+row\+\_\+rt}}
+\index{n\+\_\+row\+\_\+rt@{n\+\_\+row\+\_\+rt}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{n\+\_\+row\+\_\+rt}{n\_row\_rt}}
 {\footnotesize\ttfamily integer pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::n\+\_\+row\+\_\+rt}
 
 
 
 Number of rows of a reduced tridiagonal system after M\+P\+I\+\_\+\+Gather. 
 
+\mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_ad37699922fd3eb9c8ef7c42a60583dc7}\label{structpascal__tdma_1_1ptdma__plan__single_ad37699922fd3eb9c8ef7c42a60583dc7}} 
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!nprocs@{nprocs}}
+\index{nprocs@{nprocs}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{nprocs}{nprocs}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::nprocs}
 
 
-Definition at line 100 of file pascal\+\_\+tdma.\+f90.
+
+Communicator size of ptdma\+\_\+world. 
 
 \mbox{\Hypertarget{structpascal__tdma_1_1ptdma__plan__single_a073cddefd8ef983b185b6727d8ad7de6}\label{structpascal__tdma_1_1ptdma__plan__single_a073cddefd8ef983b185b6727d8ad7de6}} 
-\index{pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}!ptdma\_world@{ptdma\_world}}
-\index{ptdma\_world@{ptdma\_world}!pascal\_tdma::ptdma\_plan\_single@{pascal\_tdma::ptdma\_plan\_single}}
-\subsubsection{\texorpdfstring{ptdma\_world}{ptdma\_world}}
+\index{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}!ptdma\+\_\+world@{ptdma\+\_\+world}}
+\index{ptdma\+\_\+world@{ptdma\+\_\+world}!pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single@{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+\subsubsection{\texorpdfstring{ptdma\+\_\+world}{ptdma\_world}}
 {\footnotesize\ttfamily integer pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single\+::ptdma\+\_\+world}
 
 
@@ -218,10 +162,6 @@ Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA.
 
 
 
-Definition at line 99 of file pascal\+\_\+tdma.\+f90.
-
-
-
 The documentation for this type was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/\+Users/jihoon/\+Documents/develop/pascal\+\_\+tdma/src/\mbox{\hyperlink{pascal__tdma_8f90}{pascal\+\_\+tdma.\+f90}}\end{DoxyCompactItemize}
+/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/\hyperlink{pascal__tdma_8f90}{pascal\+\_\+tdma.\+f90}\end{DoxyCompactItemize}

@@ -1,0 +1,236 @@
+.TH "pascal_tdma_cuda::ptdma_plan_many_cuda" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+pascal_tdma_cuda::ptdma_plan_many_cuda \- Execution plan for many tridiagonal systems of equations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "integer \fBptdma_world\fP"
+.br
+.RI "Single dimensional subcommunicator to assemble data for the reduced TDMA\&. "
+.ti -1c
+.RI "integer \fBnprocs\fP"
+.br
+.RI "Communicator size of ptdma_world\&. "
+.ti -1c
+.RI "integer \fBnx_sys\fP"
+.br
+.RI "Number of tridiagonal systems of equations in x-direction per process\&. "
+.ti -1c
+.RI "integer \fBny_sys\fP"
+.br
+.RI "Number of tridiagonal systems of equations in y-direction per process\&. "
+.ti -1c
+.RI "integer \fBnz_row\fP"
+.br
+.RI "Row size of partitioned tridiagonal matrix in z-direction per process\&. "
+.ti -1c
+.RI "integer \fBnx_sys_rt\fP"
+.br
+.RI "Number of tridiagonal systems to be solved in each process after transpose\&. "
+.ti -1c
+.RI "integer \fBnz_row_rt\fP"
+.br
+.RI "Number of rows of a reduced tridiagonal systems after transpose\&. "
+.ti -1c
+.RI "integer \fBnz_row_rd\fP"
+.br
+.RI "Number of rows of a reduced tridiagonal systems before transpose, 2\&. "
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, allocatable \fBdevice\fP"
+.br
+.RI "Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs\&. The orginal dimension (m:n) is reduced to (m:2) The arrays are allocated in the device memory\&. "
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBdimension\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBa_rd_d\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBb_rd_d\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBc_rd_d\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBd_rd_d\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, allocatable \fBe_buff\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, allocatable \fBa_rt_d\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBb_rt_d\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBc_rt_d\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBd_rt_d\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBe_rt_d\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, allocatable \fBsendbuf\fP"
+.br
+.ti -1c
+.RI "double precision, allocatable \fBrecvbuf\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "type(dim3) \fBthreads\fP"
+.br
+.RI "Threads and blocks for CUDA kernel\&. "
+.ti -1c
+.RI "type(dim3) \fBblocks\fP"
+.br
+.ti -1c
+.RI "type(dim3) \fBblocks_rt\fP"
+.br
+.ti -1c
+.RI "type(dim3) \fBblocks_alltoall\fP"
+.br
+.ti -1c
+.RI "integer \fBshared_buffer_size\fP"
+.br
+.RI "@ "
+.in -1c
+.in -1c
+.SH "Detailed Description"
+.PP 
+Execution plan for many tridiagonal systems of equations\&. 
+
+It uses MPI_Ialltoall function to distribute the modified tridiagonal systems to MPI processes and build the reduced tridiagonal systems of equations\&. Currently it supports the equal size of domains\&. It does not use derived datatypes\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::a_rd_d"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::a_rt_d"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::b_rd_d"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::b_rt_d"
+
+.SS "type(dim3) pascal_tdma_cuda::ptdma_plan_many_cuda::blocks"
+
+.SS "type(dim3) pascal_tdma_cuda::ptdma_plan_many_cuda::blocks_alltoall"
+
+.SS "type(dim3) pascal_tdma_cuda::ptdma_plan_many_cuda::blocks_rt"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::c_rd_d"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::c_rt_d"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::d_rd_d"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::d_rt_d"
+
+.SS "double precision allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::device"
+
+.PP
+Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs\&. The orginal dimension (m:n) is reduced to (m:2) The arrays are allocated in the device memory\&. Buffers allocated in device memory for all-to-all communication\&.
+.PP
+Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (m:2) changes to (m/np: 2*np) after transpose\&. The arrays are allocated in the device memory\&.
+.PP
+Coefficient arrays for cyclic TDMA in case of nprocs = 1\&. The arrays are allocated in the device memory\&. 
+.SS "double precision pascal_tdma_cuda::ptdma_plan_many_cuda::dimension"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::e_buff"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::e_rt_d"
+
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::nprocs"
+
+.PP
+Communicator size of ptdma_world\&. 
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::nx_sys"
+
+.PP
+Number of tridiagonal systems of equations in x-direction per process\&. 
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::nx_sys_rt"
+
+.PP
+Number of tridiagonal systems to be solved in each process after transpose\&. 
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::ny_sys"
+
+.PP
+Number of tridiagonal systems of equations in y-direction per process\&. 
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::nz_row"
+
+.PP
+Row size of partitioned tridiagonal matrix in z-direction per process\&. 
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::nz_row_rd"
+
+.PP
+Number of rows of a reduced tridiagonal systems before transpose, 2\&. 
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::nz_row_rt"
+
+.PP
+Number of rows of a reduced tridiagonal systems after transpose\&. 
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::ptdma_world"
+
+.PP
+Single dimensional subcommunicator to assemble data for the reduced TDMA\&. 
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::recvbuf"
+
+.SS "double precision, allocatable pascal_tdma_cuda::ptdma_plan_many_cuda::sendbuf"
+
+.SS "integer pascal_tdma_cuda::ptdma_plan_many_cuda::shared_buffer_size"
+
+.PP
+@ shared buffer size 
+.SS "type(dim3) pascal_tdma_cuda::ptdma_plan_many_cuda::threads"
+
+.PP
+Threads and blocks for CUDA kernel\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

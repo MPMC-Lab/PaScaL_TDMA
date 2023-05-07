@@ -1,5 +1,4 @@
 <map id="tdma_single" name="tdma_single">
-<area shape="rect" id="node1" title="Solve a single tridiagonal system of equations using the Thomas algorithm." alt="" coords="409,12,502,37"/>
-<area shape="rect" id="node2" href="$namespacepascal__tdma.html#ab14e132231d4b53fd65dd333ccc85a50" title="Solve a single tridiagonal system of equation." alt="" coords="218,5,361,44"/>
-<area shape="rect" id="node3" href="$solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
+<area shape="rect" id="node2" href="$namespacepascal__tdma.html#ab14e132231d4b53fd65dd333ccc85a50" title="Solve a single tridiagonal system of equation. " alt="" coords="145,5,288,47"/>
+<area shape="rect" id="node3" href="$namespacesolve__theta.html#a215d44e312ec3ab2a3ab44fa0613b100" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA. ..." alt="" coords="336,5,467,47"/>
 </map>

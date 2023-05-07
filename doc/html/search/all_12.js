@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['x_5fsub',['x_sub',['../namespacempi__subdomain.html#a978554e1520c79471ef3793ed1872b37',1,'mpi_subdomain']]]
+  ['west_5frank',['west_rank',['../structmpi__topology_1_1cart__comm__1d.html#a63baa1f74126ffda0b67af1c487dcd45',1,'mpi_topology::cart_comm_1d']]]
 ];

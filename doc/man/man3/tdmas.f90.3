@@ -1,0 +1,153 @@
+.TH "/home/jihoon/Develop/PaScaL_TDMA/src/tdmas.f90" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jihoon/Develop/PaScaL_TDMA/src/tdmas.f90 \- Tridiagonal matrix (TDM) solvers using the Thomas algorithm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine \fBtdma_single\fP (a, b, c, d, n1)"
+.br
+.RI "Solve a single tridiagonal system of equations using the Thomas algorithm\&. "
+.ti -1c
+.RI "subroutine \fBtdma_cycl_single\fP (a, b, c, d, n1)"
+.br
+.RI "Solve a single cyclic tridiagonal system of equations using the Thomas algorithm\&. "
+.ti -1c
+.RI "subroutine \fBtdma_many\fP (a, b, c, d, n1, n2)"
+.br
+.RI "Solve many tridiagonal systems of equations using the Thomas algorithm\&. First index indicates the number of independent many tridiagonal systems to use vectorization\&. Second index indicates the row number in the tridiagonal system \&. "
+.ti -1c
+.RI "subroutine \fBtdma_cycl_many\fP (a, b, c, d, n1, n2)"
+.br
+.RI "Solve many cyclic tridiagonal systems of equations using the Thomas algorithm\&. First index indicates the number of independent many tridiagonal systems to use vectorization\&. Second index indicates the row number in the tridiagonal system\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Tridiagonal matrix (TDM) solvers using the Thomas algorithm\&. 
+
+A single TDM solver and many TDM solver with non-cyclic and cyclic conditions\&. 
+.PP
+\fBAuthor:\fP
+.RS 4
+
+.IP "\(bu" 2
+Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.IP "\(bu" 2
+Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+.IP "\(bu" 2
+Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.PP
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+March 2023 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+2\&.0 
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2019-2023 Kiha Kim and Jung-Il choi, Yonsei University and Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved\&. 
+.RE
+.PP
+\fBLicense \fP
+.RS 4
+This project is release under the terms of the MIT License (see LICENSE in ) 
+.RE
+.PP
+
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine tdma_cycl_many (double precision, dimension(n1,n2), intent(inout) a, double precision, dimension(n1,n2), intent(inout) b, double precision, dimension(n1,n2), intent(inout) c, double precision, dimension(n1,n2), intent(inout) d, integer, intent(in) n1, integer, intent(in) n2)"
+
+.PP
+Solve many cyclic tridiagonal systems of equations using the Thomas algorithm\&. First index indicates the number of independent many tridiagonal systems to use vectorization\&. Second index indicates the row number in the tridiagonal system\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP Coefficient array in lower diagonal elements 
+.br
+\fIb\fP Coefficient array in diagonal elements 
+.br
+\fIc\fP Coefficient array in upper diagonal elements 
+.br
+\fId\fP Coefficient array in the right-hand side terms 
+.br
+\fIn1\fP Number of tridiagonal systems per process 
+.br
+\fIn2\fP Number of rows in each process, size of the tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SS "subroutine tdma_cycl_single (double precision, dimension(n1), intent(inout) a, double precision, dimension(n1), intent(inout) b, double precision, dimension(n1), intent(inout) c, double precision, dimension(n1), intent(inout) d, integer, intent(in) n1)"
+
+.PP
+Solve a single cyclic tridiagonal system of equations using the Thomas algorithm\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP Coefficients in lower diagonal elements 
+.br
+\fIb\fP Coefficients in diagonal elements 
+.br
+\fIc\fP Coefficients in upper diagonal elements 
+.br
+\fId\fP Coefficients in the right-hand side terms 
+.br
+\fIn1\fP Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SS "subroutine tdma_many (double precision, dimension(n1,n2), intent(inout) a, double precision, dimension(n1,n2), intent(inout) b, double precision, dimension(n1,n2), intent(inout) c, double precision, dimension(n1,n2), intent(inout) d, integer, intent(in) n1, integer, intent(in) n2)"
+
+.PP
+Solve many tridiagonal systems of equations using the Thomas algorithm\&. First index indicates the number of independent many tridiagonal systems to use vectorization\&. Second index indicates the row number in the tridiagonal system \&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP Coefficient array in lower diagonal elements 
+.br
+\fIb\fP Coefficient array in diagonal elements 
+.br
+\fIc\fP Coefficient array in upper diagonal elements 
+.br
+\fId\fP Coefficient array in the right-hand side terms 
+.br
+\fIn1\fP Number of tridiagonal systems per process 
+.br
+\fIn2\fP Number of rows in each process, size of the tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SS "subroutine tdma_single (double precision, dimension(n1), intent(inout) a, double precision, dimension(n1), intent(inout) b, double precision, dimension(n1), intent(inout) c, double precision, dimension(n1), intent(inout) d, integer, intent(in) n1)"
+
+.PP
+Solve a single tridiagonal system of equations using the Thomas algorithm\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIa\fP Coefficients in lower diagonal elements 
+.br
+\fIb\fP Coefficients in diagonal elements 
+.br
+\fIc\fP Coefficients in upper diagonal elements 
+.br
+\fId\fP Coefficients in the right-hand side terms 
+.br
+\fIn1\fP Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

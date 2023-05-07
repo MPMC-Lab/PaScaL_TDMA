@@ -1,0 +1,161 @@
+\hypertarget{namespacepascal__tdma__cuda}{}\section{pascal\+\_\+tdma\+\_\+cuda Module Reference}
+\label{namespacepascal__tdma__cuda}\index{pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}}
+
+
+Module for Pa\+Sca\+L\+\_\+\+T\+D\+MA library with C\+U\+DA.  
+
+
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}{ptdma\+\_\+plan\+\_\+many\+\_\+cuda}
+\begin{DoxyCompactList}\small\item\em Execution plan for many tridiagonal systems of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_a84c442c238f7d1a18eef430aaa15e6c1}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda} (p, nx\+\_\+sys, ny\+\_\+sys, nz\+\_\+row, myrank, nprocs, mpi\+\_\+world, thread\+\_\+in)
+\begin{DoxyCompactList}\small\item\em Create a plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_a70734ba15cf5a093ac3ba2ccbc4f5330}{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda} (p)
+\begin{DoxyCompactList}\small\item\em Destroy the allocated arrays in the defined plan\+\_\+many. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_a0043d538e133925d9a37bf7bcdaf4b08}{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda} (p, a\+\_\+d, b\+\_\+d, c\+\_\+d, d\+\_\+d)
+\begin{DoxyCompactList}\small\item\em Solve many tridiagonal systems of equations. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_afdd30998c4a8aecc093c823e3212b57a}{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda} (p, a\+\_\+d, b\+\_\+d, c\+\_\+d, d\+\_\+d)
+\begin{DoxyCompactList}\small\item\em Solve many cyclic tridiagonal systems of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+
+\subsection{Detailed Description}
+Module for Pa\+Sca\+L\+\_\+\+T\+D\+MA library with C\+U\+DA. 
+
+It contains plans for tridiagonal systems of equations and subroutines for solving them using the defined plans. The operation of the library includes the following three phases\+: (1) Create a data structure called a plan with the information for communication and reduced systems. (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5 (3) Destroy the created plan 
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacepascal__tdma__cuda_a0043d538e133925d9a37bf7bcdaf4b08}\label{namespacepascal__tdma__cuda_a0043d538e133925d9a37bf7bcdaf4b08}} 
+\index{pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}!pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda@{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda}}
+\index{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda@{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda}!pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda()}{pascal\_tdma\_many\_solve\_cuda()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}{ptdma\+\_\+plan\+\_\+many\+\_\+cuda}), intent(inout)}]{p,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{a\+\_\+d,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{b\+\_\+d,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{c\+\_\+d,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{d\+\_\+d }\end{DoxyParamCaption})}
+
+
+
+Solve many tridiagonal systems of equations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Plan for many tridiagonal systems of equations \\
+\hline
+{\em a\+\_\+d} & Coefficient array of lower diagonal elements \\
+\hline
+{\em b\+\_\+d} & Coefficient array of diagonal elements \\
+\hline
+{\em c\+\_\+d} & Coefficient array of upper diagonal elements \\
+\hline
+{\em d\+\_\+d} & Coefficient array of right-\/hand side terms \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepascal__tdma__cuda_a0043d538e133925d9a37bf7bcdaf4b08_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacepascal__tdma__cuda_afdd30998c4a8aecc093c823e3212b57a}\label{namespacepascal__tdma__cuda_afdd30998c4a8aecc093c823e3212b57a}} 
+\index{pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}!pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda@{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda}}
+\index{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda@{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda}!pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda()}{pascal\_tdma\_many\_solve\_cycle\_cuda()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}{ptdma\+\_\+plan\+\_\+many\+\_\+cuda}), intent(inout)}]{p,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{a\+\_\+d,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{b\+\_\+d,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{c\+\_\+d,  }\item[{double precision, dimension(\+:, \+:, \+:)}]{d\+\_\+d }\end{DoxyParamCaption})}
+
+
+
+Solve many cyclic tridiagonal systems of equations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Plan for many tridiagonal systems of equations \\
+\hline
+{\em a\+\_\+d} & Coefficient array of lower diagonal elements \\
+\hline
+{\em b\+\_\+d} & Coefficient array of diagonal elements \\
+\hline
+{\em c\+\_\+d} & Coefficient array of upper diagonal elements \\
+\hline
+{\em d\+\_\+d} & Coefficient array of right-\/hand side terms \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepascal__tdma__cuda_afdd30998c4a8aecc093c823e3212b57a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacepascal__tdma__cuda_a84c442c238f7d1a18eef430aaa15e6c1}\label{namespacepascal__tdma__cuda_a84c442c238f7d1a18eef430aaa15e6c1}} 
+\index{pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}!pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda}}
+\index{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda}!pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda()}{pascal\_tdma\_plan\_many\_create\_cuda()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}{ptdma\+\_\+plan\+\_\+many\+\_\+cuda}), intent(inout)}]{p,  }\item[{integer, intent(in)}]{nx\+\_\+sys,  }\item[{integer, intent(in)}]{ny\+\_\+sys,  }\item[{integer, intent(in)}]{nz\+\_\+row,  }\item[{integer, intent(in)}]{myrank,  }\item[{integer, intent(in)}]{nprocs,  }\item[{integer, intent(in)}]{mpi\+\_\+world,  }\item[{type(dim3)}]{thread\+\_\+in }\end{DoxyParamCaption})}
+
+
+
+Create a plan for many tridiagonal systems of equations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Plan for a many tridiagonal system of equations \\
+\hline
+{\em nx\+\_\+sys} & Number of tridiagonal systems of equations in x-\/direction per process \\
+\hline
+{\em ny\+\_\+sys} & Number of tridiagonal systems of equations in y-\/direction per process \\
+\hline
+{\em nz\+\_\+row} & Row size of partitioned tridiagonal matrix in z-\/direction per process \\
+\hline
+{\em myrank} & Rank ID in mpi\+\_\+world \\
+\hline
+{\em nprocs} & Number of M\+PI process in mpi\+\_\+world \\
+\hline
+{\em mpi\+\_\+world} & Communicator for M\+P\+I\+\_\+\+Gather and M\+P\+I\+\_\+\+Scatter of reduced equations \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{namespacepascal__tdma__cuda_a84c442c238f7d1a18eef430aaa15e6c1_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepascal__tdma__cuda_a84c442c238f7d1a18eef430aaa15e6c1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacepascal__tdma__cuda_a70734ba15cf5a093ac3ba2ccbc4f5330}\label{namespacepascal__tdma__cuda_a70734ba15cf5a093ac3ba2ccbc4f5330}} 
+\index{pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}!pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda}}
+\index{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda@{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda}!pascal\+\_\+tdma\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda}}
+\subsubsection{\texorpdfstring{pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda()}{pascal\_tdma\_plan\_many\_destroy\_cuda()}}
+{\footnotesize\ttfamily subroutine, public pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda (\begin{DoxyParamCaption}\item[{type(\hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}{ptdma\+\_\+plan\+\_\+many\+\_\+cuda}), intent(inout)}]{p }\end{DoxyParamCaption})}
+
+
+
+Destroy the allocated arrays in the defined plan\+\_\+many. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & Plan for many tridiagonal systems of equations \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacepascal__tdma__cuda_a70734ba15cf5a093ac3ba2ccbc4f5330_icgraph}
+\end{center}
+\end{figure}

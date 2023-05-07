@@ -1,0 +1,25 @@
+\hypertarget{pascal__tdma__cuda_8f90}{}\section{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/pascal\+\_\+tdma\+\_\+cuda.f90 File Reference}
+\label{pascal__tdma__cuda_8f90}\index{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/pascal\+\_\+tdma\+\_\+cuda.\+f90@{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/pascal\+\_\+tdma\+\_\+cuda.\+f90}}
+\subsection*{Data Types}
+\begin{DoxyCompactItemize}
+\item 
+type \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}
+\begin{DoxyCompactList}\small\item\em Execution plan for many tridiagonal systems of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacepascal__tdma__cuda}{pascal\+\_\+tdma\+\_\+cuda}
+\begin{DoxyCompactList}\small\item\em Module for Pa\+Sca\+L\+\_\+\+T\+D\+MA library with C\+U\+DA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_a84c442c238f7d1a18eef430aaa15e6c1}{pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create\+\_\+cuda} (p, nx\+\_\+sys, ny\+\_\+sys, nz\+\_\+row, myrank, nprocs, mpi\+\_\+world, thread\+\_\+in)
+\begin{DoxyCompactList}\small\item\em Create a plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_a70734ba15cf5a093ac3ba2ccbc4f5330}{pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy\+\_\+cuda} (p)
+\begin{DoxyCompactList}\small\item\em Destroy the allocated arrays in the defined plan\+\_\+many. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_a0043d538e133925d9a37bf7bcdaf4b08}{pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cuda} (p, a\+\_\+d, b\+\_\+d, c\+\_\+d, d\+\_\+d)
+\begin{DoxyCompactList}\small\item\em Solve many tridiagonal systems of equations. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacepascal__tdma__cuda_afdd30998c4a8aecc093c823e3212b57a}{pascal\+\_\+tdma\+\_\+cuda\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle\+\_\+cuda} (p, a\+\_\+d, b\+\_\+d, c\+\_\+d, d\+\_\+d)
+\begin{DoxyCompactList}\small\item\em Solve many cyclic tridiagonal systems of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+

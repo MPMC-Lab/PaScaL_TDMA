@@ -1,0 +1,110 @@
+.TH "/home/jihoon/Develop/PaScaL_TDMA/src/pascal_tdma.f90" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jihoon/Develop/PaScaL_TDMA/src/pascal_tdma.f90 \- PaScaL_TDMA - Parallel and Scalable Library for TriDiagonal Matrix Algorithm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Types"
+
+.in +1c
+.ti -1c
+.RI "type \fBpascal_tdma::ptdma_plan_many\fP"
+.br
+.RI "Execution plan for many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "type \fBpascal_tdma::ptdma_plan_single\fP"
+.br
+.RI "Execution plan for a single tridiagonal system of equations\&. "
+.in -1c
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "module \fBpascal_tdma\fP"
+.br
+.RI "Module for PaScaL-TDMA library\&. "
+.in -1c
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_plan_single_create\fP (plan, myrank, nprocs, mpi_world, gather_rank)"
+.br
+.RI "Create a plan for a single tridiagonal system of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_plan_single_destroy\fP (plan)"
+.br
+.RI "Deallocate the allocated arrays in the defined plan_single \&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_plan_many_create\fP (plan, n_sys, myrank, nprocs, mpi_world)"
+.br
+.RI "Create a plan for many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_plan_many_destroy\fP (plan, nprocs)"
+.br
+.RI "Destroy the allocated arrays in the defined plan_many\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_single_solve\fP (plan, A, B, C, D, n_row)"
+.br
+.RI "Solve a single tridiagonal system of equation\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_single_solve_cycle\fP (plan, A, B, C, D, n_row)"
+.br
+.RI "Solve a single cyclic tridiagonal system of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_many_solve\fP (plan, A, B, C, D, n_sys, n_row)"
+.br
+.RI "Solve many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma::pascal_tdma_many_solve_cycle\fP (plan, A, B, C, D, n_sys, n_row)"
+.br
+.RI "Solve many cyclic tridiagonal systems of equations\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+PaScaL_TDMA - Parallel and Scalable Library for TriDiagonal Matrix Algorithm\&. 
+
+PaScal_TDMA provides an efficient and scalable computational procedure to solve many tridiagonal systems in multi-dimensional partial differential equations\&. The modified Thomas algorithm proposed by Laszlo et al\&.(2016) and the newly designed communication scheme have been used to reduce the communication overhead in solving many tridiagonal systems\&. This library is for both single and many tridiagonal systems of equations\&. The main algorithm for a tridiagonal matrix consists of the following five steps:
+.PP
+(1) Transform the partitioned submatrices in the tridiagonal systems into modified submatrices: Each computing core transforms the partitioned submatrices in the tridiagonal systems of equations into modified forms by applying the modified Thomas algorithm\&. (2) Construct reduced tridiagonal systems from the modified submatrices: The reduced tridiagonal systems are constructed by collecting the first and last rows of the modified submatrices from each core using MPI_Ialltoallw\&. (3) Solve the reduced tridiagonal systems: The reduced tridiagonal systems constructed in Step 2 are solved by applying the Thomas algorithm\&. (4) Distribute the solutions of the reduced tridiagonal systems: The solutions of the reduced tridiagonal systems in Step 3 are distributed to each core using MPI_Ialltoallw\&. This communication is an exact inverse of the communication in Step 2\&. (5) Update the other unknowns in the modified tridiagonal systems: The remaining unknowns in the modified submatrices in Step 1 are solved in each computing core using the solutions obtained in Step 3 and Step 4\&.
+.PP
+Step 1 and Step 5 are similar to the method proposed by Laszlo et al\&.(2016) which uses parallel cyclic reduction (PCR) algorithm to build and solve the reduced tridiagonal systems\&. Instead of using the PCR, we develop an all-to-all communication scheme using the MPI_Ialltoall function after the modified Thomas algorithm is executed\&. The number of coefficients for the reduced tridiagonal systems are greatly reduced, so we can avoid the communication bandwidth problem, which is a main bottleneck for all-to-all communications\&. Our algorithm is also distinguished from the work of Mattor et al\&. (1995) which assembles the undetermined coefficients of the temporary solutions in a single processor using MPI_Gather, where load imbalances are serious\&.
+.PP
+\fBAuthor:\fP
+.RS 4
+.IP "\(bu" 2
+Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.IP "\(bu" 2
+Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+.IP "\(bu" 2
+Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.PP
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+March 2023 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+2\&.0 
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2019-2023 Kiha Kim and Jung-Il choi, Yonsei University and Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved\&. 
+.RE
+.PP
+\fBLicense \fP
+.RS 4
+This project is released under the terms of the MIT License (see LICENSE ) 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

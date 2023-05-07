@@ -1,0 +1,49 @@
+\hypertarget{solve__theta_8f90}{}\section{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/solve\+\_\+theta.f90 File Reference}
+\label{solve__theta_8f90}\index{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/solve\+\_\+theta.\+f90@{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/examples/solve\+\_\+theta.\+f90}}
+
+
+This file contains a solver subroutine for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA.  
+
+
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+module \hyperlink{namespacesolve__theta}{solve\+\_\+theta}
+\end{DoxyCompactItemize}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacesolve__theta_a215d44e312ec3ab2a3ab44fa0613b100}{solve\+\_\+theta\+::solve\+\_\+theta\+\_\+plan\+\_\+single} (theta)
+\begin{DoxyCompactList}\small\item\em An example solver for a single tridiagonal system of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacesolve__theta_a0b7fdb576c007dc344092bf40efb0f4b}{solve\+\_\+theta\+::solve\+\_\+theta\+\_\+plan\+\_\+many} (theta)
+\begin{DoxyCompactList}\small\item\em An example solver for many tridiagonal systems of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacesolve__theta_a84c4bdc671112259790470f6ad4c7e4c}{solve\+\_\+theta\+::solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda} (theta)
+\begin{DoxyCompactList}\small\item\em An example solver for many tridiagonal systems of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA with C\+U\+DA. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacesolve__theta_a75284cf6dd015edde5309be8368c4c9e}{solve\+\_\+theta\+::ghostcell\+\_\+update\+\_\+cuda} (Value\+\_\+sub\+\_\+d)
+\begin{DoxyCompactList}\small\item\em Ghost cell update in device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains a solver subroutine for the example problem of Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
+
+The target example problem is the three-\/dimensional time-\/dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries. \begin{DoxyAuthor}{Author}
+
+\begin{DoxyItemize}
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\tt k-\/kiha@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\tt jhkang@kisti.\+re.\+kr}), Korea Institute of Science and Technology Information
+\item Mingyu Yang (\href{mailto:yang926@yonsei.ac.kr}{\tt yang926@yonsei.\+ac.\+kr}), Multi-\/\+Physics Modeling and Computation Lab., Yonsei University
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\tt jic@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
+\end{DoxyItemize}
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+March 2023 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+2.\+0 
+\end{DoxyVersion}
+\begin{DoxyParagraph}{Copyright}
+Copyright (c) 2019-\/2023 Kiha Kim, Mingyu Yang and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{License }
+This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE in ) 
+\end{DoxyParagraph}

@@ -1,0 +1,62 @@
+.TH "mpi_topology::cart_comm_1d" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mpi_topology::cart_comm_1d \- Type variable for the information of 1D communicator\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "integer \fBmyrank\fP"
+.br
+.RI "Rank ID in current communicator\&. "
+.ti -1c
+.RI "integer \fBnprocs\fP"
+.br
+.RI "Number of processes in current communicator\&. "
+.ti -1c
+.RI "integer \fBwest_rank\fP"
+.br
+.RI "Previous rank ID in current communicator\&. "
+.ti -1c
+.RI "integer \fBeast_rank\fP"
+.br
+.RI "Next rank ID in current communicator\&. "
+.ti -1c
+.RI "integer \fBmpi_comm\fP"
+.br
+.RI "Current communicator\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Type variable for the information of 1D communicator\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "integer mpi_topology::cart_comm_1d::east_rank"
+
+.PP
+Next rank ID in current communicator\&. 
+.SS "integer mpi_topology::cart_comm_1d::mpi_comm"
+
+.PP
+Current communicator\&. 
+.SS "integer mpi_topology::cart_comm_1d::myrank"
+
+.PP
+Rank ID in current communicator\&. 
+.SS "integer mpi_topology::cart_comm_1d::nprocs"
+
+.PP
+Number of processes in current communicator\&. 
+.SS "integer mpi_topology::cart_comm_1d::west_rank"
+
+.PP
+Previous rank ID in current communicator\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

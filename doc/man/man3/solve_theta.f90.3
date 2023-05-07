@@ -1,0 +1,80 @@
+.TH "/home/jihoon/Develop/PaScaL_TDMA/examples/solve_theta.f90" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jihoon/Develop/PaScaL_TDMA/examples/solve_theta.f90 \- This file contains a solver subroutine for the example problem of PaScaL_TDMA\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "module \fBsolve_theta\fP"
+.br
+.in -1c
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBsolve_theta::solve_theta_plan_single\fP (theta)"
+.br
+.RI "An example solver for a single tridiagonal system of equations using PaScaL_TDMA\&. "
+.ti -1c
+.RI "subroutine, public \fBsolve_theta::solve_theta_plan_many\fP (theta)"
+.br
+.RI "An example solver for many tridiagonal systems of equations using PaScaL_TDMA\&. "
+.ti -1c
+.RI "subroutine, public \fBsolve_theta::solve_theta_plan_many_cuda\fP (theta)"
+.br
+.RI "An example solver for many tridiagonal systems of equations using PaScaL_TDMA with CUDA\&. "
+.ti -1c
+.RI "subroutine \fBsolve_theta::ghostcell_update_cuda\fP (Value_sub_d)"
+.br
+.RI "Ghost cell update in device\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+This file contains a solver subroutine for the example problem of PaScaL_TDMA\&. 
+
+The target example problem is the three-dimensional time-dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries\&. 
+.PP
+\fBAuthor:\fP
+.RS 4
+
+.IP "\(bu" 2
+Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.IP "\(bu" 2
+Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+.IP "\(bu" 2
+Mingyu Yang (yang926@yonsei.ac.kr), Multi-Physics Modeling and Computation Lab\&., Yonsei University
+.IP "\(bu" 2
+Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.PP
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+March 2023 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+2\&.0 
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2019-2023 Kiha Kim, Mingyu Yang and Jung-Il choi, Yonsei University and Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved\&. 
+.RE
+.PP
+\fBLicense \fP
+.RS 4
+This project is release under the terms of the MIT License (see LICENSE in ) 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

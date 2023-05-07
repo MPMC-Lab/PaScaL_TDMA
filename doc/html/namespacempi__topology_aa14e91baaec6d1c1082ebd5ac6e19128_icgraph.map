@@ -1,4 +1,3 @@
 <map id="mpi_topology::mpi_topology_clean" name="mpi_topology::mpi_topology_clean">
-<area shape="rect" id="node1" title="Destroy the communicator for cartesian topology." alt="" coords="104,5,291,44"/>
-<area shape="rect" id="node2" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
+<area shape="rect" id="node2" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA. " alt="" coords="237,13,288,39"/>
 </map>

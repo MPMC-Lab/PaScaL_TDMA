@@ -4,42 +4,60 @@
 !> @details     The target example problem is a three-dimensional(3D) time-dependent heat conduction problem 
 !>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
 !>              and horizontally periodic boundaries.
-!> @author      
-!>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
-!>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
-!>              - Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>
-!> @date        June 2019
-!> @version     1.0
+!> @author      
+!>              - Ki-Ha Kim (k-kiha@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University
+!>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+!>              - Jung-Il Choi (jic@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University
+!>
+!> @date        May 2023
+!> @version     2.0
 !> @par         Copyright
-!>              Copyright (c) 2019 Kiha Kim and Jung-Il choi, Yonsei University and 
+!>              Copyright (c) 2019-2023 Ki-Ha Kim and Jung-Il choi, Yonsei University and 
 !>              Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved.
 !> @par         License     
-!>              This project is release under the terms of the MIT License (see LICENSE in )
+!>              This project is release under the terms of the MIT License (see LICENSE file).
 !======================================================================================================================
 
 !>
 !> @brief       Main execution program for the example problem of PaScaL_TDMA.
 !>
 program main
+
     use mpi
     use global
     use mpi_subdomain
     use mpi_topology
+    use solve_theta
+
+#ifdef _CUDA
+    use cudafor
+    use solve_theta, only : solve_theta_plan_many_cuda
+    use nvtx
+#else
     use PaScaL_TDMA
+#endif
     
     implicit none
  
-    integer :: time_step        ! Current time step
-    double precision :: t_curr  ! Current simulation time
-
     integer :: nprocs, myrank   ! Number of MPI processes and rank ID in MPI_COMM_WORLD
     integer :: ierr
     double precision, allocatable, dimension(:, :, :) :: theta_sub  ! Main 3-D variable to be solved
+
+#ifdef _CUDA
+    integer :: local_rank, pvd, istat, nDevices
+#endif
+
     call MPI_Init(ierr)
     call MPI_Comm_size( MPI_COMM_WORLD, nprocs, ierr)
     call MPI_Comm_rank( MPI_COMM_WORLD, myrank, ierr)
     
+#ifdef _CUDA
+    istat = cudaGetDeviceCount(nDevices) ! Count only GPUs in single node
+    local_rank = mod(myrank,nDevices) ! and devide it for GPU affinity.
+    istat = cudaSetDevice(local_rank)
+#endif
+
     if(myrank==0) write(*,*) '[Main] The main simulation starts! '
     ! Periodicity in the simulation domain
     period(0)=.true.; period(1)=.false.; period(2)=.true.
@@ -77,19 +95,14 @@ program main
 
     if(myrank==0) write(*,*) '[Main] The preparation for simulation finished! '
 
-    ! Simulation begins
-    t_curr = tStart
-    dt = dtstart
-
     if(myrank==0) write(*,*) '[Main] Solving the 3D heat equation! '
 
-    do time_step = 1, Tmax
-        t_curr = t_curr + dt
-        if(myrank==0) write(*,*) '[Main] Current time step = ', time_step
-    
-        call solve_theta_plan_many(theta_sub)
+#ifdef _CUDA
+    call solve_theta_plan_many_cuda(theta_sub)
+#else
+    call solve_theta_plan_many(theta_sub)
+#endif
  
-    end do
     if(myrank==0) write(*,*) '[Main] Solving the 3D heat equation complete! '
 
     ! Write the values of the field variable in an output file if required.
@@ -152,7 +165,7 @@ subroutine field_file_write(myrank, nprocs, theta_sub)
     do k=1,nz_sub-1
         do j=1,ny_sub-1
             do i=1,nx_sub-1
-                write(myrank,'(3D20.10,1D30.20)') X_sub(i), Y_sub(j), Z_sub(k), theta_sub(i,j,k)
+                write(myrank,'(3D14.6,1E22.14)') X_sub(i), Y_sub(j), Z_sub(k), theta_sub(i,j,k)
             enddo
         enddo
     enddo
@@ -238,7 +251,7 @@ subroutine field_file_write(myrank, nprocs, theta_sub)
         do k = 1, nzm
             do j = 1, nym
                 do i = 1, nxm
-                    write(myrank,'(3D20.10,1E30.20)') dx*dble(i-1),dy*dble(j-1),dz*dble(k-1),theta_all(i,j,k)
+                    write(myrank,'(3D14.6,1E22.14)') dx*dble(i-1),dy*dble(j-1),dz*dble(k-1),theta_all(i,j,k)
                 enddo
             enddo
         enddo

@@ -1,0 +1,107 @@
+.TH "/home/jihoon/Develop/PaScaL_TDMA/examples/mpi_topology.f90" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jihoon/Develop/PaScaL_TDMA/examples/mpi_topology.f90 \- This file contains a module of communication topology for the example problem of PaScaL_TDMA\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Types"
+
+.in +1c
+.ti -1c
+.RI "type \fBmpi_topology::cart_comm_1d\fP"
+.br
+.RI "Type variable for the information of 1D communicator\&. "
+.in -1c
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "module \fBmpi_topology\fP"
+.br
+.RI "Module for creating the cartesian topology of the MPI processes and subcommunicators\&. "
+.in -1c
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBmpi_topology::mpi_topology_clean\fP ()"
+.br
+.RI "Destroy the communicator for cartesian topology\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_topology::mpi_topology_make\fP ()"
+.br
+.RI "Create the cartesian topology for the MPI processes and subcommunicators\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "integer, public \fBmpi_topology::mpi_world_cart\fP"
+.br
+.RI "Communicator for cartesian topology\&. "
+.ti -1c
+.RI "integer, dimension(0:2), public \fBmpi_topology::np_dim\fP"
+.br
+.RI "Number of MPI processes in 3D topology\&. "
+.ti -1c
+.RI "logical, dimension(0:2), public \fBmpi_topology::period\fP"
+.br
+.RI "Periodicity in each direction\&. "
+.ti -1c
+.RI "type(cart_comm_1d), public \fBmpi_topology::comm_1d_x\fP"
+.br
+.RI "Subcommunicator information in x-direction\&. "
+.ti -1c
+.RI "type(cart_comm_1d), public \fBmpi_topology::comm_1d_y\fP"
+.br
+.RI "Subcommunicator information in y-direction\&. "
+.ti -1c
+.RI "type(cart_comm_1d), public \fBmpi_topology::comm_1d_z\fP"
+.br
+.RI "Subcommunicator information in z-direction\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+This file contains a module of communication topology for the example problem of PaScaL_TDMA\&. 
+
+The target example problem is the three-dimensional time-dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries\&. 
+.PP
+\fBAuthor:\fP
+.RS 4
+
+.IP "\(bu" 2
+Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.IP "\(bu" 2
+Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+.IP "\(bu" 2
+Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.PP
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+March 2023 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+2\&.0 
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2019-2023 Kiha Kim and Jung-Il choi, Yonsei University and Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved\&. 
+.RE
+.PP
+\fBLicense \fP
+.RS 4
+This project is release under the terms of the MIT License (see LICENSE in ) 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

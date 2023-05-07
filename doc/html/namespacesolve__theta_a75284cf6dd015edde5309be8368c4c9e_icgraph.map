@@ -1,0 +1,4 @@
+<map id="solve_theta::ghostcell_update_cuda" name="solve_theta::ghostcell_update_cuda">
+<area shape="rect" id="node2" href="$namespacesolve__theta.html#a84c4bdc671112259790470f6ad4c7e4c" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA with CUDA..." alt="" coords="203,5,365,47"/>
+<area shape="rect" id="node3" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA. " alt="" coords="413,13,464,39"/>
+</map>

@@ -1,0 +1,292 @@
+.TH "global" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+global \- Module for global parameters\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine \fBglobal_inputpara\fP (np_dim)"
+.br
+.RI "Assign global parameters\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "double precision, parameter \fBpi\fP = acos(\-1\&.d0)"
+.br
+.ti -1c
+.RI "double precision \fBpr\fP"
+.br
+.RI "Prandtl number\&. "
+.ti -1c
+.RI "double precision \fBra\fP"
+.br
+.RI "Reyleigh number\&. "
+.ti -1c
+.RI "integer \fBtmax\fP"
+.br
+.RI "Maximum number of iteration steps\&. "
+.ti -1c
+.RI "double precision \fBdt\fP"
+.br
+.RI "Length of time step\&. "
+.ti -1c
+.RI "double precision \fBdtstart\fP"
+.br
+.RI "Initial dt\&. "
+.ti -1c
+.RI "double precision \fBtstart\fP"
+.br
+.RI "Initial simulation time\&. "
+.ti -1c
+.RI "double precision \fBtheta_cold\fP"
+.br
+.RI "Boundary temperature of cold wall\&. "
+.ti -1c
+.RI "double precision \fBtheta_hot\fP"
+.br
+.RI "Boundary temperature of hot wall\&. "
+.ti -1c
+.RI "double precision \fBalphag\fP"
+.br
+.RI "Thermal expansion coefficient x gravitational acceleration\&. "
+.ti -1c
+.RI "double precision \fBnu\fP"
+.br
+.RI "Kinematic viscosity\&. "
+.ti -1c
+.RI "double precision \fBct\fP"
+.br
+.RI "Thermal diffusivity\&. "
+.ti -1c
+.RI "integer \fBthread_in_x\fP"
+.br
+.ti -1c
+.RI "integer \fBthread_in_y\fP"
+.br
+.ti -1c
+.RI "integer \fBthread_in_z\fP"
+.br
+.ti -1c
+.RI "integer \fBthread_in_x_pascal\fP"
+.br
+.ti -1c
+.RI "integer \fBthread_in_y_pascal\fP"
+.br
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBnx\fP"
+.br
+.RI "Grid numbers in each direction\&. "
+.ti -1c
+.RI "integer \fBny\fP"
+.br
+.ti -1c
+.RI "integer \fBnz\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBnxm\fP"
+.br
+.RI "Grid numbers minus 1 in each direction\&. "
+.ti -1c
+.RI "integer \fBnym\fP"
+.br
+.ti -1c
+.RI "integer \fBnzm\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBnxp\fP"
+.br
+.RI "Grid numbers plus 1 in each direction\&. "
+.ti -1c
+.RI "integer \fBnyp\fP"
+.br
+.ti -1c
+.RI "integer \fBnzp\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision \fBlx\fP"
+.br
+.RI "Lengths of the physical domain\&. "
+.ti -1c
+.RI "double precision \fBly\fP"
+.br
+.ti -1c
+.RI "double precision \fBlz\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision \fBdx\fP"
+.br
+.RI "Discretized grid lengths of the physical domain\&. "
+.ti -1c
+.RI "double precision \fBdy\fP"
+.br
+.ti -1c
+.RI "double precision \fBdz\fP"
+.br
+.in -1c
+.in -1c
+.SH "Detailed Description"
+.PP 
+Module for global parameters\&. 
+
+This global module has simulation parameters and a subroutine to initialize the parameters\&. 
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine global::global_inputpara (integer, dimension(0:2), intent(out) np_dim)"
+
+.PP
+Assign global parameters\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInp_dim\fP Number of MPI processes in 3D topology 
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "double precision global::alphag"
+
+.PP
+Thermal expansion coefficient x gravitational acceleration\&. 
+.SS "double precision global::ct"
+
+.PP
+Thermal diffusivity\&. 
+.SS "double precision global::dt"
+
+.PP
+Length of time step\&. 
+.SS "double precision global::dtstart"
+
+.PP
+Initial dt\&. 
+.SS "double precision global::dx"
+
+.PP
+Discretized grid lengths of the physical domain\&. 
+.SS "double precision global::dy"
+
+.SS "double precision global::dz"
+
+.SS "double precision global::lx"
+
+.PP
+Lengths of the physical domain\&. 
+.SS "double precision global::ly"
+
+.SS "double precision global::lz"
+
+.SS "double precision global::nu"
+
+.PP
+Kinematic viscosity\&. 
+.SS "integer global::nx"
+
+.PP
+Grid numbers in each direction\&. 
+.SS "integer global::nxm"
+
+.PP
+Grid numbers minus 1 in each direction\&. 
+.SS "integer global::nxp"
+
+.PP
+Grid numbers plus 1 in each direction\&. 
+.SS "integer global::ny"
+
+.SS "integer global::nym"
+
+.SS "integer global::nyp"
+
+.SS "integer global::nz"
+
+.SS "integer global::nzm"
+
+.SS "integer global::nzp"
+
+.SS "double precision, parameter global::pi = acos(\-1\&.d0)"
+
+.SS "double precision global::pr"
+
+.PP
+Prandtl number\&. 
+.SS "double precision global::ra"
+
+.PP
+Reyleigh number\&. 
+.SS "double precision global::theta_cold"
+
+.PP
+Boundary temperature of cold wall\&. 
+.SS "double precision global::theta_hot"
+
+.PP
+Boundary temperature of hot wall\&. 
+.SS "integer global::thread_in_x"
+
+.SS "integer global::thread_in_x_pascal"
+
+.SS "integer global::thread_in_y"
+
+.SS "integer global::thread_in_y_pascal"
+
+.SS "integer global::thread_in_z"
+
+.SS "integer global::tmax"
+
+.PP
+Maximum number of iteration steps\&. 
+.SS "double precision global::tstart"
+
+.PP
+Initial simulation time\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

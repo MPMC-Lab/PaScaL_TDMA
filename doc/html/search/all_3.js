@@ -1,7 +1,9 @@
 var searchData=
 [
   ['d_5frd',['d_rd',['../structpascal__tdma_1_1ptdma__plan__many.html#aa1054814f874504a77ad17a838a80fd2',1,'pascal_tdma::ptdma_plan_many::d_rd()'],['../structpascal__tdma_1_1ptdma__plan__single.html#a8b99edaa7ecd71fe6ceafd9c69d9a374',1,'pascal_tdma::ptdma_plan_single::d_rd()']]],
+  ['d_5frd_5fd',['d_rd_d',['../structpascal__tdma__cuda_1_1ptdma__plan__many__cuda.html#a5e58f4e3a2c9a8bd8c33e72e3e2cd4eb',1,'pascal_tdma_cuda::ptdma_plan_many_cuda']]],
   ['d_5frt',['d_rt',['../structpascal__tdma_1_1ptdma__plan__many.html#af0941ce4b9206c36a3a059d2bae84d2b',1,'pascal_tdma::ptdma_plan_many::d_rt()'],['../structpascal__tdma_1_1ptdma__plan__single.html#a627be8624cd48aa5b3aad7f6cf8d0b08',1,'pascal_tdma::ptdma_plan_single::d_rt()']]],
+  ['d_5frt_5fd',['d_rt_d',['../structpascal__tdma__cuda_1_1ptdma__plan__many__cuda.html#aaa47db7d772e950224cb7e1ec0f246a8',1,'pascal_tdma_cuda::ptdma_plan_many_cuda']]],
   ['ddtype_5fbs',['ddtype_bs',['../structpascal__tdma_1_1ptdma__plan__many.html#a54ddb10078b443daf47204cdcd8e7f8f',1,'pascal_tdma::ptdma_plan_many']]],
   ['ddtype_5ffs',['ddtype_fs',['../structpascal__tdma_1_1ptdma__plan__many.html#ad95f6ed58387dd66baecf53ed5fab7e8',1,'pascal_tdma::ptdma_plan_many']]],
   ['ddtype_5frecvfrom_5fb',['ddtype_recvfrom_b',['../namespacempi__subdomain.html#ad6462f18c8c68c076005957e9d062252',1,'mpi_subdomain']]],
@@ -16,6 +18,8 @@ var searchData=
   ['ddtype_5fsendto_5fn',['ddtype_sendto_n',['../namespacempi__subdomain.html#a55f5c1af9bd941fd176e619bddbb8d82',1,'mpi_subdomain']]],
   ['ddtype_5fsendto_5fs',['ddtype_sendto_s',['../namespacempi__subdomain.html#a660f83d621188fb7eb60ad10eab4c9b5',1,'mpi_subdomain']]],
   ['ddtype_5fsendto_5fw',['ddtype_sendto_w',['../namespacempi__subdomain.html#a0701fde01daea1a6fd51b62c75b8ee82',1,'mpi_subdomain']]],
+  ['device',['device',['../structpascal__tdma__cuda_1_1ptdma__plan__many__cuda.html#a408b2ea72e6272addd9d1c2115d133b7',1,'pascal_tdma_cuda::ptdma_plan_many_cuda']]],
+  ['dimension',['dimension',['../structpascal__tdma__cuda_1_1ptdma__plan__many__cuda.html#a7a74d732f01a8db80e6fea40237fd619',1,'pascal_tdma_cuda::ptdma_plan_many_cuda']]],
   ['displ_5frecv',['displ_recv',['../structpascal__tdma_1_1ptdma__plan__many.html#a1801ea6bbff319dd594a5e993bc5d542',1,'pascal_tdma::ptdma_plan_many']]],
   ['displ_5fsend',['displ_send',['../structpascal__tdma_1_1ptdma__plan__many.html#a1c7544758e7ccfcd3b07e91caf0d8f3d',1,'pascal_tdma::ptdma_plan_many']]],
   ['dmx_5fsub',['dmx_sub',['../namespacempi__subdomain.html#a56af1740899dc9df6868e5e71a0884a5',1,'mpi_subdomain']]],

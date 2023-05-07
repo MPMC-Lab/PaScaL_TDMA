@@ -1,5 +1,5 @@
-\hypertarget{pascal__tdma_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/pascal\+\_\+tdma/src/pascal\+\_\+tdma.f90 File Reference}
-\label{pascal__tdma_8f90}\index{/Users/jihoon/Documents/develop/pascal\_tdma/src/pascal\_tdma.f90@{/Users/jihoon/Documents/develop/pascal\_tdma/src/pascal\_tdma.f90}}
+\hypertarget{pascal__tdma_8f90}{}\section{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/pascal\+\_\+tdma.f90 File Reference}
+\label{pascal__tdma_8f90}\index{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/pascal\+\_\+tdma.\+f90@{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/pascal\+\_\+tdma.\+f90}}
 
 
 Pa\+Sca\+L\+\_\+\+T\+D\+MA -\/ Parallel and Scalable Library for Tri\+Diagonal Matrix Algorithm.  
@@ -8,33 +8,33 @@ Pa\+Sca\+L\+\_\+\+T\+D\+MA -\/ Parallel and Scalable Library for Tri\+Diagonal M
 \subsection*{Data Types}
 \begin{DoxyCompactItemize}
 \item 
-type \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__many}{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+many}}
+type \hyperlink{structpascal__tdma_1_1ptdma__plan__many}{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+many}
 \begin{DoxyCompactList}\small\item\em Execution plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
-type \mbox{\hyperlink{structpascal__tdma_1_1ptdma__plan__single}{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}}
+type \hyperlink{structpascal__tdma_1_1ptdma__plan__single}{pascal\+\_\+tdma\+::ptdma\+\_\+plan\+\_\+single}
 \begin{DoxyCompactList}\small\item\em Execution plan for a single tridiagonal system of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Modules}
 \begin{DoxyCompactItemize}
 \item 
-module \mbox{\hyperlink{namespacepascal__tdma}{pascal\+\_\+tdma}}
+module \hyperlink{namespacepascal__tdma}{pascal\+\_\+tdma}
 \begin{DoxyCompactList}\small\item\em Module for Pa\+Sca\+L-\/\+T\+D\+MA library. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create}} (plan, myrank, nprocs, mpi\+\_\+world, gather\+\_\+rank)
+subroutine, public \hyperlink{namespacepascal__tdma_a5dfc2d7c919b47ad364a74d141532a9f}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+create} (plan, myrank, nprocs, mpi\+\_\+world, gather\+\_\+rank)
 \begin{DoxyCompactList}\small\item\em Create a plan for a single tridiagonal system of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy}} (plan)
+subroutine, public \hyperlink{namespacepascal__tdma_adb04e59c740ce6c4b9518dd86eaeb594}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+single\+\_\+destroy} (plan)
 \begin{DoxyCompactList}\small\item\em Deallocate the allocated arrays in the defined plan\+\_\+single . \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create}} (plan, n\+\_\+sys, myrank, nprocs, mpi\+\_\+world)
+subroutine, public \hyperlink{namespacepascal__tdma_a7e9c24b343ae949044eccc8692dcc6e9}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+create} (plan, n\+\_\+sys, myrank, nprocs, mpi\+\_\+world)
 \begin{DoxyCompactList}\small\item\em Create a plan for many tridiagonal systems of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_a8438e6774617871b147af9ec8bdad6ce}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy}} (plan)
+subroutine, public \hyperlink{namespacepascal__tdma_aceec478e18d25d413a5bd8a174c3fcb8}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+plan\+\_\+many\+\_\+destroy} (plan, nprocs)
 \begin{DoxyCompactList}\small\item\em Destroy the allocated arrays in the defined plan\+\_\+many. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve}} (plan, A, B, C, D, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_ab14e132231d4b53fd65dd333ccc85a50}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve} (plan, A, B, C, D, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve a single tridiagonal system of equation. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle}} (plan, A, B, C, D, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_ac8e377fa86c75126380f0196f6046043}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+single\+\_\+solve\+\_\+cycle} (plan, A, B, C, D, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve a single cyclic tridiagonal system of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve}} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_afa0c78b8377f5fe1059907befda3c940}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve many tridiagonal systems of equations. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle}} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
+subroutine, public \hyperlink{namespacepascal__tdma_acbaed65e67ecbfd92a8f1d51d1b69fd5}{pascal\+\_\+tdma\+::pascal\+\_\+tdma\+\_\+many\+\_\+solve\+\_\+cycle} (plan, A, B, C, D, n\+\_\+sys, n\+\_\+row)
 \begin{DoxyCompactList}\small\item\em Solve many cyclic tridiagonal systems of equations. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -49,24 +49,21 @@ Step 1 and Step 5 are similar to the method proposed by Laszlo et al.(2016) whic
 
 \begin{DoxyAuthor}{Author}
 
-\end{DoxyAuthor}
-
 \begin{DoxyItemize}
-\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\texttt{ k-\/kiha@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
-\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\texttt{ jhkang@kisti.\+re.\+kr}}), Korea Institute of Science and Technology Information
-\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\texttt{ jic@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\tt k-\/kiha@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\tt jhkang@kisti.\+re.\+kr}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\tt jic@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
 \end{DoxyItemize}
-
+\end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-June 2019 
+March 2023 
 \end{DoxyDate}
 \begin{DoxyVersion}{Version}
-1.\+0 
+2.\+0 
 \end{DoxyVersion}
 \begin{DoxyParagraph}{Copyright}
-Copyright (c) 2019 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
+Copyright (c) 2019-\/2023 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{License }
-
-\end{DoxyParagraph}
 This project is released under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE ) 
+\end{DoxyParagraph}

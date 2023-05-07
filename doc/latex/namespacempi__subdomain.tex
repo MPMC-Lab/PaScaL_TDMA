@@ -1,5 +1,5 @@
 \hypertarget{namespacempi__subdomain}{}\section{mpi\+\_\+subdomain Module Reference}
-\label{namespacempi__subdomain}\index{mpi\_subdomain@{mpi\_subdomain}}
+\label{namespacempi__subdomain}\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 
 
 Module for building subdomains from the physical domain.  
@@ -8,116 +8,116 @@ Module for building subdomains from the physical domain.
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311}{mpi\+\_\+subdomain\+\_\+make}} (nprocs\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z, myrank\+\_\+in\+\_\+z)
+subroutine, public \hyperlink{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311}{mpi\+\_\+subdomain\+\_\+make} (nprocs\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z, myrank\+\_\+in\+\_\+z)
 \begin{DoxyCompactList}\small\item\em Prepare the subdomain and determine the size of the subdomain. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe}{mpi\+\_\+subdomain\+\_\+clean}}
+subroutine, public \hyperlink{namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe}{mpi\+\_\+subdomain\+\_\+clean}
 \begin{DoxyCompactList}\small\item\em Deallocate subdomain variables. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d}{mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype}}
+subroutine, public \hyperlink{namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d}{mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype}
 \begin{DoxyCompactList}\small\item\em Build derived datatypes for subdomain communication using ghostcells. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62}{mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update}} (theta\+\_\+sub, comm\+\_\+1d\+\_\+x, comm\+\_\+1d\+\_\+y, comm\+\_\+1d\+\_\+z)
+subroutine, public \hyperlink{namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62}{mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update} (theta\+\_\+sub, comm\+\_\+1d\+\_\+x, comm\+\_\+1d\+\_\+y, comm\+\_\+1d\+\_\+z)
 \begin{DoxyCompactList}\small\item\em Update the values of boundary ghostcells through communication in all directions. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe}{mpi\+\_\+subdomain\+\_\+indices}} (myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
+subroutine, public \hyperlink{namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe}{mpi\+\_\+subdomain\+\_\+indices} (myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
 \begin{DoxyCompactList}\small\item\em Determine whether the next grids are empty(0) or not(1) only in the y-\/direction. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a612331eead74041f174ece9a572c7427}{mpi\+\_\+subdomain\+\_\+mesh}} (myrank\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+z, nprocs\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z)
+subroutine, public \hyperlink{namespacempi__subdomain_a612331eead74041f174ece9a572c7427}{mpi\+\_\+subdomain\+\_\+mesh} (myrank\+\_\+in\+\_\+x, myrank\+\_\+in\+\_\+y, myrank\+\_\+in\+\_\+z, nprocs\+\_\+in\+\_\+x, nprocs\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+z)
 \begin{DoxyCompactList}\small\item\em Assign grid coordinates and lengths of subdomains. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4}{mpi\+\_\+subdomain\+\_\+initialization}} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
+subroutine, public \hyperlink{namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4}{mpi\+\_\+subdomain\+\_\+initialization} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
 \begin{DoxyCompactList}\small\item\em Initialize the values of the main variable in a subdomain. \end{DoxyCompactList}\item 
-subroutine, public \mbox{\hyperlink{namespacempi__subdomain_a55659431068678c08d21847338390ea8}{mpi\+\_\+subdomain\+\_\+boundary}} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
+subroutine, public \hyperlink{namespacempi__subdomain_a55659431068678c08d21847338390ea8}{mpi\+\_\+subdomain\+\_\+boundary} (theta\+\_\+sub, myrank\+\_\+in\+\_\+y, nprocs\+\_\+in\+\_\+y)
 \begin{DoxyCompactList}\small\item\em Assign the values of boundary grids in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-integer \mbox{\hyperlink{namespacempi__subdomain_acd16f258caed20a7d8d38cd28ae64688}{ierr}}
+integer \hyperlink{namespacempi__subdomain_acd16f258caed20a7d8d38cd28ae64688}{ierr}
 \item 
-double precision, dimension(\+:,\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_ad61f27caf5f32301a077e21363c2d73b}{thetabc3\+\_\+sub}}
+double precision, dimension(\+:,\+:), allocatable, public \hyperlink{namespacempi__subdomain_ad61f27caf5f32301a077e21363c2d73b}{thetabc3\+\_\+sub}
 \begin{DoxyCompactList}\small\item\em B.\+C. of lower wall. \end{DoxyCompactList}\item 
-double precision, dimension(\+:,\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_ad1705bede0c0d39ad16f9f94afe32be6}{thetabc4\+\_\+sub}}
+double precision, dimension(\+:,\+:), allocatable, public \hyperlink{namespacempi__subdomain_ad1705bede0c0d39ad16f9f94afe32be6}{thetabc4\+\_\+sub}
 \begin{DoxyCompactList}\small\item\em B.\+C. of upper wall. \end{DoxyCompactList}\item 
-integer, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_ac22380b1c941dd6c53cabe7287d185e9}{jmbc\+\_\+index}}
+integer, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_ac22380b1c941dd6c53cabe7287d185e9}{jmbc\+\_\+index}
 \begin{DoxyCompactList}\small\item\em Flag whether lower grid is empty(0) or not. \end{DoxyCompactList}\item 
-integer, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_a9adbfdd11c7e9fdb968bb8eef2b13c2b}{jpbc\+\_\+index}}
+integer, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_a9adbfdd11c7e9fdb968bb8eef2b13c2b}{jpbc\+\_\+index}
 \begin{DoxyCompactList}\small\item\em Flag whether upper grid is empty(0) or not. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}}
+integer, public \hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}
 \begin{DoxyCompactList}\small\item\em Grid numbers in the subdomain. \end{DoxyCompactList}\item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid numbers in the subdomain. \end{DoxyCompactList}\item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid numbers in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+integer, public \hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}
+\item 
+integer, public \hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}
+\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_ab8925faaa6f45326c1d11efa37e03566}{ista}}
+integer, public \hyperlink{namespacempi__subdomain_ab8925faaa6f45326c1d11efa37e03566}{ista}
 \begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_abbd7d35107c53bcfd2b2b52771f4aa67}{iend}}
-\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_ac85bfba1caf77f9c3c0047fe9450fee6}{jsta}}
-\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_a06433a0d1a081c51202a0010c21c9d36}{jend}}
-\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_acd499eb1d07159aa9f5c878f9519b00f}{ksta}}
-\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\item 
-integer, public \mbox{\hyperlink{namespacempi__subdomain_af9934313b1ccbcb09f30916df3326076}{kend}}
-\begin{DoxyCompactList}\small\item\em Grid indices of the assigned range. \end{DoxyCompactList}\end{DoxyCompactItemize}
+integer, public \hyperlink{namespacempi__subdomain_abbd7d35107c53bcfd2b2b52771f4aa67}{iend}
+\item 
+integer, public \hyperlink{namespacempi__subdomain_ac85bfba1caf77f9c3c0047fe9450fee6}{jsta}
+\item 
+integer, public \hyperlink{namespacempi__subdomain_a06433a0d1a081c51202a0010c21c9d36}{jend}
+\item 
+integer, public \hyperlink{namespacempi__subdomain_acd499eb1d07159aa9f5c878f9519b00f}{ksta}
+\item 
+integer, public \hyperlink{namespacempi__subdomain_af9934313b1ccbcb09f30916df3326076}{kend}
+\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_a978554e1520c79471ef3793ed1872b37}{x\+\_\+sub}}
+double precision, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_a978554e1520c79471ef3793ed1872b37}{x\+\_\+sub}
 \begin{DoxyCompactList}\small\item\em Coordinates of grid points in the subdomain. \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_a58b09abee5f1002de7b20b1b86f5c821}{y\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Coordinates of grid points in the subdomain. \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_aab6d78e49471a9a3db5ad9df4c3d4041}{z\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Coordinates of grid points in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double precision, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_a58b09abee5f1002de7b20b1b86f5c821}{y\+\_\+sub}
+\item 
+double precision, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_aab6d78e49471a9a3db5ad9df4c3d4041}{z\+\_\+sub}
+\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_a56af1740899dc9df6868e5e71a0884a5}{dmx\+\_\+sub}}
+double precision, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_a56af1740899dc9df6868e5e71a0884a5}{dmx\+\_\+sub}
 \begin{DoxyCompactList}\small\item\em Grid lengths in the subdomain. \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_ae44efbff9669bfad03a79ab41b5e8ace}{dmy\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid lengths in the subdomain. \end{DoxyCompactList}\item 
-double precision, dimension(\+:), allocatable, public \mbox{\hyperlink{namespacempi__subdomain_afb6341d7362587d6fd0a06fe78ba4e3f}{dmz\+\_\+sub}}
-\begin{DoxyCompactList}\small\item\em Grid lengths in the subdomain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+double precision, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_ae44efbff9669bfad03a79ab41b5e8ace}{dmy\+\_\+sub}
+\item 
+double precision, dimension(\+:), allocatable, public \hyperlink{namespacempi__subdomain_afb6341d7362587d6fd0a06fe78ba4e3f}{dmz\+\_\+sub}
+\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a93395266b1630e5a91e8e89531dfcec6}{ddtype\+\_\+sendto\+\_\+e}}
+integer \hyperlink{namespacempi__subdomain_a93395266b1630e5a91e8e89531dfcec6}{ddtype\+\_\+sendto\+\_\+e}
 \begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a0b2a4ab6d6a88a3817f473a5c2c172b9}{ddtype\+\_\+recvfrom\+\_\+w}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a0701fde01daea1a6fd51b62c75b8ee82}{ddtype\+\_\+sendto\+\_\+w}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a18a84c0f3ca27cd4dd73057ff035f341}{ddtype\+\_\+recvfrom\+\_\+e}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between x-\/neighbor subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+integer \hyperlink{namespacempi__subdomain_a0b2a4ab6d6a88a3817f473a5c2c172b9}{ddtype\+\_\+recvfrom\+\_\+w}
+\item 
+integer \hyperlink{namespacempi__subdomain_a0701fde01daea1a6fd51b62c75b8ee82}{ddtype\+\_\+sendto\+\_\+w}
+\item 
+integer \hyperlink{namespacempi__subdomain_a18a84c0f3ca27cd4dd73057ff035f341}{ddtype\+\_\+recvfrom\+\_\+e}
+\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a55f5c1af9bd941fd176e619bddbb8d82}{ddtype\+\_\+sendto\+\_\+n}}
+integer \hyperlink{namespacempi__subdomain_a55f5c1af9bd941fd176e619bddbb8d82}{ddtype\+\_\+sendto\+\_\+n}
 \begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a1f46916f08758533cad3ecac33233e38}{ddtype\+\_\+recvfrom\+\_\+s}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a660f83d621188fb7eb60ad10eab4c9b5}{ddtype\+\_\+sendto\+\_\+s}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a74f1edb3c9227692b250285680518dc4}{ddtype\+\_\+recvfrom\+\_\+n}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between y-\/neighbor subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+integer \hyperlink{namespacempi__subdomain_a1f46916f08758533cad3ecac33233e38}{ddtype\+\_\+recvfrom\+\_\+s}
+\item 
+integer \hyperlink{namespacempi__subdomain_a660f83d621188fb7eb60ad10eab4c9b5}{ddtype\+\_\+sendto\+\_\+s}
+\item 
+integer \hyperlink{namespacempi__subdomain_a74f1edb3c9227692b250285680518dc4}{ddtype\+\_\+recvfrom\+\_\+n}
+\end{DoxyCompactItemize}
 
 \textbf{ }\par
 \begin{DoxyCompactItemize}
 \item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a4f3d66535b947c7afee75e6e73a47206}{ddtype\+\_\+sendto\+\_\+f}}
+integer \hyperlink{namespacempi__subdomain_a4f3d66535b947c7afee75e6e73a47206}{ddtype\+\_\+sendto\+\_\+f}
 \begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_ad6462f18c8c68c076005957e9d062252}{ddtype\+\_\+recvfrom\+\_\+b}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a7a2af0322a7aaa435951a5432859687a}{ddtype\+\_\+sendto\+\_\+b}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\item 
-integer \mbox{\hyperlink{namespacempi__subdomain_a4da19838e8bc3934ad5c24db424bec2c}{ddtype\+\_\+recvfrom\+\_\+f}}
-\begin{DoxyCompactList}\small\item\em Derived datatype for communication between z-\/neighbor subdomains. \end{DoxyCompactList}\end{DoxyCompactItemize}
+integer \hyperlink{namespacempi__subdomain_ad6462f18c8c68c076005957e9d062252}{ddtype\+\_\+recvfrom\+\_\+b}
+\item 
+integer \hyperlink{namespacempi__subdomain_a7a2af0322a7aaa435951a5432859687a}{ddtype\+\_\+sendto\+\_\+b}
+\item 
+integer \hyperlink{namespacempi__subdomain_a4da19838e8bc3934ad5c24db424bec2c}{ddtype\+\_\+recvfrom\+\_\+f}
+\end{DoxyCompactItemize}
 
 
 
@@ -128,10 +128,10 @@ This module has simulation parameters for subdomains and communication between t
 
 \subsection{Function/\+Subroutine Documentation}
 \mbox{\Hypertarget{namespacempi__subdomain_a55659431068678c08d21847338390ea8}\label{namespacempi__subdomain_a55659431068678c08d21847338390ea8}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_boundary@{mpi\_subdomain\_boundary}}
-\index{mpi\_subdomain\_boundary@{mpi\_subdomain\_boundary}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_boundary()}{mpi\_subdomain\_boundary()}}
-{\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+boundary (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:\mbox{\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}}, 0\+:\mbox{\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}}, 0\+:\mbox{\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}}), intent(in)}]{theta\+\_\+sub,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+y }\end{DoxyParamCaption})}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+boundary@{mpi\+\_\+subdomain\+\_\+boundary}}
+\index{mpi\+\_\+subdomain\+\_\+boundary@{mpi\+\_\+subdomain\+\_\+boundary}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+boundary()}{mpi\_subdomain\_boundary()}}
+{\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+boundary (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}, 0\+:\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}, 0\+:\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}), intent(in)}]{theta\+\_\+sub,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+y }\end{DoxyParamCaption})}
 
 
 
@@ -146,45 +146,37 @@ Assign the values of boundary grids in the subdomain.
 {\em nprocs\+\_\+in\+\_\+y} & Number of M\+PI processes in y-\/direction \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 381 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=271pt]{namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph}
+\includegraphics[width=268pt]{namespacempi__subdomain_a55659431068678c08d21847338390ea8_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe}\label{namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_clean@{mpi\_subdomain\_clean}}
-\index{mpi\_subdomain\_clean@{mpi\_subdomain\_clean}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_clean()}{mpi\_subdomain\_clean()}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+clean@{mpi\+\_\+subdomain\+\_\+clean}}
+\index{mpi\+\_\+subdomain\+\_\+clean@{mpi\+\_\+subdomain\+\_\+clean}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+clean()}{mpi\_subdomain\_clean()}}
 {\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+clean (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Deallocate subdomain variables. 
 
-
-
-Definition at line 113 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=262pt]{namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe_icgraph}
+\includegraphics[width=261pt]{namespacempi__subdomain_a56e9f2afd59e45fcada0f1c21a90eefe_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62}\label{namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_ghostcell\_update@{mpi\_subdomain\_ghostcell\_update}}
-\index{mpi\_subdomain\_ghostcell\_update@{mpi\_subdomain\_ghostcell\_update}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_ghostcell\_update()}{mpi\_subdomain\_ghostcell\_update()}}
-{\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:\mbox{\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}}, 0\+:\mbox{\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}}, 0\+:\mbox{\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}}), intent(inout)}]{theta\+\_\+sub,  }\item[{type(\mbox{\hyperlink{structmpi__topology_1_1cart__comm__1d}{cart\+\_\+comm\+\_\+1d}}), intent(in)}]{comm\+\_\+1d\+\_\+x,  }\item[{type(\mbox{\hyperlink{structmpi__topology_1_1cart__comm__1d}{cart\+\_\+comm\+\_\+1d}}), intent(in)}]{comm\+\_\+1d\+\_\+y,  }\item[{type(\mbox{\hyperlink{structmpi__topology_1_1cart__comm__1d}{cart\+\_\+comm\+\_\+1d}}), intent(in)}]{comm\+\_\+1d\+\_\+z }\end{DoxyParamCaption})}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update@{mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update}}
+\index{mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update@{mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update()}{mpi\_subdomain\_ghostcell\_update()}}
+{\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+ghostcell\+\_\+update (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}, 0\+:\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}, 0\+:\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}), intent(inout)}]{theta\+\_\+sub,  }\item[{type(\hyperlink{structmpi__topology_1_1cart__comm__1d}{cart\+\_\+comm\+\_\+1d}), intent(in)}]{comm\+\_\+1d\+\_\+x,  }\item[{type(\hyperlink{structmpi__topology_1_1cart__comm__1d}{cart\+\_\+comm\+\_\+1d}), intent(in)}]{comm\+\_\+1d\+\_\+y,  }\item[{type(\hyperlink{structmpi__topology_1_1cart__comm__1d}{cart\+\_\+comm\+\_\+1d}), intent(in)}]{comm\+\_\+1d\+\_\+z }\end{DoxyParamCaption})}
 
 
 
@@ -201,22 +193,18 @@ Update the values of boundary ghostcells through communication in all directions
 {\em comm\+\_\+1d\+\_\+z} & Subcommunicator in the z-\/direction \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 220 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=350pt]{namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62_icgraph}
+\includegraphics[width=327pt]{namespacempi__subdomain_a2e34a77537009dd448375e8fdc8d5b62_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe}\label{namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_indices@{mpi\_subdomain\_indices}}
-\index{mpi\_subdomain\_indices@{mpi\_subdomain\_indices}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_indices()}{mpi\_subdomain\_indices()}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+indices@{mpi\+\_\+subdomain\+\_\+indices}}
+\index{mpi\+\_\+subdomain\+\_\+indices@{mpi\+\_\+subdomain\+\_\+indices}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+indices()}{mpi\_subdomain\_indices()}}
 {\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+indices (\begin{DoxyParamCaption}\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+y }\end{DoxyParamCaption})}
 
 
@@ -230,23 +218,19 @@ Determine whether the next grids are empty(0) or not(1) only in the y-\/directio
 {\em myrank\+\_\+in\+\_\+y} & Rank ID in y-\/direction \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 257 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=262pt]{namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph}
+\includegraphics[width=261pt]{namespacempi__subdomain_afe948dc18da021f2448cf9a6265155fe_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4}\label{namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_initialization@{mpi\_subdomain\_initialization}}
-\index{mpi\_subdomain\_initialization@{mpi\_subdomain\_initialization}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_initialization()}{mpi\_subdomain\_initialization()}}
-{\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+initialization (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:\mbox{\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}}, 0\+:\mbox{\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}}, 0\+:\mbox{\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}}), intent(inout)}]{theta\+\_\+sub,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+y }\end{DoxyParamCaption})}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+initialization@{mpi\+\_\+subdomain\+\_\+initialization}}
+\index{mpi\+\_\+subdomain\+\_\+initialization@{mpi\+\_\+subdomain\+\_\+initialization}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+initialization()}{mpi\_subdomain\_initialization()}}
+{\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+initialization (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:\hyperlink{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}{nx\+\_\+sub}, 0\+:\hyperlink{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}{ny\+\_\+sub}, 0\+:\hyperlink{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}{nz\+\_\+sub}), intent(inout)}]{theta\+\_\+sub,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+y }\end{DoxyParamCaption})}
 
 
 
@@ -261,22 +245,18 @@ Initialize the values of the main variable in a subdomain.
 {\em nprocs\+\_\+in\+\_\+y} & Number of M\+PI processes in y-\/direction \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 344 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=281pt]{namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph}
+\includegraphics[width=279pt]{namespacempi__subdomain_a7cc0deb85b84358eb7addeea849733c4_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311}\label{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_make@{mpi\_subdomain\_make}}
-\index{mpi\_subdomain\_make@{mpi\_subdomain\_make}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_make()}{mpi\_subdomain\_make()}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+make@{mpi\+\_\+subdomain\+\_\+make}}
+\index{mpi\+\_\+subdomain\+\_\+make@{mpi\+\_\+subdomain\+\_\+make}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+make()}{mpi\_subdomain\_make()}}
 {\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+make (\begin{DoxyParamCaption}\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+x,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+x,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+z,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+z }\end{DoxyParamCaption})}
 
 
@@ -298,16 +278,12 @@ Prepare the subdomain and determine the size of the subdomain.
 {\em myrank\+\_\+in\+\_\+z} & Rank ID in z-\/direction \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 87 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the call graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=291pt]{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_cgraph}
+\includegraphics[width=288pt]{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_cgraph}
 \end{center}
 \end{figure}
 Here is the caller graph for this function\+:
@@ -315,35 +291,31 @@ Here is the caller graph for this function\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=262pt]{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph}
+\includegraphics[width=261pt]{namespacempi__subdomain_a3a1e7cf64aafbebd3c09b92fc56bd311_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d}\label{namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_make\_ghostcell\_ddtype@{mpi\_subdomain\_make\_ghostcell\_ddtype}}
-\index{mpi\_subdomain\_make\_ghostcell\_ddtype@{mpi\_subdomain\_make\_ghostcell\_ddtype}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_make\_ghostcell\_ddtype()}{mpi\_subdomain\_make\_ghostcell\_ddtype()}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype@{mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype}}
+\index{mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype@{mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype()}{mpi\_subdomain\_make\_ghostcell\_ddtype()}}
 {\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+make\+\_\+ghostcell\+\_\+ddtype (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Build derived datatypes for subdomain communication using ghostcells. 
 
-
-
-Definition at line 128 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=299pt]{namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph}
+\includegraphics[width=297pt]{namespacempi__subdomain_ad788c273d92ea7058caf0874bffdad6d_icgraph}
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{namespacempi__subdomain_a612331eead74041f174ece9a572c7427}\label{namespacempi__subdomain_a612331eead74041f174ece9a572c7427}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!mpi\_subdomain\_mesh@{mpi\_subdomain\_mesh}}
-\index{mpi\_subdomain\_mesh@{mpi\_subdomain\_mesh}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{mpi\_subdomain\_mesh()}{mpi\_subdomain\_mesh()}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!mpi\+\_\+subdomain\+\_\+mesh@{mpi\+\_\+subdomain\+\_\+mesh}}
+\index{mpi\+\_\+subdomain\+\_\+mesh@{mpi\+\_\+subdomain\+\_\+mesh}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{mpi\+\_\+subdomain\+\_\+mesh()}{mpi\_subdomain\_mesh()}}
 {\footnotesize\ttfamily subroutine, public mpi\+\_\+subdomain\+::mpi\+\_\+subdomain\+\_\+mesh (\begin{DoxyParamCaption}\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+x,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{myrank\+\_\+in\+\_\+z,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+x,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+y,  }\item[{integer, intent(in)}]{nprocs\+\_\+in\+\_\+z }\end{DoxyParamCaption})}
 
 
@@ -365,258 +337,138 @@ Assign grid coordinates and lengths of subdomains.
 {\em nprocs\+\_\+in\+\_\+z} & Number of M\+PI processes in z-\/direction \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 283 of file mpi\+\_\+subdomain.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=262pt]{namespacempi__subdomain_a612331eead74041f174ece9a572c7427_icgraph}
+\includegraphics[width=261pt]{namespacempi__subdomain_a612331eead74041f174ece9a572c7427_icgraph}
 \end{center}
 \end{figure}
 
 
 \subsection{Variable Documentation}
 \mbox{\Hypertarget{namespacempi__subdomain_ad6462f18c8c68c076005957e9d062252}\label{namespacempi__subdomain_ad6462f18c8c68c076005957e9d062252}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_recvfrom\_b@{ddtype\_recvfrom\_b}}
-\index{ddtype\_recvfrom\_b@{ddtype\_recvfrom\_b}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_recvfrom\_b}{ddtype\_recvfrom\_b}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+recvfrom\+\_\+b@{ddtype\+\_\+recvfrom\+\_\+b}}
+\index{ddtype\+\_\+recvfrom\+\_\+b@{ddtype\+\_\+recvfrom\+\_\+b}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+recvfrom\+\_\+b}{ddtype\_recvfrom\_b}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+b}
 
-
-
-Derived datatype for communication between z-\/neighbor subdomains. 
-
-
-
-Definition at line 60 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a18a84c0f3ca27cd4dd73057ff035f341}\label{namespacempi__subdomain_a18a84c0f3ca27cd4dd73057ff035f341}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_recvfrom\_e@{ddtype\_recvfrom\_e}}
-\index{ddtype\_recvfrom\_e@{ddtype\_recvfrom\_e}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_recvfrom\_e}{ddtype\_recvfrom\_e}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+recvfrom\+\_\+e@{ddtype\+\_\+recvfrom\+\_\+e}}
+\index{ddtype\+\_\+recvfrom\+\_\+e@{ddtype\+\_\+recvfrom\+\_\+e}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+recvfrom\+\_\+e}{ddtype\_recvfrom\_e}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+e}
 
-
-
-Derived datatype for communication between x-\/neighbor subdomains. 
-
-
-
-Definition at line 54 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a4da19838e8bc3934ad5c24db424bec2c}\label{namespacempi__subdomain_a4da19838e8bc3934ad5c24db424bec2c}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_recvfrom\_f@{ddtype\_recvfrom\_f}}
-\index{ddtype\_recvfrom\_f@{ddtype\_recvfrom\_f}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_recvfrom\_f}{ddtype\_recvfrom\_f}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+recvfrom\+\_\+f@{ddtype\+\_\+recvfrom\+\_\+f}}
+\index{ddtype\+\_\+recvfrom\+\_\+f@{ddtype\+\_\+recvfrom\+\_\+f}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+recvfrom\+\_\+f}{ddtype\_recvfrom\_f}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+f}
 
-
-
-Derived datatype for communication between z-\/neighbor subdomains. 
-
-
-
-Definition at line 60 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a74f1edb3c9227692b250285680518dc4}\label{namespacempi__subdomain_a74f1edb3c9227692b250285680518dc4}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_recvfrom\_n@{ddtype\_recvfrom\_n}}
-\index{ddtype\_recvfrom\_n@{ddtype\_recvfrom\_n}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_recvfrom\_n}{ddtype\_recvfrom\_n}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+recvfrom\+\_\+n@{ddtype\+\_\+recvfrom\+\_\+n}}
+\index{ddtype\+\_\+recvfrom\+\_\+n@{ddtype\+\_\+recvfrom\+\_\+n}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+recvfrom\+\_\+n}{ddtype\_recvfrom\_n}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+n}
 
-
-
-Derived datatype for communication between y-\/neighbor subdomains. 
-
-
-
-Definition at line 57 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a1f46916f08758533cad3ecac33233e38}\label{namespacempi__subdomain_a1f46916f08758533cad3ecac33233e38}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_recvfrom\_s@{ddtype\_recvfrom\_s}}
-\index{ddtype\_recvfrom\_s@{ddtype\_recvfrom\_s}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_recvfrom\_s}{ddtype\_recvfrom\_s}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+recvfrom\+\_\+s@{ddtype\+\_\+recvfrom\+\_\+s}}
+\index{ddtype\+\_\+recvfrom\+\_\+s@{ddtype\+\_\+recvfrom\+\_\+s}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+recvfrom\+\_\+s}{ddtype\_recvfrom\_s}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+s}
 
-
-
-Derived datatype for communication between y-\/neighbor subdomains. 
-
-
-
-Definition at line 57 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a0b2a4ab6d6a88a3817f473a5c2c172b9}\label{namespacempi__subdomain_a0b2a4ab6d6a88a3817f473a5c2c172b9}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_recvfrom\_w@{ddtype\_recvfrom\_w}}
-\index{ddtype\_recvfrom\_w@{ddtype\_recvfrom\_w}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_recvfrom\_w}{ddtype\_recvfrom\_w}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+recvfrom\+\_\+w@{ddtype\+\_\+recvfrom\+\_\+w}}
+\index{ddtype\+\_\+recvfrom\+\_\+w@{ddtype\+\_\+recvfrom\+\_\+w}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+recvfrom\+\_\+w}{ddtype\_recvfrom\_w}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+recvfrom\+\_\+w}
 
-
-
-Derived datatype for communication between x-\/neighbor subdomains. 
-
-
-
-Definition at line 54 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a7a2af0322a7aaa435951a5432859687a}\label{namespacempi__subdomain_a7a2af0322a7aaa435951a5432859687a}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_sendto\_b@{ddtype\_sendto\_b}}
-\index{ddtype\_sendto\_b@{ddtype\_sendto\_b}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_sendto\_b}{ddtype\_sendto\_b}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+sendto\+\_\+b@{ddtype\+\_\+sendto\+\_\+b}}
+\index{ddtype\+\_\+sendto\+\_\+b@{ddtype\+\_\+sendto\+\_\+b}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+sendto\+\_\+b}{ddtype\_sendto\_b}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+b}
 
-
-
-Derived datatype for communication between z-\/neighbor subdomains. 
-
-
-
-Definition at line 60 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a93395266b1630e5a91e8e89531dfcec6}\label{namespacempi__subdomain_a93395266b1630e5a91e8e89531dfcec6}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_sendto\_e@{ddtype\_sendto\_e}}
-\index{ddtype\_sendto\_e@{ddtype\_sendto\_e}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_sendto\_e}{ddtype\_sendto\_e}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+sendto\+\_\+e@{ddtype\+\_\+sendto\+\_\+e}}
+\index{ddtype\+\_\+sendto\+\_\+e@{ddtype\+\_\+sendto\+\_\+e}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+sendto\+\_\+e}{ddtype\_sendto\_e}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+e}
 
 
 
 Derived datatype for communication between x-\/neighbor subdomains. 
 
-
-
-Definition at line 54 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a4f3d66535b947c7afee75e6e73a47206}\label{namespacempi__subdomain_a4f3d66535b947c7afee75e6e73a47206}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_sendto\_f@{ddtype\_sendto\_f}}
-\index{ddtype\_sendto\_f@{ddtype\_sendto\_f}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_sendto\_f}{ddtype\_sendto\_f}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+sendto\+\_\+f@{ddtype\+\_\+sendto\+\_\+f}}
+\index{ddtype\+\_\+sendto\+\_\+f@{ddtype\+\_\+sendto\+\_\+f}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+sendto\+\_\+f}{ddtype\_sendto\_f}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+f}
 
 
 
 Derived datatype for communication between z-\/neighbor subdomains. 
 
-
-
-Definition at line 60 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a55f5c1af9bd941fd176e619bddbb8d82}\label{namespacempi__subdomain_a55f5c1af9bd941fd176e619bddbb8d82}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_sendto\_n@{ddtype\_sendto\_n}}
-\index{ddtype\_sendto\_n@{ddtype\_sendto\_n}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_sendto\_n}{ddtype\_sendto\_n}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+sendto\+\_\+n@{ddtype\+\_\+sendto\+\_\+n}}
+\index{ddtype\+\_\+sendto\+\_\+n@{ddtype\+\_\+sendto\+\_\+n}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+sendto\+\_\+n}{ddtype\_sendto\_n}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+n}
 
 
 
 Derived datatype for communication between y-\/neighbor subdomains. 
 
-
-
-Definition at line 57 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a660f83d621188fb7eb60ad10eab4c9b5}\label{namespacempi__subdomain_a660f83d621188fb7eb60ad10eab4c9b5}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_sendto\_s@{ddtype\_sendto\_s}}
-\index{ddtype\_sendto\_s@{ddtype\_sendto\_s}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_sendto\_s}{ddtype\_sendto\_s}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+sendto\+\_\+s@{ddtype\+\_\+sendto\+\_\+s}}
+\index{ddtype\+\_\+sendto\+\_\+s@{ddtype\+\_\+sendto\+\_\+s}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+sendto\+\_\+s}{ddtype\_sendto\_s}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+s}
 
-
-
-Derived datatype for communication between y-\/neighbor subdomains. 
-
-
-
-Definition at line 57 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a0701fde01daea1a6fd51b62c75b8ee82}\label{namespacempi__subdomain_a0701fde01daea1a6fd51b62c75b8ee82}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ddtype\_sendto\_w@{ddtype\_sendto\_w}}
-\index{ddtype\_sendto\_w@{ddtype\_sendto\_w}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ddtype\_sendto\_w}{ddtype\_sendto\_w}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ddtype\+\_\+sendto\+\_\+w@{ddtype\+\_\+sendto\+\_\+w}}
+\index{ddtype\+\_\+sendto\+\_\+w@{ddtype\+\_\+sendto\+\_\+w}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ddtype\+\_\+sendto\+\_\+w}{ddtype\_sendto\_w}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ddtype\+\_\+sendto\+\_\+w}
 
-
-
-Derived datatype for communication between x-\/neighbor subdomains. 
-
-
-
-Definition at line 54 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a56af1740899dc9df6868e5e71a0884a5}\label{namespacempi__subdomain_a56af1740899dc9df6868e5e71a0884a5}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!dmx\_sub@{dmx\_sub}}
-\index{dmx\_sub@{dmx\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{dmx\_sub}{dmx\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!dmx\+\_\+sub@{dmx\+\_\+sub}}
+\index{dmx\+\_\+sub@{dmx\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{dmx\+\_\+sub}{dmx\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::dmx\+\_\+sub}
 
 
 
 Grid lengths in the subdomain. 
 
-
-
-Definition at line 45 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_ae44efbff9669bfad03a79ab41b5e8ace}\label{namespacempi__subdomain_ae44efbff9669bfad03a79ab41b5e8ace}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!dmy\_sub@{dmy\_sub}}
-\index{dmy\_sub@{dmy\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{dmy\_sub}{dmy\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!dmy\+\_\+sub@{dmy\+\_\+sub}}
+\index{dmy\+\_\+sub@{dmy\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{dmy\+\_\+sub}{dmy\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::dmy\+\_\+sub}
 
-
-
-Grid lengths in the subdomain. 
-
-
-
-Definition at line 45 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_afb6341d7362587d6fd0a06fe78ba4e3f}\label{namespacempi__subdomain_afb6341d7362587d6fd0a06fe78ba4e3f}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!dmz\_sub@{dmz\_sub}}
-\index{dmz\_sub@{dmz\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{dmz\_sub}{dmz\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!dmz\+\_\+sub@{dmz\+\_\+sub}}
+\index{dmz\+\_\+sub@{dmz\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{dmz\+\_\+sub}{dmz\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::dmz\+\_\+sub}
 
-
-
-Grid lengths in the subdomain. 
-
-
-
-Definition at line 45 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_abbd7d35107c53bcfd2b2b52771f4aa67}\label{namespacempi__subdomain_abbd7d35107c53bcfd2b2b52771f4aa67}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!iend@{iend}}
-\index{iend@{iend}!mpi\_subdomain@{mpi\_subdomain}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!iend@{iend}}
+\index{iend@{iend}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 \subsubsection{\texorpdfstring{iend}{iend}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::iend}
 
-
-
-Grid indices of the assigned range. 
-
-
-
-Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_acd16f258caed20a7d8d38cd28ae64688}\label{namespacempi__subdomain_acd16f258caed20a7d8d38cd28ae64688}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ierr@{ierr}}
-\index{ierr@{ierr}!mpi\_subdomain@{mpi\_subdomain}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ierr@{ierr}}
+\index{ierr@{ierr}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 \subsubsection{\texorpdfstring{ierr}{ierr}}
 {\footnotesize\ttfamily integer mpi\+\_\+subdomain\+::ierr}
 
-
-
-Definition at line 33 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_ab8925faaa6f45326c1d11efa37e03566}\label{namespacempi__subdomain_ab8925faaa6f45326c1d11efa37e03566}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ista@{ista}}
-\index{ista@{ista}!mpi\_subdomain@{mpi\_subdomain}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ista@{ista}}
+\index{ista@{ista}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 \subsubsection{\texorpdfstring{ista}{ista}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::ista}
 
@@ -624,203 +476,111 @@ Definition at line 33 of file mpi\+\_\+subdomain.\+f90.
 
 Grid indices of the assigned range. 
 
-
-
-Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a06433a0d1a081c51202a0010c21c9d36}\label{namespacempi__subdomain_a06433a0d1a081c51202a0010c21c9d36}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!jend@{jend}}
-\index{jend@{jend}!mpi\_subdomain@{mpi\_subdomain}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!jend@{jend}}
+\index{jend@{jend}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 \subsubsection{\texorpdfstring{jend}{jend}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::jend}
 
-
-
-Grid indices of the assigned range. 
-
-
-
-Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_ac22380b1c941dd6c53cabe7287d185e9}\label{namespacempi__subdomain_ac22380b1c941dd6c53cabe7287d185e9}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!jmbc\_index@{jmbc\_index}}
-\index{jmbc\_index@{jmbc\_index}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{jmbc\_index}{jmbc\_index}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!jmbc\+\_\+index@{jmbc\+\_\+index}}
+\index{jmbc\+\_\+index@{jmbc\+\_\+index}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{jmbc\+\_\+index}{jmbc\_index}}
 {\footnotesize\ttfamily integer, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::jmbc\+\_\+index}
 
 
 
 Flag whether lower grid is empty(0) or not. 
 
-
-
-Definition at line 50 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a9adbfdd11c7e9fdb968bb8eef2b13c2b}\label{namespacempi__subdomain_a9adbfdd11c7e9fdb968bb8eef2b13c2b}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!jpbc\_index@{jpbc\_index}}
-\index{jpbc\_index@{jpbc\_index}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{jpbc\_index}{jpbc\_index}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!jpbc\+\_\+index@{jpbc\+\_\+index}}
+\index{jpbc\+\_\+index@{jpbc\+\_\+index}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{jpbc\+\_\+index}{jpbc\_index}}
 {\footnotesize\ttfamily integer, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::jpbc\+\_\+index}
 
 
 
 Flag whether upper grid is empty(0) or not. 
 
-
-
-Definition at line 51 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_ac85bfba1caf77f9c3c0047fe9450fee6}\label{namespacempi__subdomain_ac85bfba1caf77f9c3c0047fe9450fee6}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!jsta@{jsta}}
-\index{jsta@{jsta}!mpi\_subdomain@{mpi\_subdomain}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!jsta@{jsta}}
+\index{jsta@{jsta}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 \subsubsection{\texorpdfstring{jsta}{jsta}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::jsta}
 
-
-
-Grid indices of the assigned range. 
-
-
-
-Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_af9934313b1ccbcb09f30916df3326076}\label{namespacempi__subdomain_af9934313b1ccbcb09f30916df3326076}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!kend@{kend}}
-\index{kend@{kend}!mpi\_subdomain@{mpi\_subdomain}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!kend@{kend}}
+\index{kend@{kend}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 \subsubsection{\texorpdfstring{kend}{kend}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::kend}
 
-
-
-Grid indices of the assigned range. 
-
-
-
-Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_acd499eb1d07159aa9f5c878f9519b00f}\label{namespacempi__subdomain_acd499eb1d07159aa9f5c878f9519b00f}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ksta@{ksta}}
-\index{ksta@{ksta}!mpi\_subdomain@{mpi\_subdomain}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ksta@{ksta}}
+\index{ksta@{ksta}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
 \subsubsection{\texorpdfstring{ksta}{ksta}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::ksta}
 
-
-
-Grid indices of the assigned range. 
-
-
-
-Definition at line 38 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}\label{namespacempi__subdomain_a005fe127fe0fc85b932814a820a36444}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!nx\_sub@{nx\_sub}}
-\index{nx\_sub@{nx\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{nx\_sub}{nx\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!nx\+\_\+sub@{nx\+\_\+sub}}
+\index{nx\+\_\+sub@{nx\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{nx\+\_\+sub}{nx\_sub}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::nx\+\_\+sub}
 
 
 
 Grid numbers in the subdomain. 
 
-
-
-Definition at line 35 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}\label{namespacempi__subdomain_a665ba05d0ae9309dd28b9b513a0c87a1}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!ny\_sub@{ny\_sub}}
-\index{ny\_sub@{ny\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{ny\_sub}{ny\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!ny\+\_\+sub@{ny\+\_\+sub}}
+\index{ny\+\_\+sub@{ny\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{ny\+\_\+sub}{ny\_sub}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::ny\+\_\+sub}
 
-
-
-Grid numbers in the subdomain. 
-
-
-
-Definition at line 35 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}\label{namespacempi__subdomain_a07555cc931ac78376a4c81207662251f}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!nz\_sub@{nz\_sub}}
-\index{nz\_sub@{nz\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{nz\_sub}{nz\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!nz\+\_\+sub@{nz\+\_\+sub}}
+\index{nz\+\_\+sub@{nz\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{nz\+\_\+sub}{nz\_sub}}
 {\footnotesize\ttfamily integer, public mpi\+\_\+subdomain\+::nz\+\_\+sub}
 
-
-
-Grid numbers in the subdomain. 
-
-
-
-Definition at line 35 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_ad61f27caf5f32301a077e21363c2d73b}\label{namespacempi__subdomain_ad61f27caf5f32301a077e21363c2d73b}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!thetabc3\_sub@{thetabc3\_sub}}
-\index{thetabc3\_sub@{thetabc3\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{thetabc3\_sub}{thetabc3\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!thetabc3\+\_\+sub@{thetabc3\+\_\+sub}}
+\index{thetabc3\+\_\+sub@{thetabc3\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{thetabc3\+\_\+sub}{thetabc3\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable, public mpi\+\_\+subdomain\+::thetabc3\+\_\+sub}
 
 
 
 B.\+C. of lower wall. 
 
-
-
-Definition at line 47 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_ad1705bede0c0d39ad16f9f94afe32be6}\label{namespacempi__subdomain_ad1705bede0c0d39ad16f9f94afe32be6}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!thetabc4\_sub@{thetabc4\_sub}}
-\index{thetabc4\_sub@{thetabc4\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{thetabc4\_sub}{thetabc4\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!thetabc4\+\_\+sub@{thetabc4\+\_\+sub}}
+\index{thetabc4\+\_\+sub@{thetabc4\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{thetabc4\+\_\+sub}{thetabc4\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:,\+:), allocatable, public mpi\+\_\+subdomain\+::thetabc4\+\_\+sub}
 
 
 
 B.\+C. of upper wall. 
 
-
-
-Definition at line 48 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a978554e1520c79471ef3793ed1872b37}\label{namespacempi__subdomain_a978554e1520c79471ef3793ed1872b37}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!x\_sub@{x\_sub}}
-\index{x\_sub@{x\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{x\_sub}{x\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!x\+\_\+sub@{x\+\_\+sub}}
+\index{x\+\_\+sub@{x\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{x\+\_\+sub}{x\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::x\+\_\+sub}
 
 
 
 Coordinates of grid points in the subdomain. 
 
-
-
-Definition at line 42 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_a58b09abee5f1002de7b20b1b86f5c821}\label{namespacempi__subdomain_a58b09abee5f1002de7b20b1b86f5c821}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!y\_sub@{y\_sub}}
-\index{y\_sub@{y\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{y\_sub}{y\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!y\+\_\+sub@{y\+\_\+sub}}
+\index{y\+\_\+sub@{y\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{y\+\_\+sub}{y\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::y\+\_\+sub}
 
-
-
-Coordinates of grid points in the subdomain. 
-
-
-
-Definition at line 42 of file mpi\+\_\+subdomain.\+f90.
-
 \mbox{\Hypertarget{namespacempi__subdomain_aab6d78e49471a9a3db5ad9df4c3d4041}\label{namespacempi__subdomain_aab6d78e49471a9a3db5ad9df4c3d4041}} 
-\index{mpi\_subdomain@{mpi\_subdomain}!z\_sub@{z\_sub}}
-\index{z\_sub@{z\_sub}!mpi\_subdomain@{mpi\_subdomain}}
-\subsubsection{\texorpdfstring{z\_sub}{z\_sub}}
+\index{mpi\+\_\+subdomain@{mpi\+\_\+subdomain}!z\+\_\+sub@{z\+\_\+sub}}
+\index{z\+\_\+sub@{z\+\_\+sub}!mpi\+\_\+subdomain@{mpi\+\_\+subdomain}}
+\subsubsection{\texorpdfstring{z\+\_\+sub}{z\_sub}}
 {\footnotesize\ttfamily double precision, dimension(\+:), allocatable, public mpi\+\_\+subdomain\+::z\+\_\+sub}
-
-
-
-Coordinates of grid points in the subdomain. 
-
-
-
-Definition at line 42 of file mpi\+\_\+subdomain.\+f90.
 

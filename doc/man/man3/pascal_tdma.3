@@ -1,0 +1,215 @@
+.TH "pascal_tdma" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+pascal_tdma \- Module for PaScaL-TDMA library\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Types"
+
+.in +1c
+.ti -1c
+.RI "type \fBptdma_plan_many\fP"
+.br
+.RI "Execution plan for many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "type \fBptdma_plan_single\fP"
+.br
+.RI "Execution plan for a single tridiagonal system of equations\&. "
+.in -1c
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_plan_single_create\fP (plan, myrank, nprocs, mpi_world, gather_rank)"
+.br
+.RI "Create a plan for a single tridiagonal system of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_plan_single_destroy\fP (plan)"
+.br
+.RI "Deallocate the allocated arrays in the defined plan_single \&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_plan_many_create\fP (plan, n_sys, myrank, nprocs, mpi_world)"
+.br
+.RI "Create a plan for many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_plan_many_destroy\fP (plan, nprocs)"
+.br
+.RI "Destroy the allocated arrays in the defined plan_many\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_single_solve\fP (plan, A, B, C, D, n_row)"
+.br
+.RI "Solve a single tridiagonal system of equation\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_single_solve_cycle\fP (plan, A, B, C, D, n_row)"
+.br
+.RI "Solve a single cyclic tridiagonal system of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_many_solve\fP (plan, A, B, C, D, n_sys, n_row)"
+.br
+.RI "Solve many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_many_solve_cycle\fP (plan, A, B, C, D, n_sys, n_row)"
+.br
+.RI "Solve many cyclic tridiagonal systems of equations\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Module for PaScaL-TDMA library\&. 
+
+It contains plans for tridiagonal systems of equations and subroutines for solving them using the defined plans\&. The operation of the library includes the following three phases: (1) Create a data structure called a plan, which has the information for communication and reduced systems\&. (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5 (3) Destroy the created plan 
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine, public pascal_tdma::pascal_tdma_many_solve (type(\fBptdma_plan_many\fP), intent(inout) plan, double precision, dimension(1:n_sys,1:n_row), intent(inout) A, double precision, dimension(1:n_sys,1:n_row), intent(inout) B, double precision, dimension(1:n_sys,1:n_row), intent(inout) C, double precision, dimension(1:n_sys,1:n_row), intent(inout) D, integer, intent(in) n_sys, integer, intent(in) n_row)"
+
+.PP
+Solve many tridiagonal systems of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for many tridiagonal systems of equations 
+.br
+\fIA\fP Coefficients in lower diagonal elements 
+.br
+\fIB\fP Coefficients in diagonal elements 
+.br
+\fIC\fP Coefficients in upper diagonal elements 
+.br
+\fID\fP Coefficients in right-hand side terms 
+.br
+\fIn_sys\fP Number of tridiagonal systems per process 
+.br
+\fIn_row\fP Number of rows in each process, size of a tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma::pascal_tdma_many_solve_cycle (type(\fBptdma_plan_many\fP), intent(inout) plan, double precision, dimension(1:n_sys,1:n_row), intent(inout) A, double precision, dimension(1:n_sys,1:n_row), intent(inout) B, double precision, dimension(1:n_sys,1:n_row), intent(inout) C, double precision, dimension(1:n_sys,1:n_row), intent(inout) D, integer, intent(in) n_sys, integer, intent(in) n_row)"
+
+.PP
+Solve many cyclic tridiagonal systems of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for many tridiagonal systems of equations 
+.br
+\fIA\fP Coefficients in lower diagonal elements 
+.br
+\fIB\fP Coefficients in diagonal elements 
+.br
+\fIC\fP Coefficients in upper diagonal elements 
+.br
+\fID\fP Coefficients in right-hand side terms 
+.br
+\fIn_sys\fP Number of tridiagonal systems per process 
+.br
+\fIn_row\fP Number of rows in each process, size of a tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma::pascal_tdma_plan_many_create (type(\fBptdma_plan_many\fP), intent(inout) plan, integer, intent(in) n_sys, integer, intent(in) myrank, integer, intent(in) nprocs, integer, intent(in) mpi_world)"
+
+.PP
+Create a plan for many tridiagonal systems of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for a single tridiagonal system of equations 
+.br
+\fIn_sys\fP Number of tridiagonal systems of equations for process 
+.br
+\fImyrank\fP Rank ID in mpi_world 
+.br
+\fInprocs\fP Number of MPI process in mpi_world 
+.br
+\fImpi_world\fP Communicator for MPI_Gather and MPI_Scatter of reduced equations 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma::pascal_tdma_plan_many_destroy (type(\fBptdma_plan_many\fP), intent(inout) plan, integer nprocs)"
+
+.PP
+Destroy the allocated arrays in the defined plan_many\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for many tridiagonal systems of equations 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma::pascal_tdma_plan_single_create (type(\fBptdma_plan_single\fP), intent(inout) plan, integer, intent(in) myrank, integer, intent(in) nprocs, integer, intent(in) mpi_world, integer, intent(in) gather_rank)"
+
+.PP
+Create a plan for a single tridiagonal system of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for a single tridiagonal system of equations 
+.br
+\fImyrank\fP Rank ID in mpi_world 
+.br
+\fInprocs\fP Number of MPI process in mpi_world 
+.br
+\fImpi_world\fP Communicator for MPI_Gather and MPI_Scatter of a reduced system 
+.br
+\fIgather_rank\fP Target rank where all coefficients are gathered to 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma::pascal_tdma_plan_single_destroy (type(\fBptdma_plan_single\fP), intent(inout) plan)"
+
+.PP
+Deallocate the allocated arrays in the defined plan_single \&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for a single tridiagonal system of equations 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma::pascal_tdma_single_solve (type(\fBptdma_plan_single\fP), intent(inout) plan, double precision, dimension(1:n_row), intent(inout) A, double precision, dimension(1:n_row), intent(inout) B, double precision, dimension(1:n_row), intent(inout) C, double precision, dimension(1:n_row), intent(inout) D, integer, intent(in) n_row)"
+
+.PP
+Solve a single tridiagonal system of equation\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for a single tridiagonal system of equation 
+.br
+\fIA\fP Coefficients in lower diagonal elements 
+.br
+\fIB\fP Coefficients in diagonal elements 
+.br
+\fIC\fP Coefficients in upper diagonal elements 
+.br
+\fID\fP Coefficients in right-hand side terms 
+.br
+\fIn_row\fP Number of rows in each process, size of a tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma::pascal_tdma_single_solve_cycle (type(\fBptdma_plan_single\fP), intent(inout) plan, double precision, dimension(1:n_row), intent(inout) A, double precision, dimension(1:n_row), intent(inout) B, double precision, dimension(1:n_row), intent(inout) C, double precision, dimension(1:n_row), intent(inout) D, integer, intent(in) n_row)"
+
+.PP
+Solve a single cyclic tridiagonal system of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIplan\fP Plan for a single tridiagonal system of equations 
+.br
+\fIA\fP Coefficients in lower diagonal elements 
+.br
+\fIB\fP Coefficients in diagonal elements 
+.br
+\fIC\fP Coefficients in upper diagonal elements 
+.br
+\fID\fP Coefficients in right-hand side terms 
+.br
+\fIn_row\fP Number of rows in each process, size of a tridiagonal matrix N divided by nprocs 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

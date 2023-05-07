@@ -1,0 +1,129 @@
+.TH "pascal_tdma::ptdma_plan_single" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+pascal_tdma::ptdma_plan_single \- Execution plan for a single tridiagonal system of equations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "integer \fBptdma_world\fP"
+.br
+.RI "Single dimensional subcommunicator to assemble data for the reduced TDMA\&. "
+.ti -1c
+.RI "integer \fBn_row_rt\fP"
+.br
+.RI "Number of rows of a reduced tridiagonal system after MPI_Gather\&. "
+.ti -1c
+.RI "integer \fBgather_rank\fP"
+.br
+.RI "Destination rank of MPI_Igather\&. "
+.ti -1c
+.RI "integer \fBmyrank\fP"
+.br
+.RI "Current rank ID in the communicator of ptdma_world\&. "
+.ti -1c
+.RI "integer \fBnprocs\fP"
+.br
+.RI "Communicator size of ptdma_world\&. "
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBa_rd\fP"
+.br
+.RI "Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs\&. The orginal dimension (n) is reduced to (2) "
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBb_rd\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBc_rd\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBd_rd\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBa_rt\fP"
+.br
+.RI "Coefficient arrays after transpose of a reduced system, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (2) changes to (2*np) after transpose\&. "
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBb_rt\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBc_rt\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:), allocatable \fBd_rt\fP"
+.br
+.RI "Coefficient arrays, a: lower, b: diagonal, c: upper, d: rhs\&. "
+.in -1c
+.in -1c
+.SH "Detailed Description"
+.PP 
+Execution plan for a single tridiagonal system of equations\&. 
+
+It uses the MPI_Igather function to build the reduced tridiagonal system of equations to a specified MPI process\&. 
+.SH "Member Data Documentation"
+.PP 
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::a_rd"
+
+.PP
+Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs\&. The orginal dimension (n) is reduced to (2) 
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::a_rt"
+
+.PP
+Coefficient arrays after transpose of a reduced system, a: lower, b: diagonal, c: upper, d: rhs The reduced dimension (2) changes to (2*np) after transpose\&. 
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::b_rd"
+
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::b_rt"
+
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::c_rd"
+
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::c_rt"
+
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::d_rd"
+
+.SS "double precision, dimension(:), allocatable pascal_tdma::ptdma_plan_single::d_rt"
+
+.PP
+Coefficient arrays, a: lower, b: diagonal, c: upper, d: rhs\&. 
+.SS "integer pascal_tdma::ptdma_plan_single::gather_rank"
+
+.PP
+Destination rank of MPI_Igather\&. 
+.SS "integer pascal_tdma::ptdma_plan_single::myrank"
+
+.PP
+Current rank ID in the communicator of ptdma_world\&. 
+.SS "integer pascal_tdma::ptdma_plan_single::n_row_rt"
+
+.PP
+Number of rows of a reduced tridiagonal system after MPI_Gather\&. 
+.SS "integer pascal_tdma::ptdma_plan_single::nprocs"
+
+.PP
+Communicator size of ptdma_world\&. 
+.SS "integer pascal_tdma::ptdma_plan_single::ptdma_world"
+
+.PP
+Single dimensional subcommunicator to assemble data for the reduced TDMA\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

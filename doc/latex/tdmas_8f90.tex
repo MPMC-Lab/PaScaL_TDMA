@@ -1,5 +1,5 @@
-\hypertarget{tdmas_8f90}{}\section{/\+Users/jihoon/\+Documents/develop/pascal\+\_\+tdma/src/tdmas.f90 File Reference}
-\label{tdmas_8f90}\index{/Users/jihoon/Documents/develop/pascal\_tdma/src/tdmas.f90@{/Users/jihoon/Documents/develop/pascal\_tdma/src/tdmas.f90}}
+\hypertarget{tdmas_8f90}{}\section{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/tdmas.f90 File Reference}
+\label{tdmas_8f90}\index{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/tdmas.\+f90@{/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/tdmas.\+f90}}
 
 
 Tridiagonal matrix (T\+DM) solvers using the Thomas algorithm.  
@@ -8,13 +8,13 @@ Tridiagonal matrix (T\+DM) solvers using the Thomas algorithm.
 \subsection*{Functions/\+Subroutines}
 \begin{DoxyCompactItemize}
 \item 
-subroutine \mbox{\hyperlink{tdmas_8f90_a4a6130fff49607012fefacc8640424a7}{tdma\+\_\+single}} (a, b, c, d, n1)
+subroutine \hyperlink{tdmas_8f90_a4a6130fff49607012fefacc8640424a7}{tdma\+\_\+single} (a, b, c, d, n1)
 \begin{DoxyCompactList}\small\item\em Solve a single tridiagonal system of equations using the Thomas algorithm. \end{DoxyCompactList}\item 
-subroutine \mbox{\hyperlink{tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e}{tdma\+\_\+cycl\+\_\+single}} (a, b, c, d, n1)
+subroutine \hyperlink{tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e}{tdma\+\_\+cycl\+\_\+single} (a, b, c, d, n1)
 \begin{DoxyCompactList}\small\item\em Solve a single cyclic tridiagonal system of equations using the Thomas algorithm. \end{DoxyCompactList}\item 
-subroutine \mbox{\hyperlink{tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05}{tdma\+\_\+many}} (a, b, c, d, n1, n2)
+subroutine \hyperlink{tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05}{tdma\+\_\+many} (a, b, c, d, n1, n2)
 \begin{DoxyCompactList}\small\item\em Solve many tridiagonal systems of equations using the Thomas algorithm. First index indicates the number of independent many tridiagonal systems to use vectorization. Second index indicates the row number in the tridiagonal system . \end{DoxyCompactList}\item 
-subroutine \mbox{\hyperlink{tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a}{tdma\+\_\+cycl\+\_\+many}} (a, b, c, d, n1, n2)
+subroutine \hyperlink{tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a}{tdma\+\_\+cycl\+\_\+many} (a, b, c, d, n1, n2)
 \begin{DoxyCompactList}\small\item\em Solve many cyclic tridiagonal systems of equations using the Thomas algorithm. First index indicates the number of independent many tridiagonal systems to use vectorization. Second index indicates the row number in the tridiagonal system. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
@@ -23,33 +23,31 @@ Tridiagonal matrix (T\+DM) solvers using the Thomas algorithm.
 
 A single T\+DM solver and many T\+DM solver with non-\/cyclic and cyclic conditions. \begin{DoxyAuthor}{Author}
 
-\end{DoxyAuthor}
-
 \begin{DoxyItemize}
-\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\texttt{ k-\/kiha@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
-\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\texttt{ jhkang@kisti.\+re.\+kr}}), Korea Institute of Science and Technology Information
-\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\texttt{ jic@yonsei.\+ac.\+kr}}), Department of Computational Science \& Engineering, Yonsei University
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\tt k-\/kiha@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\tt jhkang@kisti.\+re.\+kr}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\tt jic@yonsei.\+ac.\+kr}), Department of Computational Science \& Engineering, Yonsei University
 \end{DoxyItemize}
-
+\end{DoxyAuthor}
 \begin{DoxyDate}{Date}
-June 2019 
+March 2023 
 \end{DoxyDate}
 \begin{DoxyVersion}{Version}
-1.\+0 
+2.\+0 
 \end{DoxyVersion}
 \begin{DoxyParagraph}{Copyright}
-Copyright (c) 2019 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
+Copyright (c) 2019-\/2023 Kiha Kim and Jung-\/\+Il choi, Yonsei University and Ji-\/\+Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved. 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{License }
-
-\end{DoxyParagraph}
 This project is release under the terms of the M\+IT License (see L\+I\+C\+E\+N\+SE in ) 
+\end{DoxyParagraph}
+
 
 \subsection{Function/\+Subroutine Documentation}
 \mbox{\Hypertarget{tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a}\label{tdmas_8f90_a6c50d548eaa4b5e9b96ccbf8f65cb12a}} 
-\index{tdmas.f90@{tdmas.f90}!tdma\_cycl\_many@{tdma\_cycl\_many}}
-\index{tdma\_cycl\_many@{tdma\_cycl\_many}!tdmas.f90@{tdmas.f90}}
-\subsubsection{\texorpdfstring{tdma\_cycl\_many()}{tdma\_cycl\_many()}}
+\index{tdmas.\+f90@{tdmas.\+f90}!tdma\+\_\+cycl\+\_\+many@{tdma\+\_\+cycl\+\_\+many}}
+\index{tdma\+\_\+cycl\+\_\+many@{tdma\+\_\+cycl\+\_\+many}!tdmas.\+f90@{tdmas.\+f90}}
+\subsubsection{\texorpdfstring{tdma\+\_\+cycl\+\_\+many()}{tdma\_cycl\_many()}}
 {\footnotesize\ttfamily subroutine tdma\+\_\+cycl\+\_\+many (\begin{DoxyParamCaption}\item[{double precision, dimension(n1,n2), intent(inout)}]{a,  }\item[{double precision, dimension(n1,n2), intent(inout)}]{b,  }\item[{double precision, dimension(n1,n2), intent(inout)}]{c,  }\item[{double precision, dimension(n1,n2), intent(inout)}]{d,  }\item[{integer, intent(in)}]{n1,  }\item[{integer, intent(in)}]{n2 }\end{DoxyParamCaption})}
 
 
@@ -71,10 +69,6 @@ Solve many cyclic tridiagonal systems of equations using the Thomas algorithm. F
 {\em n2} & Number of rows in each process, size of the tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 160 of file tdmas.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -84,9 +78,9 @@ Here is the caller graph for this function\+:
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e}\label{tdmas_8f90_a4cb1f95e9c608085c5bb19baff639d9e}} 
-\index{tdmas.f90@{tdmas.f90}!tdma\_cycl\_single@{tdma\_cycl\_single}}
-\index{tdma\_cycl\_single@{tdma\_cycl\_single}!tdmas.f90@{tdmas.f90}}
-\subsubsection{\texorpdfstring{tdma\_cycl\_single()}{tdma\_cycl\_single()}}
+\index{tdmas.\+f90@{tdmas.\+f90}!tdma\+\_\+cycl\+\_\+single@{tdma\+\_\+cycl\+\_\+single}}
+\index{tdma\+\_\+cycl\+\_\+single@{tdma\+\_\+cycl\+\_\+single}!tdmas.\+f90@{tdmas.\+f90}}
+\subsubsection{\texorpdfstring{tdma\+\_\+cycl\+\_\+single()}{tdma\_cycl\_single()}}
 {\footnotesize\ttfamily subroutine tdma\+\_\+cycl\+\_\+single (\begin{DoxyParamCaption}\item[{double precision, dimension(n1), intent(inout)}]{a,  }\item[{double precision, dimension(n1), intent(inout)}]{b,  }\item[{double precision, dimension(n1), intent(inout)}]{c,  }\item[{double precision, dimension(n1), intent(inout)}]{d,  }\item[{integer, intent(in)}]{n1 }\end{DoxyParamCaption})}
 
 
@@ -106,10 +100,6 @@ Solve a single cyclic tridiagonal system of equations using the Thomas algorithm
 {\em n1} & Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 61 of file tdmas.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -119,9 +109,9 @@ Here is the caller graph for this function\+:
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05}\label{tdmas_8f90_ab8cc761496e63e21ee8379d4fc077f05}} 
-\index{tdmas.f90@{tdmas.f90}!tdma\_many@{tdma\_many}}
-\index{tdma\_many@{tdma\_many}!tdmas.f90@{tdmas.f90}}
-\subsubsection{\texorpdfstring{tdma\_many()}{tdma\_many()}}
+\index{tdmas.\+f90@{tdmas.\+f90}!tdma\+\_\+many@{tdma\+\_\+many}}
+\index{tdma\+\_\+many@{tdma\+\_\+many}!tdmas.\+f90@{tdmas.\+f90}}
+\subsubsection{\texorpdfstring{tdma\+\_\+many()}{tdma\_many()}}
 {\footnotesize\ttfamily subroutine tdma\+\_\+many (\begin{DoxyParamCaption}\item[{double precision, dimension(n1,n2), intent(inout)}]{a,  }\item[{double precision, dimension(n1,n2), intent(inout)}]{b,  }\item[{double precision, dimension(n1,n2), intent(inout)}]{c,  }\item[{double precision, dimension(n1,n2), intent(inout)}]{d,  }\item[{integer, intent(in)}]{n1,  }\item[{integer, intent(in)}]{n2 }\end{DoxyParamCaption})}
 
 
@@ -143,10 +133,6 @@ Solve many tridiagonal systems of equations using the Thomas algorithm. First in
 {\em n2} & Number of rows in each process, size of the tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 114 of file tdmas.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]
@@ -156,9 +142,9 @@ Here is the caller graph for this function\+:
 \end{center}
 \end{figure}
 \mbox{\Hypertarget{tdmas_8f90_a4a6130fff49607012fefacc8640424a7}\label{tdmas_8f90_a4a6130fff49607012fefacc8640424a7}} 
-\index{tdmas.f90@{tdmas.f90}!tdma\_single@{tdma\_single}}
-\index{tdma\_single@{tdma\_single}!tdmas.f90@{tdmas.f90}}
-\subsubsection{\texorpdfstring{tdma\_single()}{tdma\_single()}}
+\index{tdmas.\+f90@{tdmas.\+f90}!tdma\+\_\+single@{tdma\+\_\+single}}
+\index{tdma\+\_\+single@{tdma\+\_\+single}!tdmas.\+f90@{tdmas.\+f90}}
+\subsubsection{\texorpdfstring{tdma\+\_\+single()}{tdma\_single()}}
 {\footnotesize\ttfamily subroutine tdma\+\_\+single (\begin{DoxyParamCaption}\item[{double precision, dimension(n1), intent(inout)}]{a,  }\item[{double precision, dimension(n1), intent(inout)}]{b,  }\item[{double precision, dimension(n1), intent(inout)}]{c,  }\item[{double precision, dimension(n1), intent(inout)}]{d,  }\item[{integer, intent(in)}]{n1 }\end{DoxyParamCaption})}
 
 
@@ -178,10 +164,6 @@ Solve a single tridiagonal system of equations using the Thomas algorithm.
 {\em n1} & Number of rows in each process, dimension of tridiagonal matrix N divided by nprocs \\
 \hline
 \end{DoxyParams}
-
-
-Definition at line 28 of file tdmas.\+f90.
-
 Here is the caller graph for this function\+:
 \nopagebreak
 \begin{figure}[H]

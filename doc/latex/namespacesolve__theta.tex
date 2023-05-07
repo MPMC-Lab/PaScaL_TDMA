@@ -1,0 +1,116 @@
+\hypertarget{namespacesolve__theta}{}\section{solve\+\_\+theta Module Reference}
+\label{namespacesolve__theta}\index{solve\+\_\+theta@{solve\+\_\+theta}}
+\subsection*{Functions/\+Subroutines}
+\begin{DoxyCompactItemize}
+\item 
+subroutine, public \hyperlink{namespacesolve__theta_a215d44e312ec3ab2a3ab44fa0613b100}{solve\+\_\+theta\+\_\+plan\+\_\+single} (theta)
+\begin{DoxyCompactList}\small\item\em An example solver for a single tridiagonal system of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacesolve__theta_a0b7fdb576c007dc344092bf40efb0f4b}{solve\+\_\+theta\+\_\+plan\+\_\+many} (theta)
+\begin{DoxyCompactList}\small\item\em An example solver for many tridiagonal systems of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA. \end{DoxyCompactList}\item 
+subroutine, public \hyperlink{namespacesolve__theta_a84c4bdc671112259790470f6ad4c7e4c}{solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda} (theta)
+\begin{DoxyCompactList}\small\item\em An example solver for many tridiagonal systems of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA with C\+U\+DA. \end{DoxyCompactList}\item 
+subroutine \hyperlink{namespacesolve__theta_a75284cf6dd015edde5309be8368c4c9e}{ghostcell\+\_\+update\+\_\+cuda} (Value\+\_\+sub\+\_\+d)
+\begin{DoxyCompactList}\small\item\em Ghost cell update in device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function/\+Subroutine Documentation}
+\mbox{\Hypertarget{namespacesolve__theta_a75284cf6dd015edde5309be8368c4c9e}\label{namespacesolve__theta_a75284cf6dd015edde5309be8368c4c9e}} 
+\index{solve\+\_\+theta@{solve\+\_\+theta}!ghostcell\+\_\+update\+\_\+cuda@{ghostcell\+\_\+update\+\_\+cuda}}
+\index{ghostcell\+\_\+update\+\_\+cuda@{ghostcell\+\_\+update\+\_\+cuda}!solve\+\_\+theta@{solve\+\_\+theta}}
+\subsubsection{\texorpdfstring{ghostcell\+\_\+update\+\_\+cuda()}{ghostcell\_update\_cuda()}}
+{\footnotesize\ttfamily subroutine solve\+\_\+theta\+::ghostcell\+\_\+update\+\_\+cuda (\begin{DoxyParamCaption}\item[{double precision}]{Value\+\_\+sub\+\_\+d }\end{DoxyParamCaption})}
+
+
+
+Ghost cell update in device. 
+
+This subroutine is to update the ghost-\/cell in the device. Allocated buffers in device memory are used. 
+\begin{DoxyParams}{Parameters}
+{\em Value\+\_\+sub\+\_\+d} & Main 3-\/D variable to be updated with GC \\
+\hline
+\end{DoxyParams}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolve__theta_a75284cf6dd015edde5309be8368c4c9e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesolve__theta_a0b7fdb576c007dc344092bf40efb0f4b}\label{namespacesolve__theta_a0b7fdb576c007dc344092bf40efb0f4b}} 
+\index{solve\+\_\+theta@{solve\+\_\+theta}!solve\+\_\+theta\+\_\+plan\+\_\+many@{solve\+\_\+theta\+\_\+plan\+\_\+many}}
+\index{solve\+\_\+theta\+\_\+plan\+\_\+many@{solve\+\_\+theta\+\_\+plan\+\_\+many}!solve\+\_\+theta@{solve\+\_\+theta}}
+\subsubsection{\texorpdfstring{solve\+\_\+theta\+\_\+plan\+\_\+many()}{solve\_theta\_plan\_many()}}
+{\footnotesize\ttfamily subroutine, public solve\+\_\+theta\+::solve\+\_\+theta\+\_\+plan\+\_\+many (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:nx\+\_\+sub, 0\+:ny\+\_\+sub, 0\+:nz\+\_\+sub), intent(inout)}]{theta }\end{DoxyParamCaption})}
+
+
+
+An example solver for many tridiagonal systems of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
+
+This subroutine is for many tridiagonal systems of equations. It solves the the three-\/dimensional time-\/dependent heat conduction problem using Pa\+Sca\+L\+\_\+\+T\+D\+MA. Pa\+Sca\+L\+\_\+\+T\+D\+MA plans are created for many tridiagonal systems of equations and the many tridiagonal systems are solved plane-\/by-\/plane. 
+\begin{DoxyParams}{Parameters}
+{\em theta} & Main 3-\/D variable to be solved \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolve__theta_a0b7fdb576c007dc344092bf40efb0f4b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesolve__theta_a84c4bdc671112259790470f6ad4c7e4c}\label{namespacesolve__theta_a84c4bdc671112259790470f6ad4c7e4c}} 
+\index{solve\+\_\+theta@{solve\+\_\+theta}!solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda@{solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda}}
+\index{solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda@{solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda}!solve\+\_\+theta@{solve\+\_\+theta}}
+\subsubsection{\texorpdfstring{solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda()}{solve\_theta\_plan\_many\_cuda()}}
+{\footnotesize\ttfamily subroutine, public solve\+\_\+theta\+::solve\+\_\+theta\+\_\+plan\+\_\+many\+\_\+cuda (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:nx\+\_\+sub, 0\+:ny\+\_\+sub, 0\+:nz\+\_\+sub), intent(inout)}]{theta }\end{DoxyParamCaption})}
+
+
+
+An example solver for many tridiagonal systems of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA with C\+U\+DA. 
+
+This subroutine is for many tridiagonal systems of equations. It solves the the three-\/dimensional time-\/dependent heat conduction problem using Pa\+Sca\+L\+\_\+\+T\+D\+MA. Pa\+Sca\+L\+\_\+\+T\+D\+MA plans are created for many tridiagonal systems of equations and the many tridiagonal systems are solved plane-\/by-\/plane. 
+\begin{DoxyParams}{Parameters}
+{\em theta} & Main 3-\/D variable to be solved \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolve__theta_a84c4bdc671112259790470f6ad4c7e4c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{namespacesolve__theta_a84c4bdc671112259790470f6ad4c7e4c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacesolve__theta_a215d44e312ec3ab2a3ab44fa0613b100}\label{namespacesolve__theta_a215d44e312ec3ab2a3ab44fa0613b100}} 
+\index{solve\+\_\+theta@{solve\+\_\+theta}!solve\+\_\+theta\+\_\+plan\+\_\+single@{solve\+\_\+theta\+\_\+plan\+\_\+single}}
+\index{solve\+\_\+theta\+\_\+plan\+\_\+single@{solve\+\_\+theta\+\_\+plan\+\_\+single}!solve\+\_\+theta@{solve\+\_\+theta}}
+\subsubsection{\texorpdfstring{solve\+\_\+theta\+\_\+plan\+\_\+single()}{solve\_theta\_plan\_single()}}
+{\footnotesize\ttfamily subroutine, public solve\+\_\+theta\+::solve\+\_\+theta\+\_\+plan\+\_\+single (\begin{DoxyParamCaption}\item[{double precision, dimension(0\+:nx\+\_\+sub, 0\+:ny\+\_\+sub, 0\+:nz\+\_\+sub), intent(inout)}]{theta }\end{DoxyParamCaption})}
+
+
+
+An example solver for a single tridiagonal system of equations using Pa\+Sca\+L\+\_\+\+T\+D\+MA. 
+
+This subroutine is for a single tridiagonal system of equations. It solves the three-\/dimensional time-\/dependent heat conduction problem using Pa\+Sca\+L\+\_\+\+T\+D\+MA solver. Pa\+Sca\+L\+\_\+\+T\+D\+MA plans are created for a single tridiagonal system of equations and a single tridiagonal systems is solved line-\/by-\/line. 
+\begin{DoxyParams}{Parameters}
+{\em theta} & Main 3-\/D variable to be solved \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacesolve__theta_a215d44e312ec3ab2a3ab44fa0613b100_cgraph}
+\end{center}
+\end{figure}

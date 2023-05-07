@@ -1,4 +1,3 @@
 <map id="pascal_tdma::pascal_tdma_many_solve_cycle" name="pascal_tdma::pascal_tdma_many_solve_cycle">
-<area shape="rect" id="node1" title="Solve many cyclic tridiagonal systems of equations." alt="" coords="5,5,180,44"/>
-<area shape="rect" id="node2" href="$tdmas_8f90.html#a6c50d548eaa4b5e9b96ccbf8f65cb12a" title="Solve many cyclic tridiagonal systems of equations using the Thomas algorithm. First index indicates ..." alt="" coords="228,12,349,37"/>
+<area shape="rect" id="node2" href="$tdmas_8f90.html#a6c50d548eaa4b5e9b96ccbf8f65cb12a" title="Solve many cyclic tridiagonal systems of equations using the Thomas algorithm. First index indicates ..." alt="" coords="227,13,348,39"/>
 </map>

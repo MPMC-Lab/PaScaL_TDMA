@@ -1,15 +1,23 @@
 &meshes
-nx = 64
-ny = 32
-nz = 128
+nx = 128
+ny = 256
+nz = 64
 /
 
 &procs
 npx = 2
-npy = 3
-npz = 5
+npy = 2
+npz = 2
 /
 
 &time
 Tmax = 10
+/
+
+&threads
+thread_in_x = 8
+thread_in_y = 4
+thread_in_z = 4
+thread_in_x_pascal = 32
+thread_in_y_pascal = 16
 /

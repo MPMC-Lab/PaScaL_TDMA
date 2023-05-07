@@ -1,0 +1,77 @@
+.TH "solve_theta" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+solve_theta
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBsolve_theta_plan_single\fP (theta)"
+.br
+.RI "An example solver for a single tridiagonal system of equations using PaScaL_TDMA\&. "
+.ti -1c
+.RI "subroutine, public \fBsolve_theta_plan_many\fP (theta)"
+.br
+.RI "An example solver for many tridiagonal systems of equations using PaScaL_TDMA\&. "
+.ti -1c
+.RI "subroutine, public \fBsolve_theta_plan_many_cuda\fP (theta)"
+.br
+.RI "An example solver for many tridiagonal systems of equations using PaScaL_TDMA with CUDA\&. "
+.ti -1c
+.RI "subroutine \fBghostcell_update_cuda\fP (Value_sub_d)"
+.br
+.RI "Ghost cell update in device\&. "
+.in -1c
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine solve_theta::ghostcell_update_cuda (double precision Value_sub_d)"
+
+.PP
+Ghost cell update in device\&. This subroutine is to update the ghost-cell in the device\&. Allocated buffers in device memory are used\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIValue_sub_d\fP Main 3-D variable to be updated with GC 
+.RE
+.PP
+
+.SS "subroutine, public solve_theta::solve_theta_plan_many (double precision, dimension(0:nx_sub, 0:ny_sub, 0:nz_sub), intent(inout) theta)"
+
+.PP
+An example solver for many tridiagonal systems of equations using PaScaL_TDMA\&. This subroutine is for many tridiagonal systems of equations\&. It solves the the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA\&. PaScaL_TDMA plans are created for many tridiagonal systems of equations and the many tridiagonal systems are solved plane-by-plane\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItheta\fP Main 3-D variable to be solved 
+.RE
+.PP
+
+.SS "subroutine, public solve_theta::solve_theta_plan_many_cuda (double precision, dimension(0:nx_sub, 0:ny_sub, 0:nz_sub), intent(inout) theta)"
+
+.PP
+An example solver for many tridiagonal systems of equations using PaScaL_TDMA with CUDA\&. This subroutine is for many tridiagonal systems of equations\&. It solves the the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA\&. PaScaL_TDMA plans are created for many tridiagonal systems of equations and the many tridiagonal systems are solved plane-by-plane\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItheta\fP Main 3-D variable to be solved 
+.RE
+.PP
+
+.SS "subroutine, public solve_theta::solve_theta_plan_single (double precision, dimension(0:nx_sub, 0:ny_sub, 0:nz_sub), intent(inout) theta)"
+
+.PP
+An example solver for a single tridiagonal system of equations using PaScaL_TDMA\&. This subroutine is for a single tridiagonal system of equations\&. It solves the three-dimensional time-dependent heat conduction problem using PaScaL_TDMA solver\&. PaScaL_TDMA plans are created for a single tridiagonal system of equations and a single tridiagonal systems is solved line-by-line\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItheta\fP Main 3-D variable to be solved 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

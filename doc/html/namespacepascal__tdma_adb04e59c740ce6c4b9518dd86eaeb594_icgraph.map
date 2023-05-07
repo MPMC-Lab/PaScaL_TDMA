@@ -1,4 +1,3 @@
 <map id="pascal_tdma::pascal_tdma_plan_single_destroy" name="pascal_tdma::pascal_tdma_plan_single_destroy">
-<area shape="rect" id="node1" title="Deallocate the allocated arrays in the defined plan_single ." alt="" coords="218,5,402,44"/>
-<area shape="rect" id="node2" href="$solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="5,12,170,37"/>
+<area shape="rect" id="node2" href="$namespacesolve__theta.html#a215d44e312ec3ab2a3ab44fa0613b100" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA. ..." alt="" coords="233,5,364,47"/>
 </map>

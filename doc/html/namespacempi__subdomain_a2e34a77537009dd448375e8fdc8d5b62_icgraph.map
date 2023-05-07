@@ -1,6 +1,5 @@
 <map id="mpi_subdomain::mpi_subdomain_ghostcell_update" name="mpi_subdomain::mpi_subdomain_ghostcell_update">
-<area shape="rect" id="node1" title="Update the values of boundary ghostcells through communication in all directions." alt="" coords="316,17,470,69"/>
-<area shape="rect" id="node2" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,5,56,31"/>
-<area shape="rect" id="node3" href="$solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="105,31,267,56"/>
-<area shape="rect" id="node4" href="$solve__theta__plan__single_8f90.html#a53ef6756822306f33a47be6a66232862" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA." alt="" coords="104,80,268,105"/>
+<area shape="rect" id="node2" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA. " alt="" coords="244,5,295,32"/>
+<area shape="rect" id="node3" href="$namespacesolve__theta.html#a215d44e312ec3ab2a3ab44fa0613b100" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA. ..." alt="" coords="204,57,335,98"/>
+<area shape="rect" id="node4" href="$namespacesolve__theta.html#a0b7fdb576c007dc344092bf40efb0f4b" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA. " alt="" coords="205,122,333,163"/>
 </map>

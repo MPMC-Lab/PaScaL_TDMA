@@ -1,0 +1,101 @@
+.TH "mpi_topology" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mpi_topology \- Module for creating the cartesian topology of the MPI processes and subcommunicators\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Types"
+
+.in +1c
+.ti -1c
+.RI "type \fBcart_comm_1d\fP"
+.br
+.RI "Type variable for the information of 1D communicator\&. "
+.in -1c
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBmpi_topology_clean\fP ()"
+.br
+.RI "Destroy the communicator for cartesian topology\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_topology_make\fP ()"
+.br
+.RI "Create the cartesian topology for the MPI processes and subcommunicators\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "integer, public \fBmpi_world_cart\fP"
+.br
+.RI "Communicator for cartesian topology\&. "
+.ti -1c
+.RI "integer, dimension(0:2), public \fBnp_dim\fP"
+.br
+.RI "Number of MPI processes in 3D topology\&. "
+.ti -1c
+.RI "logical, dimension(0:2), public \fBperiod\fP"
+.br
+.RI "Periodicity in each direction\&. "
+.ti -1c
+.RI "type(\fBcart_comm_1d\fP), public \fBcomm_1d_x\fP"
+.br
+.RI "Subcommunicator information in x-direction\&. "
+.ti -1c
+.RI "type(\fBcart_comm_1d\fP), public \fBcomm_1d_y\fP"
+.br
+.RI "Subcommunicator information in y-direction\&. "
+.ti -1c
+.RI "type(\fBcart_comm_1d\fP), public \fBcomm_1d_z\fP"
+.br
+.RI "Subcommunicator information in z-direction\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Module for creating the cartesian topology of the MPI processes and subcommunicators\&. 
+
+This module has three subcommunicators in each-direction and related subroutines\&. 
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine, public mpi_topology::mpi_topology_clean ()"
+
+.PP
+Destroy the communicator for cartesian topology\&. 
+.SS "subroutine, public mpi_topology::mpi_topology_make ()"
+
+.PP
+Create the cartesian topology for the MPI processes and subcommunicators\&. 
+.SH "Variable Documentation"
+.PP 
+.SS "type(\fBcart_comm_1d\fP), public mpi_topology::comm_1d_x"
+
+.PP
+Subcommunicator information in x-direction\&. 
+.SS "type(\fBcart_comm_1d\fP), public mpi_topology::comm_1d_y"
+
+.PP
+Subcommunicator information in y-direction\&. 
+.SS "type(\fBcart_comm_1d\fP), public mpi_topology::comm_1d_z"
+
+.PP
+Subcommunicator information in z-direction\&. 
+.SS "integer, public mpi_topology::mpi_world_cart"
+
+.PP
+Communicator for cartesian topology\&. 
+.SS "integer, dimension(0:2), public mpi_topology::np_dim"
+
+.PP
+Number of MPI processes in 3D topology\&. 
+.SS "logical, dimension(0:2), public mpi_topology::period"
+
+.PP
+Periodicity in each direction\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

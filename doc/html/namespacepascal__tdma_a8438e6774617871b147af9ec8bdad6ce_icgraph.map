@@ -1,5 +1,0 @@
-<map id="pascal_tdma::pascal_tdma_plan_many_destroy" name="pascal_tdma::pascal_tdma_plan_many_destroy">
-<area shape="rect" id="node1" title="Destroy the allocated arrays in the defined plan_many." alt="" coords="314,5,496,44"/>
-<area shape="rect" id="node2" href="$solve__theta__plan__many_8f90.html#af048018fcdfbe66e00922dee3e7e9a64" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA." alt="" coords="104,12,266,37"/>
-<area shape="rect" id="node3" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA." alt="" coords="5,12,56,37"/>
-</map>

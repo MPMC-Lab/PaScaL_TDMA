@@ -1,4 +1,3 @@
 <map id="pascal_tdma::pascal_tdma_plan_many_create" name="pascal_tdma::pascal_tdma_plan_many_create">
-<area shape="rect" id="node1" title="Create a plan for many tridiagonal systems of equations." alt="" coords="5,5,181,44"/>
-<area shape="rect" id="node2" href="$para__range_8f90.html#ab75ab386311975aa4ff7cac06798fcd4" title="Compute the indices of the assigned range for each MPI process ." alt="" coords="229,12,318,37"/>
+<area shape="rect" id="node2" href="$para__range_8f90.html#ab75ab386311975aa4ff7cac06798fcd4" title="Compute the indices of the assigned range for each MPI process . " alt="" coords="224,13,311,39"/>
 </map>

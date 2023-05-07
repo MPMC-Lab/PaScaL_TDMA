@@ -1,0 +1,420 @@
+.TH "mpi_subdomain" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mpi_subdomain \- Module for building subdomains from the physical domain\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_make\fP (nprocs_in_x, myrank_in_x, nprocs_in_y, myrank_in_y, nprocs_in_z, myrank_in_z)"
+.br
+.RI "Prepare the subdomain and determine the size of the subdomain\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_clean\fP"
+.br
+.RI "Deallocate subdomain variables\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_make_ghostcell_ddtype\fP"
+.br
+.RI "Build derived datatypes for subdomain communication using ghostcells\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_ghostcell_update\fP (theta_sub, comm_1d_x, comm_1d_y, comm_1d_z)"
+.br
+.RI "Update the values of boundary ghostcells through communication in all directions\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_indices\fP (myrank_in_y, nprocs_in_y)"
+.br
+.RI "Determine whether the next grids are empty(0) or not(1) only in the y-direction\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_mesh\fP (myrank_in_x, myrank_in_y, myrank_in_z, nprocs_in_x, nprocs_in_y, nprocs_in_z)"
+.br
+.RI "Assign grid coordinates and lengths of subdomains\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_initialization\fP (theta_sub, myrank_in_y, nprocs_in_y)"
+.br
+.RI "Initialize the values of the main variable in a subdomain\&. "
+.ti -1c
+.RI "subroutine, public \fBmpi_subdomain_boundary\fP (theta_sub, myrank_in_y, nprocs_in_y)"
+.br
+.RI "Assign the values of boundary grids in the subdomain\&. "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "integer \fBierr\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable, public \fBthetabc3_sub\fP"
+.br
+.RI "B\&.C\&. of lower wall\&. "
+.ti -1c
+.RI "double precision, dimension(:,:), allocatable, public \fBthetabc4_sub\fP"
+.br
+.RI "B\&.C\&. of upper wall\&. "
+.ti -1c
+.RI "integer, dimension(:), allocatable, public \fBjmbc_index\fP"
+.br
+.RI "Flag whether lower grid is empty(0) or not\&. "
+.ti -1c
+.RI "integer, dimension(:), allocatable, public \fBjpbc_index\fP"
+.br
+.RI "Flag whether upper grid is empty(0) or not\&. "
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer, public \fBnx_sub\fP"
+.br
+.RI "Grid numbers in the subdomain\&. "
+.ti -1c
+.RI "integer, public \fBny_sub\fP"
+.br
+.ti -1c
+.RI "integer, public \fBnz_sub\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer, public \fBista\fP"
+.br
+.RI "Grid indices of the assigned range\&. "
+.ti -1c
+.RI "integer, public \fBiend\fP"
+.br
+.ti -1c
+.RI "integer, public \fBjsta\fP"
+.br
+.ti -1c
+.RI "integer, public \fBjend\fP"
+.br
+.ti -1c
+.RI "integer, public \fBksta\fP"
+.br
+.ti -1c
+.RI "integer, public \fBkend\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, dimension(:), allocatable, public \fBx_sub\fP"
+.br
+.RI "Coordinates of grid points in the subdomain\&. "
+.ti -1c
+.RI "double precision, dimension(:), allocatable, public \fBy_sub\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:), allocatable, public \fBz_sub\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "double precision, dimension(:), allocatable, public \fBdmx_sub\fP"
+.br
+.RI "Grid lengths in the subdomain\&. "
+.ti -1c
+.RI "double precision, dimension(:), allocatable, public \fBdmy_sub\fP"
+.br
+.ti -1c
+.RI "double precision, dimension(:), allocatable, public \fBdmz_sub\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBddtype_sendto_e\fP"
+.br
+.RI "Derived datatype for communication between x-neighbor subdomains\&. "
+.ti -1c
+.RI "integer \fBddtype_recvfrom_w\fP"
+.br
+.ti -1c
+.RI "integer \fBddtype_sendto_w\fP"
+.br
+.ti -1c
+.RI "integer \fBddtype_recvfrom_e\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBddtype_sendto_n\fP"
+.br
+.RI "Derived datatype for communication between y-neighbor subdomains\&. "
+.ti -1c
+.RI "integer \fBddtype_recvfrom_s\fP"
+.br
+.ti -1c
+.RI "integer \fBddtype_sendto_s\fP"
+.br
+.ti -1c
+.RI "integer \fBddtype_recvfrom_n\fP"
+.br
+.in -1c
+.in -1c
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "integer \fBddtype_sendto_f\fP"
+.br
+.RI "Derived datatype for communication between z-neighbor subdomains\&. "
+.ti -1c
+.RI "integer \fBddtype_recvfrom_b\fP"
+.br
+.ti -1c
+.RI "integer \fBddtype_sendto_b\fP"
+.br
+.ti -1c
+.RI "integer \fBddtype_recvfrom_f\fP"
+.br
+.in -1c
+.in -1c
+.SH "Detailed Description"
+.PP 
+Module for building subdomains from the physical domain\&. 
+
+This module has simulation parameters for subdomains and communication between the subdomains\&. 
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_boundary (double precision, dimension(0:\fBnx_sub\fP, 0:\fBny_sub\fP, 0:\fBnz_sub\fP), intent(in) theta_sub, integer, intent(in) myrank_in_y, integer, intent(in) nprocs_in_y)"
+
+.PP
+Assign the values of boundary grids in the subdomain\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItheta_sub\fP Main variable to be solved 
+.br
+\fImyrank_in_y\fP Rank ID in y-direction 
+.br
+\fInprocs_in_y\fP Number of MPI processes in y-direction 
+.RE
+.PP
+
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_clean ()"
+
+.PP
+Deallocate subdomain variables\&. 
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_ghostcell_update (double precision, dimension(0:\fBnx_sub\fP, 0:\fBny_sub\fP, 0:\fBnz_sub\fP), intent(inout) theta_sub, type(\fBcart_comm_1d\fP), intent(in) comm_1d_x, type(\fBcart_comm_1d\fP), intent(in) comm_1d_y, type(\fBcart_comm_1d\fP), intent(in) comm_1d_z)"
+
+.PP
+Update the values of boundary ghostcells through communication in all directions\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItheta_sub\fP Variables to be updated 
+.br
+\fIcomm_1d_x\fP Subcommunicator in the x-direction 
+.br
+\fIcomm_1d_y\fP Subcommunicator in the y-direction 
+.br
+\fIcomm_1d_z\fP Subcommunicator in the z-direction 
+.RE
+.PP
+
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_indices (integer, intent(in) myrank_in_y, integer, intent(in) nprocs_in_y)"
+
+.PP
+Determine whether the next grids are empty(0) or not(1) only in the y-direction\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInprocs_in_y\fP Number of MPI processes in y-direction 
+.br
+\fImyrank_in_y\fP Rank ID in y-direction 
+.RE
+.PP
+
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_initialization (double precision, dimension(0:\fBnx_sub\fP, 0:\fBny_sub\fP, 0:\fBnz_sub\fP), intent(inout) theta_sub, integer, intent(in) myrank_in_y, integer, intent(in) nprocs_in_y)"
+
+.PP
+Initialize the values of the main variable in a subdomain\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fItheta_sub\fP Main variable to be solved 
+.br
+\fImyrank_in_y\fP Rank ID in y-direction 
+.br
+\fInprocs_in_y\fP Number of MPI processes in y-direction 
+.RE
+.PP
+
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_make (integer, intent(in) nprocs_in_x, integer, intent(in) myrank_in_x, integer, intent(in) nprocs_in_y, integer, intent(in) myrank_in_y, integer, intent(in) nprocs_in_z, integer, intent(in) myrank_in_z)"
+
+.PP
+Prepare the subdomain and determine the size of the subdomain\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fInprocs_in_x\fP Number of MPI processes in x-direction 
+.br
+\fImyrank_in_x\fP Rank ID in x-direction 
+.br
+\fInprocs_in_y\fP Number of MPI processes in y-direction 
+.br
+\fImyrank_in_y\fP Rank ID in y-direction 
+.br
+\fInprocs_in_z\fP Number of MPI processes in z-direction 
+.br
+\fImyrank_in_z\fP Rank ID in z-direction 
+.RE
+.PP
+
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_make_ghostcell_ddtype ()"
+
+.PP
+Build derived datatypes for subdomain communication using ghostcells\&. 
+.SS "subroutine, public mpi_subdomain::mpi_subdomain_mesh (integer, intent(in) myrank_in_x, integer, intent(in) myrank_in_y, integer, intent(in) myrank_in_z, integer, intent(in) nprocs_in_x, integer, intent(in) nprocs_in_y, integer, intent(in) nprocs_in_z)"
+
+.PP
+Assign grid coordinates and lengths of subdomains\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImyrank_in_x\fP Rank ID in x-direction 
+.br
+\fImyrank_in_y\fP Rank ID in y-direction 
+.br
+\fImyrank_in_z\fP Rank ID in z-direction 
+.br
+\fInprocs_in_x\fP Number of MPI processes in x-direction 
+.br
+\fInprocs_in_y\fP Number of MPI processes in y-direction 
+.br
+\fInprocs_in_z\fP Number of MPI processes in z-direction 
+.RE
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "integer mpi_subdomain::ddtype_recvfrom_b"
+
+.SS "integer mpi_subdomain::ddtype_recvfrom_e"
+
+.SS "integer mpi_subdomain::ddtype_recvfrom_f"
+
+.SS "integer mpi_subdomain::ddtype_recvfrom_n"
+
+.SS "integer mpi_subdomain::ddtype_recvfrom_s"
+
+.SS "integer mpi_subdomain::ddtype_recvfrom_w"
+
+.SS "integer mpi_subdomain::ddtype_sendto_b"
+
+.SS "integer mpi_subdomain::ddtype_sendto_e"
+
+.PP
+Derived datatype for communication between x-neighbor subdomains\&. 
+.SS "integer mpi_subdomain::ddtype_sendto_f"
+
+.PP
+Derived datatype for communication between z-neighbor subdomains\&. 
+.SS "integer mpi_subdomain::ddtype_sendto_n"
+
+.PP
+Derived datatype for communication between y-neighbor subdomains\&. 
+.SS "integer mpi_subdomain::ddtype_sendto_s"
+
+.SS "integer mpi_subdomain::ddtype_sendto_w"
+
+.SS "double precision, dimension(:), allocatable, public mpi_subdomain::dmx_sub"
+
+.PP
+Grid lengths in the subdomain\&. 
+.SS "double precision, dimension(:), allocatable, public mpi_subdomain::dmy_sub"
+
+.SS "double precision, dimension(:), allocatable, public mpi_subdomain::dmz_sub"
+
+.SS "integer, public mpi_subdomain::iend"
+
+.SS "integer mpi_subdomain::ierr"
+
+.SS "integer, public mpi_subdomain::ista"
+
+.PP
+Grid indices of the assigned range\&. 
+.SS "integer, public mpi_subdomain::jend"
+
+.SS "integer, dimension(:), allocatable, public mpi_subdomain::jmbc_index"
+
+.PP
+Flag whether lower grid is empty(0) or not\&. 
+.SS "integer, dimension(:), allocatable, public mpi_subdomain::jpbc_index"
+
+.PP
+Flag whether upper grid is empty(0) or not\&. 
+.SS "integer, public mpi_subdomain::jsta"
+
+.SS "integer, public mpi_subdomain::kend"
+
+.SS "integer, public mpi_subdomain::ksta"
+
+.SS "integer, public mpi_subdomain::nx_sub"
+
+.PP
+Grid numbers in the subdomain\&. 
+.SS "integer, public mpi_subdomain::ny_sub"
+
+.SS "integer, public mpi_subdomain::nz_sub"
+
+.SS "double precision, dimension(:,:), allocatable, public mpi_subdomain::thetabc3_sub"
+
+.PP
+B\&.C\&. of lower wall\&. 
+.SS "double precision, dimension(:,:), allocatable, public mpi_subdomain::thetabc4_sub"
+
+.PP
+B\&.C\&. of upper wall\&. 
+.SS "double precision, dimension(:), allocatable, public mpi_subdomain::x_sub"
+
+.PP
+Coordinates of grid points in the subdomain\&. 
+.SS "double precision, dimension(:), allocatable, public mpi_subdomain::y_sub"
+
+.SS "double precision, dimension(:), allocatable, public mpi_subdomain::z_sub"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

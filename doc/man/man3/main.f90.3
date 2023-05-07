@@ -1,0 +1,84 @@
+.TH "/home/jihoon/Develop/PaScaL_TDMA/examples/main.f90" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jihoon/Develop/PaScaL_TDMA/examples/main.f90 \- This file contains the main subroutines for an example problem of PaScaL_TDMA\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Functions/Subroutines"
+
+.in +1c
+.ti -1c
+.RI "program \fBmain\fP"
+.br
+.RI "Main execution program for the example problem of PaScaL_TDMA\&. "
+.ti -1c
+.RI "subroutine \fBfield_file_write\fP (myrank, nprocs, theta_sub)"
+.br
+.RI "Write the values of the field variable in an output file\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+This file contains the main subroutines for an example problem of PaScaL_TDMA\&. 
+
+The target example problem is a three-dimensional(3D) time-dependent heat conduction problem in a unit cube domain applied with the boundary conditions of vertically constant temperature and horizontally periodic boundaries\&. 
+.PP
+\fBAuthor:\fP
+.RS 4
+
+.IP "\(bu" 2
+Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.IP "\(bu" 2
+Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+.IP "\(bu" 2
+Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
+.PP
+.RE
+.PP
+\fBDate:\fP
+.RS 4
+March 2023 
+.RE
+.PP
+\fBVersion:\fP
+.RS 4
+2\&.0 
+.RE
+.PP
+\fBCopyright\fP
+.RS 4
+Copyright (c) 2019-2023 Kiha Kim and Jung-Il choi, Yonsei University and Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved\&. 
+.RE
+.PP
+\fBLicense \fP
+.RS 4
+This project is release under the terms of the MIT License (see LICENSE in ) 
+.RE
+.PP
+
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine field_file_write (integer, intent(in) myrank, integer, intent(in) nprocs, double precision, dimension(0:nx_sub, 0:ny_sub, 0:nz_sub), intent(in) theta_sub)"
+
+.PP
+Write the values of the field variable in an output file\&. It writes the values of the field variables using two methods; single task IO and post assembly IO\&. In the single task IO, each process writes the values in its own file\&. In the post assembly IO, each process send data to a master process, which writes the obtained data in a single file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImyrank\fP Rank ID in MPI_COMM_WORLD 
+.br
+\fInprocs\fP Number of MPI process in MPI_COMM_WORLD 
+.br
+\fItheta_sub\fP Field variable to write 
+.RE
+.PP
+
+.SS "program main ()"
+
+.PP
+Main execution program for the example problem of PaScaL_TDMA\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

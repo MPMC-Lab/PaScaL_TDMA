@@ -1,0 +1,125 @@
+.TH "pascal_tdma_cuda" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+pascal_tdma_cuda \- Module for PaScaL_TDMA library with CUDA\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Types"
+
+.in +1c
+.ti -1c
+.RI "type \fBptdma_plan_many_cuda\fP"
+.br
+.RI "Execution plan for many tridiagonal systems of equations\&. "
+.in -1c
+.SS "Functions/Subroutines"
+
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_plan_many_create_cuda\fP (p, nx_sys, ny_sys, nz_row, myrank, nprocs, mpi_world, thread_in)"
+.br
+.RI "Create a plan for many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_plan_many_destroy_cuda\fP (p)"
+.br
+.RI "Destroy the allocated arrays in the defined plan_many\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_many_solve_cuda\fP (p, a_d, b_d, c_d, d_d)"
+.br
+.RI "Solve many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_many_solve_cycle_cuda\fP (p, a_d, b_d, c_d, d_d)"
+.br
+.RI "Solve many cyclic tridiagonal systems of equations\&. "
+.in -1c
+.in -1c
+.SH "Detailed Description"
+.PP 
+Module for PaScaL_TDMA library with CUDA\&. 
+
+It contains plans for tridiagonal systems of equations and subroutines for solving them using the defined plans\&. The operation of the library includes the following three phases: (1) Create a data structure called a plan with the information for communication and reduced systems\&. (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5 (3) Destroy the created plan 
+.SH "Function/Subroutine Documentation"
+.PP 
+.SS "subroutine, public pascal_tdma_cuda::pascal_tdma_many_solve_cuda (type(\fBptdma_plan_many_cuda\fP), intent(inout) p, double precision, dimension(:, :, :) a_d, double precision, dimension(:, :, :) b_d, double precision, dimension(:, :, :) c_d, double precision, dimension(:, :, :) d_d)"
+
+.PP
+Solve many tridiagonal systems of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp\fP Plan for many tridiagonal systems of equations 
+.br
+\fIa_d\fP Coefficient array of lower diagonal elements 
+.br
+\fIb_d\fP Coefficient array of diagonal elements 
+.br
+\fIc_d\fP Coefficient array of upper diagonal elements 
+.br
+\fId_d\fP Coefficient array of right-hand side terms 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma_cuda::pascal_tdma_many_solve_cycle_cuda (type(\fBptdma_plan_many_cuda\fP), intent(inout) p, double precision, dimension(:, :, :) a_d, double precision, dimension(:, :, :) b_d, double precision, dimension(:, :, :) c_d, double precision, dimension(:, :, :) d_d)"
+
+.PP
+Solve many cyclic tridiagonal systems of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp\fP Plan for many tridiagonal systems of equations 
+.br
+\fIa_d\fP Coefficient array of lower diagonal elements 
+.br
+\fIb_d\fP Coefficient array of diagonal elements 
+.br
+\fIc_d\fP Coefficient array of upper diagonal elements 
+.br
+\fId_d\fP Coefficient array of right-hand side terms 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma_cuda::pascal_tdma_plan_many_create_cuda (type(\fBptdma_plan_many_cuda\fP), intent(inout) p, integer, intent(in) nx_sys, integer, intent(in) ny_sys, integer, intent(in) nz_row, integer, intent(in) myrank, integer, intent(in) nprocs, integer, intent(in) mpi_world, type(dim3) thread_in)"
+
+.PP
+Create a plan for many tridiagonal systems of equations\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp\fP Plan for a many tridiagonal system of equations 
+.br
+\fInx_sys\fP Number of tridiagonal systems of equations in x-direction per process 
+.br
+\fIny_sys\fP Number of tridiagonal systems of equations in y-direction per process 
+.br
+\fInz_row\fP Row size of partitioned tridiagonal matrix in z-direction per process 
+.br
+\fImyrank\fP Rank ID in mpi_world 
+.br
+\fInprocs\fP Number of MPI process in mpi_world 
+.br
+\fImpi_world\fP Communicator for MPI_Gather and MPI_Scatter of reduced equations 
+.RE
+.PP
+
+.SS "subroutine, public pascal_tdma_cuda::pascal_tdma_plan_many_destroy_cuda (type(\fBptdma_plan_many_cuda\fP), intent(inout) p)"
+
+.PP
+Destroy the allocated arrays in the defined plan_many\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIp\fP Plan for many tridiagonal systems of equations 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.

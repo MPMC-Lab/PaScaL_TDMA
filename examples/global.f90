@@ -4,18 +4,19 @@
 !> @details     The target example problem is the three-dimensional(3D) time-dependent heat conduction problem 
 !>              in a unit cube domain applied with the boundary conditions of vertically constant temperature 
 !>              and horizontally periodic boundaries.
-!> @author      
-!>              - Kiha Kim (k-kiha@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
-!>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
-!>              - Jung-Il Choi (jic@yonsei.ac.kr), Department of Computational Science & Engineering, Yonsei University
 !>
-!> @date        June 2019
-!> @version     1.0
+!> @author      
+!>              - Ki-Ha Kim (k-kiha@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University
+!>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
+!>              - Jung-Il Choi (jic@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University
+!>
+!> @date        May 2023
+!> @version     2.0
 !> @par         Copyright
-!>              Copyright (c) 2019 Kiha Kim and Jung-Il choi, Yonsei University and 
+!>              Copyright (c) 2019-2023 Ki-Ha Kim and Jung-Il choi, Yonsei University and 
 !>              Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved.
 !> @par         License     
-!>              This project is release under the terms of the MIT License (see LICENSE in )
+!>              This project is release under the terms of the MIT License (see LICENSE file).
 !======================================================================================================================
 
 !>
@@ -23,6 +24,7 @@
 !> @details     This global module has simulation parameters and a subroutine to initialize the parameters. 
 !>
 module global
+
     implicit none
     double precision, parameter :: PI = acos(-1.d0)
     
@@ -62,6 +64,11 @@ module global
     double precision :: nu                      !< Kinematic viscosity
     double precision :: Ct                      !< Thermal diffusivity
 
+#ifdef _CUDA
+	! Thread for cuda
+    integer :: thread_in_x, thread_in_y, thread_in_z, thread_in_x_pascal, thread_in_y_pascal
+#endif
+    
     contains 
     !>
     !> @brief       Assign global parameters.
@@ -72,17 +79,33 @@ module global
         integer, intent(out) :: np_dim(0:2)
 
         integer :: npx, npy, npz   ! Variables to read number of processes in 3D topology
+        integer :: arg_cnt
+        character(len=32)   :: arg_str
 
         ! Namelist variables for file input
         namelist /meshes/ nx, ny, nz
         namelist /procs/ npx, npy, npz
         namelist /time/ tmax
+#ifdef _CUDA
+        namelist /threads/ thread_in_x, thread_in_y, thread_in_z, thread_in_x_pascal, thread_in_y_pascal
+#endif
 
-        open (unit = 1, file = "PARA_INPUT.inp")
+		arg_cnt = command_argument_count()
+
+		if(arg_cnt.ne.1) then
+            print *, 'Input file name is not defined. Usage:"mpirun -np number exe_file input_file" '
+            stop
+        endif
+        call get_command_argument(arg_cnt, arg_str)
+
+        open (unit = 1, file = arg_str)
             read (1, meshes)
             read (1, procs)
             read (1, time)
-        close (1)
+#ifdef _CUDA
+			read (1, threads)
+#endif
+			close (1)
 
         np_dim(0) = npx
         np_dim(1) = npy

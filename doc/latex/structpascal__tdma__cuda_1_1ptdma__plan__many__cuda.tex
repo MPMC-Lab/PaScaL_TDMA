@@ -1,0 +1,307 @@
+\hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}{}\section{pascal\+\_\+tdma\+\_\+cuda\+:\+:ptdma\+\_\+plan\+\_\+many\+\_\+cuda Type Reference}
+\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda}\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+
+
+Execution plan for many tridiagonal systems of equations.  
+
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ab983f24a2e00981f41ff983e0d81fdb3}{ptdma\+\_\+world}
+\begin{DoxyCompactList}\small\item\em Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a706e78d10591f47539ba6edced84a56e}{nprocs}
+\begin{DoxyCompactList}\small\item\em Communicator size of ptdma\+\_\+world. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a34475304ac7bdfdd0c9a86798774f515}{nx\+\_\+sys}
+\begin{DoxyCompactList}\small\item\em Number of tridiagonal systems of equations in x-\/direction per process. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a14e8282cfbc71ecefdf980d86753b1d3}{ny\+\_\+sys}
+\begin{DoxyCompactList}\small\item\em Number of tridiagonal systems of equations in y-\/direction per process. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_abb6b78165b33a6d0f4c6071bf0c82cb8}{nz\+\_\+row}
+\begin{DoxyCompactList}\small\item\em Row size of partitioned tridiagonal matrix in z-\/direction per process. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a814c894fc8d118f7c7d815dafa6f2938}{nx\+\_\+sys\+\_\+rt}
+\begin{DoxyCompactList}\small\item\em Number of tridiagonal systems to be solved in each process after transpose. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a7851f23de66e323f86e4b0383b2fdd3f}{nz\+\_\+row\+\_\+rt}
+\begin{DoxyCompactList}\small\item\em Number of rows of a reduced tridiagonal systems after transpose. \end{DoxyCompactList}\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_abac7f0bc27e004dcf86abf85f1810c12}{nz\+\_\+row\+\_\+rd}
+\begin{DoxyCompactList}\small\item\em Number of rows of a reduced tridiagonal systems before transpose, 2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a408b2ea72e6272addd9d1c2115d133b7}{device}
+\begin{DoxyCompactList}\small\item\em Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) The arrays are allocated in the device memory. \end{DoxyCompactList}\item 
+double precision, dimension(\+:), allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a7a74d732f01a8db80e6fea40237fd619}{dimension}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ac119b2bb89cb1975879959161b1ea1f3}{a\+\_\+rd\+\_\+d}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a0dbc902b5d5d7622e905d4bcdc97a972}{b\+\_\+rd\+\_\+d}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a4f2fd00c32e504cc3b0d16d7c7558cc1}{c\+\_\+rd\+\_\+d}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a5e58f4e3a2c9a8bd8c33e72e3e2cd4eb}{d\+\_\+rd\+\_\+d}
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a1a98ce23bb02a30a0fdf3cbc3bbce8c6}{e\+\_\+buff}
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a9c5a1cdde14c466d8d82943aabc99803}{a\+\_\+rt\+\_\+d}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a67a8f62b3d035a1187832067da91edd8}{b\+\_\+rt\+\_\+d}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a8cee9d1ef8e63c242839cf073df164a4}{c\+\_\+rt\+\_\+d}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_aaa47db7d772e950224cb7e1ec0f246a8}{d\+\_\+rt\+\_\+d}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a36c4e454f031ec49adf6244177fa7917}{e\+\_\+rt\+\_\+d}
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_af5e759a242166d52d508ee3ef7540642}{sendbuf}
+\item 
+double precision, allocatable \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a61fc25b52197944802ea0b7a12153f2d}{recvbuf}
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+type(dim3) \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_af863fad6c2a79c6d4fc280f6afbf599d}{threads}
+\begin{DoxyCompactList}\small\item\em Threads and blocks for C\+U\+DA kernel. \end{DoxyCompactList}\item 
+type(dim3) \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ae107096b9e9c849c6b11e210a6a6518d}{blocks}
+\item 
+type(dim3) \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a829ff230c0e063d6254024be776f905b}{blocks\+\_\+rt}
+\item 
+type(dim3) \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a1989eb8901f6e50b833f61ee9447fb37}{blocks\+\_\+alltoall}
+\item 
+integer \hyperlink{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a4a33f2fe35ac3c91c722d87498b230e3}{shared\+\_\+buffer\+\_\+size}
+\begin{DoxyCompactList}\small\item\em @ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+
+\subsection{Detailed Description}
+Execution plan for many tridiagonal systems of equations. 
+
+It uses M\+P\+I\+\_\+\+Ialltoall function to distribute the modified tridiagonal systems to M\+PI processes and build the reduced tridiagonal systems of equations. Currently it supports the equal size of domains. It does not use derived datatypes. 
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ac119b2bb89cb1975879959161b1ea1f3}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ac119b2bb89cb1975879959161b1ea1f3}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!a\+\_\+rd\+\_\+d@{a\+\_\+rd\+\_\+d}}
+\index{a\+\_\+rd\+\_\+d@{a\+\_\+rd\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{a\+\_\+rd\+\_\+d}{a\_rd\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::a\+\_\+rd\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a9c5a1cdde14c466d8d82943aabc99803}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a9c5a1cdde14c466d8d82943aabc99803}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!a\+\_\+rt\+\_\+d@{a\+\_\+rt\+\_\+d}}
+\index{a\+\_\+rt\+\_\+d@{a\+\_\+rt\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{a\+\_\+rt\+\_\+d}{a\_rt\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::a\+\_\+rt\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a0dbc902b5d5d7622e905d4bcdc97a972}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a0dbc902b5d5d7622e905d4bcdc97a972}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!b\+\_\+rd\+\_\+d@{b\+\_\+rd\+\_\+d}}
+\index{b\+\_\+rd\+\_\+d@{b\+\_\+rd\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{b\+\_\+rd\+\_\+d}{b\_rd\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::b\+\_\+rd\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a67a8f62b3d035a1187832067da91edd8}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a67a8f62b3d035a1187832067da91edd8}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!b\+\_\+rt\+\_\+d@{b\+\_\+rt\+\_\+d}}
+\index{b\+\_\+rt\+\_\+d@{b\+\_\+rt\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{b\+\_\+rt\+\_\+d}{b\_rt\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::b\+\_\+rt\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ae107096b9e9c849c6b11e210a6a6518d}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ae107096b9e9c849c6b11e210a6a6518d}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!blocks@{blocks}}
+\index{blocks@{blocks}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{blocks}{blocks}}
+{\footnotesize\ttfamily type(dim3) pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::blocks}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a1989eb8901f6e50b833f61ee9447fb37}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a1989eb8901f6e50b833f61ee9447fb37}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!blocks\+\_\+alltoall@{blocks\+\_\+alltoall}}
+\index{blocks\+\_\+alltoall@{blocks\+\_\+alltoall}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{blocks\+\_\+alltoall}{blocks\_alltoall}}
+{\footnotesize\ttfamily type(dim3) pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::blocks\+\_\+alltoall}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a829ff230c0e063d6254024be776f905b}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a829ff230c0e063d6254024be776f905b}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!blocks\+\_\+rt@{blocks\+\_\+rt}}
+\index{blocks\+\_\+rt@{blocks\+\_\+rt}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{blocks\+\_\+rt}{blocks\_rt}}
+{\footnotesize\ttfamily type(dim3) pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::blocks\+\_\+rt}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a4f2fd00c32e504cc3b0d16d7c7558cc1}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a4f2fd00c32e504cc3b0d16d7c7558cc1}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!c\+\_\+rd\+\_\+d@{c\+\_\+rd\+\_\+d}}
+\index{c\+\_\+rd\+\_\+d@{c\+\_\+rd\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{c\+\_\+rd\+\_\+d}{c\_rd\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::c\+\_\+rd\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a8cee9d1ef8e63c242839cf073df164a4}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a8cee9d1ef8e63c242839cf073df164a4}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!c\+\_\+rt\+\_\+d@{c\+\_\+rt\+\_\+d}}
+\index{c\+\_\+rt\+\_\+d@{c\+\_\+rt\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{c\+\_\+rt\+\_\+d}{c\_rt\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::c\+\_\+rt\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a5e58f4e3a2c9a8bd8c33e72e3e2cd4eb}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a5e58f4e3a2c9a8bd8c33e72e3e2cd4eb}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!d\+\_\+rd\+\_\+d@{d\+\_\+rd\+\_\+d}}
+\index{d\+\_\+rd\+\_\+d@{d\+\_\+rd\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{d\+\_\+rd\+\_\+d}{d\_rd\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::d\+\_\+rd\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_aaa47db7d772e950224cb7e1ec0f246a8}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_aaa47db7d772e950224cb7e1ec0f246a8}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!d\+\_\+rt\+\_\+d@{d\+\_\+rt\+\_\+d}}
+\index{d\+\_\+rt\+\_\+d@{d\+\_\+rt\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{d\+\_\+rt\+\_\+d}{d\_rt\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::d\+\_\+rt\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a408b2ea72e6272addd9d1c2115d133b7}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a408b2ea72e6272addd9d1c2115d133b7}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!device@{device}}
+\index{device@{device}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{device}{device}}
+{\footnotesize\ttfamily double precision allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::device}
+
+
+
+Coefficient arrays after reduction, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs. The orginal dimension (m\+:n) is reduced to (m\+:2) The arrays are allocated in the device memory. 
+
+Buffers allocated in device memory for all-\/to-\/all communication.
+
+Coefficient arrays after transpose of reduced systems, a\+: lower, b\+: diagonal, c\+: upper, d\+: rhs The reduced dimension (m\+:2) changes to (m/np\+: 2$\ast$np) after transpose. The arrays are allocated in the device memory.
+
+Coefficient arrays for cyclic T\+D\+MA in case of nprocs = 1. The arrays are allocated in the device memory. \mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a7a74d732f01a8db80e6fea40237fd619}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a7a74d732f01a8db80e6fea40237fd619}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!dimension@{dimension}}
+\index{dimension@{dimension}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{dimension}{dimension}}
+{\footnotesize\ttfamily double precision pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::dimension}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a1a98ce23bb02a30a0fdf3cbc3bbce8c6}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a1a98ce23bb02a30a0fdf3cbc3bbce8c6}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!e\+\_\+buff@{e\+\_\+buff}}
+\index{e\+\_\+buff@{e\+\_\+buff}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{e\+\_\+buff}{e\_buff}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::e\+\_\+buff}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a36c4e454f031ec49adf6244177fa7917}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a36c4e454f031ec49adf6244177fa7917}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!e\+\_\+rt\+\_\+d@{e\+\_\+rt\+\_\+d}}
+\index{e\+\_\+rt\+\_\+d@{e\+\_\+rt\+\_\+d}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{e\+\_\+rt\+\_\+d}{e\_rt\_d}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::e\+\_\+rt\+\_\+d}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a706e78d10591f47539ba6edced84a56e}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a706e78d10591f47539ba6edced84a56e}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!nprocs@{nprocs}}
+\index{nprocs@{nprocs}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{nprocs}{nprocs}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::nprocs}
+
+
+
+Communicator size of ptdma\+\_\+world. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a34475304ac7bdfdd0c9a86798774f515}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a34475304ac7bdfdd0c9a86798774f515}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!nx\+\_\+sys@{nx\+\_\+sys}}
+\index{nx\+\_\+sys@{nx\+\_\+sys}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{nx\+\_\+sys}{nx\_sys}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::nx\+\_\+sys}
+
+
+
+Number of tridiagonal systems of equations in x-\/direction per process. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a814c894fc8d118f7c7d815dafa6f2938}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a814c894fc8d118f7c7d815dafa6f2938}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!nx\+\_\+sys\+\_\+rt@{nx\+\_\+sys\+\_\+rt}}
+\index{nx\+\_\+sys\+\_\+rt@{nx\+\_\+sys\+\_\+rt}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{nx\+\_\+sys\+\_\+rt}{nx\_sys\_rt}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::nx\+\_\+sys\+\_\+rt}
+
+
+
+Number of tridiagonal systems to be solved in each process after transpose. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a14e8282cfbc71ecefdf980d86753b1d3}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a14e8282cfbc71ecefdf980d86753b1d3}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!ny\+\_\+sys@{ny\+\_\+sys}}
+\index{ny\+\_\+sys@{ny\+\_\+sys}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{ny\+\_\+sys}{ny\_sys}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::ny\+\_\+sys}
+
+
+
+Number of tridiagonal systems of equations in y-\/direction per process. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_abb6b78165b33a6d0f4c6071bf0c82cb8}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_abb6b78165b33a6d0f4c6071bf0c82cb8}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!nz\+\_\+row@{nz\+\_\+row}}
+\index{nz\+\_\+row@{nz\+\_\+row}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{nz\+\_\+row}{nz\_row}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::nz\+\_\+row}
+
+
+
+Row size of partitioned tridiagonal matrix in z-\/direction per process. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_abac7f0bc27e004dcf86abf85f1810c12}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_abac7f0bc27e004dcf86abf85f1810c12}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!nz\+\_\+row\+\_\+rd@{nz\+\_\+row\+\_\+rd}}
+\index{nz\+\_\+row\+\_\+rd@{nz\+\_\+row\+\_\+rd}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{nz\+\_\+row\+\_\+rd}{nz\_row\_rd}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::nz\+\_\+row\+\_\+rd}
+
+
+
+Number of rows of a reduced tridiagonal systems before transpose, 2. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a7851f23de66e323f86e4b0383b2fdd3f}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a7851f23de66e323f86e4b0383b2fdd3f}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!nz\+\_\+row\+\_\+rt@{nz\+\_\+row\+\_\+rt}}
+\index{nz\+\_\+row\+\_\+rt@{nz\+\_\+row\+\_\+rt}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{nz\+\_\+row\+\_\+rt}{nz\_row\_rt}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::nz\+\_\+row\+\_\+rt}
+
+
+
+Number of rows of a reduced tridiagonal systems after transpose. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ab983f24a2e00981f41ff983e0d81fdb3}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_ab983f24a2e00981f41ff983e0d81fdb3}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!ptdma\+\_\+world@{ptdma\+\_\+world}}
+\index{ptdma\+\_\+world@{ptdma\+\_\+world}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{ptdma\+\_\+world}{ptdma\_world}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::ptdma\+\_\+world}
+
+
+
+Single dimensional subcommunicator to assemble data for the reduced T\+D\+MA. 
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a61fc25b52197944802ea0b7a12153f2d}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a61fc25b52197944802ea0b7a12153f2d}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!recvbuf@{recvbuf}}
+\index{recvbuf@{recvbuf}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{recvbuf}{recvbuf}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::recvbuf}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_af5e759a242166d52d508ee3ef7540642}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_af5e759a242166d52d508ee3ef7540642}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!sendbuf@{sendbuf}}
+\index{sendbuf@{sendbuf}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{sendbuf}{sendbuf}}
+{\footnotesize\ttfamily double precision, allocatable pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::sendbuf}
+
+\mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a4a33f2fe35ac3c91c722d87498b230e3}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_a4a33f2fe35ac3c91c722d87498b230e3}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!shared\+\_\+buffer\+\_\+size@{shared\+\_\+buffer\+\_\+size}}
+\index{shared\+\_\+buffer\+\_\+size@{shared\+\_\+buffer\+\_\+size}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{shared\+\_\+buffer\+\_\+size}{shared\_buffer\_size}}
+{\footnotesize\ttfamily integer pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::shared\+\_\+buffer\+\_\+size}
+
+
+
+@ 
+
+shared buffer size \mbox{\Hypertarget{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_af863fad6c2a79c6d4fc280f6afbf599d}\label{structpascal__tdma__cuda_1_1ptdma__plan__many__cuda_af863fad6c2a79c6d4fc280f6afbf599d}} 
+\index{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}!threads@{threads}}
+\index{threads@{threads}!pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda@{pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda}}
+\subsubsection{\texorpdfstring{threads}{threads}}
+{\footnotesize\ttfamily type(dim3) pascal\+\_\+tdma\+\_\+cuda\+::ptdma\+\_\+plan\+\_\+many\+\_\+cuda\+::threads}
+
+
+
+Threads and blocks for C\+U\+DA kernel. 
+
+
+
+The documentation for this type was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/jihoon/\+Develop/\+Pa\+Sca\+L\+\_\+\+T\+D\+M\+A/src/\hyperlink{pascal__tdma__cuda_8f90}{pascal\+\_\+tdma\+\_\+cuda.\+f90}\end{DoxyCompactItemize}

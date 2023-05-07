@@ -1,0 +1,116 @@
+Parallel and Scalable Library for Tri\+Diagonal Matrix Algorithm
+
+Pa\+Scal\+\_\+\+T\+D\+MA provides an efficient and scalable computational procedure to solve many tridiagonal systems in multi-\/dimensional partial differential equations. The modified Thomas algorithm proposed by Laszlo et al.(2016) and the newly designed communication scheme have been used to reduce the communication overhead in solving many tridiagonal systems.
+
+This library is for both single and many tridiagonal systems of equations. The main algorithm for a tridiagonal matrix consists of the following five steps\+:
+
+
+\begin{DoxyItemize}
+\item (1) Transform the partitioned submatrices in the tridiagonal systems into modified submatrices\+: Each computing core transforms the partitioned submatrices in the tridiagonal systems of equations into the modified forms by applying modified Thomas algorithm.
+\item (2) Construct reduced tridiagonal systems from the modified submatrices\+: The reduced tridiagonal systems are constructed by collecting the first and last rows of the modified submatrices from each core using M\+P\+I\+\_\+\+Ialltoallw.
+\item (3) Solve the reduced tridiagonal systems\+: The reduced tridiagonal systems constructed in Step 2 are solved by applying the Thomas algorithm.
+\item (4) Distribute the solutions of the reduced tridiagonal systems\+: The solutions of the reduced tridiagonal systems in Step 3 are distributed to each core using M\+P\+I\+\_\+\+Ialltoallw. This communication is an exact inverse of the communication in Step 2.
+\item (5) Update the other unknowns in the modified tridiagonal systems\+: The remaining unknowns in the modified submatrices in Step 1 are solved in each computing core with the solutions obtained in Step 3 and Step 4.
+\end{DoxyItemize}
+
+Step 1 and Step 5 are similar to the method proposed by Laszlo et al.(2016) which uses parallel cyclic reduction (P\+CR) algorithm to build and solve the reduced tridiagonal systems. Instead of using the P\+CR, we develop an all-\/to-\/all communication scheme using the M\+P\+I\+\_\+\+Ialltoall function after the modified Thomas algorithm is executed. The number of coefficients for the reduced tridiagonal systems are greatly reduced, so we can avoid the communication bandwidth problem, which is a main bottleneck for all-\/to-\/all communications. Our algorithm is also distinguished from the work of Mattor et al. (1995) which assembles the undetermined coefficients of the temporary solutions in a single processor using M\+P\+I\+\_\+\+Gather, where load imbalances are serious.
+
+\section*{C\+U\+DA implementation in Pa\+Scal\+\_\+\+T\+D\+MA 2.\+0}
+
+In Pa\+Sca\+L\+\_\+\+T\+D\+MA 2.\+0, multi-\/\+G\+PU acceleration is implemented using N\+V\+I\+D\+IA C\+U\+DA. C\+U\+D\+A-\/related features are as follows\+:
+\begin{DoxyItemize}
+\item (1) Incorporation of C\+U\+DA kernels into the loop structures of the existing algorithm, that are modified to exploit more G\+PU threads.
+\item (2) Utilization of shared memory using pipeline copy of variables in device memory to reduce the amount of device memory access.
+\item (3) C\+U\+D\+A-\/aware M\+PI communication for rapid communication with the support of hardward
+\item (4) Use of 3\+D-\/array for practical applications and accordingly the use of C\+U\+DA threads more than in a single dimension with the 3-\/D array.
+\item (5) Depreciation on functions for single tridiagonal matrix as they are rarely used for three-\/dimensional problems.
+\end{DoxyItemize}
+
+\section*{Authors}
+
+
+\begin{DoxyItemize}
+\item Kiha Kim (\href{mailto:k-kiha@yonsei.ac.kr}{\tt k-\/kiha@yonsei.\+ac.\+kr}), Multi-\/\+Physics Modeling and Computation Lab., Yonsei University
+\item Mingyu Yang (\href{mailto:yang926@yonsei.ac.kr}{\tt yang926@yonsei.\+ac.\+kr}), Multi-\/\+Physics Modeling and Computation Lab., Yonsei University
+\item Ji-\/\+Hoon Kang (\href{mailto:jhkang@kisti.re.kr}{\tt jhkang@kisti.\+re.\+kr}), Korea Institute of Science and Technology Information
+\item Jung-\/\+Il Choi (\href{mailto:jic@yonsei.ac.kr}{\tt jic@yonsei.\+ac.\+kr}), Multi-\/\+Physics Modeling and Computation Lab., Yonsei University
+\end{DoxyItemize}
+
+\section*{Usage}
+
+\subsection*{Downloading Pa\+Sca\+L\+\_\+\+T\+D\+MA}
+
+The repository can be cloned as follows\+:
+
+
+\begin{DoxyCode}
+git clone https://github.com/MPMC-Lab/PaScaL\_TDMA.git
+\end{DoxyCode}
+ Alternatively, the source files can be downloaded through github menu \textquotesingle{}Download Z\+IP\textquotesingle{}.
+
+\subsection*{Compile}
+
+\subsubsection*{Prerequisites}
+
+Prerequisites to compile Pa\+Sca\+L\+\_\+\+T\+D\+M\+AS are as follows\+:
+\begin{DoxyItemize}
+\item M\+PI
+\item fortran compiler (`nvfortran for G\+PU runs, N\+V\+I\+D\+IA H\+PC S\+KD 21.\+1 or higher)
+\end{DoxyItemize}
+
+\subsubsection*{Compile and build}
+
+
+\begin{DoxyItemize}
+\item Build Pa\+Sca\+L\+\_\+\+T\+D\+MA ``` make lib ```
+\item Build an example problem after build Pa\+Sca\+L\+\_\+\+T\+D\+MA
+
+``` make example ```
+\item Build all
+
+``` make all ``` \subsubsection*{Mores on compile option}
+
+The {\ttfamily Makefile} in root directory is to compile the source code, and is expected to work for most systems. The \textquotesingle{}\hyperlink{_makefile_8inc}{Makefile.\+inc}\textquotesingle{} file in the root directory can be used to change the compiler (and M\+PI wrapper) and a few pre-\/defined compile options depending on compiler, execution environment and et al.
+\end{DoxyItemize}
+
+\subsection*{Running the example}
+
+After building the example file, an executable binary, {\ttfamily a.\+out}, is built in the {\ttfamily run} folder. The {\ttfamily P\+A\+R\+A\+\_\+\+I\+N\+P\+U\+T.\+inp} file in the {\ttfamily run} folder is a pre-\/defined input file, and the {\ttfamily a.\+out} can be executed as follows\+: ``` mpirun -\/np 8 ./a.out ./\+P\+A\+R\+A\+\_\+\+I\+N\+P\+UT.inp ```
+
+\section*{Folder structure}
+
+
+\begin{DoxyItemize}
+\item {\ttfamily src} \+: source files of Pa\+Sca\+L\+\_\+\+T\+D\+M\+A\+\_\+\+C\+U\+DA.
+\item {\ttfamily example} \+: source files of an example problem for 3D heat-\/transfer equation.
+\item {\ttfamily include} \+: header files are created after building
+\item {\ttfamily lib} \+: a static library of Pa\+Sca\+L\+\_\+\+T\+D\+M\+A\+\_\+\+C\+U\+DA is are created after building
+\item {\ttfamily doc} \+: documentation
+\item {\ttfamily run} \+: an executable binary file for the example problem is created after building.
+\end{DoxyItemize}
+
+\section*{Cite}
+
+Please use the following bibtex, when you refer to this project. \begin{DoxyVerb}@article{kkpc2020,
+    title = "PaScaL_TDMA: A library of parallel and scalable solvers for massive tridiagonal system",
+    author = "Kim, Kiha and Kang, Ji-Hoon and Pan, Xiaomin and Choi, Jung-Il",
+    journal = "Computer Physics Communications",
+    volume = "260",
+    pages = "107722",
+    year = "2021",
+    issn = "0010-4655",
+    doi = "https://doi.org/10.1016/j.cpc.2020.107722"
+}
+
+@misc{PaScaL_TDMA2019,
+    title  = "Parallel and Scalable Library for TriDiagonal Matrix Algorithm",
+    author = "Kim, Kiha and Kang, Ji-Hoon and Choi, Jung-Il",
+    url    = "https://github.com/MPMC-Lab/PaScaL_TDMA",
+    year   = "2019"
+}
+\end{DoxyVerb}
+
+
+\section*{References}
+
+For more information, please the reference paper and \href{https://www.mpmc.yonsei.ac.kr/}{\tt Multi-\/\+Physics Modeling and Computation Lab.} 

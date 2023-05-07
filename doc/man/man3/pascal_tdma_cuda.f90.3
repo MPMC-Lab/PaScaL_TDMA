@@ -1,0 +1,53 @@
+.TH "/home/jihoon/Develop/PaScaL_TDMA/src/pascal_tdma_cuda.f90" 3 "Wed Apr 26 2023" "PaScaL_TDMA2.0" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/jihoon/Develop/PaScaL_TDMA/src/pascal_tdma_cuda.f90
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Types"
+
+.in +1c
+.ti -1c
+.RI "type \fBpascal_tdma_cuda::ptdma_plan_many_cuda\fP"
+.br
+.RI "Execution plan for many tridiagonal systems of equations\&. "
+.in -1c
+.SS "Modules"
+
+.in +1c
+.ti -1c
+.RI "module \fBpascal_tdma_cuda\fP"
+.br
+.RI "Module for PaScaL_TDMA library with CUDA\&. "
+.in -1c
+.SS "Functions/Subroutines"
+
+.PP
+.RI "\fB\fP"
+.br
+
+.in +1c
+.in +1c
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_cuda::pascal_tdma_plan_many_create_cuda\fP (p, nx_sys, ny_sys, nz_row, myrank, nprocs, mpi_world, thread_in)"
+.br
+.RI "Create a plan for many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_cuda::pascal_tdma_plan_many_destroy_cuda\fP (p)"
+.br
+.RI "Destroy the allocated arrays in the defined plan_many\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_cuda::pascal_tdma_many_solve_cuda\fP (p, a_d, b_d, c_d, d_d)"
+.br
+.RI "Solve many tridiagonal systems of equations\&. "
+.ti -1c
+.RI "subroutine, public \fBpascal_tdma_cuda::pascal_tdma_many_solve_cycle_cuda\fP (p, a_d, b_d, c_d, d_d)"
+.br
+.RI "Solve many cyclic tridiagonal systems of equations\&. "
+.in -1c
+.in -1c
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PaScaL_TDMA2\&.0 from the source code\&.
