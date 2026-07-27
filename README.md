@@ -1,113 +1,220 @@
-# PaScaL_TDMA 2.0
+# PaScaL_TDMA 2.1
 
 Parallel and Scalable Library for TriDiagonal Matrix Algorithm
 
-PaScaL_TDMA provides an efficient and scalable computational procedure to solve many tridiagonal systems in multi-dimensional partial differential equations. The modified Thomas algorithm proposed by Laszlo et al.(2016) and the newly designed communication scheme have been used to reduce the communication overhead in solving many tridiagonal systems.
+PaScaL_TDMA solves large batches of tridiagonal systems whose row direction
+is distributed across MPI ranks. Version 2.1 supersedes version 2.0 as the
+GPU-oriented release while preserving the five-step numerical structure of
+the original PaScaL_TDMA method.
 
-This library is for both single and many tridiagonal systems of equations. The main algorithm for a tridiagonal matrix consists of the following five steps: 
+The PaScaL_TDMA 2.1 publication and program archive describe the CUDA Fortran
+implementation. This repository also provides a CUDA C++17 port and
+profiling/study tools as post-publication repository extensions.
 
-- (1) Transform the partitioned submatrices in the tridiagonal systems into modified submatrices:
-        Each computing core transforms the partitioned submatrices in the tridiagonal systems of equations into the modified forms by applying modified Thomas algorithm.
-- (2) Construct reduced tridiagonal systems from the modified submatrices:
-        The reduced tridiagonal systems are constructed by collecting the first and last rows of the modified submatrices from each core using MPI_Ialltoallw.
-- (3) Solve the reduced tridiagonal systems:
-        The reduced tridiagonal systems constructed in Step 2 are solved by applying the Thomas algorithm.
-- (4) Distribute the solutions of the reduced tridiagonal systems:
-        The solutions of the reduced tridiagonal systems in Step 3 are distributed to each core using MPI_Ialltoallw.
-        This communication is an exact inverse of the communication in Step 2.
-- (5) Update the other unknowns in the modified tridiagonal systems:
-        The remaining unknowns in the modified submatrices in Step 1 are solved in each computing core with the solutions obtained in Step 3 and Step 4.
-    
-Step 1 and Step 5 are similar to the method proposed by Laszlo et al.(2016) which uses parallel cyclic reduction (PCR) algorithm to build and solve the reduced tridiagonal systems. Instead of using the PCR, we develop an all-to-all communication scheme using the MPI_Ialltoall function after the modified Thomas algorithm is executed. The number of coefficients for the reduced tridiagonal systems are greatly reduced, so we can avoid the communication bandwidth problem, which is a main bottleneck for all-to-all communications. Our algorithm is also distinguished from the work of Mattor et al. (1995) which assembles the undetermined coefficients of the temporary solutions in a single processor using MPI_Gather, where load imbalances are serious.
+## Version lineage
 
+| Release | Main scope | Publication |
+| --- | --- | --- |
+| `v1.0` | Original CPU implementation | [Computer Physics Communications 260 (2021) 107722](https://doi.org/10.1016/j.cpc.2020.107722) |
+| `v2.0` | Multi-GPU CUDA Fortran implementation with shared-memory buffering | [Computer Physics Communications 290 (2023) 108785](https://doi.org/10.1016/j.cpc.2023.108785) |
+| `v2.1` | Register-resident CUDA Fortran implementation with a redesigned kernel interface and consolidated communication | [Computer Physics Communications 323 (2026) 110120](https://doi.org/10.1016/j.cpc.2026.110120) |
 
-# CUDA implementation in PaScaL_TDMA 2.0
-In PaScaL_TDMA 2.0, multi-GPU acceleration is implemented using NVIDIA CUDA. CUDA-related features are as follows:
-- (1) Incorporation of CUDA kernels into the loop structures of the existing algorithm, that are modified to exploit more GPU threads.
-- (2) Utilization of shared memory using pipeline copy of variables in device memory to reduce the amount of device memory access.
-- (3) CUDA-aware MPI communication for rapid communication with the support of hardward
-- (4) Use of 3D-array for practical applications and accordingly the use of CUDA threads more than in a single dimension with the 3-D array.
-- (5) Depreciation on functions for single tridiagonal matrix as they are rarely used for three-dimensional problems.
+See the [changelog](CHANGELOG.md), [v2.1 release notes](doc/release_notes/v2.1.md),
+and [source provenance](doc/PROVENANCE.md) for the detailed boundary between
+the published implementation and later repository extensions.
 
+## Algorithm
 
-# Authors
-- Ki-Ha Kim (k-kiha@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University (v1.0, v2.0)
-- Mingyu Yang (yang926@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University (v2.0)
-- Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information (v1.0, v2.0)
-- Oh-Kyoung Kwon (okkwon@kisti.re.kr), Korea Institute of Science and Technology Information (v2.0)
-- Jung-Il Choi (jic@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University (v1.0, v2.0)
+For a distributed solve, each rank owns a contiguous segment of every
+tridiagonal line. PaScaL_TDMA performs:
 
-# Usage
-## Downloading PaScaL_TDMA
-The repository can be cloned as follows:
+1. a modified Thomas reduction on each rank-local line segment;
+2. packing and exchange of the first and last reduced rows;
+3. solution of the assembled reduced tridiagonal systems;
+4. redistribution of the interface solutions; and
+5. reconstruction of each full rank-local solution.
 
+The current source uses two collective phases per distributed solve. The
+forward phase packs reduced `A`, `C`, and `D` fields into one
+`MPI_Alltoallv` exchange. After the reduced solve, the backward phase returns
+interface `D` values through a second `MPI_Alltoallv`. The publication's
+description of a consolidated all-to-all refers to combining the coefficient
+fields used for reduced-system assembly; it does not remove the later
+interface-solution exchange.
+
+For one MPI rank, the implementation directly applies the many-system Thomas
+solver.
+
+## What changed in version 2.1
+
+Compared with PaScaL_TDMA 2.0, version 2.1:
+
+- replaces shared-memory buffering with register-resident elimination
+  kernels;
+- maps adjacent CUDA threads to adjacent tridiagonal lines for coalesced
+  global-memory access;
+- replaces assumed-shape kernel arrays with fixed-bound arrays and explicit
+  scalar arguments, avoiding implicit descriptor transfers at launch; and
+- consolidates the fields used for reduced-system assembly into a packed
+  all-to-all exchange while reconstructing the unit diagonal locally.
+
+These changes preserve the numerical reduction and reconstruction sequence.
+Performance results in the article are specific to the hardware, problem
+sizes, and placement used in that study.
+
+## Implementations
+
+| Implementation | Source | Scope |
+| --- | --- | --- |
+| CUDA Fortran | `src/pascal_tdma_cuda.f90` | Published PaScaL_TDMA 2.1 implementation lineage; CUDA-aware MPI device buffers |
+| CUDA C++17 | `src/pascal_tdma_cuda.cu`, `src/pascal_tdma_cuda.hpp` | Repository port of the same solver flow; device-direct MPI by default and optional host staging |
+
+Both implementations solve non-cyclic, double-precision systems. The CUDA C++
+implementation was not the programming-language implementation evaluated in
+the PaScaL_TDMA 2.1 article.
+
+## Requirements
+
+- NVIDIA GPU and compatible driver;
+- NVIDIA HPC SDK with CUDA Fortran support;
+- CUDA Toolkit with `nvcc` for the CUDA C++ port;
+- MPI Fortran and C++ compiler wrappers;
+- CUDA-aware MPI for CUDA Fortran and for the default CUDA C++ device-buffer
+  path; and
+- GNU Make.
+
+`FC` must select an MPI wrapper backed by NVIDIA `nvfortran`. The checked-in
+default is `FC=mpifort`; override the wrapper and `CUDA_ARCH` for the target
+system. Only the CUDA C++ port supplies an explicit host-staging fallback.
+
+## Build
+
+The historical MPMC entry points retain their scope:
+
+```bash
+make lib CUDA_ARCH=90 FC=mpifort
+make example CUDA_ARCH=90 FC=mpifort
+make all CUDA_ARCH=90 FC=mpifort
 ```
-git clone https://github.com/MPMC-Lab/PaScaL_TDMA.git
+
+| Target | Output |
+| --- | --- |
+| `make lib` | `lib/libpascal_tdma.a` and Fortran modules in `include/` |
+| `make example` | the Fortran library and `run/a.out` |
+| `make all` | the same library and Fortran example |
+| `make cuda-cxx` | `lib/libpascal_tdma_cuda.a`, the public header in `include/`, and two C++ examples |
+| `make cuda-cxx-profile` | the C++ library and `run/ex_tdma_profile` |
+| `make study` | both libraries and both corresponding profile drivers |
+| `make all-implementations` | every library, example, and profile driver |
+
+For the added implementations:
+
+```bash
+make cuda-cxx CUDA_ARCH=90 MPICXX=mpicxx
+make study CUDA_ARCH=90 FC=mpifort MPICXX=mpicxx
 ```
-Alternatively, the source files can be downloaded through github menu 'Download ZIP'.
 
-## Compile
-### Prerequisites
-Prerequisites to compile PaScaL_TDMA are as follows:
-* MPI
-* fortran compiler (`nvfortran` for GPU runs, NVIDIA HPC SDK 21.1 or higher)
+Compiler and architecture defaults are centralized in `Makefile.inc`.
+`make clean` removes generated build products while retaining `run/job.sh` and
+the checked-in Study data.
 
-### Compile and build
-* Build PaScaL_TDMA
-    ```
-	make lib
-	```
-* Build an example problem after build PaScaL_TDMA
+## Run
 
-    ```
-	make example
-	```
-* Build all
+CUDA Fortran example:
 
-    ```
-	make all
-	```
-### Mores on compile option
-The `Makefile` in root directory is to compile the source code, and is expected to work for most systems. The 'Makefile.inc' file in the root directory can be used to change the compiler (and MPI wrapper) and a few pre-defined compile options depending on compiler, execution environment and et al.
+```bash
+mpirun -np 4 ./run/a.out
+```
 
-## Running the example
-After building the example file, an executable binary, `a.out`, is built in the `run` folder. The `PARA_INPUT.inp` file in the `run` folder is a pre-defined input file, and the `a.out` can be executed as follows:
-    ```
-	mpirun -np 8 ./a.out ./PARA_INPUT.inp
-    ```
-## GPU power monitoring
-In the `tool` folder, there is a Python script `gpu_power_monitor.py` that can be used to monitor and print real-time GPU power usage with timestamps. To use this script, you will need to install the `pynvml` library.
+CUDA C++ example with CUDA-aware MPI:
 
-# Folder structure
-* `src` : source files of PaScaL_TDMA 2.0.
-* `example` : source files of an example problem for 3D heat-transfer equation.
-* `include` : header files are created after building
-* `lib` : a static library of PaScaL_TDMA 2.0 is are created after building
-* `doc` : documentation
-* `run` : an executable binary file for the example problem is created after building.
-* `tool` : contains useful scripts and tools.
+```bash
+mpirun -np 4 ./run/ex_tdma_zdirection
+```
 
-# Cite
-Please use the following bibtex, when you refer to this project.
+CUDA C++ host-staging fallback:
 
-    @article{kkpc2020,
-        title = "PaScaL_TDMA: A library of parallel and scalable solvers for massive tridiagonal system",
-        author = "Kim, Ki-Ha and Kang, Ji-Hoon and Pan, Xiaomin and Choi, Jung-Il",
-        journal = "Computer Physics Communications",
-        volume = "260",
-        pages = "107722",
-        year = "2021",
-        issn = "0010-4655",
-        doi = "https://doi.org/10.1016/j.cpc.2020.107722"
-    }
+```bash
+PASCAL_TDMA_MPI_MODE=host \
+  mpirun -np 4 ./run/ex_tdma_zdirection
+```
 
-    @misc{PaScaL_TDMA2019,
-        title  = "Parallel and Scalable Library for TriDiagonal Matrix Algorithm",
-        author = "Kim, Ki-Ha and Kang, Ji-Hoon and Choi, Jung-Il",
-        url    = "https://github.com/MPMC-Lab/PaScaL_TDMA",
-        year   = "2019"
-    }
+Only the exact value `host` selects host staging. The examples assign a GPU
+using `rank % visible_device_count`; configure rank placement to avoid
+unintended GPU oversubscription.
 
+## Solver data contract
 
-# References
-For more information, please the reference paper and [School of Mathematics and Computing (Computational Science and Engineering)](https://www.mpmc.yonsei.ac.kr/)
+Both implementations use system-contiguous storage:
+
+```text
+offset(sys, row) = sys + row * nsys
+```
+
+`D` contains the right-hand side on entry and the solution on return. A
+one-rank solve modifies `C` and `D`; a distributed solve modifies `A`, `C`, and
+`D`. `B` is not modified. Restore the original modified arrays before solving
+the same mathematical system again.
+
+For multiple ranks, each rank must have `nrow >= 2`, and the current reduced
+system partition requires `nsys >= number of ranks`.
+
+## Repository layout
+
+- `src/`: CUDA Fortran and CUDA C++ solver sources;
+- `examples/`: standalone examples and corresponding profile drivers;
+- `run/`: generated executables and the cluster job example;
+- `include/`, `lib/`: generated headers/modules and static libraries;
+- `doc/`: manual documentation, release notes, provenance, and Study data;
+- `tool/`: profiling, environment, cleanup, and GPU power utilities.
+
+The [documentation index](doc/README.md) links the implementation manuals and
+Study report. Generated v2.0 Doxygen pages were removed because they described
+source and APIs no longer present; the historical pages remain available from
+the immutable `v2.0` tag.
+
+## Study boundary
+
+Build and preview the repository Study workflow with:
+
+```bash
+make study CUDA_ARCH=90 FC=mpifort MPICXX=mpicxx
+DRY_RUN=1 STUDY_PRESET=quick ./tool/run_study_sweep.sh
+```
+
+The current curated dataset contains 25 CUDA C++ cases and no CUDA Fortran
+timing rows. Correctness is recorded after iteration 0. Later timed iterations
+reuse arrays transformed in place by earlier solver calls, so the data do not
+establish repeated independent-solve timing or a Fortran-versus-C++ comparison.
+See the [Study documentation](doc/study/README.md) before interpreting the
+tables.
+
+## Release contributors
+
+The version labels below record public release attribution; per-file
+copyright and article authorship are documented separately.
+
+- Ki-Ha Kim (`v1.0`, `v2.0`, `v2.1`)
+- Mingyu Yang (`v2.0`)
+- Ji-Hoon Kang (`v1.0`, `v2.0`, `v2.1`)
+- Oh-Kyoung Kwon (`v2.0`)
+- Jung-Il Choi (`v1.0`, `v2.0`, `v2.1`)
+- Dongjin Lee (`v2.1`)
+- Junhwan Lee (`v2.1`)
+- Sehyeong Oh (`v2.1`)
+- Seungwon Lee (`v2.1`)
+
+## Citation
+
+Use [CITATION.cff](CITATION.cff) for machine-readable metadata. Cite the
+PaScaL_TDMA 2.1 article for the published CUDA Fortran release and the earlier
+articles when discussing the original or version 2.0 methods. The publication
+snapshot is archived as
+[Mendeley Data version 3](https://doi.org/10.17632/49z6fh94z3.3); the current
+repository also contains post-archive fixes, profiling support, and a CUDA C++
+port.
+
+## License
+
+PaScaL_TDMA is distributed under the [MIT License](LICENSE). Historical and
+imported-code copyright notices are preserved in that file.

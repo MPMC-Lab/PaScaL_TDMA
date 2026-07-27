@@ -1,0 +1,12 @@
+| case | mode | np | iter0_ms | iter1_9_mean_ms | iter0_to_iter1_9_mean |
+| --- | --- | --- | --- | --- | --- |
+| np8_128x128x2048_device | device | 8 | 205.105 | 0.814 | 252.1 |
+| np8_128x512x2048_device | device | 8 | 210.285 | 1.066 | 197.3 |
+| np8_64x64x4096_device | device | 8 | 206.414 | 1.082 | 190.8 |
+| np8_128x128x4096_device | device | 8 | 214.406 | 1.340 | 160.1 |
+| np8_128x256x4096_device | device | 8 | 208.627 | 1.477 | 141.2 |
+| np4_128x128x2048_device | device | 4 | 156.290 | 1.199 | 130.3 |
+| np8_256x256x4096_device | device | 8 | 210.283 | 1.870 | 112.4 |
+| np8_128x128x4096_host | host | 8 | 148.134 | 1.650 | 89.8 |
+| np8_128x128x8192_device | device | 8 | 189.625 | 2.352 | 80.6 |
+| np4_128x256x2048_device | device | 4 | 106.958 | 1.351 | 79.2 |

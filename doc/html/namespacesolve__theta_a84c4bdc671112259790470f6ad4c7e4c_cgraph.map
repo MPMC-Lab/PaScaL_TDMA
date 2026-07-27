@@ -1,8 +1,0 @@
-<map id="solve_theta::solve_theta_plan_many_cuda" name="solve_theta::solve_theta_plan_many_cuda">
-<area shape="rect" id="node2" href="$namespacepascal__tdma__cuda.html#a84c442c238f7d1a18eef430aaa15e6c1" title="Create a plan for many tridiagonal systems of equations. " alt="" coords="219,5,426,47"/>
-<area shape="rect" id="node4" href="$namespacepascal__tdma__cuda.html#afdd30998c4a8aecc093c823e3212b57a" title="Solve many cyclic tridiagonal systems of equations. " alt="" coords="219,71,427,112"/>
-<area shape="rect" id="node5" href="$namespacepascal__tdma__cuda.html#a0043d538e133925d9a37bf7bcdaf4b08" title="Solve many tridiagonal systems of equations. " alt="" coords="234,136,411,177"/>
-<area shape="rect" id="node6" href="$namespacesolve__theta.html#a75284cf6dd015edde5309be8368c4c9e" title="Ghost cell update in device. " alt="" coords="248,201,397,243"/>
-<area shape="rect" id="node7" href="$namespacepascal__tdma__cuda.html#a70734ba15cf5a093ac3ba2ccbc4f5330" title="Destroy the allocated arrays in the defined plan_many. " alt="" coords="216,267,429,308"/>
-<area shape="rect" id="node3" href="$para__range_8f90.html#ab75ab386311975aa4ff7cac06798fcd4" title="Compute the indices of the assigned range for each MPI process . " alt="" coords="477,13,564,39"/>
-</map>

@@ -1,34 +1,26 @@
-###############################################################################
-# Compile setting with intel compiler and intel MPI.
-# Modify flags according to the system and environment
-###############################################################################
+########################################################################
+# Common build configuration for PaScaL_TDMA 2.1
+#
+# FC must be an MPI wrapper backed by NVIDIA nvfortran. Command-line
+# assignments override these portable defaults, for example:
+#
+#   make all FC=ftn CUDA_ARCH=90
+########################################################################
 
-# FC = mpiifort
+FC       = mpifort
+NVCC     = nvcc
+MPICXX   = mpicxx
+AR       = ar
+RANLIB   = ranlib
 
-# FLAG  = -O3 -fPIC -cpp
-# FLAG += -g
-# FLAG += -fcheck=all -warn-all 
-# FLAG += -fp-model=precise 
-# FLAG += -check bounds
-# FLAG += -xMIC-AVX512
+CUDA_ARCH = 90
+OPT       = -O3
 
-###############################################################################
-# Compile setting with nvfortran and non-intel MPI.
-# Modify flags according to the system and environment
-###############################################################################
+# CUDA Fortran compile and link flags.
+FLAG      = $(OPT) -fPIC -Mfree -cpp
+CUDAFLAG  = -cuda -gpu=cc$(CUDA_ARCH)
 
-FC = mpifort
-
-FLAG  = -O3 -fPIC -cpp 
-FLAG += -tp=skylake 
-
-###############################################################################
-# To use CUDA
-# PaScaL_TDMA is compiled for CUDA also.
-###############################################################################
-
-USE_CUDA = yes
-FLAG += -mp:multicore -Mcuda -Minfo=accel 
-#FLAG += -DUSE_NVTX
-
-
+# CUDA C++ compile and link flags. The MPI wrapper is used as nvcc's host
+# compiler so MPI headers and libraries are supplied consistently.
+GENCODE   = -gencode arch=compute_$(CUDA_ARCH),code=sm_$(CUDA_ARCH)
+NVCCFLAGS = -std=c++17 $(OPT) $(GENCODE) -ccbin $(MPICXX)

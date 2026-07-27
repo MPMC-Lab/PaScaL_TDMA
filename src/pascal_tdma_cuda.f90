@@ -1,733 +1,940 @@
-!======================================================================================================================
-!> @file        pascal_tdma_cuda.cuf
-!> @brief       PaScaL_TDMA - Parallel and Scalable Library for TriDiagonal Matrix Algorithm
-!> @details     PaScaL_TDMA includes a CUDA implementation of PaScaL_TDMA, which accelerates 
-!>              to solve many tridiagonal systems in multi-dimensional partial differential equations on GPU.
-!>              It adopts the pipeline copy within the shared memory for the forward elemination and 
-!>              backward substitution procudures of TDMA to reduce global memory access.
-!>              For the main algorithm of PaScaL_TDMA, see also https://github.com/MPMC-Lab/PaScaL_TDMA.
-!> 
-!> @author      
-!>              - Mingyu Yang (yang926@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University
-!>              - Ji-Hoon Kang (jhkang@kisti.re.kr), Korea Institute of Science and Technology Information
-!>              - Ki-Ha Kim (k-kiha@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University
-!>              - Jung-Il Choi (jic@yonsei.ac.kr), School of Mathematics and Computing (Computational Science and Engineering), Yonsei University
-!>
-!> @date        May 2023
-!> @version     2.0
-!> @par         Copyright
-!>              Copyright (c) 2019-2023 Mingyu Yang, Ki-Ha Kim and Jung-Il choi, Yonsei University and 
-!>              Ji-Hoon Kang, Korea Institute of Science and Technology Information, All rights reserved.
-!> @par         License     
-!>              This project is release under the terms of the MIT License (see LICENSE file).
-!======================================================================================================================
-
-!>
-!> @brief       Module for PaScaL_TDMA library with CUDA.
-!> @details     It contains plans for tridiagonal systems of equations and subroutines for solving them 
-!>              using the defined plans. The operation of the library includes the following three phases:
-!>              (1) Create a data structure called a plan with the information for communication and reduced systems.
-!>              (2) Solve the tridiagonal systems of equations executing from Step 1 to Step 5
-!>              (3) Destroy the created plan
-!>
 module PaScaL_TDMA_cuda
-
-    use mpi
-    use tdma
-    use cudafor
-
+    use mpi                      ! MPI for distributed communication
+    use cudafor                  ! CUDA Fortran extensions (device, dim3, etc.)
     implicit none
 
-    !> @brief   Execution plan for many tridiagonal systems of equations.
-    !> @details It uses MPI_Ialltoall function to distribute the modified tridiagonal systems to MPI processes
-    !>          and build the reduced tridiagonal systems of equations. Currently it supports the equal size of domains.
-	!>          It does not use derived datatypes.
-    
-    type, public :: ptdma_plan_many_cuda
+    !===================================================================
+    ! ptdma_plan_cuda
+    ! ----------------
+    ! This derived type stores all metadata and device buffers required
+    ! by the parallel TDMA solver:
+    !   - MPI communicator and rank layout
+    !   - Problem sizes for reduced (rd) and transformed (tr) systems
+    !   - All gather / scatter descriptors for communication
+    !   - Packed communication buffers (host/device)
+    !   - CUDA launch configurations (block / grid)
+    !   - Device work arrays for reduced and transformed systems
+    !===================================================================
+    type, public :: ptdma_plan_cuda
+        ! MPI context
+        integer :: ptdma_world,myrank,nprocs
 
-        private
+        ! Global and local sizes of reduced system (Ard,Brd,Crd,Drd)
+        ! Nrd_global = (/ Nsys, 2 /)
+        ! Nrd_local  = (/ local_Nsys, 2 /)
+        integer :: Nrd_global(0:1),Nrd_local(0:1)
 
-        integer :: ptdma_world      !< Single dimensional subcommunicator to assemble data for the reduced TDMA
-        integer :: nprocs     		!< Communicator size of ptdma_world
+        ! Global and local sizes of transformed (reduced) system (Atr,Btr,Ctr,Dtr)
+        ! Ntr_global = (/ local_Nsys, 2*nprocs /)
+        ! Ntr_local  = (/ local_Nsys, 2 /)
+        integer :: Ntr_global(0:1),Ntr_local(0:1)
 
-        integer :: nx_sys           !< Number of tridiagonal systems of equations in x-direction per process
-        integer :: ny_sys           !< Number of tridiagonal systems of equations in y-direction per process
-        integer :: nz_row           !< Row size of partitioned tridiagonal matrix in z-direction per process
+        ! Host-side gather descriptors:
+        !   gather_N*_local(0,:)  : local "row" (first dimension) size
+        !   gather_N*_local(1,:)  : local "column" (second dimension) size
+        !   gather_N*_start(0,:)  : starting row index for each rank
+        !   gather_N*_start(1,:)  : starting column index for each rank
+        integer, allocatable, dimension(:,:) :: gather_Nrd_local,gather_Ntr_local
+        integer, allocatable, dimension(:,:) :: gather_Nrd_start,gather_Ntr_start
 
-        integer :: nx_sys_rt        !< Number of tridiagonal systems to be solved in each process after transpose
-        integer :: nz_row_rt        !< Number of rows of a reduced tridiagonal systems after transpose
-        integer :: nz_row_rd        !< Number of rows of a reduced tridiagonal systems before transpose, 2.
+        ! Device-side copies of the same gather descriptors
+        integer, allocatable, dimension(:,:), device :: gather_Nrd_local_d,gather_Ntr_local_d
+        integer, allocatable, dimension(:,:), device :: gather_Nrd_start_d,gather_Ntr_start_d
 
-        !> @{ Coefficient arrays after reduction, a: lower, b: diagonal, c: upper, d: rhs.
-        !>    The orginal dimension (m:n) is reduced to (m:2)
-        !>    The arrays are allocated in the device memory.
-        double precision, allocatable, device, dimension(:,:,:) :: a_rd_d, b_rd_d, c_rd_d, d_rd_d
-        !> @}
+        ! Host-side buffer size and displacement descriptors for A-side
+        integer, allocatable, dimension(:) :: bufsubsize_A,bufstart_A
+        integer, allocatable, dimension(:) :: BIGbufsubsize_A,BIGbufstart_A
 
-        !> @{ Coefficient arrays for cyclic TDMA in case of nprocs = 1.
-        !>    The arrays are allocated in the device memory.
-        double precision, allocatable, device, dimension(:,:,:) :: e_buff
-        !> @}
+        ! Host-side buffer size and displacement descriptors for B-side
+        integer, allocatable, dimension(:) :: bufsubsize_B,bufstart_B
+        integer, allocatable, dimension(:) :: BIGbufsubsize_B,BIGbufstart_B
 
-        !> @{ Coefficient arrays after transpose of reduced systems, a: lower, b: diagonal, c: upper, d: rhs
-        !>    The reduced dimension (m:2) changes to (m/np: 2*np) after transpose.
-        !>    The arrays are allocated in the device memory.
-        double precision, allocatable, device, dimension(:,:,:) :: a_rt_d, b_rt_d, c_rt_d, d_rt_d, e_rt_d
-        !> @}
+        ! Device-side large communication buffers for packing/unpacking
+        real*8, allocatable, dimension(:), device :: BIGbuf_A, BIGbuf_B 
 
-        !> @{ Buffers allocated in device memory for all-to-all communication
-        double precision, allocatable, device, dimension(:) :: sendbuf, recvbuf
-        !> @}
+        ! CUDA launch configuration for:
+        !   t_* : thread block dimensions (dim3)
+        !   b_* : grid dimensions       (dim3)
+        !   tdma     : local TDMA sweeps
+        !   rdtdma   : reduced TDMA sweeps
+        !   pack     : pack data into communication buffers
+        !   unpack   : unpack data from communication buffers
+        !   intiAb   : initialize reduced system (e.g. identity / ones)
+        type(dim3) :: t_tdma, t_rdtdma, t_pack, t_unpack, t_intiAb
+        type(dim3) :: b_tdma, b_rdtdma, b_pack, b_unpack, b_intiAb
 
-        !> @{ Threads and blocks for CUDA kernel
-        type(dim3)  :: threads, blocks, blocks_rt, blocks_alltoall
-        !> @
+        ! Device-side reduced system (size Nsys x 2):
+        !   Ard, Brd, Crd, Drd represent boundary-compressed TDMA coefficients
+        real*8, allocatable, dimension(:,:), device :: Ard,Brd,Crd,Drd
 
-        integer     :: shared_buffer_size   !< shared buffer size
-    
-    end type ptdma_plan_many_cuda
-
-    private
-    public  :: PaScaL_TDMA_plan_many_create_cuda
-    public  :: PaScaL_TDMA_plan_many_destroy_cuda
-    public  :: PaScaL_TDMA_many_solve_cuda
-    public  :: PaScaL_TDMA_many_solve_cycle_cuda 
-
-    contains
-
-    !>
-    !> @brief   Create a plan for many tridiagonal systems of equations.
-    !> @param   p           Plan for a many tridiagonal system of equations
-    !> @param   nx_sys      Number of tridiagonal systems of equations in x-direction per process
-    !> @param   ny_sys      Number of tridiagonal systems of equations in y-direction per process
-    !> @param   nz_row      Row size of partitioned tridiagonal matrix in z-direction per process
-    !> @param   myrank      Rank ID in mpi_world
-    !> @param   nprocs      Number of MPI process in mpi_world
-    !> @param   mpi_world   Communicator for MPI_Gather and MPI_Scatter of reduced equations
-    !>
-    subroutine PaScaL_TDMA_plan_many_create_cuda(p, nx_sys, ny_sys, nz_row, myrank, nprocs, mpi_world, thread_in)
-
-        implicit none
+        ! Device-side transformed system (size local_N x 2*nprocs):
+        !   Atr, Btr, Ctr, Dtr form the globally reduced tridiagonal system
+        real*8, allocatable, dimension(:,:), device :: Atr,Btr,Ctr,Dtr
         
-        type(ptdma_plan_many_cuda), intent(inout)  :: p
-        type(dim3) :: thread_in
+    end type ptdma_plan_cuda
 
-        integer, intent(in)     :: nx_sys
-        integer, intent(in)     :: ny_sys
-        integer, intent(in)     :: nz_row
-        integer, intent(in)     :: myrank, nprocs, mpi_world
+    !===================================================================
+    ! ptdma_timing_cuda
+    ! -----------------
+    ! Phase timing container for the profiled solver entry point.
+    ! Times are local to each MPI rank. Study drivers reduce them across
+    ! ranks when writing CSV output.
+    !===================================================================
+    type, public :: ptdma_timing_cuda
+        real(8) :: total = 0.0d0
+        real(8) :: local_compute = 0.0d0
+        real(8) :: pack_forward = 0.0d0
+        real(8) :: mpi_forward = 0.0d0
+        real(8) :: unpack_forward = 0.0d0
+        real(8) :: reduced_compute = 0.0d0
+        real(8) :: pack_backward = 0.0d0
+        real(8) :: mpi_backward = 0.0d0
+        real(8) :: unpack_backward = 0.0d0
+        real(8) :: update_compute = 0.0d0
+    end type ptdma_timing_cuda
+    
+contains
 
-        integer :: nx_block, ny_block, nx_rt_block
+    subroutine pascal_timing_reset(timing)
+        implicit none
+        type(ptdma_timing_cuda) :: timing
+
+        timing%total = 0.0d0
+        timing%local_compute = 0.0d0
+        timing%pack_forward = 0.0d0
+        timing%mpi_forward = 0.0d0
+        timing%unpack_forward = 0.0d0
+        timing%reduced_compute = 0.0d0
+        timing%pack_backward = 0.0d0
+        timing%mpi_backward = 0.0d0
+        timing%unpack_backward = 0.0d0
+        timing%update_compute = 0.0d0
+    end subroutine pascal_timing_reset
+
+    !===================================================================
+    ! pascal_plan_create
+    ! -------------------
+    ! Set up the ptdma_plan_cuda structure:
+    !   - Compute local domain size using "para"
+    !   - Allocate device work arrays (Ard,Brd,Crd,Drd,Atr,Btr,Ctr,Dtr)
+    !   - Build gather descriptors for reduced and transformed systems
+    !   - Construct host/device communication buffers and offsets
+    !   - Determine CUDA kernel launch configurations (t_*, b_*)
+    !
+    ! Input:
+    !   plan       : solver plan to be initialized
+    !   Nsys       : number of independent tridiagonal systems
+    !   commworld  : MPI communicator
+    !   myrank     : MPI rank of this process
+    !   nprocs     : total number of MPI processes
+    !   tmp_opti1  : preferred thread block size for local TDMA
+    !   tmp_opti2  : preferred thread block size for reduced TDMA
+    !===================================================================
+    subroutine pascal_plan_create(plan,Nsys,commworld,myrank,nprocs,tmp_opti1,tmp_opti2)
+        implicit none
+        type(ptdma_plan_cuda) :: plan 
+        integer :: Nsys
+        integer :: commworld,myrank,nprocs
+        integer :: i,ia,ib
+
+        integer :: tmp_N,tmp_opti1,tmp_opti2,tmp_opti3
+        integer, allocatable, dimension(:) :: tmp_int
+        allocate(tmp_int(0:nprocs-1))
+
+        ! Store MPI context inside the plan
+        plan%ptdma_world = commworld
+        plan%myrank = myrank
+        plan%nprocs = nprocs
+
+        ! Compute local range of systems [ia, ib] for this rank
+        call para(0,Nsys-1,nprocs,myrank,ia,ib)
+        tmp_N = ib-ia+1
+
+        ! Global and local grid sizes for reduced and transformed systems
+        plan%Nrd_global(0:1) = (/Nsys,2/)
+        plan%Ntr_global(0:1) = (/tmp_N,2*nprocs/)
+
+        plan%Nrd_local(0:1)  = (/tmp_N,2/)
+        plan%Ntr_local(0:1)  = (/tmp_N,2/)
+
+        ! Device arrays:
+        !   Ard,Brd,Crd,Drd : reduced coefficients (Nsys x 2)
+        allocate(plan%Ard(0:Nsys-1,0:1),plan%Brd(0:Nsys-1,0:1),plan%Crd(0:Nsys-1,0:1),plan%Drd(0:Nsys-1,0:1))
+
+        !   Atr,Btr,Ctr,Dtr : transformed system over Nprocs (tmp_N x 2*nprocs)
+        allocate(plan%Atr(0:tmp_N-1,0:2*nprocs-1),plan%Btr(0:tmp_N-1,0:2*nprocs-1))
+        allocate(plan%Ctr(0:tmp_N-1,0:2*nprocs-1),plan%Dtr(0:tmp_N-1,0:2*nprocs-1))
+        
+        ! Host-side gather information (local sizes per rank)
+        allocate(plan%gather_Nrd_local(0:1,0:nprocs-1),plan%gather_Ntr_local(0:1,0:nprocs-1))
+        allocate(plan%gather_Nrd_local_d(0:1,0:nprocs-1),plan%gather_Ntr_local_d(0:1,0:nprocs-1))
+
+        ! Host-side gather start indices (prefix sums for packed layout)
+        allocate(plan%gather_Nrd_start(0:1,0:nprocs-1),plan%gather_Ntr_start(0:1,0:nprocs-1))
+        allocate(plan%gather_Nrd_start_d(0:1,0:nprocs-1),plan%gather_Ntr_start_d(0:1,0:nprocs-1))
+
+        !----------------------------------------------------------------
+        ! Build per-rank descriptors for reduced and transformed systems
+        !----------------------------------------------------------------
+        do i = 0, nprocs-1
+            ! Local problem size for rank i
+            call para(0,Nsys-1,nprocs,i,ia,ib)
+            plan%gather_Nrd_local(0:1,i) = (/ib-ia+1,2/)
+            plan%gather_Ntr_local(0:1,i) = plan%Ntr_local(0:1)
+
+            ! Compute starting indices (prefix sums) for each rank
+            plan%gather_Nrd_start(0:1,i) = (/sum(plan%gather_Nrd_local(0,0:i))-plan%gather_Nrd_local(0,i),0/) 
+            plan%gather_Ntr_start(0:1,i) = (/0,sum(plan%gather_Ntr_local(1,0:i))-plan%gather_Ntr_local(1,i)/)
+
+            tmp_int(i) = ib-ia+1
+        end do
+        
+        ! Copy gather descriptors to device
+        plan%gather_Nrd_local_d= plan%gather_Nrd_local
+        plan%gather_Ntr_local_d= plan%gather_Ntr_local
+        plan%gather_Nrd_start_d= plan%gather_Nrd_start
+        plan%gather_Ntr_start_d= plan%gather_Ntr_start
+        
+        !----------------------------------------------------------------
+        ! Allocate host-side buffer descriptors for all-to-all communication
+        !----------------------------------------------------------------
+        allocate(plan%bufsubsize_A(0:nprocs-1),plan%bufsubsize_B(0:nprocs-1))
+        allocate(plan%bufstart_A(0:nprocs-1),plan%bufstart_B(0:nprocs-1))
+        allocate(plan%BIGbufsubsize_A(0:nprocs-1),plan%BIGbufsubsize_B(0:nprocs-1))
+        allocate(plan%BIGbufstart_A(0:nprocs-1),plan%BIGbufstart_B(0:nprocs-1))
+
+        ! Per-rank buffer extents and starts for reduced (A) and transformed (B) data
+        do i = 0, nprocs-1
+            plan%bufsubsize_A(i) = plan%gather_Nrd_local(0,i)*plan%gather_Nrd_local(1,i)
+            plan%bufsubsize_B(i) = plan%gather_Ntr_local(0,i)*plan%gather_Ntr_local(1,i)
+
+            plan%bufstart_A(i) = sum(plan%bufsubsize_A(0:i)) - plan%bufsubsize_A(i)
+            plan%bufstart_B(i) = sum(plan%bufsubsize_B(0:i)) - plan%bufsubsize_B(i)
+        end do
+
+        ! "BIG" buffers are sized at 3× the minimal requirement to store
+        ! three coefficient arrays (e.g. A, C, D) per rank.
+        plan%BIGbufsubsize_A(:) = 3*plan%bufsubsize_A
+        plan%BIGbufsubsize_B(:) = 3*plan%bufsubsize_B
+        plan%BIGbufstart_A(:)   = 3*plan%bufstart_A
+        plan%BIGbufstart_B(:)   = 3*plan%bufstart_B
+
+        ! Device-side consolidated communication buffers
+        allocate(plan%BIGbuf_A(0:sum(plan%BIGbufsubsize_A(:))-1),plan%BIGbuf_B(0:sum(plan%BIGbufsubsize_B(:))-1))
+
+
+        !----------------------------------------------------------------
+        ! Configure CUDA thread block sizes
+        !----------------------------------------------------------------
+        ! tmp_opti1 = Nsys
+        ! tmp_opti2 = tmp_N
+        tmp_opti3 = maxval(tmp_int(:))
+        ! if(Nsys>512) tmp_opti1 = 512
+        ! if(tmp_N>512) tmp_opti2 = 512
+        if(maxval(tmp_int(:))>128) tmp_opti3 = 128
+
+        ! Thread block dimensions
+        plan%t_tdma    = dim3(tmp_opti1,1,1)
+        plan%t_rdtdma  = dim3(tmp_opti2,1,1)
+        plan%t_pack    = dim3(tmp_opti3,1,1)
+        plan%t_unpack  = dim3(tmp_opti3,1,1)
+        plan%t_intiAb  = dim3(tmp_opti2,1,1)
+        
+        ! Grid dimensions computed from problem sizes and block sizes
+        plan%b_tdma    = dim3(ceiling(dble(Nsys)              /dble(plan%t_tdma  %x)),       1,1)
+        plan%b_rdtdma  = dim3(ceiling(dble(tmp_N)             /dble(plan%t_rdtdma%x)),       1,1)
+        plan%b_pack    = dim3(ceiling(dble(maxval(tmp_int(:)))/dble(plan%t_pack  %x)),       2,1)
+        plan%b_unpack  = dim3(ceiling(dble(maxval(tmp_int(:)))/dble(plan%t_unpack%x)),       2,1)
+        plan%b_intiAb  = dim3(ceiling(dble(tmp_N)             /dble(plan%t_intiAb%x)),2*nprocs,1)
+       
+        deallocate(tmp_int)
+    end subroutine pascal_plan_create
+
+    !===================================================================
+    ! pascal_plan_clean
+    ! -----------------
+    ! Release all host/device arrays associated with a given plan.
+    ! This should be called once the solver is no longer needed.
+    !===================================================================
+    subroutine pascal_plan_clean(plan)
+        implicit none
+        type(ptdma_plan_cuda) :: plan 
+
+        ! Device work arrays
+        deallocate(plan%Ard,plan%Brd,plan%Crd,plan%Drd)
+        deallocate(plan%Atr,plan%Btr)
+        deallocate(plan%Ctr,plan%Dtr)
+
+        ! Host/device gather descriptors
+        deallocate(plan%gather_Nrd_local,plan%gather_Ntr_local)
+        deallocate(plan%gather_Nrd_local_d,plan%gather_Ntr_local_d)
+
+        deallocate(plan%gather_Nrd_start,plan%gather_Ntr_start)
+        deallocate(plan%gather_Nrd_start_d,plan%gather_Ntr_start_d)
+
+        ! Communication buffer descriptors and buffers
+        deallocate(plan%bufsubsize_A,plan%bufsubsize_B)
+        deallocate(plan%bufstart_A,plan%bufstart_B)
+        deallocate(plan%BIGbufsubsize_A,plan%BIGbufsubsize_B)
+        deallocate(plan%BIGbufstart_A,plan%BIGbufstart_B)
+        deallocate(plan%BIGbuf_A,plan%BIGbuf_B)
+    end subroutine pascal_plan_clean
+
+    !===================================================================
+    ! pascal_setcudathread
+    ! --------------------
+    ! (Placeholder)
+    ! Intended for externally overriding CUDA block/thread settings
+    ! after plan creation. Currently not implemented.
+    !===================================================================
+    subroutine pascal_setcudathread(plan,int_tdma, int_rdtdma, int_pack, int_unpack, int_intiAb)
+        implicit none
+        type(ptdma_plan_cuda) :: plan 
+        type(dim3) :: int_tdma,int_rdtdma,int_pack,int_unpack,int_intiAb
+        
+    end subroutine pascal_setcudathread
+
+    !===================================================================
+    ! pascal_solver
+    ! -------------
+    ! Top-level driver for the PaScaL-TDMA algorithm.
+    !
+    ! For nprocs == 1:
+    !   - Directly call tdma_many_cuda on all independent systems.
+    !
+    ! For nprocs > 1:
+    !   1) Apply modified TDMA locally to compress each line
+    !   2) Pack reduced coefficients into send buffers (pascalpack)
+    !   3) Perform all-to-all communication (pascal_a2av)
+    !   4) Unpack to build globally reduced system (pascalunpack)
+    !   5) Initialize reduced system RHS (pascalintAb)
+    !   6) Solve reduced system using tdma_many_cuda
+    !   7) Pack/unpack solutions to distribute interface values
+    !   8) Update full solution along each line (pascal_update)
+    !
+    ! A, B, C, D:
+    !   Input/Output device arrays holding tridiagonal coefficients and RHS.
+    !===================================================================
+    subroutine pascal_solver(plan,A,B,C,D,Nsys,Nrow)
+        implicit none
+        type(ptdma_plan_cuda) :: plan 
+        integer :: Nsys,Nrow
+        real*8, device :: A(0:Nsys-1,0:Nrow-1),B(0:Nsys-1,0:Nrow-1),C(0:Nsys-1,0:Nrow-1),D(0:Nsys-1,0:Nrow-1)
+
+        integer :: i
+        
+        if(plan%nprocs==1) then
+            ! Single-process case: standard TDMA on each system
+            call tdma_many_cuda<<<plan%b_tdma,plan%t_tdma>>>(A,B,C,D, Nsys, Nrow)
+        else
+            !----------------------------------------------------------------
+            ! Local modified TDMA: compress each line into boundary system
+            !----------------------------------------------------------------
+            call tdma_modified_cuda<<<plan%b_tdma,plan%t_tdma>>>(A,B,C,D, plan%Ard,plan%Brd,plan%Crd,plan%Drd, Nsys, Nrow)
+            
+            !----------------------------------------------------------------
+            ! PACK: extract reduced coefficients (Ard,Crd,Drd) into BIGbuf_A
+            !----------------------------------------------------------------
+            do i = 0, plan%nprocs-1          
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Ard,plan%Nrd_global(0),plan%Nrd_global(1)                  &
+                                                            ,plan%gather_Nrd_local_d(0:1,i),plan%gather_Nrd_start_d(0:1,i) &
+                                                            ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))                    &
+                                                            ,plan%BIGbufstart_A(i)+0*plan%bufsubsize_A(i)                  )
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Crd,plan%Nrd_global(0),plan%Nrd_global(1)                  &
+                                                            ,plan%gather_Nrd_local_d(0:1,i),plan%gather_Nrd_start_d(0:1,i) &
+                                                            ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))                    &
+                                                            ,plan%BIGbufstart_A(i)+1*plan%bufsubsize_A(i)                  )
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Drd,plan%Nrd_global(0),plan%Nrd_global(1)                  &
+                                                            ,plan%gather_Nrd_local_d(0:1,i),plan%gather_Nrd_start_d(0:1,i) &
+                                                            ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))                    &
+                                                            ,plan%BIGbufstart_A(i)+2*plan%bufsubsize_A(i)                  )
+            end do
+
+            !----------------------------------------------------------------
+            ! All-to-all communication of reduced coefficients
+            !----------------------------------------------------------------
+            call pascal_a2av( plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:)) &
+                            , plan%BIGbufsubsize_A,plan%BIGbufstart_A &
+                            , plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:)) &
+                            , plan%BIGbufsubsize_B,plan%BIGbufstart_B &
+                            , plan%nprocs, plan%ptdma_world)
+    
+            !----------------------------------------------------------------
+            ! UNPACK: assemble globally reduced system (Atr,Ctr,Dtr)
+            !----------------------------------------------------------------
+            do i = 0, plan%nprocs-1          
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Atr,plan%Ntr_global(0),plan%Ntr_global(1)                  &
+                                                            ,plan%gather_Ntr_local_d(0:1,i),plan%gather_Ntr_start_d(0:1,i) &
+                                                            ,plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:))                    &
+                                                            ,plan%BIGbufstart_B(i)+0*plan%bufsubsize_B(i)                  )
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Ctr,plan%Ntr_global(0),plan%Ntr_global(1)                  &
+                                                            ,plan%gather_Ntr_local_d(0:1,i),plan%gather_Ntr_start_d(0:1,i) &
+                                                            ,plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:))                    &
+                                                            ,plan%BIGbufstart_B(i)+1*plan%bufsubsize_B(i)                  )
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Dtr,plan%Ntr_global(0),plan%Ntr_global(1)                  &
+                                                            ,plan%gather_Ntr_local_d(0:1,i),plan%gather_Ntr_start_d(0:1,i) &
+                                                            ,plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:))                    &
+                                                            ,plan%BIGbufstart_B(i)+2*plan%bufsubsize_B(i)                  )
+            end do
+
+            ! Initialize Btr (reduced RHS) to identity/ones pattern
+            call pascalintAb<<<plan%b_intiAb, plan%t_intiAb>>>(plan%Btr, plan%Ntr_global(0), plan%Ntr_global(1))
+            
+            ! Solve the globally reduced system (size tmp_N x 2*nprocs)
+            call tdma_many_cuda<<<plan%b_rdtdma,plan%t_rdtdma>>>(plan%Atr,plan%Btr,plan%Ctr,plan%Dtr &
+                                                               ,plan%Ntr_global(0), plan%Ntr_global(1))
+
+            !----------------------------------------------------------------
+            ! PACK: gather reduced solutions back into BIGbuf_B
+            !----------------------------------------------------------------
+            do i = 0, plan%nprocs-1          
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Dtr,plan%Ntr_global(0),plan%Ntr_global(1)                  &
+                                                             ,plan%gather_Ntr_local_d(0:1,i),plan%gather_Ntr_start_d(0:1,i) &
+                                                             ,plan%BIGbuf_B,sum(plan%bufsubsize_B(:))                    &
+                                                             ,plan%bufstart_B(i)                  )
+            end do
+
+            ! All-to-all to distribute interface solutions to all ranks
+            call pascal_a2av( plan%BIGbuf_B,sum(plan%bufsubsize_B(:)) &
+                            , plan%bufsubsize_B,plan%bufstart_B &
+                            , plan%BIGbuf_A,sum(plan%bufsubsize_A(:)) &
+                            , plan%bufsubsize_A,plan%bufstart_A &
+                            , plan%nprocs, plan%ptdma_world)
+
+            ! UNPACK: scatter reduced solutions into Drd (local reduced RHS)
+            do i = 0, plan%nprocs-1          
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Drd,plan%Nrd_global(0),plan%Nrd_global(1)                  &
+                                                             ,plan%gather_Nrd_local_d(0:1,i),plan%gather_Nrd_start_d(0:1,i) &
+                                                             ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))                    &
+                                                             ,plan%bufstart_A(i)                  )
+            end do
+
+            ! Final update: reconstruct full solution on each rank
+            call pascal_update<<<plan%b_tdma,plan%t_tdma>>>(A,B,C,D, plan%Drd, Nsys, Nrow)
+            
+        endif
+    end subroutine pascal_solver
+
+    !===================================================================
+    ! pascal_solver_profiled
+    ! ----------------------
+    ! Profiled solver entry point for Study drivers. It preserves the same
+    ! numerical flow as pascal_solver, but inserts synchronizations around
+    ! major CUDA/MPI phases so the measured phase times are meaningful.
+    !
+    ! This routine is intended for instrumentation and comparison studies.
+    ! The regular pascal_solver path is kept free of profiling overhead.
+    !===================================================================
+    subroutine pascal_solver_profiled(plan,A,B,C,D,Nsys,Nrow,timing)
+        implicit none
+        type(ptdma_plan_cuda) :: plan
+        type(ptdma_timing_cuda) :: timing
+        integer :: Nsys,Nrow
+        real*8, device :: A(0:Nsys-1,0:Nrow-1),B(0:Nsys-1,0:Nrow-1)
+        real*8, device :: C(0:Nsys-1,0:Nrow-1),D(0:Nsys-1,0:Nrow-1)
+
         integer :: i, ierr
-        integer :: ista, iend           ! First and last row indices of many tridiagonal systems of equations 
-        integer :: nx_sys_rd, nz_row_rd ! Dimensions of many reduced tridiagonal systems
-        integer :: nx_sys_rt, nz_row_rt ! Dimensions of many reduced tridiagonal systems after transpose
+        real(8) :: total_start, phase_start
 
-        ! Assign plan variables and allocate coefficient arrays.
-        p%nx_sys        = nx_sys
-        p%ny_sys        = ny_sys
-        p%nz_row        = nz_row
-        p%ptdma_world   = mpi_world
-        p%nprocs  = nprocs
+        call pascal_timing_reset(timing)
+        ierr = CudaDeviceSynchronize()
+        total_start = MPI_WTIME()
+
+        if(plan%nprocs==1) then
+            phase_start = MPI_WTIME()
+            call tdma_many_cuda<<<plan%b_tdma,plan%t_tdma>>>(A,B,C,D, Nsys, Nrow)
+            ierr = CudaDeviceSynchronize()
+            timing%local_compute = MPI_WTIME() - phase_start
+            timing%total = MPI_WTIME() - total_start
+        else
+            phase_start = MPI_WTIME()
+            call tdma_modified_cuda<<<plan%b_tdma,plan%t_tdma>>>(A,B,C,D, &
+                                                                 plan%Ard,plan%Brd,plan%Crd,plan%Drd, &
+                                                                 Nsys, Nrow)
+            ierr = CudaDeviceSynchronize()
+            timing%local_compute = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            do i = 0, plan%nprocs-1
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Ard,plan%Nrd_global(0),plan%Nrd_global(1) &
+                                                            ,plan%gather_Nrd_local_d(0:1,i)                 &
+                                                            ,plan%gather_Nrd_start_d(0:1,i)                 &
+                                                            ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))     &
+                                                            ,plan%BIGbufstart_A(i)+0*plan%bufsubsize_A(i)   )
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Crd,plan%Nrd_global(0),plan%Nrd_global(1) &
+                                                            ,plan%gather_Nrd_local_d(0:1,i)                 &
+                                                            ,plan%gather_Nrd_start_d(0:1,i)                 &
+                                                            ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))     &
+                                                            ,plan%BIGbufstart_A(i)+1*plan%bufsubsize_A(i)   )
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Drd,plan%Nrd_global(0),plan%Nrd_global(1) &
+                                                            ,plan%gather_Nrd_local_d(0:1,i)                 &
+                                                            ,plan%gather_Nrd_start_d(0:1,i)                 &
+                                                            ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))     &
+                                                            ,plan%BIGbufstart_A(i)+2*plan%bufsubsize_A(i)   )
+            end do
+            ierr = CudaDeviceSynchronize()
+            timing%pack_forward = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            call pascal_a2av( plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:)),plan%BIGbufsubsize_A,plan%BIGbufstart_A &
+                            , plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:)),plan%BIGbufsubsize_B,plan%BIGbufstart_B &
+                            , plan%nprocs, plan%ptdma_world)
+            timing%mpi_forward = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            do i = 0, plan%nprocs-1
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Atr,plan%Ntr_global(0),plan%Ntr_global(1) &
+                                                              ,plan%gather_Ntr_local_d(0:1,i)                 &
+                                                              ,plan%gather_Ntr_start_d(0:1,i)                 &
+                                                              ,plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:))     &
+                                                              ,plan%BIGbufstart_B(i)+0*plan%bufsubsize_B(i)   )
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Ctr,plan%Ntr_global(0),plan%Ntr_global(1) &
+                                                              ,plan%gather_Ntr_local_d(0:1,i)                 &
+                                                              ,plan%gather_Ntr_start_d(0:1,i)                 &
+                                                              ,plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:))     &
+                                                              ,plan%BIGbufstart_B(i)+1*plan%bufsubsize_B(i)   )
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Dtr,plan%Ntr_global(0),plan%Ntr_global(1) &
+                                                              ,plan%gather_Ntr_local_d(0:1,i)                 &
+                                                              ,plan%gather_Ntr_start_d(0:1,i)                 &
+                                                              ,plan%BIGbuf_B,sum(plan%BIGbufsubsize_B(:))     &
+                                                              ,plan%BIGbufstart_B(i)+2*plan%bufsubsize_B(i)   )
+            end do
+            ierr = CudaDeviceSynchronize()
+            timing%unpack_forward = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            call pascalintAb<<<plan%b_intiAb, plan%t_intiAb>>>(plan%Btr, plan%Ntr_global(0), plan%Ntr_global(1))
+            call tdma_many_cuda<<<plan%b_rdtdma,plan%t_rdtdma>>>(plan%Atr,plan%Btr,plan%Ctr,plan%Dtr, &
+                                                                 plan%Ntr_global(0), plan%Ntr_global(1))
+            ierr = CudaDeviceSynchronize()
+            timing%reduced_compute = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            do i = 0, plan%nprocs-1
+                call pascalpack<<<plan%b_pack,plan%t_pack>>>(plan%Dtr,plan%Ntr_global(0),plan%Ntr_global(1) &
+                                                            ,plan%gather_Ntr_local_d(0:1,i)                 &
+                                                            ,plan%gather_Ntr_start_d(0:1,i)                 &
+                                                            ,plan%BIGbuf_B,sum(plan%bufsubsize_B(:))        &
+                                                            ,plan%bufstart_B(i)                             )
+            end do
+            ierr = CudaDeviceSynchronize()
+            timing%pack_backward = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            call pascal_a2av( plan%BIGbuf_B,sum(plan%bufsubsize_B(:)),plan%bufsubsize_B,plan%bufstart_B &
+                            , plan%BIGbuf_A,sum(plan%bufsubsize_A(:)),plan%bufsubsize_A,plan%bufstart_A &
+                            , plan%nprocs, plan%ptdma_world)
+            timing%mpi_backward = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            do i = 0, plan%nprocs-1
+                call pascalunpack<<<plan%b_pack,plan%t_pack>>>(plan%Drd,plan%Nrd_global(0),plan%Nrd_global(1) &
+                                                              ,plan%gather_Nrd_local_d(0:1,i)                 &
+                                                              ,plan%gather_Nrd_start_d(0:1,i)                 &
+                                                              ,plan%BIGbuf_A,sum(plan%BIGbufsubsize_A(:))     &
+                                                              ,plan%bufstart_A(i)                             )
+            end do
+            ierr = CudaDeviceSynchronize()
+            timing%unpack_backward = MPI_WTIME() - phase_start
+
+            phase_start = MPI_WTIME()
+            call pascal_update<<<plan%b_tdma,plan%t_tdma>>>(A,B,C,D, plan%Drd, Nsys, Nrow)
+            ierr = CudaDeviceSynchronize()
+            timing%update_compute = MPI_WTIME() - phase_start
+
+            timing%total = MPI_WTIME() - total_start
+        endif
+    end subroutine pascal_solver_profiled
+
+    !===================================================================
+    ! para
+    ! ----
+    ! Simple 1D block partition of a global index range [nsta, nend]
+    ! into "nprocs" contiguous subranges. This rank (myrank) receives
+    ! the subrange [indx_a, indx_b].
+    !===================================================================
+    subroutine para(nsta,nend,nprocs,myrank,indx_a,indx_b)
+        implicit none
+        integer :: nsta,nend,nprocs,myrank,indx_a,indx_b
+        integer :: iwork1, iwork2
+        
+        iwork1 = int((nend-nsta+1)/nprocs)
+        iwork2 = mod((nend-nsta+1),nprocs)
+        indx_a = myrank*iwork1 + nsta +min(myrank,iwork2)
+        indx_b = indx_a + iwork1 -1
+        if(iwork2 > myrank) indx_b = indx_b +1
+        
+    end subroutine para
+
+    !===================================================================
+    ! pascalpack
+    ! ----------
+    ! CUDA kernel that packs a 2D sub-block of A into a linear buffer.
+    !   - A        : input 2D array (device)
+    !   - pack_*   : size and starting indices of the sub-block
+    !   - buf_A    : output 1D buffer on device
+    !   - bufpoint : offset inside buf_A where this sub-block is stored
+    ! Used to assemble send buffers for MPI all-to-all communication.
+    !===================================================================
+    attributes(global) subroutine pascalpack(A,n1,n2,pack_subsize,pack_start,buf_A,bufsize,bufpoint)
+        use cudafor
+        implicit none
+        integer,value :: n1,n2,bufsize,bufpoint
+        integer, device :: pack_subsize(0:1),pack_start(0:1)
+        real*8, device :: A(0:n1-1,0:n2-1)
+        real*8, device :: buf_A(0:bufsize-1)
+        
+        integer :: i,j,k,ierr
+        integer :: indexi,indexj,indexk,indexbf
+        
+        ! Compute (i,j) index from thread / block indices
+        i = (blockidx%x - 1)*blockdim%x + (threadidx%x-1)
+        j = (blockidx%y - 1)*blockdim%y + (threadidx%y-1)
+
+        ! Global (row, column) indices in A for this thread
+        indexi = i + pack_start(0)
+        indexj = j + pack_start(1)
+        
+        ! If within bounds, write into contiguous buffer
+        if ( (indexi<n1)   &
+        .and.(indexj<n2)  ) then
+            indexbf =i + j*pack_subsize(0) + bufpoint
+            buf_A(indexbf) = A(indexi,indexj)
+        end if        
+        
+    end subroutine pascalpack
     
-        ! Specify dimensions for reduced systems.
-        nx_sys_rd = nx_sys
-        nz_row_rd = 2
-
-        ! Specify dimensions for reduced systems after transpose.
-        ! nx_sys_rt         : divide the number of tridiagonal systems of equations per each process  
-        ! nx_sys_rt_array   : save the nx_sys_rt in nx_sys_rt_array for defining the DDT
-        ! nz_row_rt         : dimensions of the reduced tridiagonal systems in the solving direction, nz_row_rd*nprocs
-        call para_range(1, nx_sys_rd, nprocs, myrank, ista, iend)
-        nx_sys_rt = iend - ista + 1
-        nz_row_rt = nz_row_rd*nprocs
+    !===================================================================
+    ! pascalunpack
+    ! ------------
+    ! CUDA kernel that unpacks data from a 1D buffer back into a 2D
+    ! sub-block of array A. This is the inverse of pascalpack.
+    !===================================================================
+    attributes(global) subroutine pascalunpack(A,n1,n2,pack_subsize,pack_start,buf_A,bufsize,bufpoint)
+        use cudafor
+        implicit none
+        integer,value :: n1,n2,bufsize,bufpoint
+        integer, device :: pack_subsize(0:1),pack_start(0:1)
+        real*8, device :: A(0:n1-1,0:n2-1)
+        real*8, device :: buf_A(0:bufsize-1)
         
-        ! Specify dimensions for reduced systems.
-        p%nx_sys_rt     = nx_sys_rt
-        p%nz_row_rt     = nz_row_rt
-        p%nz_row_rd     = nz_row_rd
+        integer :: i,j,k,ierr
+        integer :: indexi,indexj,indexk,indexbf
+        
+        ! Compute (i,j) index from thread / block indices
+        i = (blockidx%x - 1)*blockdim%x + (threadidx%x-1)
+        j = (blockidx%y - 1)*blockdim%y + (threadidx%y-1)
 
-        ! Allocate coefficient arrays.
-        if(p%nprocs.eq.1) then
-            allocate( p%e_buff(nx_sys, ny_sys, nz_row) );  p%e_buff = 0.0d0
-        else
-            allocate( p%a_rd_d(nx_sys_rd, ny_sys, nz_row_rd) );  p%a_rd_d  = 0.0d0
-            allocate( p%b_rd_d(nx_sys_rd, ny_sys, nz_row_rd) );  p%b_rd_d  = 0.0d0
-            allocate( p%c_rd_d(nx_sys_rd, ny_sys, nz_row_rd) );  p%c_rd_d  = 0.0d0
-            allocate( p%d_rd_d(nx_sys_rd, ny_sys, nz_row_rd) );  p%d_rd_d  = 0.0d0
-            allocate( p%a_rt_d(nx_sys_rt, ny_sys, nz_row_rt) );  p%a_rt_d  = 0.0d0
-            allocate( p%b_rt_d(nx_sys_rt, ny_sys, nz_row_rt) );  p%b_rt_d  = 0.0d0
-            allocate( p%c_rt_d(nx_sys_rt, ny_sys, nz_row_rt) );  p%c_rt_d  = 0.0d0
-            allocate( p%d_rt_d(nx_sys_rt, ny_sys, nz_row_rt) );  p%d_rt_d  = 0.0d0
-            allocate( p%e_rt_d(nx_sys_rt, ny_sys, nz_row_rt) );  p%e_rt_d  = 0.0d0
-            allocate( p%sendbuf(nx_sys*ny_sys*nz_row_rd))     ;  p%sendbuf = 0.0d0
-            allocate( p%recvbuf(nx_sys*ny_sys*nz_row_rd))     ;  p%recvbuf = 0.0d0
-        endif
+        ! Global (row, column) indices in A for this thread
+        indexi = i + pack_start(0)
+        indexj = j + pack_start(1)
+        
+        ! If within bounds, read from contiguous buffer into A
+        if ( (indexi<n1)   &
+        .and.(indexj<n2)  ) then
+            indexbf =i + j*pack_subsize(0) + bufpoint
+            A(indexi,indexj) = buf_A(indexbf) 
+        end if        
+        
+    end subroutine pascalunpack
 
-        ! Check the thread and block
-        nx_block = nx_sys/thread_in%x
-        if(nx_block.eq.0 .or. (mod(nx_sys, thread_in%x).ne.0)) then
-            print '(a,i5,a,i5)', '[Error] nx_sys should be a multiple of thread_in%x. &
-                                    thread_in%x = ',thread_in%x,', nx_sys = ',nx_sys
-            call MPI_Finalize(ierr)
-            stop
-        endif
-
-        nx_rt_block = nx_sys_rt/thread_in%x
-        if(nx_rt_block.eq.0 .or. (mod(nx_sys_rt, thread_in%x).ne.0)) then
-            print '(a,i5,a,i5)', '[Error] nx_sys_rt should be a multiple of thread_in%x. &
-                                    thread_in%x = ',thread_in%x,', nx_sys_rt = ', nx_sys_rt
-            call MPI_Finalize(ierr)
-            stop
-        endif
-
-        ny_block = ny_sys/thread_in%y
-        if(ny_block.eq.0 .or. (mod(ny_sys, thread_in%y).ne.0)) then
-            print '(a,i5,a,i5)', '[Error] ny_sys should be a multiple of thread_in%y. &
-                                    thread_in%y = ',thread_in%y,', ny_sys = ',ny_sys
-            call MPI_Finalize(ierr)
-            stop
-        endif
-
-        ! Define threads and blocks of dim3 type
-        p%threads         = dim3( thread_in%x, thread_in%y,    1)
-        p%blocks          = dim3( nx_block,    ny_block,       1)
-        p%blocks_rt       = dim3( nx_rt_block, ny_block,       1)
-        p%blocks_alltoall = dim3( nx_rt_block, ny_block,       nz_row_rd)
-
-        ! Define the buffer size of shared memory for pipeline copy
-        p%shared_buffer_size = kind(0.0d0)*(1+thread_in%x)*thread_in%y
-
-    end subroutine PaScaL_TDMA_plan_many_create_cuda
-
-    !>
-    !> @brief   Destroy the allocated arrays in the defined plan_many.
-    !> @param   p           Plan for many tridiagonal systems of equations
-    !>
-    subroutine PaScaL_TDMA_plan_many_destroy_cuda(p)
-        implicit none
-
-        type(ptdma_plan_many_cuda), intent(inout)  :: p
-
-        if(p%nprocs.eq.1) then
-            deallocate(p%e_buff) 
-        else
-            deallocate(p%a_rd_d, p%b_rd_d, p%c_rd_d, p%d_rd_d)
-            deallocate(p%a_rt_d, p%b_rt_d, p%c_rt_d, p%d_rt_d, p%e_rt_d)
-            deallocate(p%sendbuf, p%recvbuf)
-        endif       
-
-    end subroutine PaScaL_TDMA_plan_many_destroy_cuda
-
-    !>
-    !> @brief   Solve many tridiagonal systems of equations.
-    !> @param   p           Plan for many tridiagonal systems of equations
-    !> @param   a_d         Coefficient array of lower diagonal elements
-    !> @param   b_d         Coefficient array of diagonal elements
-    !> @param   c_d         Coefficient array of upper diagonal elements
-    !> @param   d_d         Coefficient array of right-hand side terms
-    !>
-    subroutine PaScaL_TDMA_many_solve_cuda(p, a_d, b_d, c_d, d_d)
-
-        implicit none
-
-        type(ptdma_plan_many_cuda), intent(inout)   :: p
-        double precision, device, intent(inout)     :: a_d(:, :, :), b_d(:, :, :)
-        double precision, device, intent(inout)     :: c_d(:, :, :), d_d(:, :, :)
-
-        if(p%nprocs.eq.1) then
-            ! Solve the tridiagonal system directly when nprocs = 1. 
-            ! The size of shared memory is specified using shared_buffer_size
-            call tdma_many_cuda <<<p%blocks, p%threads, 6*p%shared_buffer_size>>> & ! 6 * 8 byte ?
-                                (a_d, b_d, c_d, d_d, p%nz_row)
-        else
-            ! The modified Thomas algorithm
-            ! The size of shared memory is specified using 'shared_buffer_size'
-            call PaScaL_TDMA_many_modified_Thomas_cuda <<<p%blocks, p%threads, 9*p%shared_buffer_size>>> &
-                    (a_d, b_d, c_d, d_d, p%a_rd_d, p%b_rd_d, p%c_rd_d, p%d_rd_d, p%nz_row)
-
-            ! Transpose the reduced systems of equations for TDMA using MPI_alltoall and CUDA-aware-MPI.
-            call transpose_slab_xy_to_yz(p, p%a_rd_d, p%a_rt_d)
-            call transpose_slab_xy_to_yz(p, p%b_rd_d, p%b_rt_d)
-            call transpose_slab_xy_to_yz(p, p%c_rd_d, p%c_rt_d)
-            call transpose_slab_xy_to_yz(p, p%d_rd_d, p%d_rt_d)
-
-            ! Solve the reduced tridiagonal systems of equations using Thomas algorithm.
-            ! The size of shared memory is specified using 'shared_buffer_size'
-            call tdma_many_cuda <<<p%blocks_rt, p%threads, 6*p%shared_buffer_size>>> &
-                                (p%a_rt_d,p%b_rt_d,p%c_rt_d,p%d_rt_d, p%nz_row_rt)
-
-            ! Transpose the obtained solutions to original reduced forms using MPI_Alltoall and CUDA-aware-MPI.
-            call transpose_slab_yz_to_xy(p, p%d_rt_d, p%d_rd_d)
-
-            ! Update solutions of the modified tridiagonal system with the solutions of the reduced tridiagonal system.
-            ! The size of shared memory is specified using 'shared_buffer_size'
-            call PaScaL_TDMA_many_update_solution_cuda<<<p%blocks, p%threads, 2*p%shared_buffer_size>>> &
-                                    (a_d, c_d, d_d, p%d_rd_d, p%nz_row)
-        endif
-
-    end subroutine PaScaL_TDMA_many_solve_cuda
-
-    !>
-    !> @brief   Solve many cyclic tridiagonal systems of equations.
-    !> @param   p           Plan for many tridiagonal systems of equations
-    !> @param   a_d         Coefficient array of lower diagonal elements
-    !> @param   b_d         Coefficient array of diagonal elements
-    !> @param   c_d         Coefficient array of upper diagonal elements
-    !> @param   d_d         Coefficient array of right-hand side terms
-    !>
-    subroutine PaScaL_TDMA_many_solve_cycle_cuda(p, a_d, b_d, c_d, d_d)
-
-        implicit none
-
-        type(ptdma_plan_many_cuda), intent(inout)   :: p
-        double precision, device, intent(inout)     :: a_d(:, :, :), b_d(:, :, :)
-        double precision, device, intent(inout)     :: c_d(:, :, :), d_d(:, :, :)
-
-        if(p%nprocs.eq.1) then
-            ! Solve the cyclic tridiagonal system directly when nprocs = 1. 
-            ! The size of shared memory is specified using shared_buffer_size
-            call tdma_cycl_many_cuda<<<p%blocks, p%threads, 8*p%shared_buffer_size>>> &
-                                    (a_d, b_d, c_d, d_d, p%e_buff, p%nz_row)
-        else
-            ! The modified Thomas algorithm
-            ! The size of shared memory is specified using 'shared_buffer_size'
-            call PaScaL_TDMA_many_modified_Thomas_cuda<<<p%blocks, p%threads, 9*p%shared_buffer_size>>> &
-                (a_d, b_d, c_d, d_d, p%a_rd_d, p%b_rd_d, p%c_rd_d, p%d_rd_d, p%nz_row)
- 
-            ! Transpose the reduced systems of equations for TDMA using MPI_alltoall and CUDA-aware-MPI.
-            call transpose_slab_xy_to_yz(p, p%a_rd_d, p%a_rt_d)
-            call transpose_slab_xy_to_yz(p, p%b_rd_d, p%b_rt_d)
-            call transpose_slab_xy_to_yz(p, p%c_rd_d, p%c_rt_d)
-            call transpose_slab_xy_to_yz(p, p%d_rd_d, p%d_rt_d)
     
-            ! Solve the reduced tridiagonal systems of equations using Thomas algorithm.
-            ! The size of shared memory is specified using 'shared_buffer_size'
-            call tdma_cycl_many_cuda<<<p%blocks_rt, p%threads, 8*p%shared_buffer_size>>> &
-                                    (p%a_rt_d,p%b_rt_d,p%c_rt_d,p%d_rt_d,p%e_rt_d, p%nz_row_rt)
+    !===================================================================
+    ! tdma_many_cuda
+    ! --------------
+    ! CUDA kernel implementing the standard Thomas algorithm for many
+    ! independent tridiagonal systems in parallel.
+    !
+    !   - Each thread i solves one system (over j = 0..nrow-1)
+    !   - a,b,c : tridiagonal coefficients
+    !   - d     : RHS; overwritten in-place by the solution
+    !===================================================================
+    attributes(global) subroutine tdma_many_cuda(a,b,c,d, nsys, nrow)
+        integer, value :: nsys, nrow
+        real*8, device :: a(0:nsys-1,0:nrow-1),b(0:nsys-1,0:nrow-1),c(0:nsys-1,0:nrow-1),d(0:nsys-1,0:nrow-1)
 
-            ! Transpose the obtained solutions to original reduced forms using MPI_alltoall and CUDA-aware-MPI.
-            call transpose_slab_yz_to_xy(p, p%d_rt_d, p%d_rd_d)
+        real*8:: a1_sh
+        real*8:: b1_sh
+        real*8:: c1_sh,c0_sh
+        real*8:: d1_sh,d0_sh
 
-            ! Update solutions of the modified tridiagonal system with the solutions of the reduced tridiagonal system.
-            ! The size of shared memory is specified using 'shared_buffer_size'
-            call PaScaL_TDMA_many_update_solution_cuda<<<p%blocks, p%threads, 2*p%shared_buffer_size>>> &
-                                                    (a_d, c_d, d_d, p%d_rd_d, p%nz_row)
+        integer :: i,j
+        integer :: ti
+        real*8  :: r
+
+        ti = (threadidx%x-1)
+        i  = (threadidx%x-1) + (blockidx%x-1)*blockdim%x
+    
+        if(i<nsys) then
+            ! Forward sweep: eliminate lower diagonal
+            b1_sh = b(i,0)
+            c1_sh = c(i,0)
+            d1_sh = d(i,0)
+
+            d1_sh = d1_sh/b1_sh
+            c1_sh = c1_sh/b1_sh
+
+            d(i,0)=d1_sh
+            c(i,0)=c1_sh
+
+            do j=1, nrow-1
+                c0_sh = c1_sh
+                d0_sh = d1_sh
+
+                a1_sh = a(i,j) 
+                b1_sh = b(i,j) 
+                c1_sh = c(i,j) 
+                d1_sh = d(i,j)
+                
+                r = 1.d0/(b1_sh-a1_sh*c0_sh)
+                d1_sh = r*(d1_sh-a1_sh*d0_sh)
+                c1_sh = r*c1_sh
+
+                d(i,j) = d1_sh
+                c(i,j) = c1_sh
+            enddo
+
+            ! Back substitution
+            do j=nrow-2,0,-1
+                c0_sh = c(i,j)
+                d0_sh = d(i,j)
+                d0_sh = d0_sh-c0_sh*d1_sh
+                d1_sh = d0_sh
+                d(i,j) = d0_sh
+            enddo
         endif
+    end subroutine tdma_many_cuda
 
-    end subroutine PaScaL_TDMA_many_solve_cycle_cuda
+    !===================================================================
+    ! tdma_modified_cuda
+    ! ------------------
+    ! Variant of TDMA that:
+    !   - Applies a local transformation to compress each system into
+    !     a 2×2 reduced representation (stored in a_rd,b_rd,c_rd,d_rd)
+    !   - These reduced systems are later coupled across ranks and
+    !     solved as a global reduced problem.
+    !===================================================================
+    attributes(global) subroutine tdma_modified_cuda(a,b,c,d, a_rd,b_rd,c_rd,d_rd, nsys, nrow)
+        integer, value :: nsys, nrow
+        real*8, device :: a(0:nsys-1,0:nrow-1),b(0:nsys-1,0:nrow-1),c(0:nsys-1,0:nrow-1),d(0:nsys-1,0:nrow-1)
+        real*8, device :: a_rd(0:nsys-1,0:1),b_rd(0:nsys-1,0:1),c_rd(0:nsys-1,0:1),d_rd(0:nsys-1,0:1)
 
-    !>
-    !> @brief   The modified Thomas algorithm : elimination of lower diagonal elements
-    !> @param   a           Coefficient array of lower diagonal elements
-    !> @param   b           Coefficient array of diagonal elements
-    !> @param   c           Coefficient array of upper diagonal elements
-    !> @param   d           Coefficient array of right-hand side terms
-    !> @param   a_rd        Reduced coefficient array of lower diagonal elements
-    !> @param   b_rd        Reduced coefficient array of diagonal elements
-    !> @param   c_rd        Reduced coefficient array of upper diagonal elements
-    !> @param   d_rd        Reduced doefficient array of right-hand side terms
-    !> @param   nz_row      Row size of partitioned tridiagonal matrix in z-direction per process
-    !>
-    attributes(global) subroutine PaScaL_TDMA_many_modified_Thomas_cuda(a, b, c, d, a_rd, b_rd, c_rd, d_rd, nz_row)
+        real*8:: a1_sh,a0_sh
+        real*8:: b1_sh,b0_sh
+        real*8:: c1_sh,c0_sh
+        real*8:: d1_sh,d0_sh
 
+        integer :: i,j
+        integer :: ti
+        real*8  :: r,r0_sh
+
+        ti = (threadidx%x-1)
+        i  = (threadidx%x-1) + (blockidx%x-1)*blockdim%x
+    
+        if(i<nsys) then
+            ! First two rows: initial normalization
+            a0_sh = a(i,0)
+            b0_sh = b(i,0)
+            c0_sh = c(i,0)
+            d0_sh = d(i,0)
+
+            a0_sh = a0_sh/b0_sh
+            c0_sh = c0_sh/b0_sh
+            d0_sh = d0_sh/b0_sh
+
+            a(i,0)=a0_sh
+            c(i,0)=c0_sh
+            d(i,0)=d0_sh
+            
+            a1_sh = a(i,1)
+            b1_sh = b(i,1)
+            c1_sh = c(i,1)
+            d1_sh = d(i,1)
+
+            a1_sh = a1_sh/b1_sh
+            c1_sh = c1_sh/b1_sh
+            d1_sh = d1_sh/b1_sh
+
+            a(i,1)=a1_sh
+            c(i,1)=c1_sh
+            d(i,1)=d1_sh
+
+            ! Forward elimination for rows 2..nrow-1 with modified scheme
+            do j=2, nrow-1
+                a0_sh = a1_sh
+                c0_sh = c1_sh
+                d0_sh = d1_sh
+
+                a1_sh = a(i,j) 
+                b1_sh = b(i,j) 
+                c1_sh = c(i,j) 
+                d1_sh = d(i,j)
+                
+                r0_sh = 1.d0/(b1_sh-a1_sh*c0_sh)
+                d1_sh = r0_sh*(d1_sh-a1_sh*d0_sh)
+                c1_sh = r0_sh*c1_sh
+                a1_sh =-r0_sh*a1_sh*a0_sh
+
+                a(i,j) = a1_sh
+                c(i,j) = c1_sh
+                d(i,j) = d1_sh
+            enddo
+
+            ! Store reduced representation (end row)
+            a_rd(i,1) = a1_sh
+            b_rd(i,1) = 1.d0
+            c_rd(i,1) = c1_sh
+            d_rd(i,1) = d1_sh
+
+            ! Backward sweep to compress toward the first row
+            a1_sh = a0_sh
+            c1_sh = c0_sh
+            d1_sh = d0_sh
+
+            do j=nrow-3,1,-1
+                a0_sh = a(i,j)
+                d0_sh = d(i,j)
+                c0_sh = c(i,j)
+
+                a0_sh = a0_sh-c0_sh*a1_sh
+                d0_sh = d0_sh-c0_sh*d1_sh
+                c0_sh =-c0_sh*c1_sh
+                
+                a1_sh = a0_sh
+                d1_sh = d0_sh
+                c1_sh = c0_sh
+
+                a(i,j) = a0_sh
+                d(i,j) = d0_sh
+                c(i,j) = c0_sh
+            enddo
+
+            ! Final reduction to a 2×2 system stored in a_rd, b_rd, c_rd, d_rd
+            a0_sh = a(i,0)
+            d0_sh = d(i,0)
+            c0_sh = c(i,0)
+
+            r0_sh = 1.d0/(1.d0-a1_sh*c0_sh)
+            a0_sh = r0_sh*a0_sh
+            d0_sh = r0_sh*(d0_sh-c0_sh*d1_sh)
+            c0_sh =-r0_sh*c0_sh*c1_sh
+
+            a(i,0) = a0_sh
+            d(i,0) = d0_sh
+            c(i,0) = c0_sh
+
+            a_rd(i,0) = a0_sh
+            b_rd(i,0) = 1.d0
+            c_rd(i,0) = c0_sh
+            d_rd(i,0) = d0_sh
+        endif
+    end subroutine tdma_modified_cuda
+
+    !===================================================================
+    ! pascal_update
+    ! -------------
+    ! CUDA kernel that reconstructs the full solution along each line
+    ! using the reduced solution at both ends (d_rd):
+    !   - ds_sh = solution at start
+    !   - de_sh = solution at end
+    !   - Interior points are adjusted by subtracting contributions
+    !     from a(i,j)*ds_sh and c(i,j)*de_sh.
+    !===================================================================
+    attributes(global) subroutine pascal_update(a,b,c,d, d_rd, nsys, nrow)
+        integer, value :: nsys, nrow
+        real*8, device :: a(0:nsys-1,0:nrow-1),b(0:nsys-1,0:nrow-1),c(0:nsys-1,0:nrow-1),d(0:nsys-1,0:nrow-1)
+        real*8, device :: d_rd(0:nsys-1,0:1)
+
+        real*8:: ds_sh,de_sh
+
+        integer :: i,j
+        integer :: ti
+        real*8  :: r,r0_sh
+
+        ti = (threadidx%x-1)
+        i  = (threadidx%x-1) + (blockidx%x-1)*blockdim%x
+        if(i<nsys) then
+            ds_sh =d_rd(i,0)
+            de_sh =d_rd(i,1)
+            !call synthreads()
+
+            ! Apply boundary solutions at both ends
+            d(i,0)      = ds_sh
+            d(i,nrow-1) = de_sh
+
+            ! Correct interior entries using boundary contributions
+            do j=1,nrow-2
+                d(i,j) = d(i,j) - a(i,j)*ds_sh - c(i,j)*de_sh
+            enddo
+        endif
+    end subroutine pascal_update
+    
+    !===================================================================
+    ! pascal_a2av
+    ! -----------
+    ! Wrapper around MPI_ALLTOALLV for double precision buffers.
+    ! A and B are device arrays; MPI is expected to be CUDA-aware
+    ! so that device pointers can be passed directly.
+    !
+    !   A        : send buffer (device)
+    !   B        : receive buffer (device)
+    !   send*    : counts/displacements for A
+    !   recv*    : counts/displacements for B
+    !===================================================================
+    subroutine pascal_a2av(A,Asize,sendcount,senddisp, B,Bsize,recvcount,recvdisp, nprocs,communicator)
+        use mpi
+        use cudafor
         implicit none
+        integer:: Asize,Bsize
+        integer :: nprocs
+        real*8, dimension(:), device :: A(0:Asize-1),B(0:Bsize-1) 
+        integer, dimension(:) :: sendcount(0:nprocs-1),senddisp(0:nprocs-1)
+        integer, dimension(:) :: recvcount(0:nprocs-1),recvdisp(0:nprocs-1)
+        integer :: communicator
 
-        integer, value, intent(in)      :: nz_row
-        double precision, device, intent(inout) :: a(:, :, :), c(:, :, :), d(:, :, :)
-        double precision, device, intent(in)    :: b(:, :, :)
-        double precision, device, intent(inout) :: a_rd(:, :, :), b_rd(:, :, :)
-        double precision, device, intent(inout) :: c_rd(:, :, :), d_rd(:, :, :)
+        integer :: i,myrank,ierr   
+        integer :: requestA(0:1024-1),requestB(0:1024-1)     
 
-        ! Temporary variables for computation
-        integer :: i, j, k
-        integer :: ti, tj, tk
-        double precision :: r
-
-        ! Block shared memory for pipeline copy
-        double precision, shared :: a1(blockdim%x+1, blockdim%y), a0(blockdim%x+1, blockdim%y)
-        double precision, shared :: b1(blockdim%x+1, blockdim%y), b0(blockdim%x+1, blockdim%y)
-        double precision, shared :: c1(blockdim%x+1, blockdim%y), c0(blockdim%x+1, blockdim%y)
-        double precision, shared :: d1(blockdim%x+1, blockdim%y), d0(blockdim%x+1, blockdim%y)
-        double precision, shared :: r0(blockdim%x+1, blockdim%y)
-
-        ! Global index
-        j = (blockidx%x-1) * blockdim%x + threadidx%x
-        k = (blockidx%y-1) * blockdim%y + threadidx%y
-
-        ! Local index in block
-        tj = threadidx%x
-        tk = threadidx%y
-
-        ! The modified Thomas algorithm : elimination of lower diagonal elements. 
-        ! First & second indices indicate a number of independent many tridiagonal systems for parallezation.
-        ! Third index indicates a row number in a partitioned tridiagonal system .
-		! Therefore, first & second indices are for thread IDs.
-        ! The modified Thomas algorithm : elimination of lower diagonal elements. 
-
-        a0(tj, tk) = a(j, k, 1)
-        b0(tj, tk) = b(j, k, 1)
-        c0(tj, tk) = c(j, k, 1)
-        d0(tj, tk) = d(j, k, 1)
-
-        a0(tj, tk) = a0(tj, tk) / b0(tj, tk)
-        c0(tj, tk) = c0(tj, tk) / b0(tj, tk)
-        d0(tj, tk) = d0(tj, tk) / b0(tj, tk)
-
-        a(j, k,1) = a0(tj, tk)
-        c(j, k,1) = c0(tj, tk)
-        d(j, k,1) = d0(tj, tk)
-
-        a1(tj, tk) = a(j, k, 2)
-        b1(tj, tk) = b(j, k, 2)
-        c1(tj, tk) = c(j, k, 2)
-        d1(tj, tk) = d(j, k, 2)
-
-        a1(tj, tk) = a1(tj, tk) / b1(tj, tk)
-        c1(tj, tk) = c1(tj, tk) / b1(tj, tk)
-        d1(tj, tk) = d1(tj, tk) / b1(tj, tk)
-
-        a(j, k,2) = a1(tj, tk)
-        c(j, k,2) = c1(tj, tk)
-        d(j, k,2) = d1(tj, tk)
-
-        do i = 3, nz_row
-
-            ! Pipeline copy of (i-1)th data using shared memory
-            a0(tj, tk) = a1(tj, tk)
-            c0(tj, tk) = c1(tj, tk)
-            d0(tj, tk) = d1(tj, tk)
-
-            ! Load i-th data from global memory
-            a1(tj, tk) = a(j, k,i)
-            b1(tj, tk) = b(j, k,i)
-            c1(tj, tk) = c(j, k,i)
-            d1(tj, tk) = d(j, k,i)
-
-            r0(tj, tk) =  1.0d0 / (b1(tj, tk) - a1(tj, tk) * c0(tj, tk))
-            d1(tj, tk) =  r0(tj, tk) * (d1(tj, tk) - a1(tj, tk) * d0(tj, tk))
-            c1(tj, tk) =  r0(tj, tk) * c1(tj, tk)
-            a1(tj, tk) = -r0(tj, tk) * a1(tj, tk) * a0(tj, tk)
-
-            ! Save updated i-th data to global memory
-            a(j, k,i) = a1(tj, tk)
-            c(j, k,i) = c1(tj, tk)
-            d(j, k,i) = d1(tj, tk)
-
-        enddo
-
-        ! Construct many reduced tridiagonal systems per each rank. Each process has two rows of reduced systems.
-        a_rd(j, k,2) = a1(tj, tk)
-        b_rd(j, k,2) = 1.0d0
-        c_rd(j, k,2) = c1(tj, tk)
-        d_rd(j, k,2) = d1(tj, tk)
-
-        ! Pipeline copy between arrays in shared memory
-        a1(tj, tk) = a0(tj, tk)
-        c1(tj, tk) = c0(tj, tk)
-        d1(tj, tk) = d0(tj, tk)
-
-        ! The modified Thomas algorithm : elimination of upper diagonal elements.
-        do i = nz_row-2, 2, -1
-
-            ! Load i-th data from global memory
-            a0(tj, tk) = a(j, k,i)
-            c0(tj, tk) = c(j, k,i)
-            d0(tj, tk) = d(j, k,i)
-
-            d0(tj, tk) = d0(tj, tk) - c0(tj, tk)*d1(tj, tk)
-            a0(tj, tk) = a0(tj, tk) - c0(tj, tk)*a1(tj, tk)
-            c0(tj, tk) =-c0(tj, tk) * c1(tj, tk)
-
-            ! Pipeline copy of updated i-th data using shared memory
-            a1(tj, tk) = a0(tj, tk)
-            c1(tj, tk) = c0(tj, tk)
-            d1(tj, tk) = d0(tj, tk)
-
-            ! Save updated data to global memory
-            a(j, k,i) = a0(tj, tk)
-            c(j, k,i) = c0(tj, tk)
-            d(j, k,i) = d0(tj, tk)
-        enddo
-
-        a0(tj, tk) = a(j, k,1)
-        c0(tj, tk) = c(j, k,1)
-        d0(tj, tk) = d(j, k,1)
-
-        r0(tj, tk) = 1.0d0 / (1.0d0 - a1(tj, tk) * c0(tj, tk))
-        d0(tj, tk) =  r0(tj, tk) * (d0(tj, tk) - c0(tj, tk) * d1(tj, tk))
-        a0(tj, tk) =  r0(tj, tk) * a0(tj, tk)
-        c0(tj, tk) = -r0(tj, tk) * c0(tj, tk) * c1(tj, tk)
-
-        d(j, k,1) = d0(tj, tk)
-        a(j, k,1) = a0(tj, tk)
-        c(j, k,1) = c0(tj, tk)
-
-        ! Construct many reduced tridiagonal systems per each rank. Each process has two rows of reduced systems.
-        a_rd(j, k,1) = a0(tj, tk)
-        b_rd(j, k,1) = 1.0d0
-        c_rd(j, k,1) = c0(tj, tk)
-        d_rd(j, k,1) = d0(tj, tk)
+        ierr = CudaDeviceSynchronize()
+        call MPI_ALLTOALLV(A,sendcount,senddisp,MPI_DOUBLE, B,recvcount,recvdisp,MPI_DOUBLE, communicator, ierr)
+        ! call MPI_COMM_RANK(communicator, myrank, ierr)
+        ! do i = 0, nprocs-1
+        !     call MPI_ISEND(A(senddisp(i)),sendcount(i),MPI_DOUBLE,i,111,communicator,requestA(i),ierr)
+        ! end do
         
-
-    end subroutine PaScaL_TDMA_many_modified_Thomas_cuda
-
-    !>
-    !> @brief   The modified Thomas algorithm : elimination of lower diagonal elements
-    !> @param   a           Coefficient array of lower diagonal elements
-    !> @param   c           Coefficient array of upper diagonal elements
-    !> @param   d           Coefficient array of solution terms
-    !> @param   d_rd        Reduced coefficient array of solution terms
-    !> @param   nz_row      Row size of partitioned tridiagonal matrix in z-direction per process
-    !>
-    attributes(global) subroutine PaScaL_TDMA_many_update_solution_cuda(a, c, d, d_rd, nz_row)
-
-        implicit none
-
-        integer, value, intent(in)      :: nz_row
-        double precision, device, intent(in)    :: a(:, :, :), c(:, :, :), d_rd(:, :, :)
-        double precision, device, intent(inout) :: d(:, :, :)
-
-        ! Temporary variables for computation
-        integer :: i, j, k
-        integer :: tj, tk
-
-        ! Block shared memory
-        double precision, shared :: ds(blockdim%x + 1, blockdim%y), de(blockdim%x + 1, blockdim%y)
-
-        ! Global index
-        j = (blockidx%x - 1) * blockdim%x + threadidx%x
-        k = (blockidx%y - 1) * blockdim%y + threadidx%y
-
-        ! Local index in block
-        tj = threadidx%x
-        tk = threadidx%y
-
-        ! Using shared memory
-		! First and second indices are for thread IDs
-        ds(tj, tk) = d_rd(j, k, 1)
-        de(tj, tk) = d_rd(j, k, 2)
-        call syncthreads()
-
-        ! Update solutions of the modified tridiagonal system with the solutions of the reduced tridiagonal system.
-        d(j, k, 1)      = ds(tj, tk)
-        d(j, k, nz_row) = de(tj, tk)
-
-        do i = 2, nz_row-1
-            d(j, k, i) = d(j, k, i) - a(j, k, i) * ds(tj, tk) - c(j, k, i) * de(tj, tk)
-        enddo
-
-    end subroutine PaScaL_TDMA_many_update_solution_cuda
-
-
-    !>
-    !> @brief   Subroutine to transpose x-y slab to y-z slab for solving TDM in z-direction
-    !> @param   slab_xy     Coefficient array in the shape of x-y slab
-    !> @param   slab_yz     Coefficient array in the shape of y-z slab
-    !>
-    subroutine transpose_slab_xy_to_yz (p, slab_xy, slab_yz)
-
-        implicit none
-
-        type(ptdma_plan_many_cuda), intent(inout)   :: p
-        double precision, device, intent(in )       :: slab_xy(:, :, :)
-        double precision, device, intent(out)       :: slab_yz(:, :, :)
+        ! do i = 0, nprocs-1
+        !     call MPI_IRECV(B(recvdisp(i)),recvcount(i),MPI_DOUBLE,i,111,communicator,requestB(i),ierr)
+        ! end do
         
-        integer  :: nblksize
-        integer  :: ierr
-  
-        nblksize = p%nx_sys * p%ny_sys * p%nz_row_rd / p%nprocs
+        ! call MPI_WAITALL(nprocs, requestA, MPI_STATUSES_IGNORE, ierr)
+        ! call MPI_WAITALL(nprocs, requestB, MPI_STATUSES_IGNORE, ierr)
+        
+    end subroutine pascal_a2av
 
-        call mem_detach_slab_xy <<<p%blocks_alltoall, p%threads>>> &
-                                (slab_xy, p%sendbuf, p%nx_sys, p%ny_sys, p%nz_row_rd, p%nprocs)
-
-        !----- alltoall communication of sbuf to rbuf
-        ierr = cudaStreamSynchronize()
-        call MPI_Alltoall(p%sendbuf, nblksize, MPI_DOUBLE_PRECISION, &
-                          p%recvbuf, nblksize, MPI_DOUBLE_PRECISION, &
-                          p%ptdma_world, ierr)
-
-        call mem_unite_slab_yz<<<p%blocks_alltoall, p%threads>>> &
-                                (p%recvbuf, slab_yz, p%nx_sys, p%ny_sys, p%nz_row_rd, p%nprocs)
-  
-    end subroutine transpose_slab_xy_to_yz
-
-    !>
-    !> @brief   Subroutine to rearrange x-y slab to a 1D array for MPI_Alltoall
-    !> @param   slab_xy     Coefficient array in the shape of x-y slab
-    !> @param   array1D     1-D Coefficient array
-    !> @param   n1, n2, n3  Dimension of array 'slab_xy'
-    !> @param   nprocs      Number of processes in 'mpi_comm'
-    !>
-    attributes(global) subroutine mem_detach_slab_xy(slab_xy, array1D, n1, n2, n3, nprocs)
-
+    !===================================================================
+    ! pascalintAb
+    ! -----------
+    ! Simple CUDA kernel that initializes a 2D array A to 1.0 inside
+    ! the given bounds. Used to set up a reduced system RHS or
+    ! identity-like structure in the transformed space.
+    !===================================================================
+    attributes(global) subroutine pascalintAb(A,in_n,in_m)
+        use cudafor
         implicit none
+        integer, value :: in_n,in_m
+        real*8, device :: A(0:in_n-1,0:in_m-1)
 
-        integer, value, intent(in)  :: n1, n2, n3, nprocs
-        double precision, device, intent(in)    :: slab_xy(:, :, :)
-        double precision, device, intent(out)   :: array1D(:)
-
-        ! Variables to calculate indices for in and out arrays
-        integer :: i, j, k, kblk, n1blksize, blksize
-        integer :: pos, pos_i, pos_j, pos_k
-
-        n1blksize  = n1 / nprocs
-        blksize    = n1blksize * n2 * n3
-
-        i = (blockidx%x - 1) * blockdim%x + threadidx%x
-        j = (blockidx%y - 1) * blockdim%y + threadidx%y
-        k = (blockidx%z - 1) * blockdim%z + threadidx%z
-
-        pos_i = (i - 1) * n2 * n3
-        pos_j = (j - 1) * n3
-
-        do kblk = 1, nprocs
-            pos_k = k + (kblk - 1) * blksize
-            pos   = pos_k + pos_j + pos_i
-            array1D(pos) = slab_xy(i + (kblk - 1) * n1blksize, j, k)
-        enddo
-
-    end subroutine mem_detach_slab_xy
-
-    !>
-    !> @brief   Subroutine to rearrange a 1D array to y-z slab after MPI_Alltoall
-    !> @param   array1D     1-D Coefficient array
-    !> @param   slab_yz     Coefficient array in the shape of y-z slab
-    !> @param   n1, n2, n3  Dimension of array 'slab_xy'
-    !> @param   nprocs      Number of processes in 'mpi_comm'
-    !>
-    attributes(global) subroutine mem_unite_slab_yz(array1D, slab_yz, n1, n2, n3, nprocs)
-
-        implicit none
-
-        integer, value, intent(in)  :: n1, n2, n3, nprocs
-        double precision, device, intent(in)    :: array1D(:)
-        double precision, device, intent(out)   :: slab_yz(:, :, :)
-
-        ! Variables to calculate indices for in and out arrays
-        integer :: i, j, k, kblk, blksize
-        integer :: pos, pos_i, pos_j, pos_k
-
-        blksize  = n1 * n2 * n3 / nprocs
-
-        i = (blockidx%x - 1) * blockdim%x + threadidx%x
-        j = (blockidx%y - 1) * blockdim%y + threadidx%y
-        k = (blockidx%z - 1) * blockdim%z + threadidx%z
-
-        pos_i = (i - 1) * n2 * n3
-        pos_j = (j - 1) * n3
-
-        do kblk = 1, nprocs
-            pos_k = k + (kblk - 1) * blksize
-            pos   = pos_k + pos_j + pos_i
-            slab_yz(i, j, k + (kblk - 1) * n3) = array1D(pos)
-        enddo
-
-    end subroutine mem_unite_slab_yz
-
-    !>
-    !> @brief   Subroutine to transpose y-z slab (d_rt_d) to x-y slab (d_rd_d) after solving TDM in z-direction
-    !> @param   p           Plan for a single tridiagonal system of equations
-    !> @param   slab_yz     Coefficient array in the shape of y-z slab
-    !> @param   slab_xy     Coefficient array in the shape of x-y slab
-    !>
-    subroutine transpose_slab_yz_to_xy(p, slab_yz, slab_xy)
-
-        implicit none
-
-        type(ptdma_plan_many_cuda), intent(inout)      :: p
-        double precision, device, intent(in )   :: slab_yz(:, :, :)
-        double precision, device, intent(out)   :: slab_xy(:, :, :)
-
-        integer  :: nblksize
-        integer  :: ierr
-  
-        nblksize   = p%nx_sys * p%ny_sys * p%nz_row_rd / p%nprocs
-
-        call mem_detach_slab_yz<<<p%blocks_alltoall, p%threads>>> &
-                                (slab_yz, p%sendbuf, p%nx_sys, p%ny_sys, p%nz_row_rd, p%nprocs)
-
-        !----- alltoall communication of sendbuf to recvbuf
-        ierr = cudaStreamSynchronize()
-        call MPI_Alltoall(p%sendbuf, nblksize, MPI_DOUBLE_PRECISION, &
-                          p%recvbuf, nblksize, MPI_DOUBLE_PRECISION, &
-                          p%ptdma_world, ierr)
-
-        call mem_unite_slab_xy<<<p%blocks_alltoall, p%threads>>> &
-                                (p%recvbuf, slab_xy, p%nx_sys, p%ny_sys, p%nz_row_rd, p%nprocs)
-
-    end subroutine transpose_slab_yz_to_xy
-
-    !>
-    !> @brief   Subroutine to rearrange y-z slab to a 1D array for MPI_Alltoall
-    !> @param   slab_yz     Coefficient array in the shape of y-z slab
-    !> @param   array1D     1-D Coefficient array
-    !> @param   n1, n2, n3  Dimension of array 'slab_xy'
-    !> @param   nprocs      Number of processes in 'mpi_comm'
-    !>
-    attributes(global) subroutine mem_detach_slab_yz(slab_yz, array1D, n1, n2, n3, nprocs)
-
-        implicit none
-
-        integer, value, intent(in)  :: n1, n2, n3, nprocs
-        double precision, device, intent(in)    :: slab_yz(:, :, :)
-        double precision, device, intent(out)   :: array1D(:)
-
-        ! Variables to calculate indices for in and out arrays
-        integer :: i, j, k, kblk, blksize
-        integer :: pos_k, pos_i, pos_j, pos
-
-        i = (blockidx%x - 1) * blockdim%x + threadidx%x
-        j = (blockidx%y - 1) * blockdim%y + threadidx%y
-        k = (blockidx%z - 1) * blockdim%z + threadidx%z
-
-        pos_i = (i - 1) * n2 * n3
-        pos_j = (j - 1) * n3
-        blksize  = n1 * n2 * n3 / nprocs
-
-        do kblk = 1, nprocs
-            pos_k = k + (kblk - 1) * blksize
-            pos   = pos_k + pos_j + pos_i
-            array1D(pos) = slab_yz(i, j, k + (kblk - 1) * n3)
-        enddo
-
-    end subroutine mem_detach_slab_yz
-
-    !>
-    !> @brief   Subroutine to rearrange a 1D array to x-y slab after MPI_Alltoall
-    !> @param   array1D     1-D Coefficient array
-    !> @param   slab_xy     Coefficient array in the shape of x-y slab
-    !> @param   n1, n2, n3  Dimension of array 'slab_xy'
-    !> @param   nprocs      Number of processes in 'mpi_comm'
-    !>
-    attributes(global) subroutine mem_unite_slab_xy(array1D, slab_xy, n1, n2, n3, nprocs)
-
-        implicit none
-
-        integer, value, intent(in)  :: n1, n2, n3, nprocs
-        double precision, device, intent(in)    :: array1D(:)
-        double precision, device, intent(out)   :: slab_xy(:, :, :)
-
-        ! Variables to calculate indices for in and out arrays
-        integer :: i, j, k, kblk, n1blksize, blksize
-        integer :: pos, pos_i, pos_j, pos_k
-
-        n1blksize  = n1 / nprocs
-        blksize  = n1blksize * n2 * n3
-
-        i = (blockidx%x - 1) * blockdim%x + threadidx%x
-        j = (blockidx%y - 1) * blockdim%y + threadidx%y
-        k = (blockidx%z - 1) * blockdim%z + threadidx%z
-
-        pos_i = (i - 1) * n2 * n3
-        pos_j = (j - 1) * n3
-
-        do kblk = 1, nprocs
-            pos_k = k + (kblk - 1) * blksize
-            pos   = pos_k + pos_j + pos_i
-            slab_xy(i + (kblk - 1) * n1blksize, j, k) = array1D(pos)
-        enddo
-
-    end subroutine mem_unite_slab_xy
+        integer :: i,j,k,ierr
+        
+        ! Compute (i,j) from block/thread indices
+        i = (blockidx%x - 1)*blockdim%x + (threadidx%x-1)
+        j = (blockidx%y - 1)*blockdim%y + (threadidx%y-1)
+        
+        ! Initialize within bounds
+        if ( (i<in_n) .and.(j<in_m)   ) then
+            A(i,j) = 1.d0
+        end if        
+        
+    end subroutine pascalintAb
 
 end module PaScaL_TDMA_cuda

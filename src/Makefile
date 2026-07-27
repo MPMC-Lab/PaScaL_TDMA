@@ -1,40 +1,53 @@
 include ../Makefile.inc
 
-LIB = libpascal_tdma.a
+LIBDIR        := ../lib
+INCDIR        := ../include
+OBJDIR        := obj
+FORTRAN_OBJDIR := $(OBJDIR)/fortran
+CXX_OBJDIR     := $(OBJDIR)/cuda-cxx
 
-OBJDIR = ./obj
+FORTRAN_SRC   := pascal_tdma_cuda.f90
+FORTRAN_OBJ   := $(FORTRAN_OBJDIR)/pascal_tdma_cuda.o
+FORTRAN_LIB   := $(LIBDIR)/libpascal_tdma.a
 
-RANGE = $(OBJDIR)/para_range.o
-TDMAS = $(OBJDIR)/tdmas.o
-PTDMA  = $(OBJDIR)/pascal_tdma.o
+CXX_SRC       := pascal_tdma_cuda.cu
+CXX_PUBLIC_H  := pascal_tdma_cuda.hpp
+CXX_OBJ       := $(CXX_OBJDIR)/pascal_tdma_cuda.o
+CXX_LIB       := $(LIBDIR)/libpascal_tdma_cuda.a
+CXX_STAGED_H  := $(INCDIR)/pascal_tdma_cuda.hpp
 
-TDMAS_CUDA = $(OBJDIR)/tdmas_cuda.o
-PTDMA_CUDA  = $(OBJDIR)/pascal_tdma_cuda.o
+.PHONY: all fortran-lib cuda-cxx-lib clean
 
-OBJS   = $(RANGE) $(TDMAS) $(PTDMA)
+all: fortran-lib
 
-ifdef USE_CUDA
-    OBJS += $(TDMAS_CUDA) $(PTDMA_CUDA)
-endif
+fortran-lib: $(FORTRAN_LIB) | $(INCDIR)
+	cp $(FORTRAN_OBJDIR)/*.mod $(INCDIR)/
 
-all: $(LIB) inc
+cuda-cxx-lib: $(CXX_LIB) $(CXX_STAGED_H)
 
-$(LIB): $(OBJS)
-	ar qc $@ $(OBJS)
-	cp $@ ../lib
+$(FORTRAN_LIB): $(FORTRAN_OBJ) | $(LIBDIR)
+	rm -f $@
+	$(AR) rcs $@ $^
+	$(RANLIB) $@
 
-inc: $(LIB)
-	cp $(OBJDIR)/*.mod ../include
+$(FORTRAN_OBJ): $(FORTRAN_SRC) | $(FORTRAN_OBJDIR)
+	$(FC) $(FLAG) $(CUDAFLAG) -c $< -o $@ -module $(FORTRAN_OBJDIR)
 
-$(OBJDIR)/%.o: %.f90
-	$(FC) $(FLAG) -c $^ -o $@  -module $(OBJDIR) -I$(OBJDIR)
-$(OBJDIR)/%.o: %.cuf
-	$(FC) $(FLAG) -c $^ -o $@  -module $(OBJDIR) -I$(OBJDIR)
-$(OBJDIR)/%.o:$(OBJDIR)/%.mod
+$(CXX_LIB): $(CXX_OBJ) | $(LIBDIR)
+	rm -f $@
+	$(AR) rcs $@ $^
+	$(RANLIB) $@
 
-%(PTDMA)	 : %(RANGE) %(TDMAS)
+$(CXX_OBJ): $(CXX_SRC) $(CXX_PUBLIC_H) | $(CXX_OBJDIR)
+	$(NVCC) $(NVCCFLAGS) -I. -c $< -o $@
+
+$(CXX_STAGED_H): $(CXX_PUBLIC_H) | $(INCDIR)
+	cp $< $@
+
+$(LIBDIR) $(INCDIR) $(FORTRAN_OBJDIR) $(CXX_OBJDIR):
+	mkdir -p $@
 
 clean:
-	rm -rf ../lib ../include *__genmod.f90 $(LIB)
 	rm -rf $(OBJDIR)
-
+	rm -f $(FORTRAN_LIB) $(CXX_LIB)
+	rm -f $(INCDIR)/*.mod $(CXX_STAGED_H)

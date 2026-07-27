@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#1f2933}
+.title{font-size:18px;font-weight:700}
+.axis{stroke:#52606d;stroke-width:1}
+.grid{stroke:#d9e2ec;stroke-width:1}
+.tick{font-size:11px;fill:#52606d}
+.label{font-size:12px;fill:#334e68}
+.point-label{font-size:11px;fill:#243b53;font-weight:600}
+.legend{font-size:12px;fill:#243b53}
+</style>
+<text x="460.0" y="28" text-anchor="middle" class="title">MPI Mode Comparison: Device vs Host</text>
+<line x1="88" y1="408" x2="886" y2="408" class="axis"/>
+<line x1="88" y1="58" x2="88" y2="408" class="axis"/>
+<line x1="88" y1="408.0" x2="886" y2="408.0" class="grid"/>
+<text x="80" y="412.0" text-anchor="end" class="tick">0.00</text>
+<line x1="88" y1="291.3" x2="886" y2="291.3" class="grid"/>
+<text x="80" y="295.3" text-anchor="end" class="tick">2.00</text>
+<line x1="88" y1="174.7" x2="886" y2="174.7" class="grid"/>
+<text x="80" y="178.7" text-anchor="end" class="tick">4.00</text>
+<line x1="88" y1="58.0" x2="886" y2="58.0" class="grid"/>
+<text x="80" y="62.0" text-anchor="end" class="tick">6.00</text>
+<text x="487.0" y="508" text-anchor="middle" class="label">central case 128x128x4096</text>
+<text x="16" y="233.0" text-anchor="middle" class="label" transform="rotate(-90 16 233.0)">total_s_max mean (ms)</text>
+<rect x="114.6" y="161.6" width="103.4" height="246.4" fill="#2f80ed"/>
+<rect x="221.0" y="139.7" width="103.4" height="268.3" fill="#eb5757"/>
+<text x="221.0" y="432" text-anchor="middle" class="tick">np=2</text>
+<rect x="380.6" y="278.4" width="103.4" height="129.6" fill="#2f80ed"/>
+<rect x="487.0" y="265.8" width="103.4" height="142.2" fill="#eb5757"/>
+<text x="487.0" y="432" text-anchor="middle" class="tick">np=4</text>
+<rect x="646.6" y="329.9" width="103.4" height="78.1" fill="#2f80ed"/>
+<rect x="753.0" y="311.8" width="103.4" height="96.2" fill="#eb5757"/>
+<text x="753.0" y="432" text-anchor="middle" class="tick">np=8</text>
+<rect x="96" y="65" width="12" height="12" fill="#2f80ed"/>
+<text x="114" y="76" class="legend">device</text>
+<rect x="96" y="85" width="12" height="12" fill="#eb5757"/>
+<text x="114" y="96" class="legend">host</text>
+</svg>

@@ -1,8 +1,0 @@
-<map id="para_range" name="para_range">
-<area shape="rect" id="node2" href="$namespacempi__subdomain.html#a3a1e7cf64aafbebd3c09b92fc56bd311" title="Prepare the subdomain and determine the size of the subdomain. " alt="" coords="405,5,547,47"/>
-<area shape="rect" id="node4" href="$namespacepascal__tdma.html#a7e9c24b343ae949044eccc8692dcc6e9" title="Create a plan for many tridiagonal systems of equations. " alt="" coords="158,71,329,112"/>
-<area shape="rect" id="node6" href="$namespacepascal__tdma__cuda.html#a84c442c238f7d1a18eef430aaa15e6c1" title="Create a plan for many tridiagonal systems of equations. " alt="" coords="140,136,347,177"/>
-<area shape="rect" id="node3" href="$main_8f90.html#a8ec2266d83cd6c0b762cbcbc92c0af3d" title="Main execution program for the example problem of PaScaL_TDMA. " alt="" coords="605,78,656,105"/>
-<area shape="rect" id="node5" href="$namespacesolve__theta.html#a0b7fdb576c007dc344092bf40efb0f4b" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA. " alt="" coords="412,71,540,112"/>
-<area shape="rect" id="node7" href="$namespacesolve__theta.html#a84c4bdc671112259790470f6ad4c7e4c" title="An example solver for many tridiagonal systems of equations using PaScaL_TDMA with CUDA..." alt="" coords="395,136,557,177"/>
-</map>
