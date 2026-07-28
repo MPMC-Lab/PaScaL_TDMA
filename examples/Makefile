@@ -1,29 +1,59 @@
 include ../Makefile.inc
 
-EXE = a.out
+BINDIR       := ../run
+INCDIR       := ../include
+LIBDIR       := ../lib
+FORTRAN_LIB  := $(LIBDIR)/libpascal_tdma.a
+CXX_LIB      := $(LIBDIR)/libpascal_tdma_cuda.a
+FORTRAN_SOURCE := ../src/pascal_tdma_cuda.f90
+CXX_SOURCE     := ../src/pascal_tdma_cuda.cu
+CXX_HEADER     := ../src/pascal_tdma_cuda.hpp
 
-INC = ../include
-LIB = ../lib -lpascal_tdma
+FORTRAN_EXE  := $(BINDIR)/a.out
+CXX_EXE      := $(BINDIR)/ex_tdma_zdirection
+CXX_PROFILE  := $(BINDIR)/ex_tdma_profile
+STUDY_F_EXE  := $(BINDIR)/example_fortran_profile
+STUDY_CXX_EXE := $(BINDIR)/example_cuda_cxx_profile
 
-global = global.o
-topology = mpi_topology.o 
-subdomain = mpi_subdomain.o
-THETA = solve_theta.o
-main = main.o
+.PHONY: all fortran-example cuda-cxx-example cuda-cxx-profile study clean
 
-OBJS   = $(global) $(topology) $(subdomain) $(THETA) $(main)
+all: fortran-example
 
-all:$(OBJS)
-	$(FC) ${FLAG} ${OBJS} -o $(EXE) -I$(INC) -L$(LIB)
-	mv a.out ../run
+fortran-example: $(FORTRAN_EXE)
 
-%.o: %.f90
-	$(FC) $(FLAG) -c $^ -o $@  -I$(INC)
+cuda-cxx-example: $(CXX_EXE)
 
-%(subdomain)	: %(topology)
-%(THETA)		: %(global) #%(p3t_module) 
-%(main)			: %(global) %(topology) %(subdomain) %(THETA)
-$(EXE)			: %(OBJS)
+cuda-cxx-profile: $(CXX_PROFILE)
+
+study: $(STUDY_F_EXE) $(STUDY_CXX_EXE)
+
+$(FORTRAN_EXE): ex_tdma_zdirection.f90 $(FORTRAN_LIB) | $(BINDIR)
+	$(FC) $(FLAG) $(CUDAFLAG) -I$(INCDIR) $< \
+		-L$(LIBDIR) -lpascal_tdma -o $@
+
+$(CXX_EXE): ex_tdma_zdirection.cu $(CXX_LIB) | $(BINDIR)
+	$(NVCC) $(NVCCFLAGS) -I../src $< $(CXX_LIB) -o $@
+
+$(CXX_PROFILE): ex_tdma_profile.cu $(CXX_LIB) | $(BINDIR)
+	$(NVCC) $(NVCCFLAGS) -I../src $< $(CXX_LIB) -o $@
+
+$(STUDY_F_EXE): example_fortran_profile.f90 $(FORTRAN_LIB) | $(BINDIR)
+	$(FC) $(FLAG) $(CUDAFLAG) -I$(INCDIR) $< \
+		-L$(LIBDIR) -lpascal_tdma -o $@
+
+$(STUDY_CXX_EXE): example_cuda_cxx_profile.cu $(CXX_LIB) | $(BINDIR)
+	$(NVCC) $(NVCCFLAGS) -I../src $< $(CXX_LIB) -o $@
+
+$(FORTRAN_LIB): $(FORTRAN_SOURCE)
+	$(MAKE) -C ../src fortran-lib
+
+$(CXX_LIB): $(CXX_SOURCE) $(CXX_HEADER)
+	$(MAKE) -C ../src cuda-cxx-lib
+
+$(BINDIR):
+	mkdir -p $@
 
 clean:
-	rm -f *.mod *.o *__genmod.f90 ../run/$(EXE) ../run/*.PLT ../run/*.dat
+	rm -f $(FORTRAN_EXE) $(CXX_EXE) $(CXX_PROFILE)
+	rm -f $(STUDY_F_EXE) $(STUDY_CXX_EXE)
+	rm -f *.o *.mod *__genmod.f90

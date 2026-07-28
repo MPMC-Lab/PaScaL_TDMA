@@ -1,0 +1,29 @@
+Max absolute error to expected value across available rows: 8.860e-12
+
+| case | implementation | mode | np | grid | max_abs_error |
+| --- | --- | --- | --- | --- | --- |
+| np1_64x64x2048_device | cuda-cxx | device | 1 | 64x64x2048 | 6.197e-13 |
+| np1_128x128x4096_device | cuda-cxx | device | 1 | 128x128x4096 | 4.772e-12 |
+| np2_64x64x4096_device | cuda-cxx | device | 2 | 64x64x4096 | 1.932e-12 |
+| np2_128x128x2048_device | cuda-cxx | device | 2 | 128x128x2048 | 2.945e-13 |
+| np2_128x128x4096_device | cuda-cxx | device | 2 | 128x128x4096 | 1.932e-12 |
+| np2_128x128x8192_device | cuda-cxx | device | 2 | 128x128x8192 | 8.860e-12 |
+| np2_128x256x4096_device | cuda-cxx | device | 2 | 128x256x4096 | 1.932e-12 |
+| np2_256x256x4096_device | cuda-cxx | device | 2 | 256x256x4096 | 1.932e-12 |
+| np4_64x64x4096_device | cuda-cxx | device | 4 | 64x64x4096 | 3.462e-13 |
+| np4_128x128x2048_device | cuda-cxx | device | 4 | 128x128x2048 | 1.342e-12 |
+| np4_128x128x4096_device | cuda-cxx | device | 4 | 128x128x4096 | 3.462e-13 |
+| np4_128x128x8192_device | cuda-cxx | device | 4 | 128x128x8192 | 7.399e-12 |
+| np4_128x256x2048_device | cuda-cxx | device | 4 | 128x256x2048 | 1.342e-12 |
+| np4_128x256x4096_device | cuda-cxx | device | 4 | 128x256x4096 | 3.462e-13 |
+| np4_256x256x4096_device | cuda-cxx | device | 4 | 256x256x4096 | 3.462e-13 |
+| np8_64x64x4096_device | cuda-cxx | device | 8 | 64x64x4096 | 5.218e-12 |
+| np8_128x128x2048_device | cuda-cxx | device | 8 | 128x128x2048 | 1.468e-13 |
+| np8_128x128x4096_device | cuda-cxx | device | 8 | 128x128x4096 | 5.218e-12 |
+| np8_128x128x8192_device | cuda-cxx | device | 8 | 128x128x8192 | 6.312e-13 |
+| np8_128x256x4096_device | cuda-cxx | device | 8 | 128x256x4096 | 5.218e-12 |
+| np8_128x512x2048_device | cuda-cxx | device | 8 | 128x512x2048 | 1.468e-13 |
+| np8_256x256x4096_device | cuda-cxx | device | 8 | 256x256x4096 | 5.218e-12 |
+| np2_128x128x4096_host | cuda-cxx | host | 2 | 128x128x4096 | 1.932e-12 |
+| np4_128x128x4096_host | cuda-cxx | host | 4 | 128x128x4096 | 3.462e-13 |
+| np8_128x128x4096_host | cuda-cxx | host | 8 | 128x128x4096 | 5.218e-12 |

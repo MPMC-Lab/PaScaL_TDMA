@@ -1,4 +1,0 @@
-<map id="tdma_single" name="tdma_single">
-<area shape="rect" id="node2" href="$namespacepascal__tdma.html#ab14e132231d4b53fd65dd333ccc85a50" title="Solve a single tridiagonal system of equation. " alt="" coords="145,5,288,47"/>
-<area shape="rect" id="node3" href="$namespacesolve__theta.html#a215d44e312ec3ab2a3ab44fa0613b100" title="An example solver for a single tridiagonal system of equations using PaScaL_TDMA. ..." alt="" coords="336,5,467,47"/>
-</map>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="520" viewBox="0 0 920 520">
+<rect width="100%" height="100%" fill="#ffffff"/>
+<style>
+text{font-family:Arial,Helvetica,sans-serif;fill:#1f2933}
+.title{font-size:18px;font-weight:700}
+.axis{stroke:#52606d;stroke-width:1}
+.grid{stroke:#d9e2ec;stroke-width:1}
+.tick{font-size:11px;fill:#52606d}
+.label{font-size:12px;fill:#334e68}
+.point-label{font-size:11px;fill:#243b53;font-weight:600}
+.legend{font-size:12px;fill:#243b53}
+</style>
+<text x="460.0" y="28" text-anchor="middle" class="title">CUDA C++ Device Mode: Phase Breakdown</text>
+<line x1="88" y1="408" x2="886" y2="408" class="axis"/>
+<line x1="88" y1="58" x2="88" y2="408" class="axis"/>
+<line x1="88" y1="408.0" x2="886" y2="408.0" class="grid"/>
+<text x="80" y="412.0" text-anchor="end" class="tick">0.00</text>
+<line x1="88" y1="338.0" x2="886" y2="338.0" class="grid"/>
+<text x="80" y="342.0" text-anchor="end" class="tick">1.00</text>
+<line x1="88" y1="268.0" x2="886" y2="268.0" class="grid"/>
+<text x="80" y="272.0" text-anchor="end" class="tick">2.00</text>
+<line x1="88" y1="198.0" x2="886" y2="198.0" class="grid"/>
+<text x="80" y="202.0" text-anchor="end" class="tick">3.00</text>
+<line x1="88" y1="128.0" x2="886" y2="128.0" class="grid"/>
+<text x="80" y="132.0" text-anchor="end" class="tick">4.00</text>
+<line x1="88" y1="58.0" x2="886" y2="58.0" class="grid"/>
+<text x="80" y="62.0" text-anchor="end" class="tick">5.00</text>
+<text x="487.0" y="508" text-anchor="middle" class="label">central case 128x128x4096</text>
+<text x="16" y="233.0" text-anchor="middle" class="label" transform="rotate(-90 16 233.0)">phase time mean (ms)</text>
+<rect x="151.8" y="120.0" width="138.3" height="288.0" fill="#2f80ed"/>
+<rect x="151.8" y="116.4" width="138.3" height="3.6" fill="#f2994a"/>
+<rect x="151.8" y="112.1" width="138.3" height="4.2" fill="#27ae60"/>
+<text x="221.0" y="432" text-anchor="middle" class="tick">np=2</text>
+<rect x="417.8" y="264.0" width="138.3" height="144.0" fill="#2f80ed"/>
+<rect x="417.8" y="259.0" width="138.3" height="4.9" fill="#f2994a"/>
+<rect x="417.8" y="252.3" width="138.3" height="6.8" fill="#27ae60"/>
+<text x="487.0" y="432" text-anchor="middle" class="tick">np=4</text>
+<rect x="683.8" y="335.1" width="138.3" height="72.9" fill="#2f80ed"/>
+<rect x="683.8" y="324.8" width="138.3" height="10.3" fill="#f2994a"/>
+<rect x="683.8" y="312.8" width="138.3" height="11.9" fill="#27ae60"/>
+<text x="753.0" y="432" text-anchor="middle" class="tick">np=8</text>
+<rect x="96" y="65" width="12" height="12" fill="#2f80ed"/>
+<text x="114" y="76" class="legend">compute</text>
+<rect x="96" y="85" width="12" height="12" fill="#f2994a"/>
+<text x="114" y="96" class="legend">communication</text>
+<rect x="96" y="105" width="12" height="12" fill="#27ae60"/>
+<text x="114" y="116" class="legend">packing</text>
+</svg>

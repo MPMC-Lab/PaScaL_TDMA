@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+message: "If you use PaScaL_TDMA 2.1, please cite the article listed under preferred-citation."
+title: "PaScaL_TDMA"
+version: "2.1"
+type: software
+authors:
+  - family-names: Kim
+    given-names: Ki-Ha
+  - family-names: Lee
+    given-names: Dongjin
+  - family-names: Lee
+    given-names: Junhwan
+  - family-names: Oh
+    given-names: Sehyeong
+  - family-names: Lee
+    given-names: Seungwon
+  - family-names: Kang
+    given-names: Ji-Hoon
+  - family-names: Choi
+    given-names: Jung-Il
+repository-code: "https://github.com/MPMC-Lab/PaScaL_TDMA"
+repository-artifact: "https://data.mendeley.com/datasets/49z6fh94z3/3"
+license: MIT
+identifiers:
+  - type: doi
+    value: "10.17632/49z6fh94z3.3"
+    description: "PaScaL_TDMA 2.1 publication snapshot archived as Mendeley Data version 3"
+preferred-citation:
+  type: article
+  authors:
+    - family-names: Kim
+      given-names: Ki-Ha
+    - family-names: Lee
+      given-names: Dongjin
+    - family-names: Lee
+      given-names: Junhwan
+    - family-names: Oh
+      given-names: Sehyeong
+    - family-names: Lee
+      given-names: Seungwon
+    - family-names: Kang
+      given-names: Ji-Hoon
+    - family-names: Choi
+      given-names: Jung-Il
+  title: "PaScaL_TDMA 2.1: A register-resident multi-GPU tridiagonal matrix solver with optimized communication for large-scale CFD simulations"
+  journal: "Computer Physics Communications"
+  volume: 323
+  start: "110120"
+  year: 2026
+  month: 6
+  doi: "10.1016/j.cpc.2026.110120"
+  url: "https://www.sciencedirect.com/science/article/pii/S0010465526001025"

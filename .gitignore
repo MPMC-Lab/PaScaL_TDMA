@@ -30,3 +30,19 @@
 *.exe
 *.out
 *.app
+
+# macOS metadata
+.DS_Store
+
+# PaScaL_TDMA generated build directories and executables
+/src/obj/
+/include/
+/lib/
+/run/a.out
+/run/ex_tdma_zdirection
+/run/ex_tdma_profile
+/run/example_fortran_profile
+/run/example_cuda_cxx_profile
+/run/log_*.out
+/run/profile_results/
+/run/study/
